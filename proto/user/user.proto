@@ -5,7 +5,7 @@ package user.v1;
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "shopify-go-api/gen/user";
+option go_package = "github.com/iamKienb/shopify-go-api/gen/user";
 
 message RegisterRequest {
   string email = 1 [(validate.rules).string.email = true];

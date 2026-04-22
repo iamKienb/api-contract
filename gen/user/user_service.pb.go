@@ -28,7 +28,7 @@ const file_user_user_service_proto_rawDesc = "" +
 	"\x12UserCommandService\x12?\n" +
 	"\bRegister\x12\x18.user.v1.RegisterRequest\x1a\x19.user.v1.RegisterResponse\x126\n" +
 	"\x05Login\x12\x15.user.v1.LoginRequest\x1a\x16.user.v1.LoginResponse2\x12\n" +
-	"\x10UserQueryServiceB\x19Z\x17shopify-go-api/gen/userb\x06proto3"
+	"\x10UserQueryServiceB-Z+github.com/iamKienb/shopify-go-api/gen/userb\x06proto3"
 
 var file_user_user_service_proto_goTypes = []any{
 	(*RegisterRequest)(nil),  // 0: user.v1.RegisterRequest

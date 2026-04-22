@@ -5,7 +5,7 @@ package otp.v1;
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "shopify-go-api/gen/otp";
+option go_package = "github.com/iamKienb/shopify-go-api/gen/otp";
 
 message VerifyRequest {
   string session_token = 1 [(validate.rules).string.min_len = 1];

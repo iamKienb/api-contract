@@ -3,7 +3,7 @@ package user.v1;
 
 import "user/user.proto";
 
-option go_package = "shopify-go-api/gen/user";
+option go_package = "github.com/iamKienb/shopify-go-api/gen/user";
 
 // UserCommandService provides commands for user management.
 service UserCommandService {

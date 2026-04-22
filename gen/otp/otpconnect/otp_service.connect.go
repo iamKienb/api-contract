@@ -8,8 +8,8 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
+	otp "github.com/iamKienb/shopify-go-api/gen/otp"
 	http "net/http"
-	otp "shopify-go-api/gen/otp"
 	strings "strings"
 )
 
