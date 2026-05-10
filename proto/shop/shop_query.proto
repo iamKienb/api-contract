@@ -1,0 +1,12 @@
+syntax = "proto3";
+package shop.v1;
+
+import "shop/shop_type.proto";
+
+option go_package = "github.com/iamKienb/shopify-go-api/gen/shop";
+
+service ShopQueryService {
+  rpc SearchShops(SearchShopsRequest) returns (SearchShopsResponse);
+  rpc GetShopDetail(GetShopDetailRequest) returns (GetShopDetailResponse);
+  rpc GetShopMembers(GetShopMembersRequest) returns (GetShopMembersResponse);
+}

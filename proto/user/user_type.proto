@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package user.v1;
+
+import "validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/iamKienb/shopify-go-api/gen/user";
+
+message RegisterRequest {
+  string email     = 1 [(validate.rules).string.email = true];
+  string password  = 2 [(validate.rules).string.min_len = 8];
+  string full_name = 3 [(validate.rules).string.min_len = 1];
+  string gender    = 4 [(validate.rules).string = {in: ["Male", "Female", "Other"]}];
+}
+
+message RegisterResponse {
+  string                    session_token = 1;
+  google.protobuf.Timestamp expires_at    = 2;
+}
+
+message LoginRequest {
+  string email    = 1 [(validate.rules).string.email = true];
+  string password = 2 [(validate.rules).string.min_len = 8];
+}
+
+message LoginResponse {
+  string                    access_token       = 1;
+  string                    refresh_token      = 2;
+  google.protobuf.Timestamp access_expires_at  = 3;
+  google.protobuf.Timestamp refresh_expires_at = 4;
+}
+
+message LocationInfo {
+  string id   = 1 [(validate.rules).string.min_len = 1];
+  string name = 2 [(validate.rules).string.min_len = 1];
+}
+
+message AddUserAddressRequest {
+  string user_id = 1 [(validate.rules).string.min_len = 1];
+
+  LocationInfo country  = 2 [(validate.rules).message.required = true];
+  LocationInfo city     = 3 [(validate.rules).message.required = true];
+  LocationInfo district = 4 [(validate.rules).message.required = true];
+  LocationInfo ward     = 5 [(validate.rules).message.required = true];
+
+  string address_line  = 6 [(validate.rules).string.min_len = 1];
+  string receiver_name = 7 [(validate.rules).string.min_len = 1];
+  string phone_number  = 8 [(validate.rules).string = {pattern: "^[0-9]{10,11}$"}];
+
+  string label      = 9 [(validate.rules).string = {in: ["Home", "Office"]}];
+  bool   is_default = 10;
+}
+
+message AddUserAddressResponse {
+  string address_id = 1;
+}
+
+message GetUserDetailRequest {
+
+}
+
+message GetUserDetailResponse {
+
+}
+
+message ListUserAddressesRequest {
+
+}
+
+message ListUserAddressesResponse {
+
+}

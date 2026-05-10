@@ -1,18 +1,14 @@
 syntax = "proto3";
 package user.v1;
 
-import "user/user.proto";
+import "user/user_type.proto";
 
 option go_package = "github.com/iamKienb/shopify-go-api/gen/user";
 
-// UserCommandService provides commands for user management.
 service UserCommandService {
-  //  registers user.
+  //  Public Commands
   rpc Register(RegisterRequest) returns (RegisterResponse);
-
-  // login user.
   rpc Login(LoginRequest) returns (LoginResponse);
-}
+  rpc AddUserAddress(AddUserAddressRequest) returns (AddUserAddressResponse);
 
-// UserQueryService provides queries for service call.
-service UserQueryService {}
+}
