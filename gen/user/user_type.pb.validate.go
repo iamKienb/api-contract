@@ -35,6 +35,133 @@ var (
 	_ = sort.Sort
 )
 
+// Validate checks the field values on ProfileInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ProfileInfo) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ProfileInfo with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ProfileInfoMultiError, or
+// nil if none found.
+func (m *ProfileInfo) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ProfileInfo) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetFullName()) < 1 {
+		err := ProfileInfoValidationError{
+			field:  "FullName",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if _, ok := _ProfileInfo_Gender_InLookup[m.GetGender()]; !ok {
+		err := ProfileInfoValidationError{
+			field:  "Gender",
+			reason: "value must be in list [Male Female Other]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return ProfileInfoMultiError(errors)
+	}
+
+	return nil
+}
+
+// ProfileInfoMultiError is an error wrapping multiple validation errors
+// returned by ProfileInfo.ValidateAll() if the designated constraints aren't met.
+type ProfileInfoMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ProfileInfoMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ProfileInfoMultiError) AllErrors() []error { return m }
+
+// ProfileInfoValidationError is the validation error returned by
+// ProfileInfo.Validate if the designated constraints aren't met.
+type ProfileInfoValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ProfileInfoValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ProfileInfoValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ProfileInfoValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ProfileInfoValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ProfileInfoValidationError) ErrorName() string { return "ProfileInfoValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ProfileInfoValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sProfileInfo.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ProfileInfoValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ProfileInfoValidationError{}
+
+var _ProfileInfo_Gender_InLookup = map[string]struct{}{
+	"Male":   {},
+	"Female": {},
+	"Other":  {},
+}
+
 // Validate checks the field values on RegisterRequest with the rules defined
 // in the proto definition for this message. If any rules are violated, the
 // first error encountered is returned, or nil if there are no violations.
@@ -80,10 +207,10 @@ func (m *RegisterRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetFullName()) < 1 {
+	if m.GetProfile() == nil {
 		err := RegisterRequestValidationError{
-			field:  "FullName",
-			reason: "value length must be at least 1 runes",
+			field:  "Profile",
+			reason: "value is required",
 		}
 		if !all {
 			return err
@@ -91,15 +218,33 @@ func (m *RegisterRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if _, ok := _RegisterRequest_Gender_InLookup[m.GetGender()]; !ok {
-		err := RegisterRequestValidationError{
-			field:  "Gender",
-			reason: "value must be in list [Male Female Other]",
+	if all {
+		switch v := interface{}(m.GetProfile()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RegisterRequestValidationError{
+					field:  "Profile",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RegisterRequestValidationError{
+					field:  "Profile",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
 		}
-		if !all {
-			return err
+	} else if v, ok := interface{}(m.GetProfile()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RegisterRequestValidationError{
+				field:  "Profile",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
 		}
-		errors = append(errors, err)
 	}
 
 	if len(errors) > 0 {
@@ -229,12 +374,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = RegisterRequestValidationError{}
-
-var _RegisterRequest_Gender_InLookup = map[string]struct{}{
-	"Male":   {},
-	"Female": {},
-	"Other":  {},
-}
 
 // Validate checks the field values on RegisterResponse with the rules defined
 // in the proto definition for this message. If any rules are violated, the

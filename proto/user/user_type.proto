@@ -7,11 +7,15 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/iamKienb/shopify-go-api/gen/user";
 
-message RegisterRequest {
-  string email     = 1 [(validate.rules).string.email = true];
-  string password  = 2 [(validate.rules).string.min_len = 8];
+message ProfileInfo {
   string full_name = 3 [(validate.rules).string.min_len = 1];
   string gender    = 4 [(validate.rules).string = {in: ["Male", "Female", "Other"]}];
+}
+
+message RegisterRequest {
+  string      email    = 1 [(validate.rules).string.email = true];
+  string      password = 2 [(validate.rules).string.min_len = 8];
+  ProfileInfo profile  = 3 [(validate.rules).message.required = true];
 }
 
 message RegisterResponse {

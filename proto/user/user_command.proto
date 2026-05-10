@@ -10,5 +10,4 @@ service UserCommandService {
   rpc Register(RegisterRequest) returns (RegisterResponse);
   rpc Login(LoginRequest) returns (LoginResponse);
   rpc AddUserAddress(AddUserAddressRequest) returns (AddUserAddressResponse);
-
 }
