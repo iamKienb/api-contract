@@ -24,27 +24,28 @@ var File_user_user_command_proto protoreflect.FileDescriptor
 
 const file_user_user_command_proto_rawDesc = "" +
 	"\n" +
-	"\x17user/user_command.proto\x12\auser.v1\x1a\x14user/user_type.proto2\xe0\x01\n" +
+	"\x17user/user_command.proto\x12\auser.v1\x1a\x14user/user_type.proto2\xd4\x01\n" +
 	"\x12UserCommandService\x12?\n" +
 	"\bRegister\x12\x18.user.v1.RegisterRequest\x1a\x19.user.v1.RegisterResponse\x126\n" +
-	"\x05Login\x12\x15.user.v1.LoginRequest\x1a\x16.user.v1.LoginResponse\x12Q\n" +
-	"\x0eAddUserAddress\x12\x1e.user.v1.AddUserAddressRequest\x1a\x1f.user.v1.AddUserAddressResponseB-Z+github.com/iamKienb/shopify-go-api/gen/userb\x06proto3"
+	"\x05Login\x12\x15.user.v1.LoginRequest\x1a\x16.user.v1.LoginResponse\x12E\n" +
+	"\n" +
+	"AddAddress\x12\x1a.user.v1.AddAddressRequest\x1a\x1b.user.v1.AddAddressResponseB-Z+github.com/iamKienb/shopify-go-api/gen/userb\x06proto3"
 
 var file_user_user_command_proto_goTypes = []any{
-	(*RegisterRequest)(nil),        // 0: user.v1.RegisterRequest
-	(*LoginRequest)(nil),           // 1: user.v1.LoginRequest
-	(*AddUserAddressRequest)(nil),  // 2: user.v1.AddUserAddressRequest
-	(*RegisterResponse)(nil),       // 3: user.v1.RegisterResponse
-	(*LoginResponse)(nil),          // 4: user.v1.LoginResponse
-	(*AddUserAddressResponse)(nil), // 5: user.v1.AddUserAddressResponse
+	(*RegisterRequest)(nil),    // 0: user.v1.RegisterRequest
+	(*LoginRequest)(nil),       // 1: user.v1.LoginRequest
+	(*AddAddressRequest)(nil),  // 2: user.v1.AddAddressRequest
+	(*RegisterResponse)(nil),   // 3: user.v1.RegisterResponse
+	(*LoginResponse)(nil),      // 4: user.v1.LoginResponse
+	(*AddAddressResponse)(nil), // 5: user.v1.AddAddressResponse
 }
 var file_user_user_command_proto_depIdxs = []int32{
 	0, // 0: user.v1.UserCommandService.Register:input_type -> user.v1.RegisterRequest
 	1, // 1: user.v1.UserCommandService.Login:input_type -> user.v1.LoginRequest
-	2, // 2: user.v1.UserCommandService.AddUserAddress:input_type -> user.v1.AddUserAddressRequest
+	2, // 2: user.v1.UserCommandService.AddAddress:input_type -> user.v1.AddAddressRequest
 	3, // 3: user.v1.UserCommandService.Register:output_type -> user.v1.RegisterResponse
 	4, // 4: user.v1.UserCommandService.Login:output_type -> user.v1.LoginResponse
-	5, // 5: user.v1.UserCommandService.AddUserAddress:output_type -> user.v1.AddUserAddressResponse
+	5, // 5: user.v1.UserCommandService.AddAddress:output_type -> user.v1.AddAddressResponse
 	3, // [3:6] is the sub-list for method output_type
 	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

@@ -6,6 +6,6 @@ import "user/user_type.proto";
 option go_package = "github.com/iamKienb/shopify-go-api/gen/user";
 
 service UserQueryService {
-  rpc GetUserDetail(GetUserDetailRequest) returns (GetUserDetailResponse);
-  rpc ListUserAddresses(ListUserAddressesRequest) returns (ListUserAddressesResponse);
+  rpc GetShopDetail(GetDetailRequest) returns (GetDetailResponse);
+  rpc ListAddresses(ListAddressesRequest) returns (ListAddressesResponse);
 }

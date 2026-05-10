@@ -39,16 +39,16 @@ const (
 	// ShopQueryServiceGetShopDetailProcedure is the fully-qualified name of the ShopQueryService's
 	// GetShopDetail RPC.
 	ShopQueryServiceGetShopDetailProcedure = "/shop.v1.ShopQueryService/GetShopDetail"
-	// ShopQueryServiceGetShopMembersProcedure is the fully-qualified name of the ShopQueryService's
-	// GetShopMembers RPC.
-	ShopQueryServiceGetShopMembersProcedure = "/shop.v1.ShopQueryService/GetShopMembers"
+	// ShopQueryServiceGetMembersProcedure is the fully-qualified name of the ShopQueryService's
+	// GetMembers RPC.
+	ShopQueryServiceGetMembersProcedure = "/shop.v1.ShopQueryService/GetMembers"
 )
 
 // ShopQueryServiceClient is a client for the shop.v1.ShopQueryService service.
 type ShopQueryServiceClient interface {
 	SearchShops(context.Context, *connect.Request[shop.SearchShopsRequest]) (*connect.Response[shop.SearchShopsResponse], error)
 	GetShopDetail(context.Context, *connect.Request[shop.GetShopDetailRequest]) (*connect.Response[shop.GetShopDetailResponse], error)
-	GetShopMembers(context.Context, *connect.Request[shop.GetShopMembersRequest]) (*connect.Response[shop.GetShopMembersResponse], error)
+	GetMembers(context.Context, *connect.Request[shop.GetMembersRequest]) (*connect.Response[shop.GetMembersResponse], error)
 }
 
 // NewShopQueryServiceClient constructs a client for the shop.v1.ShopQueryService service. By
@@ -74,10 +74,10 @@ func NewShopQueryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(shopQueryServiceMethods.ByName("GetShopDetail")),
 			connect.WithClientOptions(opts...),
 		),
-		getShopMembers: connect.NewClient[shop.GetShopMembersRequest, shop.GetShopMembersResponse](
+		getMembers: connect.NewClient[shop.GetMembersRequest, shop.GetMembersResponse](
 			httpClient,
-			baseURL+ShopQueryServiceGetShopMembersProcedure,
-			connect.WithSchema(shopQueryServiceMethods.ByName("GetShopMembers")),
+			baseURL+ShopQueryServiceGetMembersProcedure,
+			connect.WithSchema(shopQueryServiceMethods.ByName("GetMembers")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -85,9 +85,9 @@ func NewShopQueryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 
 // shopQueryServiceClient implements ShopQueryServiceClient.
 type shopQueryServiceClient struct {
-	searchShops    *connect.Client[shop.SearchShopsRequest, shop.SearchShopsResponse]
-	getShopDetail  *connect.Client[shop.GetShopDetailRequest, shop.GetShopDetailResponse]
-	getShopMembers *connect.Client[shop.GetShopMembersRequest, shop.GetShopMembersResponse]
+	searchShops   *connect.Client[shop.SearchShopsRequest, shop.SearchShopsResponse]
+	getShopDetail *connect.Client[shop.GetShopDetailRequest, shop.GetShopDetailResponse]
+	getMembers    *connect.Client[shop.GetMembersRequest, shop.GetMembersResponse]
 }
 
 // SearchShops calls shop.v1.ShopQueryService.SearchShops.
@@ -100,16 +100,16 @@ func (c *shopQueryServiceClient) GetShopDetail(ctx context.Context, req *connect
 	return c.getShopDetail.CallUnary(ctx, req)
 }
 
-// GetShopMembers calls shop.v1.ShopQueryService.GetShopMembers.
-func (c *shopQueryServiceClient) GetShopMembers(ctx context.Context, req *connect.Request[shop.GetShopMembersRequest]) (*connect.Response[shop.GetShopMembersResponse], error) {
-	return c.getShopMembers.CallUnary(ctx, req)
+// GetMembers calls shop.v1.ShopQueryService.GetMembers.
+func (c *shopQueryServiceClient) GetMembers(ctx context.Context, req *connect.Request[shop.GetMembersRequest]) (*connect.Response[shop.GetMembersResponse], error) {
+	return c.getMembers.CallUnary(ctx, req)
 }
 
 // ShopQueryServiceHandler is an implementation of the shop.v1.ShopQueryService service.
 type ShopQueryServiceHandler interface {
 	SearchShops(context.Context, *connect.Request[shop.SearchShopsRequest]) (*connect.Response[shop.SearchShopsResponse], error)
 	GetShopDetail(context.Context, *connect.Request[shop.GetShopDetailRequest]) (*connect.Response[shop.GetShopDetailResponse], error)
-	GetShopMembers(context.Context, *connect.Request[shop.GetShopMembersRequest]) (*connect.Response[shop.GetShopMembersResponse], error)
+	GetMembers(context.Context, *connect.Request[shop.GetMembersRequest]) (*connect.Response[shop.GetMembersResponse], error)
 }
 
 // NewShopQueryServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -131,10 +131,10 @@ func NewShopQueryServiceHandler(svc ShopQueryServiceHandler, opts ...connect.Han
 		connect.WithSchema(shopQueryServiceMethods.ByName("GetShopDetail")),
 		connect.WithHandlerOptions(opts...),
 	)
-	shopQueryServiceGetShopMembersHandler := connect.NewUnaryHandler(
-		ShopQueryServiceGetShopMembersProcedure,
-		svc.GetShopMembers,
-		connect.WithSchema(shopQueryServiceMethods.ByName("GetShopMembers")),
+	shopQueryServiceGetMembersHandler := connect.NewUnaryHandler(
+		ShopQueryServiceGetMembersProcedure,
+		svc.GetMembers,
+		connect.WithSchema(shopQueryServiceMethods.ByName("GetMembers")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/shop.v1.ShopQueryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -143,8 +143,8 @@ func NewShopQueryServiceHandler(svc ShopQueryServiceHandler, opts ...connect.Han
 			shopQueryServiceSearchShopsHandler.ServeHTTP(w, r)
 		case ShopQueryServiceGetShopDetailProcedure:
 			shopQueryServiceGetShopDetailHandler.ServeHTTP(w, r)
-		case ShopQueryServiceGetShopMembersProcedure:
-			shopQueryServiceGetShopMembersHandler.ServeHTTP(w, r)
+		case ShopQueryServiceGetMembersProcedure:
+			shopQueryServiceGetMembersHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -162,6 +162,6 @@ func (UnimplementedShopQueryServiceHandler) GetShopDetail(context.Context, *conn
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopQueryService.GetShopDetail is not implemented"))
 }
 
-func (UnimplementedShopQueryServiceHandler) GetShopMembers(context.Context, *connect.Request[shop.GetShopMembersRequest]) (*connect.Response[shop.GetShopMembersResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopQueryService.GetShopMembers is not implemented"))
+func (UnimplementedShopQueryServiceHandler) GetMembers(context.Context, *connect.Request[shop.GetMembersRequest]) (*connect.Response[shop.GetMembersResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopQueryService.GetMembers is not implemented"))
 }

@@ -40,7 +40,7 @@ message LocationInfo {
   string name = 2 [(validate.rules).string.min_len = 1];
 }
 
-message AddUserAddressRequest {
+message AddAddressRequest {
   string user_id = 1 [(validate.rules).string.min_len = 1];
 
   LocationInfo country  = 2 [(validate.rules).message.required = true];
@@ -56,22 +56,22 @@ message AddUserAddressRequest {
   bool   is_default = 10;
 }
 
-message AddUserAddressResponse {
+message AddAddressResponse {
   string address_id = 1;
 }
 
-message GetUserDetailRequest {
+message GetDetailRequest {
 
 }
 
-message GetUserDetailResponse {
+message GetDetailResponse {
 
 }
 
-message ListUserAddressesRequest {
+message ListAddressesRequest {
 
 }
 
-message ListUserAddressesResponse {
+message ListAddressesResponse {
 
 }

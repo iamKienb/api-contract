@@ -8,5 +8,5 @@ option go_package = "github.com/iamKienb/shopify-go-api/gen/shop";
 service ShopQueryService {
   rpc SearchShops(SearchShopsRequest) returns (SearchShopsResponse);
   rpc GetShopDetail(GetShopDetailRequest) returns (GetShopDetailResponse);
-  rpc GetShopMembers(GetShopMembersRequest) returns (GetShopMembersResponse);
+  rpc GetMembers(GetMembersRequest) returns (GetMembersResponse);
 }

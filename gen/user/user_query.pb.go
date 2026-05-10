@@ -24,22 +24,22 @@ var File_user_user_query_proto protoreflect.FileDescriptor
 
 const file_user_user_query_proto_rawDesc = "" +
 	"\n" +
-	"\x15user/user_query.proto\x12\auser.v1\x1a\x14user/user_type.proto2\xbe\x01\n" +
-	"\x10UserQueryService\x12N\n" +
-	"\rGetUserDetail\x12\x1d.user.v1.GetUserDetailRequest\x1a\x1e.user.v1.GetUserDetailResponse\x12Z\n" +
-	"\x11ListUserAddresses\x12!.user.v1.ListUserAddressesRequest\x1a\".user.v1.ListUserAddressesResponseB-Z+github.com/iamKienb/shopify-go-api/gen/userb\x06proto3"
+	"\x15user/user_query.proto\x12\auser.v1\x1a\x14user/user_type.proto2\xaa\x01\n" +
+	"\x10UserQueryService\x12F\n" +
+	"\rGetShopDetail\x12\x19.user.v1.GetDetailRequest\x1a\x1a.user.v1.GetDetailResponse\x12N\n" +
+	"\rListAddresses\x12\x1d.user.v1.ListAddressesRequest\x1a\x1e.user.v1.ListAddressesResponseB-Z+github.com/iamKienb/shopify-go-api/gen/userb\x06proto3"
 
 var file_user_user_query_proto_goTypes = []any{
-	(*GetUserDetailRequest)(nil),      // 0: user.v1.GetUserDetailRequest
-	(*ListUserAddressesRequest)(nil),  // 1: user.v1.ListUserAddressesRequest
-	(*GetUserDetailResponse)(nil),     // 2: user.v1.GetUserDetailResponse
-	(*ListUserAddressesResponse)(nil), // 3: user.v1.ListUserAddressesResponse
+	(*GetDetailRequest)(nil),      // 0: user.v1.GetDetailRequest
+	(*ListAddressesRequest)(nil),  // 1: user.v1.ListAddressesRequest
+	(*GetDetailResponse)(nil),     // 2: user.v1.GetDetailResponse
+	(*ListAddressesResponse)(nil), // 3: user.v1.ListAddressesResponse
 }
 var file_user_user_query_proto_depIdxs = []int32{
-	0, // 0: user.v1.UserQueryService.GetUserDetail:input_type -> user.v1.GetUserDetailRequest
-	1, // 1: user.v1.UserQueryService.ListUserAddresses:input_type -> user.v1.ListUserAddressesRequest
-	2, // 2: user.v1.UserQueryService.GetUserDetail:output_type -> user.v1.GetUserDetailResponse
-	3, // 3: user.v1.UserQueryService.ListUserAddresses:output_type -> user.v1.ListUserAddressesResponse
+	0, // 0: user.v1.UserQueryService.GetShopDetail:input_type -> user.v1.GetDetailRequest
+	1, // 1: user.v1.UserQueryService.ListAddresses:input_type -> user.v1.ListAddressesRequest
+	2, // 2: user.v1.UserQueryService.GetShopDetail:output_type -> user.v1.GetDetailResponse
+	3, // 3: user.v1.UserQueryService.ListAddresses:output_type -> user.v1.ListAddressesResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

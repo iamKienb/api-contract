@@ -13,7 +13,7 @@ message ProfileInfo {
   optional string banner_url  = 3;
 }
 
-message CreateShopRequest {
+message CreateRequest {
   string user_id = 1 [(validate.rules).string.min_len = 1];
   string name    = 2 [(validate.rules).string.min_len = 1];
   string slug = 3 [(validate.rules).string = {
@@ -24,7 +24,7 @@ message CreateShopRequest {
   optional ProfileInfo profile = 4;
 }
 
-message CreateShopResponse {
+message CreateResponse {
   string shop_id = 1;
 }
 
@@ -33,7 +33,7 @@ message LocationInfo {
   string name = 2 [(validate.rules).string.min_len = 1];
 }
 
-message AddShopAddressRequest {
+message AddAddressRequest {
   string user_id = 1 [(validate.rules).string.min_len = 1];
   string shop_id = 2 [(validate.rules).string.min_len = 1];
 
@@ -49,17 +49,17 @@ message AddShopAddressRequest {
   string type = 10 [(validate.rules).string = {in: ["Pickup", "Return"]}];
 }
 
-message AddShopAddressResponse {
+message AddAddressResponse {
   string address_id = 1;
 }
 
-message AssignShopMemberRolesRequest {
+message AssignMemberRolesRequest {
   string          shop_id   = 2 [(validate.rules).string.min_len = 1];
   string          member_id = 3 [(validate.rules).string.min_len = 1];
   repeated string roles     = 4 [(validate.rules).repeated = {min_items: 1, unique: true}];
 }
 
-message AssignShopMemberRolesResponse {
+message AssignMemberRolesResponse {
   bool success = 1;
 }
 
@@ -79,10 +79,10 @@ message GetShopDetailResponse {
 
 }
 
-message GetShopMembersRequest {
+message GetMembersRequest {
 
 }
 
-message GetShopMembersResponse {
+message GetMembersResponse {
 
 }

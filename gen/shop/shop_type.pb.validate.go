@@ -146,22 +146,22 @@ var _ interface {
 	ErrorName() string
 } = ProfileInfoValidationError{}
 
-// Validate checks the field values on CreateShopRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *CreateShopRequest) Validate() error {
+// Validate checks the field values on CreateRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *CreateRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on CreateShopRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// CreateShopRequestMultiError, or nil if none found.
-func (m *CreateShopRequest) ValidateAll() error {
+// ValidateAll checks the field values on CreateRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in CreateRequestMultiError, or
+// nil if none found.
+func (m *CreateRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *CreateShopRequest) validate(all bool) error {
+func (m *CreateRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -169,7 +169,7 @@ func (m *CreateShopRequest) validate(all bool) error {
 	var errors []error
 
 	if utf8.RuneCountInString(m.GetUserId()) < 1 {
-		err := CreateShopRequestValidationError{
+		err := CreateRequestValidationError{
 			field:  "UserId",
 			reason: "value length must be at least 1 runes",
 		}
@@ -180,7 +180,7 @@ func (m *CreateShopRequest) validate(all bool) error {
 	}
 
 	if utf8.RuneCountInString(m.GetName()) < 1 {
-		err := CreateShopRequestValidationError{
+		err := CreateRequestValidationError{
 			field:  "Name",
 			reason: "value length must be at least 1 runes",
 		}
@@ -191,7 +191,7 @@ func (m *CreateShopRequest) validate(all bool) error {
 	}
 
 	if l := utf8.RuneCountInString(m.GetSlug()); l < 1 || l > 20 {
-		err := CreateShopRequestValidationError{
+		err := CreateRequestValidationError{
 			field:  "Slug",
 			reason: "value length must be between 1 and 20 runes, inclusive",
 		}
@@ -201,8 +201,8 @@ func (m *CreateShopRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if !_CreateShopRequest_Slug_Pattern.MatchString(m.GetSlug()) {
-		err := CreateShopRequestValidationError{
+	if !_CreateRequest_Slug_Pattern.MatchString(m.GetSlug()) {
+		err := CreateRequestValidationError{
 			field:  "Slug",
 			reason: "value does not match regex pattern \"^[a-z0-9]+(?:-[a-z0-9]+)*$\"",
 		}
@@ -218,7 +218,7 @@ func (m *CreateShopRequest) validate(all bool) error {
 			switch v := interface{}(m.GetProfile()).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, CreateShopRequestValidationError{
+					errors = append(errors, CreateRequestValidationError{
 						field:  "Profile",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -226,7 +226,7 @@ func (m *CreateShopRequest) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, CreateShopRequestValidationError{
+					errors = append(errors, CreateRequestValidationError{
 						field:  "Profile",
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -235,7 +235,7 @@ func (m *CreateShopRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(m.GetProfile()).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return CreateShopRequestValidationError{
+				return CreateRequestValidationError{
 					field:  "Profile",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -246,19 +246,19 @@ func (m *CreateShopRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return CreateShopRequestMultiError(errors)
+		return CreateRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// CreateShopRequestMultiError is an error wrapping multiple validation errors
-// returned by CreateShopRequest.ValidateAll() if the designated constraints
+// CreateRequestMultiError is an error wrapping multiple validation errors
+// returned by CreateRequest.ValidateAll() if the designated constraints
 // aren't met.
-type CreateShopRequestMultiError []error
+type CreateRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CreateShopRequestMultiError) Error() string {
+func (m CreateRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -267,11 +267,11 @@ func (m CreateShopRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CreateShopRequestMultiError) AllErrors() []error { return m }
+func (m CreateRequestMultiError) AllErrors() []error { return m }
 
-// CreateShopRequestValidationError is the validation error returned by
-// CreateShopRequest.Validate if the designated constraints aren't met.
-type CreateShopRequestValidationError struct {
+// CreateRequestValidationError is the validation error returned by
+// CreateRequest.Validate if the designated constraints aren't met.
+type CreateRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -279,24 +279,22 @@ type CreateShopRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e CreateShopRequestValidationError) Field() string { return e.field }
+func (e CreateRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CreateShopRequestValidationError) Reason() string { return e.reason }
+func (e CreateRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CreateShopRequestValidationError) Cause() error { return e.cause }
+func (e CreateRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CreateShopRequestValidationError) Key() bool { return e.key }
+func (e CreateRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CreateShopRequestValidationError) ErrorName() string {
-	return "CreateShopRequestValidationError"
-}
+func (e CreateRequestValidationError) ErrorName() string { return "CreateRequestValidationError" }
 
 // Error satisfies the builtin error interface
-func (e CreateShopRequestValidationError) Error() string {
+func (e CreateRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -308,14 +306,14 @@ func (e CreateShopRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCreateShopRequest.%s: %s%s",
+		"invalid %sCreateRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CreateShopRequestValidationError{}
+var _ error = CreateRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -323,26 +321,26 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CreateShopRequestValidationError{}
+} = CreateRequestValidationError{}
 
-var _CreateShopRequest_Slug_Pattern = regexp.MustCompile("^[a-z0-9]+(?:-[a-z0-9]+)*$")
+var _CreateRequest_Slug_Pattern = regexp.MustCompile("^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
-// Validate checks the field values on CreateShopResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *CreateShopResponse) Validate() error {
+// Validate checks the field values on CreateResponse with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *CreateResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on CreateShopResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// CreateShopResponseMultiError, or nil if none found.
-func (m *CreateShopResponse) ValidateAll() error {
+// ValidateAll checks the field values on CreateResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in CreateResponseMultiError,
+// or nil if none found.
+func (m *CreateResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *CreateShopResponse) validate(all bool) error {
+func (m *CreateResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -352,19 +350,19 @@ func (m *CreateShopResponse) validate(all bool) error {
 	// no validation rules for ShopId
 
 	if len(errors) > 0 {
-		return CreateShopResponseMultiError(errors)
+		return CreateResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// CreateShopResponseMultiError is an error wrapping multiple validation errors
-// returned by CreateShopResponse.ValidateAll() if the designated constraints
+// CreateResponseMultiError is an error wrapping multiple validation errors
+// returned by CreateResponse.ValidateAll() if the designated constraints
 // aren't met.
-type CreateShopResponseMultiError []error
+type CreateResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CreateShopResponseMultiError) Error() string {
+func (m CreateResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -373,11 +371,11 @@ func (m CreateShopResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CreateShopResponseMultiError) AllErrors() []error { return m }
+func (m CreateResponseMultiError) AllErrors() []error { return m }
 
-// CreateShopResponseValidationError is the validation error returned by
-// CreateShopResponse.Validate if the designated constraints aren't met.
-type CreateShopResponseValidationError struct {
+// CreateResponseValidationError is the validation error returned by
+// CreateResponse.Validate if the designated constraints aren't met.
+type CreateResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -385,24 +383,22 @@ type CreateShopResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e CreateShopResponseValidationError) Field() string { return e.field }
+func (e CreateResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CreateShopResponseValidationError) Reason() string { return e.reason }
+func (e CreateResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CreateShopResponseValidationError) Cause() error { return e.cause }
+func (e CreateResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CreateShopResponseValidationError) Key() bool { return e.key }
+func (e CreateResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CreateShopResponseValidationError) ErrorName() string {
-	return "CreateShopResponseValidationError"
-}
+func (e CreateResponseValidationError) ErrorName() string { return "CreateResponseValidationError" }
 
 // Error satisfies the builtin error interface
-func (e CreateShopResponseValidationError) Error() string {
+func (e CreateResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -414,14 +410,14 @@ func (e CreateShopResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCreateShopResponse.%s: %s%s",
+		"invalid %sCreateResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CreateShopResponseValidationError{}
+var _ error = CreateResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -429,7 +425,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CreateShopResponseValidationError{}
+} = CreateResponseValidationError{}
 
 // Validate checks the field values on LocationInfo with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
@@ -552,22 +548,22 @@ var _ interface {
 	ErrorName() string
 } = LocationInfoValidationError{}
 
-// Validate checks the field values on AddShopAddressRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AddShopAddressRequest) Validate() error {
+// Validate checks the field values on AddAddressRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *AddAddressRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AddShopAddressRequest with the rules
+// ValidateAll checks the field values on AddAddressRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// AddShopAddressRequestMultiError, or nil if none found.
-func (m *AddShopAddressRequest) ValidateAll() error {
+// AddAddressRequestMultiError, or nil if none found.
+func (m *AddAddressRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AddShopAddressRequest) validate(all bool) error {
+func (m *AddAddressRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -575,7 +571,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 	var errors []error
 
 	if utf8.RuneCountInString(m.GetUserId()) < 1 {
-		err := AddShopAddressRequestValidationError{
+		err := AddAddressRequestValidationError{
 			field:  "UserId",
 			reason: "value length must be at least 1 runes",
 		}
@@ -586,7 +582,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 	}
 
 	if utf8.RuneCountInString(m.GetShopId()) < 1 {
-		err := AddShopAddressRequestValidationError{
+		err := AddAddressRequestValidationError{
 			field:  "ShopId",
 			reason: "value length must be at least 1 runes",
 		}
@@ -597,7 +593,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 	}
 
 	if m.GetCountry() == nil {
-		err := AddShopAddressRequestValidationError{
+		err := AddAddressRequestValidationError{
 			field:  "Country",
 			reason: "value is required",
 		}
@@ -611,7 +607,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 		switch v := interface{}(m.GetCountry()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AddShopAddressRequestValidationError{
+				errors = append(errors, AddAddressRequestValidationError{
 					field:  "Country",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -619,7 +615,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, AddShopAddressRequestValidationError{
+				errors = append(errors, AddAddressRequestValidationError{
 					field:  "Country",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -628,7 +624,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetCountry()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return AddShopAddressRequestValidationError{
+			return AddAddressRequestValidationError{
 				field:  "Country",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -637,7 +633,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 	}
 
 	if m.GetCity() == nil {
-		err := AddShopAddressRequestValidationError{
+		err := AddAddressRequestValidationError{
 			field:  "City",
 			reason: "value is required",
 		}
@@ -651,7 +647,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 		switch v := interface{}(m.GetCity()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AddShopAddressRequestValidationError{
+				errors = append(errors, AddAddressRequestValidationError{
 					field:  "City",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -659,7 +655,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, AddShopAddressRequestValidationError{
+				errors = append(errors, AddAddressRequestValidationError{
 					field:  "City",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -668,7 +664,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetCity()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return AddShopAddressRequestValidationError{
+			return AddAddressRequestValidationError{
 				field:  "City",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -677,7 +673,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 	}
 
 	if m.GetDistrict() == nil {
-		err := AddShopAddressRequestValidationError{
+		err := AddAddressRequestValidationError{
 			field:  "District",
 			reason: "value is required",
 		}
@@ -691,7 +687,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 		switch v := interface{}(m.GetDistrict()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AddShopAddressRequestValidationError{
+				errors = append(errors, AddAddressRequestValidationError{
 					field:  "District",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -699,7 +695,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, AddShopAddressRequestValidationError{
+				errors = append(errors, AddAddressRequestValidationError{
 					field:  "District",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -708,7 +704,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetDistrict()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return AddShopAddressRequestValidationError{
+			return AddAddressRequestValidationError{
 				field:  "District",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -717,7 +713,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 	}
 
 	if m.GetWard() == nil {
-		err := AddShopAddressRequestValidationError{
+		err := AddAddressRequestValidationError{
 			field:  "Ward",
 			reason: "value is required",
 		}
@@ -731,7 +727,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 		switch v := interface{}(m.GetWard()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AddShopAddressRequestValidationError{
+				errors = append(errors, AddAddressRequestValidationError{
 					field:  "Ward",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -739,7 +735,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 			}
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
-				errors = append(errors, AddShopAddressRequestValidationError{
+				errors = append(errors, AddAddressRequestValidationError{
 					field:  "Ward",
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -748,7 +744,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 		}
 	} else if v, ok := interface{}(m.GetWard()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
-			return AddShopAddressRequestValidationError{
+			return AddAddressRequestValidationError{
 				field:  "Ward",
 				reason: "embedded message failed validation",
 				cause:  err,
@@ -757,7 +753,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 	}
 
 	if utf8.RuneCountInString(m.GetAddressLine()) < 1 {
-		err := AddShopAddressRequestValidationError{
+		err := AddAddressRequestValidationError{
 			field:  "AddressLine",
 			reason: "value length must be at least 1 runes",
 		}
@@ -768,7 +764,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 	}
 
 	if utf8.RuneCountInString(m.GetContactName()) < 1 {
-		err := AddShopAddressRequestValidationError{
+		err := AddAddressRequestValidationError{
 			field:  "ContactName",
 			reason: "value length must be at least 1 runes",
 		}
@@ -778,8 +774,8 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if !_AddShopAddressRequest_PhoneNumber_Pattern.MatchString(m.GetPhoneNumber()) {
-		err := AddShopAddressRequestValidationError{
+	if !_AddAddressRequest_PhoneNumber_Pattern.MatchString(m.GetPhoneNumber()) {
+		err := AddAddressRequestValidationError{
 			field:  "PhoneNumber",
 			reason: "value does not match regex pattern \"^[0-9]{10,11}$\"",
 		}
@@ -789,8 +785,8 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if _, ok := _AddShopAddressRequest_Type_InLookup[m.GetType()]; !ok {
-		err := AddShopAddressRequestValidationError{
+	if _, ok := _AddAddressRequest_Type_InLookup[m.GetType()]; !ok {
+		err := AddAddressRequestValidationError{
 			field:  "Type",
 			reason: "value must be in list [Pickup Return]",
 		}
@@ -801,19 +797,19 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return AddShopAddressRequestMultiError(errors)
+		return AddAddressRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// AddShopAddressRequestMultiError is an error wrapping multiple validation
-// errors returned by AddShopAddressRequest.ValidateAll() if the designated
-// constraints aren't met.
-type AddShopAddressRequestMultiError []error
+// AddAddressRequestMultiError is an error wrapping multiple validation errors
+// returned by AddAddressRequest.ValidateAll() if the designated constraints
+// aren't met.
+type AddAddressRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AddShopAddressRequestMultiError) Error() string {
+func (m AddAddressRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -822,11 +818,11 @@ func (m AddShopAddressRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AddShopAddressRequestMultiError) AllErrors() []error { return m }
+func (m AddAddressRequestMultiError) AllErrors() []error { return m }
 
-// AddShopAddressRequestValidationError is the validation error returned by
-// AddShopAddressRequest.Validate if the designated constraints aren't met.
-type AddShopAddressRequestValidationError struct {
+// AddAddressRequestValidationError is the validation error returned by
+// AddAddressRequest.Validate if the designated constraints aren't met.
+type AddAddressRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -834,24 +830,24 @@ type AddShopAddressRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e AddShopAddressRequestValidationError) Field() string { return e.field }
+func (e AddAddressRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AddShopAddressRequestValidationError) Reason() string { return e.reason }
+func (e AddAddressRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AddShopAddressRequestValidationError) Cause() error { return e.cause }
+func (e AddAddressRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AddShopAddressRequestValidationError) Key() bool { return e.key }
+func (e AddAddressRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AddShopAddressRequestValidationError) ErrorName() string {
-	return "AddShopAddressRequestValidationError"
+func (e AddAddressRequestValidationError) ErrorName() string {
+	return "AddAddressRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AddShopAddressRequestValidationError) Error() string {
+func (e AddAddressRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -863,14 +859,14 @@ func (e AddShopAddressRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAddShopAddressRequest.%s: %s%s",
+		"invalid %sAddAddressRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AddShopAddressRequestValidationError{}
+var _ error = AddAddressRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -878,31 +874,31 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AddShopAddressRequestValidationError{}
+} = AddAddressRequestValidationError{}
 
-var _AddShopAddressRequest_PhoneNumber_Pattern = regexp.MustCompile("^[0-9]{10,11}$")
+var _AddAddressRequest_PhoneNumber_Pattern = regexp.MustCompile("^[0-9]{10,11}$")
 
-var _AddShopAddressRequest_Type_InLookup = map[string]struct{}{
+var _AddAddressRequest_Type_InLookup = map[string]struct{}{
 	"Pickup": {},
 	"Return": {},
 }
 
-// Validate checks the field values on AddShopAddressResponse with the rules
+// Validate checks the field values on AddAddressResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AddShopAddressResponse) Validate() error {
+func (m *AddAddressResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AddShopAddressResponse with the rules
+// ValidateAll checks the field values on AddAddressResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// AddShopAddressResponseMultiError, or nil if none found.
-func (m *AddShopAddressResponse) ValidateAll() error {
+// AddAddressResponseMultiError, or nil if none found.
+func (m *AddAddressResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AddShopAddressResponse) validate(all bool) error {
+func (m *AddAddressResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -912,19 +908,19 @@ func (m *AddShopAddressResponse) validate(all bool) error {
 	// no validation rules for AddressId
 
 	if len(errors) > 0 {
-		return AddShopAddressResponseMultiError(errors)
+		return AddAddressResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// AddShopAddressResponseMultiError is an error wrapping multiple validation
-// errors returned by AddShopAddressResponse.ValidateAll() if the designated
-// constraints aren't met.
-type AddShopAddressResponseMultiError []error
+// AddAddressResponseMultiError is an error wrapping multiple validation errors
+// returned by AddAddressResponse.ValidateAll() if the designated constraints
+// aren't met.
+type AddAddressResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AddShopAddressResponseMultiError) Error() string {
+func (m AddAddressResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -933,11 +929,11 @@ func (m AddShopAddressResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AddShopAddressResponseMultiError) AllErrors() []error { return m }
+func (m AddAddressResponseMultiError) AllErrors() []error { return m }
 
-// AddShopAddressResponseValidationError is the validation error returned by
-// AddShopAddressResponse.Validate if the designated constraints aren't met.
-type AddShopAddressResponseValidationError struct {
+// AddAddressResponseValidationError is the validation error returned by
+// AddAddressResponse.Validate if the designated constraints aren't met.
+type AddAddressResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -945,24 +941,24 @@ type AddShopAddressResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e AddShopAddressResponseValidationError) Field() string { return e.field }
+func (e AddAddressResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AddShopAddressResponseValidationError) Reason() string { return e.reason }
+func (e AddAddressResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AddShopAddressResponseValidationError) Cause() error { return e.cause }
+func (e AddAddressResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AddShopAddressResponseValidationError) Key() bool { return e.key }
+func (e AddAddressResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AddShopAddressResponseValidationError) ErrorName() string {
-	return "AddShopAddressResponseValidationError"
+func (e AddAddressResponseValidationError) ErrorName() string {
+	return "AddAddressResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AddShopAddressResponseValidationError) Error() string {
+func (e AddAddressResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -974,14 +970,14 @@ func (e AddShopAddressResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAddShopAddressResponse.%s: %s%s",
+		"invalid %sAddAddressResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AddShopAddressResponseValidationError{}
+var _ error = AddAddressResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -989,24 +985,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AddShopAddressResponseValidationError{}
+} = AddAddressResponseValidationError{}
 
-// Validate checks the field values on AssignShopMemberRolesRequest with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on AssignMemberRolesRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AssignShopMemberRolesRequest) Validate() error {
+func (m *AssignMemberRolesRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AssignShopMemberRolesRequest with the
+// ValidateAll checks the field values on AssignMemberRolesRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// AssignShopMemberRolesRequestMultiError, or nil if none found.
-func (m *AssignShopMemberRolesRequest) ValidateAll() error {
+// AssignMemberRolesRequestMultiError, or nil if none found.
+func (m *AssignMemberRolesRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AssignShopMemberRolesRequest) validate(all bool) error {
+func (m *AssignMemberRolesRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1014,7 +1010,7 @@ func (m *AssignShopMemberRolesRequest) validate(all bool) error {
 	var errors []error
 
 	if utf8.RuneCountInString(m.GetShopId()) < 1 {
-		err := AssignShopMemberRolesRequestValidationError{
+		err := AssignMemberRolesRequestValidationError{
 			field:  "ShopId",
 			reason: "value length must be at least 1 runes",
 		}
@@ -1025,7 +1021,7 @@ func (m *AssignShopMemberRolesRequest) validate(all bool) error {
 	}
 
 	if utf8.RuneCountInString(m.GetMemberId()) < 1 {
-		err := AssignShopMemberRolesRequestValidationError{
+		err := AssignMemberRolesRequestValidationError{
 			field:  "MemberId",
 			reason: "value length must be at least 1 runes",
 		}
@@ -1036,7 +1032,7 @@ func (m *AssignShopMemberRolesRequest) validate(all bool) error {
 	}
 
 	if len(m.GetRoles()) < 1 {
-		err := AssignShopMemberRolesRequestValidationError{
+		err := AssignMemberRolesRequestValidationError{
 			field:  "Roles",
 			reason: "value must contain at least 1 item(s)",
 		}
@@ -1046,13 +1042,13 @@ func (m *AssignShopMemberRolesRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	_AssignShopMemberRolesRequest_Roles_Unique := make(map[string]struct{}, len(m.GetRoles()))
+	_AssignMemberRolesRequest_Roles_Unique := make(map[string]struct{}, len(m.GetRoles()))
 
 	for idx, item := range m.GetRoles() {
 		_, _ = idx, item
 
-		if _, exists := _AssignShopMemberRolesRequest_Roles_Unique[item]; exists {
-			err := AssignShopMemberRolesRequestValidationError{
+		if _, exists := _AssignMemberRolesRequest_Roles_Unique[item]; exists {
+			err := AssignMemberRolesRequestValidationError{
 				field:  fmt.Sprintf("Roles[%v]", idx),
 				reason: "repeated value must contain unique items",
 			}
@@ -1061,26 +1057,26 @@ func (m *AssignShopMemberRolesRequest) validate(all bool) error {
 			}
 			errors = append(errors, err)
 		} else {
-			_AssignShopMemberRolesRequest_Roles_Unique[item] = struct{}{}
+			_AssignMemberRolesRequest_Roles_Unique[item] = struct{}{}
 		}
 
 		// no validation rules for Roles[idx]
 	}
 
 	if len(errors) > 0 {
-		return AssignShopMemberRolesRequestMultiError(errors)
+		return AssignMemberRolesRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// AssignShopMemberRolesRequestMultiError is an error wrapping multiple
-// validation errors returned by AssignShopMemberRolesRequest.ValidateAll() if
-// the designated constraints aren't met.
-type AssignShopMemberRolesRequestMultiError []error
+// AssignMemberRolesRequestMultiError is an error wrapping multiple validation
+// errors returned by AssignMemberRolesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type AssignMemberRolesRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AssignShopMemberRolesRequestMultiError) Error() string {
+func (m AssignMemberRolesRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1089,12 +1085,11 @@ func (m AssignShopMemberRolesRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AssignShopMemberRolesRequestMultiError) AllErrors() []error { return m }
+func (m AssignMemberRolesRequestMultiError) AllErrors() []error { return m }
 
-// AssignShopMemberRolesRequestValidationError is the validation error returned
-// by AssignShopMemberRolesRequest.Validate if the designated constraints
-// aren't met.
-type AssignShopMemberRolesRequestValidationError struct {
+// AssignMemberRolesRequestValidationError is the validation error returned by
+// AssignMemberRolesRequest.Validate if the designated constraints aren't met.
+type AssignMemberRolesRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1102,24 +1097,24 @@ type AssignShopMemberRolesRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e AssignShopMemberRolesRequestValidationError) Field() string { return e.field }
+func (e AssignMemberRolesRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AssignShopMemberRolesRequestValidationError) Reason() string { return e.reason }
+func (e AssignMemberRolesRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AssignShopMemberRolesRequestValidationError) Cause() error { return e.cause }
+func (e AssignMemberRolesRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AssignShopMemberRolesRequestValidationError) Key() bool { return e.key }
+func (e AssignMemberRolesRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AssignShopMemberRolesRequestValidationError) ErrorName() string {
-	return "AssignShopMemberRolesRequestValidationError"
+func (e AssignMemberRolesRequestValidationError) ErrorName() string {
+	return "AssignMemberRolesRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AssignShopMemberRolesRequestValidationError) Error() string {
+func (e AssignMemberRolesRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1131,14 +1126,14 @@ func (e AssignShopMemberRolesRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAssignShopMemberRolesRequest.%s: %s%s",
+		"invalid %sAssignMemberRolesRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AssignShopMemberRolesRequestValidationError{}
+var _ error = AssignMemberRolesRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1146,24 +1141,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AssignShopMemberRolesRequestValidationError{}
+} = AssignMemberRolesRequestValidationError{}
 
-// Validate checks the field values on AssignShopMemberRolesResponse with the
-// rules defined in the proto definition for this message. If any rules are
+// Validate checks the field values on AssignMemberRolesResponse with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AssignShopMemberRolesResponse) Validate() error {
+func (m *AssignMemberRolesResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AssignShopMemberRolesResponse with
-// the rules defined in the proto definition for this message. If any rules
-// are violated, the result is a list of violation errors wrapped in
-// AssignShopMemberRolesResponseMultiError, or nil if none found.
-func (m *AssignShopMemberRolesResponse) ValidateAll() error {
+// ValidateAll checks the field values on AssignMemberRolesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AssignMemberRolesResponseMultiError, or nil if none found.
+func (m *AssignMemberRolesResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AssignShopMemberRolesResponse) validate(all bool) error {
+func (m *AssignMemberRolesResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1173,19 +1168,19 @@ func (m *AssignShopMemberRolesResponse) validate(all bool) error {
 	// no validation rules for Success
 
 	if len(errors) > 0 {
-		return AssignShopMemberRolesResponseMultiError(errors)
+		return AssignMemberRolesResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// AssignShopMemberRolesResponseMultiError is an error wrapping multiple
-// validation errors returned by AssignShopMemberRolesResponse.ValidateAll()
-// if the designated constraints aren't met.
-type AssignShopMemberRolesResponseMultiError []error
+// AssignMemberRolesResponseMultiError is an error wrapping multiple validation
+// errors returned by AssignMemberRolesResponse.ValidateAll() if the
+// designated constraints aren't met.
+type AssignMemberRolesResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AssignShopMemberRolesResponseMultiError) Error() string {
+func (m AssignMemberRolesResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1194,12 +1189,11 @@ func (m AssignShopMemberRolesResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AssignShopMemberRolesResponseMultiError) AllErrors() []error { return m }
+func (m AssignMemberRolesResponseMultiError) AllErrors() []error { return m }
 
-// AssignShopMemberRolesResponseValidationError is the validation error
-// returned by AssignShopMemberRolesResponse.Validate if the designated
-// constraints aren't met.
-type AssignShopMemberRolesResponseValidationError struct {
+// AssignMemberRolesResponseValidationError is the validation error returned by
+// AssignMemberRolesResponse.Validate if the designated constraints aren't met.
+type AssignMemberRolesResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1207,24 +1201,24 @@ type AssignShopMemberRolesResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e AssignShopMemberRolesResponseValidationError) Field() string { return e.field }
+func (e AssignMemberRolesResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AssignShopMemberRolesResponseValidationError) Reason() string { return e.reason }
+func (e AssignMemberRolesResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AssignShopMemberRolesResponseValidationError) Cause() error { return e.cause }
+func (e AssignMemberRolesResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AssignShopMemberRolesResponseValidationError) Key() bool { return e.key }
+func (e AssignMemberRolesResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AssignShopMemberRolesResponseValidationError) ErrorName() string {
-	return "AssignShopMemberRolesResponseValidationError"
+func (e AssignMemberRolesResponseValidationError) ErrorName() string {
+	return "AssignMemberRolesResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AssignShopMemberRolesResponseValidationError) Error() string {
+func (e AssignMemberRolesResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1236,14 +1230,14 @@ func (e AssignShopMemberRolesResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAssignShopMemberRolesResponse.%s: %s%s",
+		"invalid %sAssignMemberRolesResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AssignShopMemberRolesResponseValidationError{}
+var _ error = AssignMemberRolesResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1251,7 +1245,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AssignShopMemberRolesResponseValidationError{}
+} = AssignMemberRolesResponseValidationError{}
 
 // Validate checks the field values on SearchShopsRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -1661,22 +1655,22 @@ var _ interface {
 	ErrorName() string
 } = GetShopDetailResponseValidationError{}
 
-// Validate checks the field values on GetShopMembersRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetShopMembersRequest) Validate() error {
+// Validate checks the field values on GetMembersRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetMembersRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetShopMembersRequest with the rules
+// ValidateAll checks the field values on GetMembersRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetShopMembersRequestMultiError, or nil if none found.
-func (m *GetShopMembersRequest) ValidateAll() error {
+// GetMembersRequestMultiError, or nil if none found.
+func (m *GetMembersRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetShopMembersRequest) validate(all bool) error {
+func (m *GetMembersRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1684,19 +1678,19 @@ func (m *GetShopMembersRequest) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return GetShopMembersRequestMultiError(errors)
+		return GetMembersRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetShopMembersRequestMultiError is an error wrapping multiple validation
-// errors returned by GetShopMembersRequest.ValidateAll() if the designated
-// constraints aren't met.
-type GetShopMembersRequestMultiError []error
+// GetMembersRequestMultiError is an error wrapping multiple validation errors
+// returned by GetMembersRequest.ValidateAll() if the designated constraints
+// aren't met.
+type GetMembersRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetShopMembersRequestMultiError) Error() string {
+func (m GetMembersRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1705,11 +1699,11 @@ func (m GetShopMembersRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetShopMembersRequestMultiError) AllErrors() []error { return m }
+func (m GetMembersRequestMultiError) AllErrors() []error { return m }
 
-// GetShopMembersRequestValidationError is the validation error returned by
-// GetShopMembersRequest.Validate if the designated constraints aren't met.
-type GetShopMembersRequestValidationError struct {
+// GetMembersRequestValidationError is the validation error returned by
+// GetMembersRequest.Validate if the designated constraints aren't met.
+type GetMembersRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1717,24 +1711,24 @@ type GetShopMembersRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetShopMembersRequestValidationError) Field() string { return e.field }
+func (e GetMembersRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetShopMembersRequestValidationError) Reason() string { return e.reason }
+func (e GetMembersRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetShopMembersRequestValidationError) Cause() error { return e.cause }
+func (e GetMembersRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetShopMembersRequestValidationError) Key() bool { return e.key }
+func (e GetMembersRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetShopMembersRequestValidationError) ErrorName() string {
-	return "GetShopMembersRequestValidationError"
+func (e GetMembersRequestValidationError) ErrorName() string {
+	return "GetMembersRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetShopMembersRequestValidationError) Error() string {
+func (e GetMembersRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1746,14 +1740,14 @@ func (e GetShopMembersRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetShopMembersRequest.%s: %s%s",
+		"invalid %sGetMembersRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetShopMembersRequestValidationError{}
+var _ error = GetMembersRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1761,24 +1755,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetShopMembersRequestValidationError{}
+} = GetMembersRequestValidationError{}
 
-// Validate checks the field values on GetShopMembersResponse with the rules
+// Validate checks the field values on GetMembersResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetShopMembersResponse) Validate() error {
+func (m *GetMembersResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on GetShopMembersResponse with the rules
+// ValidateAll checks the field values on GetMembersResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// GetShopMembersResponseMultiError, or nil if none found.
-func (m *GetShopMembersResponse) ValidateAll() error {
+// GetMembersResponseMultiError, or nil if none found.
+func (m *GetMembersResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *GetShopMembersResponse) validate(all bool) error {
+func (m *GetMembersResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1786,19 +1780,19 @@ func (m *GetShopMembersResponse) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return GetShopMembersResponseMultiError(errors)
+		return GetMembersResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// GetShopMembersResponseMultiError is an error wrapping multiple validation
-// errors returned by GetShopMembersResponse.ValidateAll() if the designated
-// constraints aren't met.
-type GetShopMembersResponseMultiError []error
+// GetMembersResponseMultiError is an error wrapping multiple validation errors
+// returned by GetMembersResponse.ValidateAll() if the designated constraints
+// aren't met.
+type GetMembersResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m GetShopMembersResponseMultiError) Error() string {
+func (m GetMembersResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1807,11 +1801,11 @@ func (m GetShopMembersResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m GetShopMembersResponseMultiError) AllErrors() []error { return m }
+func (m GetMembersResponseMultiError) AllErrors() []error { return m }
 
-// GetShopMembersResponseValidationError is the validation error returned by
-// GetShopMembersResponse.Validate if the designated constraints aren't met.
-type GetShopMembersResponseValidationError struct {
+// GetMembersResponseValidationError is the validation error returned by
+// GetMembersResponse.Validate if the designated constraints aren't met.
+type GetMembersResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1819,24 +1813,24 @@ type GetShopMembersResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e GetShopMembersResponseValidationError) Field() string { return e.field }
+func (e GetMembersResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e GetShopMembersResponseValidationError) Reason() string { return e.reason }
+func (e GetMembersResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e GetShopMembersResponseValidationError) Cause() error { return e.cause }
+func (e GetMembersResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e GetShopMembersResponseValidationError) Key() bool { return e.key }
+func (e GetMembersResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e GetShopMembersResponseValidationError) ErrorName() string {
-	return "GetShopMembersResponseValidationError"
+func (e GetMembersResponseValidationError) ErrorName() string {
+	return "GetMembersResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e GetShopMembersResponseValidationError) Error() string {
+func (e GetMembersResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1848,14 +1842,14 @@ func (e GetShopMembersResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sGetShopMembersResponse.%s: %s%s",
+		"invalid %sGetMembersResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = GetShopMembersResponseValidationError{}
+var _ error = GetMembersResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1863,4 +1857,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = GetShopMembersResponseValidationError{}
+} = GetMembersResponseValidationError{}

@@ -33,23 +33,23 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// ShopCommandServiceCreateShopProcedure is the fully-qualified name of the ShopCommandService's
-	// CreateShop RPC.
-	ShopCommandServiceCreateShopProcedure = "/shop.v1.ShopCommandService/CreateShop"
-	// ShopCommandServiceAddShopAddressProcedure is the fully-qualified name of the ShopCommandService's
-	// AddShopAddress RPC.
-	ShopCommandServiceAddShopAddressProcedure = "/shop.v1.ShopCommandService/AddShopAddress"
-	// ShopCommandServiceAssignShopMemberRolesProcedure is the fully-qualified name of the
-	// ShopCommandService's AssignShopMemberRoles RPC.
-	ShopCommandServiceAssignShopMemberRolesProcedure = "/shop.v1.ShopCommandService/AssignShopMemberRoles"
+	// ShopCommandServiceCreateProcedure is the fully-qualified name of the ShopCommandService's Create
+	// RPC.
+	ShopCommandServiceCreateProcedure = "/shop.v1.ShopCommandService/Create"
+	// ShopCommandServiceAddAddressProcedure is the fully-qualified name of the ShopCommandService's
+	// AddAddress RPC.
+	ShopCommandServiceAddAddressProcedure = "/shop.v1.ShopCommandService/AddAddress"
+	// ShopCommandServiceAssignMemberRolesProcedure is the fully-qualified name of the
+	// ShopCommandService's AssignMemberRoles RPC.
+	ShopCommandServiceAssignMemberRolesProcedure = "/shop.v1.ShopCommandService/AssignMemberRoles"
 )
 
 // ShopCommandServiceClient is a client for the shop.v1.ShopCommandService service.
 type ShopCommandServiceClient interface {
 	// Public Commands
-	CreateShop(context.Context, *connect.Request[shop.CreateShopRequest]) (*connect.Response[shop.CreateShopResponse], error)
-	AddShopAddress(context.Context, *connect.Request[shop.AddShopAddressRequest]) (*connect.Response[shop.AddShopAddressResponse], error)
-	AssignShopMemberRoles(context.Context, *connect.Request[shop.AssignShopMemberRolesRequest]) (*connect.Response[shop.AssignShopMemberRolesResponse], error)
+	Create(context.Context, *connect.Request[shop.CreateRequest]) (*connect.Response[shop.CreateResponse], error)
+	AddAddress(context.Context, *connect.Request[shop.AddAddressRequest]) (*connect.Response[shop.AddAddressResponse], error)
+	AssignMemberRoles(context.Context, *connect.Request[shop.AssignMemberRolesRequest]) (*connect.Response[shop.AssignMemberRolesResponse], error)
 }
 
 // NewShopCommandServiceClient constructs a client for the shop.v1.ShopCommandService service. By
@@ -63,22 +63,22 @@ func NewShopCommandServiceClient(httpClient connect.HTTPClient, baseURL string, 
 	baseURL = strings.TrimRight(baseURL, "/")
 	shopCommandServiceMethods := shop.File_shop_shop_command_proto.Services().ByName("ShopCommandService").Methods()
 	return &shopCommandServiceClient{
-		createShop: connect.NewClient[shop.CreateShopRequest, shop.CreateShopResponse](
+		create: connect.NewClient[shop.CreateRequest, shop.CreateResponse](
 			httpClient,
-			baseURL+ShopCommandServiceCreateShopProcedure,
-			connect.WithSchema(shopCommandServiceMethods.ByName("CreateShop")),
+			baseURL+ShopCommandServiceCreateProcedure,
+			connect.WithSchema(shopCommandServiceMethods.ByName("Create")),
 			connect.WithClientOptions(opts...),
 		),
-		addShopAddress: connect.NewClient[shop.AddShopAddressRequest, shop.AddShopAddressResponse](
+		addAddress: connect.NewClient[shop.AddAddressRequest, shop.AddAddressResponse](
 			httpClient,
-			baseURL+ShopCommandServiceAddShopAddressProcedure,
-			connect.WithSchema(shopCommandServiceMethods.ByName("AddShopAddress")),
+			baseURL+ShopCommandServiceAddAddressProcedure,
+			connect.WithSchema(shopCommandServiceMethods.ByName("AddAddress")),
 			connect.WithClientOptions(opts...),
 		),
-		assignShopMemberRoles: connect.NewClient[shop.AssignShopMemberRolesRequest, shop.AssignShopMemberRolesResponse](
+		assignMemberRoles: connect.NewClient[shop.AssignMemberRolesRequest, shop.AssignMemberRolesResponse](
 			httpClient,
-			baseURL+ShopCommandServiceAssignShopMemberRolesProcedure,
-			connect.WithSchema(shopCommandServiceMethods.ByName("AssignShopMemberRoles")),
+			baseURL+ShopCommandServiceAssignMemberRolesProcedure,
+			connect.WithSchema(shopCommandServiceMethods.ByName("AssignMemberRoles")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -86,32 +86,32 @@ func NewShopCommandServiceClient(httpClient connect.HTTPClient, baseURL string, 
 
 // shopCommandServiceClient implements ShopCommandServiceClient.
 type shopCommandServiceClient struct {
-	createShop            *connect.Client[shop.CreateShopRequest, shop.CreateShopResponse]
-	addShopAddress        *connect.Client[shop.AddShopAddressRequest, shop.AddShopAddressResponse]
-	assignShopMemberRoles *connect.Client[shop.AssignShopMemberRolesRequest, shop.AssignShopMemberRolesResponse]
+	create            *connect.Client[shop.CreateRequest, shop.CreateResponse]
+	addAddress        *connect.Client[shop.AddAddressRequest, shop.AddAddressResponse]
+	assignMemberRoles *connect.Client[shop.AssignMemberRolesRequest, shop.AssignMemberRolesResponse]
 }
 
-// CreateShop calls shop.v1.ShopCommandService.CreateShop.
-func (c *shopCommandServiceClient) CreateShop(ctx context.Context, req *connect.Request[shop.CreateShopRequest]) (*connect.Response[shop.CreateShopResponse], error) {
-	return c.createShop.CallUnary(ctx, req)
+// Create calls shop.v1.ShopCommandService.Create.
+func (c *shopCommandServiceClient) Create(ctx context.Context, req *connect.Request[shop.CreateRequest]) (*connect.Response[shop.CreateResponse], error) {
+	return c.create.CallUnary(ctx, req)
 }
 
-// AddShopAddress calls shop.v1.ShopCommandService.AddShopAddress.
-func (c *shopCommandServiceClient) AddShopAddress(ctx context.Context, req *connect.Request[shop.AddShopAddressRequest]) (*connect.Response[shop.AddShopAddressResponse], error) {
-	return c.addShopAddress.CallUnary(ctx, req)
+// AddAddress calls shop.v1.ShopCommandService.AddAddress.
+func (c *shopCommandServiceClient) AddAddress(ctx context.Context, req *connect.Request[shop.AddAddressRequest]) (*connect.Response[shop.AddAddressResponse], error) {
+	return c.addAddress.CallUnary(ctx, req)
 }
 
-// AssignShopMemberRoles calls shop.v1.ShopCommandService.AssignShopMemberRoles.
-func (c *shopCommandServiceClient) AssignShopMemberRoles(ctx context.Context, req *connect.Request[shop.AssignShopMemberRolesRequest]) (*connect.Response[shop.AssignShopMemberRolesResponse], error) {
-	return c.assignShopMemberRoles.CallUnary(ctx, req)
+// AssignMemberRoles calls shop.v1.ShopCommandService.AssignMemberRoles.
+func (c *shopCommandServiceClient) AssignMemberRoles(ctx context.Context, req *connect.Request[shop.AssignMemberRolesRequest]) (*connect.Response[shop.AssignMemberRolesResponse], error) {
+	return c.assignMemberRoles.CallUnary(ctx, req)
 }
 
 // ShopCommandServiceHandler is an implementation of the shop.v1.ShopCommandService service.
 type ShopCommandServiceHandler interface {
 	// Public Commands
-	CreateShop(context.Context, *connect.Request[shop.CreateShopRequest]) (*connect.Response[shop.CreateShopResponse], error)
-	AddShopAddress(context.Context, *connect.Request[shop.AddShopAddressRequest]) (*connect.Response[shop.AddShopAddressResponse], error)
-	AssignShopMemberRoles(context.Context, *connect.Request[shop.AssignShopMemberRolesRequest]) (*connect.Response[shop.AssignShopMemberRolesResponse], error)
+	Create(context.Context, *connect.Request[shop.CreateRequest]) (*connect.Response[shop.CreateResponse], error)
+	AddAddress(context.Context, *connect.Request[shop.AddAddressRequest]) (*connect.Response[shop.AddAddressResponse], error)
+	AssignMemberRoles(context.Context, *connect.Request[shop.AssignMemberRolesRequest]) (*connect.Response[shop.AssignMemberRolesResponse], error)
 }
 
 // NewShopCommandServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -121,32 +121,32 @@ type ShopCommandServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewShopCommandServiceHandler(svc ShopCommandServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	shopCommandServiceMethods := shop.File_shop_shop_command_proto.Services().ByName("ShopCommandService").Methods()
-	shopCommandServiceCreateShopHandler := connect.NewUnaryHandler(
-		ShopCommandServiceCreateShopProcedure,
-		svc.CreateShop,
-		connect.WithSchema(shopCommandServiceMethods.ByName("CreateShop")),
+	shopCommandServiceCreateHandler := connect.NewUnaryHandler(
+		ShopCommandServiceCreateProcedure,
+		svc.Create,
+		connect.WithSchema(shopCommandServiceMethods.ByName("Create")),
 		connect.WithHandlerOptions(opts...),
 	)
-	shopCommandServiceAddShopAddressHandler := connect.NewUnaryHandler(
-		ShopCommandServiceAddShopAddressProcedure,
-		svc.AddShopAddress,
-		connect.WithSchema(shopCommandServiceMethods.ByName("AddShopAddress")),
+	shopCommandServiceAddAddressHandler := connect.NewUnaryHandler(
+		ShopCommandServiceAddAddressProcedure,
+		svc.AddAddress,
+		connect.WithSchema(shopCommandServiceMethods.ByName("AddAddress")),
 		connect.WithHandlerOptions(opts...),
 	)
-	shopCommandServiceAssignShopMemberRolesHandler := connect.NewUnaryHandler(
-		ShopCommandServiceAssignShopMemberRolesProcedure,
-		svc.AssignShopMemberRoles,
-		connect.WithSchema(shopCommandServiceMethods.ByName("AssignShopMemberRoles")),
+	shopCommandServiceAssignMemberRolesHandler := connect.NewUnaryHandler(
+		ShopCommandServiceAssignMemberRolesProcedure,
+		svc.AssignMemberRoles,
+		connect.WithSchema(shopCommandServiceMethods.ByName("AssignMemberRoles")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/shop.v1.ShopCommandService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case ShopCommandServiceCreateShopProcedure:
-			shopCommandServiceCreateShopHandler.ServeHTTP(w, r)
-		case ShopCommandServiceAddShopAddressProcedure:
-			shopCommandServiceAddShopAddressHandler.ServeHTTP(w, r)
-		case ShopCommandServiceAssignShopMemberRolesProcedure:
-			shopCommandServiceAssignShopMemberRolesHandler.ServeHTTP(w, r)
+		case ShopCommandServiceCreateProcedure:
+			shopCommandServiceCreateHandler.ServeHTTP(w, r)
+		case ShopCommandServiceAddAddressProcedure:
+			shopCommandServiceAddAddressHandler.ServeHTTP(w, r)
+		case ShopCommandServiceAssignMemberRolesProcedure:
+			shopCommandServiceAssignMemberRolesHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -156,14 +156,14 @@ func NewShopCommandServiceHandler(svc ShopCommandServiceHandler, opts ...connect
 // UnimplementedShopCommandServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedShopCommandServiceHandler struct{}
 
-func (UnimplementedShopCommandServiceHandler) CreateShop(context.Context, *connect.Request[shop.CreateShopRequest]) (*connect.Response[shop.CreateShopResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopCommandService.CreateShop is not implemented"))
+func (UnimplementedShopCommandServiceHandler) Create(context.Context, *connect.Request[shop.CreateRequest]) (*connect.Response[shop.CreateResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopCommandService.Create is not implemented"))
 }
 
-func (UnimplementedShopCommandServiceHandler) AddShopAddress(context.Context, *connect.Request[shop.AddShopAddressRequest]) (*connect.Response[shop.AddShopAddressResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopCommandService.AddShopAddress is not implemented"))
+func (UnimplementedShopCommandServiceHandler) AddAddress(context.Context, *connect.Request[shop.AddAddressRequest]) (*connect.Response[shop.AddAddressResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopCommandService.AddAddress is not implemented"))
 }
 
-func (UnimplementedShopCommandServiceHandler) AssignShopMemberRoles(context.Context, *connect.Request[shop.AssignShopMemberRolesRequest]) (*connect.Response[shop.AssignShopMemberRolesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopCommandService.AssignShopMemberRoles is not implemented"))
+func (UnimplementedShopCommandServiceHandler) AssignMemberRoles(context.Context, *connect.Request[shop.AssignMemberRolesRequest]) (*connect.Response[shop.AssignMemberRolesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopCommandService.AssignMemberRoles is not implemented"))
 }

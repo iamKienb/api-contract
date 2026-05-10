@@ -7,7 +7,7 @@ option go_package = "github.com/iamKienb/shopify-go-api/gen/shop";
 
 service ShopCommandService {
   //  Public Commands
-  rpc CreateShop(CreateShopRequest) returns (CreateShopResponse);
-  rpc AddShopAddress(AddShopAddressRequest) returns (AddShopAddressResponse);
-  rpc AssignShopMemberRoles(AssignShopMemberRolesRequest) returns (AssignShopMemberRolesResponse);
+  rpc Create(CreateRequest) returns (CreateResponse);
+  rpc AddAddress(AddAddressRequest) returns (AddAddressResponse);
+  rpc AssignMemberRoles(AssignMemberRolesRequest) returns (AssignMemberRolesResponse);
 }
