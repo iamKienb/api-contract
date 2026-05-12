@@ -3,13 +3,13 @@ package otp.v1;
 
 import "otp/otp.proto";
 
-option go_package = "github.com/iamKienb/shopify-go-api/gen/otp";
+option go_package = "github.com/iamKienb/go-api-module/gen/otp";
 
 // OTPCommandService provides commands for user management.
 service OTPCommandService {
   //  Verify otp.
   rpc Verify(VerifyRequest) returns (VerifyResponse);
-  
+
   // Resend otp.
   rpc Resend(ResendRequest) returns (ResendResponse);
 }

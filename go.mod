@@ -1,4 +1,4 @@
-module github.com/iamKienb/shopify-go-api
+module github.com/iamKienb/go-api-module
 
 go 1.25.8
 

@@ -779,7 +779,7 @@ const file_shop_shop_type_proto_rawDesc = "" +
 	"\x14GetShopDetailRequest\"\x17\n" +
 	"\x15GetShopDetailResponse\"\x13\n" +
 	"\x11GetMembersRequest\"\x14\n" +
-	"\x12GetMembersResponseB-Z+github.com/iamKienb/shopify-go-api/gen/shopb\x06proto3"
+	"\x12GetMembersResponseB,Z*github.com/iamKienb/go-api-module/gen/shopb\x06proto3"
 
 var (
 	file_shop_shop_type_proto_rawDescOnce sync.Once

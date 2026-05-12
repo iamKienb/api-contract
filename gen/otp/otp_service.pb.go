@@ -28,7 +28,7 @@ const file_otp_otp_service_proto_rawDesc = "" +
 	"\x11OTPCommandService\x127\n" +
 	"\x06Verify\x12\x15.otp.v1.VerifyRequest\x1a\x16.otp.v1.VerifyResponse\x127\n" +
 	"\x06Resend\x12\x15.otp.v1.ResendRequest\x1a\x16.otp.v1.ResendResponse2\x11\n" +
-	"\x0fOTPQueryServiceB,Z*github.com/iamKienb/shopify-go-api/gen/otpb\x06proto3"
+	"\x0fOTPQueryServiceB+Z)github.com/iamKienb/go-api-module/gen/otpb\x06proto3"
 
 var file_otp_otp_service_proto_goTypes = []any{
 	(*VerifyRequest)(nil),  // 0: otp.v1.VerifyRequest

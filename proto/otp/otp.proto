@@ -5,11 +5,11 @@ package otp.v1;
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/iamKienb/shopify-go-api/gen/otp";
+option go_package = "github.com/iamKienb/go-api-module/gen/otp";
 
 message VerifyRequest {
   string session_token = 1 [(validate.rules).string.min_len = 1];
-  
+
   string otp = 2 [(validate.rules).string = {
     min_len: 6,
     max_len: 6,
@@ -18,9 +18,9 @@ message VerifyRequest {
 }
 
 message VerifyResponse {
-  string access_token = 1;
-  string refresh_token = 2;
-  google.protobuf.Timestamp access_expires_at = 3;
+  string                    access_token       = 1;
+  string                    refresh_token      = 2;
+  google.protobuf.Timestamp access_expires_at  = 3;
   google.protobuf.Timestamp refresh_expires_at = 4;
 }
 

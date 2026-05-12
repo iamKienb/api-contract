@@ -27,7 +27,7 @@ const file_user_user_query_proto_rawDesc = "" +
 	"\x15user/user_query.proto\x12\auser.v1\x1a\x14user/user_type.proto2\xaa\x01\n" +
 	"\x10UserQueryService\x12F\n" +
 	"\rGetShopDetail\x12\x19.user.v1.GetDetailRequest\x1a\x1a.user.v1.GetDetailResponse\x12N\n" +
-	"\rListAddresses\x12\x1d.user.v1.ListAddressesRequest\x1a\x1e.user.v1.ListAddressesResponseB-Z+github.com/iamKienb/shopify-go-api/gen/userb\x06proto3"
+	"\rListAddresses\x12\x1d.user.v1.ListAddressesRequest\x1a\x1e.user.v1.ListAddressesResponseB,Z*github.com/iamKienb/go-api-module/gen/userb\x06proto3"
 
 var file_user_user_query_proto_goTypes = []any{
 	(*GetDetailRequest)(nil),      // 0: user.v1.GetDetailRequest

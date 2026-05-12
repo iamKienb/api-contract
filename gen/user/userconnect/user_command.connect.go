@@ -8,7 +8,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	user "github.com/iamKienb/shopify-go-api/gen/user"
+	user "github.com/iamKienb/go-api-module/gen/user"
 	http "net/http"
 	strings "strings"
 )

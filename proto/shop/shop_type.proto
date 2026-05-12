@@ -5,7 +5,7 @@ package shop.v1;
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/iamKienb/shopify-go-api/gen/shop";
+option go_package = "github.com/iamKienb/go-api-module/gen/shop";
 
 message ProfileInfo {
   optional string description = 1;
