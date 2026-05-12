@@ -29,7 +29,7 @@ const file_shop_shop_query_proto_rawDesc = "" +
 	"\vSearchShops\x12\x1b.shop.v1.SearchShopsRequest\x1a\x1c.shop.v1.SearchShopsResponse\x12N\n" +
 	"\rGetShopDetail\x12\x1d.shop.v1.GetShopDetailRequest\x1a\x1e.shop.v1.GetShopDetailResponse\x12E\n" +
 	"\n" +
-	"GetMembers\x12\x1a.shop.v1.GetMembersRequest\x1a\x1b.shop.v1.GetMembersResponseB,Z*github.com/iamKienb/go-api-module/gen/shopb\x06proto3"
+	"GetMembers\x12\x1a.shop.v1.GetMembersRequest\x1a\x1b.shop.v1.GetMembersResponseB2Z0github.com/iamKienb/api-contract-module/gen/shopb\x06proto3"
 
 var file_shop_shop_query_proto_goTypes = []any{
 	(*SearchShopsRequest)(nil),    // 0: shop.v1.SearchShopsRequest

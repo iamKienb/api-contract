@@ -29,7 +29,7 @@ const file_shop_shop_command_proto_rawDesc = "" +
 	"\x06Create\x12\x16.shop.v1.CreateRequest\x1a\x17.shop.v1.CreateResponse\x12E\n" +
 	"\n" +
 	"AddAddress\x12\x1a.shop.v1.AddAddressRequest\x1a\x1b.shop.v1.AddAddressResponse\x12Z\n" +
-	"\x11AssignMemberRoles\x12!.shop.v1.AssignMemberRolesRequest\x1a\".shop.v1.AssignMemberRolesResponseB,Z*github.com/iamKienb/go-api-module/gen/shopb\x06proto3"
+	"\x11AssignMemberRoles\x12!.shop.v1.AssignMemberRolesRequest\x1a\".shop.v1.AssignMemberRolesResponseB2Z0github.com/iamKienb/api-contract-module/gen/shopb\x06proto3"
 
 var file_shop_shop_command_proto_goTypes = []any{
 	(*CreateRequest)(nil),             // 0: shop.v1.CreateRequest

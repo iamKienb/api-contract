@@ -29,7 +29,7 @@ const file_user_user_command_proto_rawDesc = "" +
 	"\bRegister\x12\x18.user.v1.RegisterRequest\x1a\x19.user.v1.RegisterResponse\x126\n" +
 	"\x05Login\x12\x15.user.v1.LoginRequest\x1a\x16.user.v1.LoginResponse\x12E\n" +
 	"\n" +
-	"AddAddress\x12\x1a.user.v1.AddAddressRequest\x1a\x1b.user.v1.AddAddressResponseB,Z*github.com/iamKienb/go-api-module/gen/userb\x06proto3"
+	"AddAddress\x12\x1a.user.v1.AddAddressRequest\x1a\x1b.user.v1.AddAddressResponseB2Z0github.com/iamKienb/api-contract-module/gen/userb\x06proto3"
 
 var file_user_user_command_proto_goTypes = []any{
 	(*RegisterRequest)(nil),    // 0: user.v1.RegisterRequest
