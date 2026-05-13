@@ -7,13 +7,13 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/iamKienb/api-contract-module/gen/shop";
 
-message ProfileInfo {
+message ShopProfileInfo {
   optional string description = 1;
   optional string logo_url    = 2;
   optional string banner_url  = 3;
 }
 
-message CreateRequest {
+message CreateShopRequest {
   string user_id = 1 [(validate.rules).string.min_len = 1];
   string name    = 2 [(validate.rules).string.min_len = 1];
   string slug = 3 [(validate.rules).string = {
@@ -21,10 +21,10 @@ message CreateRequest {
     min_len: 1,
     max_len: 20
   }];
-  optional ProfileInfo profile = 4;
+  optional ShopProfileInfo profile = 4;
 }
 
-message CreateResponse {
+message CreateShopResponse {
   string shop_id = 1;
 }
 
@@ -33,7 +33,7 @@ message LocationInfo {
   string name = 2 [(validate.rules).string.min_len = 1];
 }
 
-message AddAddressRequest {
+message AddShopAddressRequest {
   string user_id = 1 [(validate.rules).string.min_len = 1];
   string shop_id = 2 [(validate.rules).string.min_len = 1];
 
@@ -49,7 +49,7 @@ message AddAddressRequest {
   string type = 10 [(validate.rules).string = {in: ["Pickup", "Return"]}];
 }
 
-message AddAddressResponse {
+message AddShopAddressResponse {
   string address_id = 1;
 }
 

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package inventory.v1;
+
+import "validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/iamKienb/api-contract-module/gen/inventory";
+
+message InventoryItem {
+  string sku_id   = 1 [(validate.rules).string.min_len = 1];
+  int32  quantity = 2 [(validate.rules).int32.gte = 0];
+}
+
+message CreateInventoriesRequest {
+  string                 shop_id = 1 [(validate.rules).string.uuid = true];
+  repeated InventoryItem items   = 2 [(validate.rules).repeated.min_items = 1];
+}
+
+message CreateInventoriesResponse {
+  bool success = 1;
+}

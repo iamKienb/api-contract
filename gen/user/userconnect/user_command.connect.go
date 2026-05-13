@@ -33,23 +33,23 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// UserCommandServiceRegisterProcedure is the fully-qualified name of the UserCommandService's
-	// Register RPC.
-	UserCommandServiceRegisterProcedure = "/user.v1.UserCommandService/Register"
-	// UserCommandServiceLoginProcedure is the fully-qualified name of the UserCommandService's Login
-	// RPC.
-	UserCommandServiceLoginProcedure = "/user.v1.UserCommandService/Login"
-	// UserCommandServiceAddAddressProcedure is the fully-qualified name of the UserCommandService's
-	// AddAddress RPC.
-	UserCommandServiceAddAddressProcedure = "/user.v1.UserCommandService/AddAddress"
+	// UserCommandServiceRegisterUserProcedure is the fully-qualified name of the UserCommandService's
+	// RegisterUser RPC.
+	UserCommandServiceRegisterUserProcedure = "/user.v1.UserCommandService/RegisterUser"
+	// UserCommandServiceLoginUserProcedure is the fully-qualified name of the UserCommandService's
+	// LoginUser RPC.
+	UserCommandServiceLoginUserProcedure = "/user.v1.UserCommandService/LoginUser"
+	// UserCommandServiceAddUserAddressProcedure is the fully-qualified name of the UserCommandService's
+	// AddUserAddress RPC.
+	UserCommandServiceAddUserAddressProcedure = "/user.v1.UserCommandService/AddUserAddress"
 )
 
 // UserCommandServiceClient is a client for the user.v1.UserCommandService service.
 type UserCommandServiceClient interface {
 	// Public Commands
-	Register(context.Context, *connect.Request[user.RegisterRequest]) (*connect.Response[user.RegisterResponse], error)
-	Login(context.Context, *connect.Request[user.LoginRequest]) (*connect.Response[user.LoginResponse], error)
-	AddAddress(context.Context, *connect.Request[user.AddAddressRequest]) (*connect.Response[user.AddAddressResponse], error)
+	RegisterUser(context.Context, *connect.Request[user.RegisterUserRequest]) (*connect.Response[user.RegisterUserResponse], error)
+	LoginUser(context.Context, *connect.Request[user.LoginUserRequest]) (*connect.Response[user.LoginUserResponse], error)
+	AddUserAddress(context.Context, *connect.Request[user.AddUserAddressRequest]) (*connect.Response[user.AddUserAddressResponse], error)
 }
 
 // NewUserCommandServiceClient constructs a client for the user.v1.UserCommandService service. By
@@ -63,22 +63,22 @@ func NewUserCommandServiceClient(httpClient connect.HTTPClient, baseURL string, 
 	baseURL = strings.TrimRight(baseURL, "/")
 	userCommandServiceMethods := user.File_user_user_command_proto.Services().ByName("UserCommandService").Methods()
 	return &userCommandServiceClient{
-		register: connect.NewClient[user.RegisterRequest, user.RegisterResponse](
+		registerUser: connect.NewClient[user.RegisterUserRequest, user.RegisterUserResponse](
 			httpClient,
-			baseURL+UserCommandServiceRegisterProcedure,
-			connect.WithSchema(userCommandServiceMethods.ByName("Register")),
+			baseURL+UserCommandServiceRegisterUserProcedure,
+			connect.WithSchema(userCommandServiceMethods.ByName("RegisterUser")),
 			connect.WithClientOptions(opts...),
 		),
-		login: connect.NewClient[user.LoginRequest, user.LoginResponse](
+		loginUser: connect.NewClient[user.LoginUserRequest, user.LoginUserResponse](
 			httpClient,
-			baseURL+UserCommandServiceLoginProcedure,
-			connect.WithSchema(userCommandServiceMethods.ByName("Login")),
+			baseURL+UserCommandServiceLoginUserProcedure,
+			connect.WithSchema(userCommandServiceMethods.ByName("LoginUser")),
 			connect.WithClientOptions(opts...),
 		),
-		addAddress: connect.NewClient[user.AddAddressRequest, user.AddAddressResponse](
+		addUserAddress: connect.NewClient[user.AddUserAddressRequest, user.AddUserAddressResponse](
 			httpClient,
-			baseURL+UserCommandServiceAddAddressProcedure,
-			connect.WithSchema(userCommandServiceMethods.ByName("AddAddress")),
+			baseURL+UserCommandServiceAddUserAddressProcedure,
+			connect.WithSchema(userCommandServiceMethods.ByName("AddUserAddress")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -86,32 +86,32 @@ func NewUserCommandServiceClient(httpClient connect.HTTPClient, baseURL string, 
 
 // userCommandServiceClient implements UserCommandServiceClient.
 type userCommandServiceClient struct {
-	register   *connect.Client[user.RegisterRequest, user.RegisterResponse]
-	login      *connect.Client[user.LoginRequest, user.LoginResponse]
-	addAddress *connect.Client[user.AddAddressRequest, user.AddAddressResponse]
+	registerUser   *connect.Client[user.RegisterUserRequest, user.RegisterUserResponse]
+	loginUser      *connect.Client[user.LoginUserRequest, user.LoginUserResponse]
+	addUserAddress *connect.Client[user.AddUserAddressRequest, user.AddUserAddressResponse]
 }
 
-// Register calls user.v1.UserCommandService.Register.
-func (c *userCommandServiceClient) Register(ctx context.Context, req *connect.Request[user.RegisterRequest]) (*connect.Response[user.RegisterResponse], error) {
-	return c.register.CallUnary(ctx, req)
+// RegisterUser calls user.v1.UserCommandService.RegisterUser.
+func (c *userCommandServiceClient) RegisterUser(ctx context.Context, req *connect.Request[user.RegisterUserRequest]) (*connect.Response[user.RegisterUserResponse], error) {
+	return c.registerUser.CallUnary(ctx, req)
 }
 
-// Login calls user.v1.UserCommandService.Login.
-func (c *userCommandServiceClient) Login(ctx context.Context, req *connect.Request[user.LoginRequest]) (*connect.Response[user.LoginResponse], error) {
-	return c.login.CallUnary(ctx, req)
+// LoginUser calls user.v1.UserCommandService.LoginUser.
+func (c *userCommandServiceClient) LoginUser(ctx context.Context, req *connect.Request[user.LoginUserRequest]) (*connect.Response[user.LoginUserResponse], error) {
+	return c.loginUser.CallUnary(ctx, req)
 }
 
-// AddAddress calls user.v1.UserCommandService.AddAddress.
-func (c *userCommandServiceClient) AddAddress(ctx context.Context, req *connect.Request[user.AddAddressRequest]) (*connect.Response[user.AddAddressResponse], error) {
-	return c.addAddress.CallUnary(ctx, req)
+// AddUserAddress calls user.v1.UserCommandService.AddUserAddress.
+func (c *userCommandServiceClient) AddUserAddress(ctx context.Context, req *connect.Request[user.AddUserAddressRequest]) (*connect.Response[user.AddUserAddressResponse], error) {
+	return c.addUserAddress.CallUnary(ctx, req)
 }
 
 // UserCommandServiceHandler is an implementation of the user.v1.UserCommandService service.
 type UserCommandServiceHandler interface {
 	// Public Commands
-	Register(context.Context, *connect.Request[user.RegisterRequest]) (*connect.Response[user.RegisterResponse], error)
-	Login(context.Context, *connect.Request[user.LoginRequest]) (*connect.Response[user.LoginResponse], error)
-	AddAddress(context.Context, *connect.Request[user.AddAddressRequest]) (*connect.Response[user.AddAddressResponse], error)
+	RegisterUser(context.Context, *connect.Request[user.RegisterUserRequest]) (*connect.Response[user.RegisterUserResponse], error)
+	LoginUser(context.Context, *connect.Request[user.LoginUserRequest]) (*connect.Response[user.LoginUserResponse], error)
+	AddUserAddress(context.Context, *connect.Request[user.AddUserAddressRequest]) (*connect.Response[user.AddUserAddressResponse], error)
 }
 
 // NewUserCommandServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -121,32 +121,32 @@ type UserCommandServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewUserCommandServiceHandler(svc UserCommandServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	userCommandServiceMethods := user.File_user_user_command_proto.Services().ByName("UserCommandService").Methods()
-	userCommandServiceRegisterHandler := connect.NewUnaryHandler(
-		UserCommandServiceRegisterProcedure,
-		svc.Register,
-		connect.WithSchema(userCommandServiceMethods.ByName("Register")),
+	userCommandServiceRegisterUserHandler := connect.NewUnaryHandler(
+		UserCommandServiceRegisterUserProcedure,
+		svc.RegisterUser,
+		connect.WithSchema(userCommandServiceMethods.ByName("RegisterUser")),
 		connect.WithHandlerOptions(opts...),
 	)
-	userCommandServiceLoginHandler := connect.NewUnaryHandler(
-		UserCommandServiceLoginProcedure,
-		svc.Login,
-		connect.WithSchema(userCommandServiceMethods.ByName("Login")),
+	userCommandServiceLoginUserHandler := connect.NewUnaryHandler(
+		UserCommandServiceLoginUserProcedure,
+		svc.LoginUser,
+		connect.WithSchema(userCommandServiceMethods.ByName("LoginUser")),
 		connect.WithHandlerOptions(opts...),
 	)
-	userCommandServiceAddAddressHandler := connect.NewUnaryHandler(
-		UserCommandServiceAddAddressProcedure,
-		svc.AddAddress,
-		connect.WithSchema(userCommandServiceMethods.ByName("AddAddress")),
+	userCommandServiceAddUserAddressHandler := connect.NewUnaryHandler(
+		UserCommandServiceAddUserAddressProcedure,
+		svc.AddUserAddress,
+		connect.WithSchema(userCommandServiceMethods.ByName("AddUserAddress")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/user.v1.UserCommandService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case UserCommandServiceRegisterProcedure:
-			userCommandServiceRegisterHandler.ServeHTTP(w, r)
-		case UserCommandServiceLoginProcedure:
-			userCommandServiceLoginHandler.ServeHTTP(w, r)
-		case UserCommandServiceAddAddressProcedure:
-			userCommandServiceAddAddressHandler.ServeHTTP(w, r)
+		case UserCommandServiceRegisterUserProcedure:
+			userCommandServiceRegisterUserHandler.ServeHTTP(w, r)
+		case UserCommandServiceLoginUserProcedure:
+			userCommandServiceLoginUserHandler.ServeHTTP(w, r)
+		case UserCommandServiceAddUserAddressProcedure:
+			userCommandServiceAddUserAddressHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -156,14 +156,14 @@ func NewUserCommandServiceHandler(svc UserCommandServiceHandler, opts ...connect
 // UnimplementedUserCommandServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedUserCommandServiceHandler struct{}
 
-func (UnimplementedUserCommandServiceHandler) Register(context.Context, *connect.Request[user.RegisterRequest]) (*connect.Response[user.RegisterResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserCommandService.Register is not implemented"))
+func (UnimplementedUserCommandServiceHandler) RegisterUser(context.Context, *connect.Request[user.RegisterUserRequest]) (*connect.Response[user.RegisterUserResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserCommandService.RegisterUser is not implemented"))
 }
 
-func (UnimplementedUserCommandServiceHandler) Login(context.Context, *connect.Request[user.LoginRequest]) (*connect.Response[user.LoginResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserCommandService.Login is not implemented"))
+func (UnimplementedUserCommandServiceHandler) LoginUser(context.Context, *connect.Request[user.LoginUserRequest]) (*connect.Response[user.LoginUserResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserCommandService.LoginUser is not implemented"))
 }
 
-func (UnimplementedUserCommandServiceHandler) AddAddress(context.Context, *connect.Request[user.AddAddressRequest]) (*connect.Response[user.AddAddressResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserCommandService.AddAddress is not implemented"))
+func (UnimplementedUserCommandServiceHandler) AddUserAddress(context.Context, *connect.Request[user.AddUserAddressRequest]) (*connect.Response[user.AddUserAddressResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserCommandService.AddUserAddress is not implemented"))
 }

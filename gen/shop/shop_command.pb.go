@@ -24,27 +24,27 @@ var File_shop_shop_command_proto protoreflect.FileDescriptor
 
 const file_shop_shop_command_proto_rawDesc = "" +
 	"\n" +
-	"\x17shop/shop_command.proto\x12\ashop.v1\x1a\x14shop/shop_type.proto2\xf2\x01\n" +
-	"\x12ShopCommandService\x129\n" +
-	"\x06Create\x12\x16.shop.v1.CreateRequest\x1a\x17.shop.v1.CreateResponse\x12E\n" +
+	"\x17shop/shop_command.proto\x12\ashop.v1\x1a\x14shop/shop_type.proto2\x8a\x02\n" +
+	"\x12ShopCommandService\x12E\n" +
 	"\n" +
-	"AddAddress\x12\x1a.shop.v1.AddAddressRequest\x1a\x1b.shop.v1.AddAddressResponse\x12Z\n" +
+	"CreateShop\x12\x1a.shop.v1.CreateShopRequest\x1a\x1b.shop.v1.CreateShopResponse\x12Q\n" +
+	"\x0eAddShopAddress\x12\x1e.shop.v1.AddShopAddressRequest\x1a\x1f.shop.v1.AddShopAddressResponse\x12Z\n" +
 	"\x11AssignMemberRoles\x12!.shop.v1.AssignMemberRolesRequest\x1a\".shop.v1.AssignMemberRolesResponseB2Z0github.com/iamKienb/api-contract-module/gen/shopb\x06proto3"
 
 var file_shop_shop_command_proto_goTypes = []any{
-	(*CreateRequest)(nil),             // 0: shop.v1.CreateRequest
-	(*AddAddressRequest)(nil),         // 1: shop.v1.AddAddressRequest
+	(*CreateShopRequest)(nil),         // 0: shop.v1.CreateShopRequest
+	(*AddShopAddressRequest)(nil),     // 1: shop.v1.AddShopAddressRequest
 	(*AssignMemberRolesRequest)(nil),  // 2: shop.v1.AssignMemberRolesRequest
-	(*CreateResponse)(nil),            // 3: shop.v1.CreateResponse
-	(*AddAddressResponse)(nil),        // 4: shop.v1.AddAddressResponse
+	(*CreateShopResponse)(nil),        // 3: shop.v1.CreateShopResponse
+	(*AddShopAddressResponse)(nil),    // 4: shop.v1.AddShopAddressResponse
 	(*AssignMemberRolesResponse)(nil), // 5: shop.v1.AssignMemberRolesResponse
 }
 var file_shop_shop_command_proto_depIdxs = []int32{
-	0, // 0: shop.v1.ShopCommandService.Create:input_type -> shop.v1.CreateRequest
-	1, // 1: shop.v1.ShopCommandService.AddAddress:input_type -> shop.v1.AddAddressRequest
+	0, // 0: shop.v1.ShopCommandService.CreateShop:input_type -> shop.v1.CreateShopRequest
+	1, // 1: shop.v1.ShopCommandService.AddShopAddress:input_type -> shop.v1.AddShopAddressRequest
 	2, // 2: shop.v1.ShopCommandService.AssignMemberRoles:input_type -> shop.v1.AssignMemberRolesRequest
-	3, // 3: shop.v1.ShopCommandService.Create:output_type -> shop.v1.CreateResponse
-	4, // 4: shop.v1.ShopCommandService.AddAddress:output_type -> shop.v1.AddAddressResponse
+	3, // 3: shop.v1.ShopCommandService.CreateShop:output_type -> shop.v1.CreateShopResponse
+	4, // 4: shop.v1.ShopCommandService.AddShopAddress:output_type -> shop.v1.AddShopAddressResponse
 	5, // 5: shop.v1.ShopCommandService.AssignMemberRoles:output_type -> shop.v1.AssignMemberRolesResponse
 	3, // [3:6] is the sub-list for method output_type
 	0, // [0:3] is the sub-list for method input_type

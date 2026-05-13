@@ -24,28 +24,27 @@ var File_user_user_command_proto protoreflect.FileDescriptor
 
 const file_user_user_command_proto_rawDesc = "" +
 	"\n" +
-	"\x17user/user_command.proto\x12\auser.v1\x1a\x14user/user_type.proto2\xd4\x01\n" +
-	"\x12UserCommandService\x12?\n" +
-	"\bRegister\x12\x18.user.v1.RegisterRequest\x1a\x19.user.v1.RegisterResponse\x126\n" +
-	"\x05Login\x12\x15.user.v1.LoginRequest\x1a\x16.user.v1.LoginResponse\x12E\n" +
-	"\n" +
-	"AddAddress\x12\x1a.user.v1.AddAddressRequest\x1a\x1b.user.v1.AddAddressResponseB2Z0github.com/iamKienb/api-contract-module/gen/userb\x06proto3"
+	"\x17user/user_command.proto\x12\auser.v1\x1a\x14user/user_type.proto2\xf8\x01\n" +
+	"\x12UserCommandService\x12K\n" +
+	"\fRegisterUser\x12\x1c.user.v1.RegisterUserRequest\x1a\x1d.user.v1.RegisterUserResponse\x12B\n" +
+	"\tLoginUser\x12\x19.user.v1.LoginUserRequest\x1a\x1a.user.v1.LoginUserResponse\x12Q\n" +
+	"\x0eAddUserAddress\x12\x1e.user.v1.AddUserAddressRequest\x1a\x1f.user.v1.AddUserAddressResponseB2Z0github.com/iamKienb/api-contract-module/gen/userb\x06proto3"
 
 var file_user_user_command_proto_goTypes = []any{
-	(*RegisterRequest)(nil),    // 0: user.v1.RegisterRequest
-	(*LoginRequest)(nil),       // 1: user.v1.LoginRequest
-	(*AddAddressRequest)(nil),  // 2: user.v1.AddAddressRequest
-	(*RegisterResponse)(nil),   // 3: user.v1.RegisterResponse
-	(*LoginResponse)(nil),      // 4: user.v1.LoginResponse
-	(*AddAddressResponse)(nil), // 5: user.v1.AddAddressResponse
+	(*RegisterUserRequest)(nil),    // 0: user.v1.RegisterUserRequest
+	(*LoginUserRequest)(nil),       // 1: user.v1.LoginUserRequest
+	(*AddUserAddressRequest)(nil),  // 2: user.v1.AddUserAddressRequest
+	(*RegisterUserResponse)(nil),   // 3: user.v1.RegisterUserResponse
+	(*LoginUserResponse)(nil),      // 4: user.v1.LoginUserResponse
+	(*AddUserAddressResponse)(nil), // 5: user.v1.AddUserAddressResponse
 }
 var file_user_user_command_proto_depIdxs = []int32{
-	0, // 0: user.v1.UserCommandService.Register:input_type -> user.v1.RegisterRequest
-	1, // 1: user.v1.UserCommandService.Login:input_type -> user.v1.LoginRequest
-	2, // 2: user.v1.UserCommandService.AddAddress:input_type -> user.v1.AddAddressRequest
-	3, // 3: user.v1.UserCommandService.Register:output_type -> user.v1.RegisterResponse
-	4, // 4: user.v1.UserCommandService.Login:output_type -> user.v1.LoginResponse
-	5, // 5: user.v1.UserCommandService.AddAddress:output_type -> user.v1.AddAddressResponse
+	0, // 0: user.v1.UserCommandService.RegisterUser:input_type -> user.v1.RegisterUserRequest
+	1, // 1: user.v1.UserCommandService.LoginUser:input_type -> user.v1.LoginUserRequest
+	2, // 2: user.v1.UserCommandService.AddUserAddress:input_type -> user.v1.AddUserAddressRequest
+	3, // 3: user.v1.UserCommandService.RegisterUser:output_type -> user.v1.RegisterUserResponse
+	4, // 4: user.v1.UserCommandService.LoginUser:output_type -> user.v1.LoginUserResponse
+	5, // 5: user.v1.UserCommandService.AddUserAddress:output_type -> user.v1.AddUserAddressResponse
 	3, // [3:6] is the sub-list for method output_type
 	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

@@ -7,7 +7,7 @@ option go_package = "github.com/iamKienb/api-contract-module/gen/shop";
 
 service ShopCommandService {
   //  Public Commands
-  rpc Create(CreateRequest) returns (CreateResponse);
-  rpc AddAddress(AddAddressRequest) returns (AddAddressResponse);
+  rpc CreateShop(CreateShopRequest) returns (CreateShopResponse);
+  rpc AddShopAddress(AddShopAddressRequest) returns (AddShopAddressResponse);
   rpc AssignMemberRoles(AssignMemberRolesRequest) returns (AssignMemberRolesResponse);
 }

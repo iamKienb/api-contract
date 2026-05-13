@@ -23,7 +23,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type ProfileInfo struct {
+type ShopProfileInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Description   *string                `protobuf:"bytes,1,opt,name=description,proto3,oneof" json:"description,omitempty"`
 	LogoUrl       *string                `protobuf:"bytes,2,opt,name=logo_url,json=logoUrl,proto3,oneof" json:"logo_url,omitempty"`
@@ -32,20 +32,20 @@ type ProfileInfo struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ProfileInfo) Reset() {
-	*x = ProfileInfo{}
+func (x *ShopProfileInfo) Reset() {
+	*x = ShopProfileInfo{}
 	mi := &file_shop_shop_type_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ProfileInfo) String() string {
+func (x *ShopProfileInfo) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ProfileInfo) ProtoMessage() {}
+func (*ShopProfileInfo) ProtoMessage() {}
 
-func (x *ProfileInfo) ProtoReflect() protoreflect.Message {
+func (x *ShopProfileInfo) ProtoReflect() protoreflect.Message {
 	mi := &file_shop_shop_type_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -57,56 +57,56 @@ func (x *ProfileInfo) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ProfileInfo.ProtoReflect.Descriptor instead.
-func (*ProfileInfo) Descriptor() ([]byte, []int) {
+// Deprecated: Use ShopProfileInfo.ProtoReflect.Descriptor instead.
+func (*ShopProfileInfo) Descriptor() ([]byte, []int) {
 	return file_shop_shop_type_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ProfileInfo) GetDescription() string {
+func (x *ShopProfileInfo) GetDescription() string {
 	if x != nil && x.Description != nil {
 		return *x.Description
 	}
 	return ""
 }
 
-func (x *ProfileInfo) GetLogoUrl() string {
+func (x *ShopProfileInfo) GetLogoUrl() string {
 	if x != nil && x.LogoUrl != nil {
 		return *x.LogoUrl
 	}
 	return ""
 }
 
-func (x *ProfileInfo) GetBannerUrl() string {
+func (x *ShopProfileInfo) GetBannerUrl() string {
 	if x != nil && x.BannerUrl != nil {
 		return *x.BannerUrl
 	}
 	return ""
 }
 
-type CreateRequest struct {
+type CreateShopRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Slug          string                 `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
-	Profile       *ProfileInfo           `protobuf:"bytes,4,opt,name=profile,proto3,oneof" json:"profile,omitempty"`
+	Profile       *ShopProfileInfo       `protobuf:"bytes,4,opt,name=profile,proto3,oneof" json:"profile,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateRequest) Reset() {
-	*x = CreateRequest{}
+func (x *CreateShopRequest) Reset() {
+	*x = CreateShopRequest{}
 	mi := &file_shop_shop_type_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateRequest) String() string {
+func (x *CreateShopRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateRequest) ProtoMessage() {}
+func (*CreateShopRequest) ProtoMessage() {}
 
-func (x *CreateRequest) ProtoReflect() protoreflect.Message {
+func (x *CreateShopRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_shop_shop_type_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -118,60 +118,60 @@ func (x *CreateRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateRequest.ProtoReflect.Descriptor instead.
-func (*CreateRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateShopRequest.ProtoReflect.Descriptor instead.
+func (*CreateShopRequest) Descriptor() ([]byte, []int) {
 	return file_shop_shop_type_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateRequest) GetUserId() string {
+func (x *CreateShopRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
 	return ""
 }
 
-func (x *CreateRequest) GetName() string {
+func (x *CreateShopRequest) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *CreateRequest) GetSlug() string {
+func (x *CreateShopRequest) GetSlug() string {
 	if x != nil {
 		return x.Slug
 	}
 	return ""
 }
 
-func (x *CreateRequest) GetProfile() *ProfileInfo {
+func (x *CreateShopRequest) GetProfile() *ShopProfileInfo {
 	if x != nil {
 		return x.Profile
 	}
 	return nil
 }
 
-type CreateResponse struct {
+type CreateShopResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ShopId        string                 `protobuf:"bytes,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateResponse) Reset() {
-	*x = CreateResponse{}
+func (x *CreateShopResponse) Reset() {
+	*x = CreateShopResponse{}
 	mi := &file_shop_shop_type_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateResponse) String() string {
+func (x *CreateShopResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateResponse) ProtoMessage() {}
+func (*CreateShopResponse) ProtoMessage() {}
 
-func (x *CreateResponse) ProtoReflect() protoreflect.Message {
+func (x *CreateShopResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_shop_shop_type_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -183,12 +183,12 @@ func (x *CreateResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateResponse.ProtoReflect.Descriptor instead.
-func (*CreateResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateShopResponse.ProtoReflect.Descriptor instead.
+func (*CreateShopResponse) Descriptor() ([]byte, []int) {
 	return file_shop_shop_type_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *CreateResponse) GetShopId() string {
+func (x *CreateShopResponse) GetShopId() string {
 	if x != nil {
 		return x.ShopId
 	}
@@ -247,7 +247,7 @@ func (x *LocationInfo) GetName() string {
 	return ""
 }
 
-type AddAddressRequest struct {
+type AddShopAddressRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	ShopId        string                 `protobuf:"bytes,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
@@ -263,20 +263,20 @@ type AddAddressRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AddAddressRequest) Reset() {
-	*x = AddAddressRequest{}
+func (x *AddShopAddressRequest) Reset() {
+	*x = AddShopAddressRequest{}
 	mi := &file_shop_shop_type_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AddAddressRequest) String() string {
+func (x *AddShopAddressRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddAddressRequest) ProtoMessage() {}
+func (*AddShopAddressRequest) ProtoMessage() {}
 
-func (x *AddAddressRequest) ProtoReflect() protoreflect.Message {
+func (x *AddShopAddressRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_shop_shop_type_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -288,102 +288,102 @@ func (x *AddAddressRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddAddressRequest.ProtoReflect.Descriptor instead.
-func (*AddAddressRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddShopAddressRequest.ProtoReflect.Descriptor instead.
+func (*AddShopAddressRequest) Descriptor() ([]byte, []int) {
 	return file_shop_shop_type_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *AddAddressRequest) GetUserId() string {
+func (x *AddShopAddressRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
 	return ""
 }
 
-func (x *AddAddressRequest) GetShopId() string {
+func (x *AddShopAddressRequest) GetShopId() string {
 	if x != nil {
 		return x.ShopId
 	}
 	return ""
 }
 
-func (x *AddAddressRequest) GetCountry() *LocationInfo {
+func (x *AddShopAddressRequest) GetCountry() *LocationInfo {
 	if x != nil {
 		return x.Country
 	}
 	return nil
 }
 
-func (x *AddAddressRequest) GetCity() *LocationInfo {
+func (x *AddShopAddressRequest) GetCity() *LocationInfo {
 	if x != nil {
 		return x.City
 	}
 	return nil
 }
 
-func (x *AddAddressRequest) GetDistrict() *LocationInfo {
+func (x *AddShopAddressRequest) GetDistrict() *LocationInfo {
 	if x != nil {
 		return x.District
 	}
 	return nil
 }
 
-func (x *AddAddressRequest) GetWard() *LocationInfo {
+func (x *AddShopAddressRequest) GetWard() *LocationInfo {
 	if x != nil {
 		return x.Ward
 	}
 	return nil
 }
 
-func (x *AddAddressRequest) GetAddressLine() string {
+func (x *AddShopAddressRequest) GetAddressLine() string {
 	if x != nil {
 		return x.AddressLine
 	}
 	return ""
 }
 
-func (x *AddAddressRequest) GetContactName() string {
+func (x *AddShopAddressRequest) GetContactName() string {
 	if x != nil {
 		return x.ContactName
 	}
 	return ""
 }
 
-func (x *AddAddressRequest) GetPhoneNumber() string {
+func (x *AddShopAddressRequest) GetPhoneNumber() string {
 	if x != nil {
 		return x.PhoneNumber
 	}
 	return ""
 }
 
-func (x *AddAddressRequest) GetType() string {
+func (x *AddShopAddressRequest) GetType() string {
 	if x != nil {
 		return x.Type
 	}
 	return ""
 }
 
-type AddAddressResponse struct {
+type AddShopAddressResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AddressId     string                 `protobuf:"bytes,1,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AddAddressResponse) Reset() {
-	*x = AddAddressResponse{}
+func (x *AddShopAddressResponse) Reset() {
+	*x = AddShopAddressResponse{}
 	mi := &file_shop_shop_type_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AddAddressResponse) String() string {
+func (x *AddShopAddressResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddAddressResponse) ProtoMessage() {}
+func (*AddShopAddressResponse) ProtoMessage() {}
 
-func (x *AddAddressResponse) ProtoReflect() protoreflect.Message {
+func (x *AddShopAddressResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_shop_shop_type_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -395,12 +395,12 @@ func (x *AddAddressResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddAddressResponse.ProtoReflect.Descriptor instead.
-func (*AddAddressResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddShopAddressResponse.ProtoReflect.Descriptor instead.
+func (*AddShopAddressResponse) Descriptor() ([]byte, []int) {
 	return file_shop_shop_type_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *AddAddressResponse) GetAddressId() string {
+func (x *AddShopAddressResponse) GetAddressId() string {
 	if x != nil {
 		return x.AddressId
 	}
@@ -731,28 +731,28 @@ var File_shop_shop_type_proto protoreflect.FileDescriptor
 
 const file_shop_shop_type_proto_rawDesc = "" +
 	"\n" +
-	"\x14shop/shop_type.proto\x12\ashop.v1\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa4\x01\n" +
-	"\vProfileInfo\x12%\n" +
+	"\x14shop/shop_type.proto\x12\ashop.v1\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa8\x01\n" +
+	"\x0fShopProfileInfo\x12%\n" +
 	"\vdescription\x18\x01 \x01(\tH\x00R\vdescription\x88\x01\x01\x12\x1e\n" +
 	"\blogo_url\x18\x02 \x01(\tH\x01R\alogoUrl\x88\x01\x01\x12\"\n" +
 	"\n" +
 	"banner_url\x18\x03 \x01(\tH\x02R\tbannerUrl\x88\x01\x01B\x0e\n" +
 	"\f_descriptionB\v\n" +
 	"\t_logo_urlB\r\n" +
-	"\v_banner_url\"\xca\x01\n" +
-	"\rCreateRequest\x12 \n" +
+	"\v_banner_url\"\xd2\x01\n" +
+	"\x11CreateShopRequest\x12 \n" +
 	"\auser_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06userId\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\x129\n" +
-	"\x04slug\x18\x03 \x01(\tB%\xfaB\"r \x10\x01\x18\x142\x1a^[a-z0-9]+(?:-[a-z0-9]+)*$R\x04slug\x123\n" +
-	"\aprofile\x18\x04 \x01(\v2\x14.shop.v1.ProfileInfoH\x00R\aprofile\x88\x01\x01B\n" +
+	"\x04slug\x18\x03 \x01(\tB%\xfaB\"r \x10\x01\x18\x142\x1a^[a-z0-9]+(?:-[a-z0-9]+)*$R\x04slug\x127\n" +
+	"\aprofile\x18\x04 \x01(\v2\x18.shop.v1.ShopProfileInfoH\x00R\aprofile\x88\x01\x01B\n" +
 	"\n" +
-	"\b_profile\")\n" +
-	"\x0eCreateResponse\x12\x17\n" +
+	"\b_profile\"-\n" +
+	"\x12CreateShopResponse\x12\x17\n" +
 	"\ashop_id\x18\x01 \x01(\tR\x06shopId\"D\n" +
 	"\fLocationInfo\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x02id\x12\x1b\n" +
-	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\"\xf6\x03\n" +
-	"\x11AddAddressRequest\x12 \n" +
+	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\"\xfa\x03\n" +
+	"\x15AddShopAddressRequest\x12 \n" +
 	"\auser_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06userId\x12 \n" +
 	"\ashop_id\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x129\n" +
 	"\acountry\x18\x03 \x01(\v2\x15.shop.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\acountry\x123\n" +
@@ -763,8 +763,8 @@ const file_shop_shop_type_proto_rawDesc = "" +
 	"\fcontact_name\x18\b \x01(\tB\a\xfaB\x04r\x02\x10\x01R\vcontactName\x128\n" +
 	"\fphone_number\x18\t \x01(\tB\x15\xfaB\x12r\x102\x0e^[0-9]{10,11}$R\vphoneNumber\x12)\n" +
 	"\x04type\x18\n" +
-	" \x01(\tB\x15\xfaB\x12r\x10R\x06PickupR\x06ReturnR\x04type\"3\n" +
-	"\x12AddAddressResponse\x12\x1d\n" +
+	" \x01(\tB\x15\xfaB\x12r\x10R\x06PickupR\x06ReturnR\x04type\"7\n" +
+	"\x16AddShopAddressResponse\x12\x1d\n" +
 	"\n" +
 	"address_id\x18\x01 \x01(\tR\taddressId\"\x84\x01\n" +
 	"\x18AssignMemberRolesRequest\x12 \n" +
@@ -795,12 +795,12 @@ func file_shop_shop_type_proto_rawDescGZIP() []byte {
 
 var file_shop_shop_type_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_shop_shop_type_proto_goTypes = []any{
-	(*ProfileInfo)(nil),               // 0: shop.v1.ProfileInfo
-	(*CreateRequest)(nil),             // 1: shop.v1.CreateRequest
-	(*CreateResponse)(nil),            // 2: shop.v1.CreateResponse
+	(*ShopProfileInfo)(nil),           // 0: shop.v1.ShopProfileInfo
+	(*CreateShopRequest)(nil),         // 1: shop.v1.CreateShopRequest
+	(*CreateShopResponse)(nil),        // 2: shop.v1.CreateShopResponse
 	(*LocationInfo)(nil),              // 3: shop.v1.LocationInfo
-	(*AddAddressRequest)(nil),         // 4: shop.v1.AddAddressRequest
-	(*AddAddressResponse)(nil),        // 5: shop.v1.AddAddressResponse
+	(*AddShopAddressRequest)(nil),     // 4: shop.v1.AddShopAddressRequest
+	(*AddShopAddressResponse)(nil),    // 5: shop.v1.AddShopAddressResponse
 	(*AssignMemberRolesRequest)(nil),  // 6: shop.v1.AssignMemberRolesRequest
 	(*AssignMemberRolesResponse)(nil), // 7: shop.v1.AssignMemberRolesResponse
 	(*SearchShopsRequest)(nil),        // 8: shop.v1.SearchShopsRequest
@@ -811,11 +811,11 @@ var file_shop_shop_type_proto_goTypes = []any{
 	(*GetMembersResponse)(nil),        // 13: shop.v1.GetMembersResponse
 }
 var file_shop_shop_type_proto_depIdxs = []int32{
-	0, // 0: shop.v1.CreateRequest.profile:type_name -> shop.v1.ProfileInfo
-	3, // 1: shop.v1.AddAddressRequest.country:type_name -> shop.v1.LocationInfo
-	3, // 2: shop.v1.AddAddressRequest.city:type_name -> shop.v1.LocationInfo
-	3, // 3: shop.v1.AddAddressRequest.district:type_name -> shop.v1.LocationInfo
-	3, // 4: shop.v1.AddAddressRequest.ward:type_name -> shop.v1.LocationInfo
+	0, // 0: shop.v1.CreateShopRequest.profile:type_name -> shop.v1.ShopProfileInfo
+	3, // 1: shop.v1.AddShopAddressRequest.country:type_name -> shop.v1.LocationInfo
+	3, // 2: shop.v1.AddShopAddressRequest.city:type_name -> shop.v1.LocationInfo
+	3, // 3: shop.v1.AddShopAddressRequest.district:type_name -> shop.v1.LocationInfo
+	3, // 4: shop.v1.AddShopAddressRequest.ward:type_name -> shop.v1.LocationInfo
 	5, // [5:5] is the sub-list for method output_type
 	5, // [5:5] is the sub-list for method input_type
 	5, // [5:5] is the sub-list for extension type_name

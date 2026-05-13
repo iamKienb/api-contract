@@ -23,7 +23,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type ProfileInfo struct {
+type UserProfileInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FullName      string                 `protobuf:"bytes,3,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
 	Gender        string                 `protobuf:"bytes,4,opt,name=gender,proto3" json:"gender,omitempty"`
@@ -31,20 +31,20 @@ type ProfileInfo struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ProfileInfo) Reset() {
-	*x = ProfileInfo{}
+func (x *UserProfileInfo) Reset() {
+	*x = UserProfileInfo{}
 	mi := &file_user_user_type_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ProfileInfo) String() string {
+func (x *UserProfileInfo) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ProfileInfo) ProtoMessage() {}
+func (*UserProfileInfo) ProtoMessage() {}
 
-func (x *ProfileInfo) ProtoReflect() protoreflect.Message {
+func (x *UserProfileInfo) ProtoReflect() protoreflect.Message {
 	mi := &file_user_user_type_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -56,48 +56,48 @@ func (x *ProfileInfo) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ProfileInfo.ProtoReflect.Descriptor instead.
-func (*ProfileInfo) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserProfileInfo.ProtoReflect.Descriptor instead.
+func (*UserProfileInfo) Descriptor() ([]byte, []int) {
 	return file_user_user_type_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *ProfileInfo) GetFullName() string {
+func (x *UserProfileInfo) GetFullName() string {
 	if x != nil {
 		return x.FullName
 	}
 	return ""
 }
 
-func (x *ProfileInfo) GetGender() string {
+func (x *UserProfileInfo) GetGender() string {
 	if x != nil {
 		return x.Gender
 	}
 	return ""
 }
 
-type RegisterRequest struct {
+type RegisterUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
 	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
-	Profile       *ProfileInfo           `protobuf:"bytes,3,opt,name=profile,proto3" json:"profile,omitempty"`
+	Profile       *UserProfileInfo       `protobuf:"bytes,3,opt,name=profile,proto3" json:"profile,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RegisterRequest) Reset() {
-	*x = RegisterRequest{}
+func (x *RegisterUserRequest) Reset() {
+	*x = RegisterUserRequest{}
 	mi := &file_user_user_type_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RegisterRequest) String() string {
+func (x *RegisterUserRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RegisterRequest) ProtoMessage() {}
+func (*RegisterUserRequest) ProtoMessage() {}
 
-func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
+func (x *RegisterUserRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_user_user_type_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -109,33 +109,33 @@ func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RegisterRequest.ProtoReflect.Descriptor instead.
-func (*RegisterRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use RegisterUserRequest.ProtoReflect.Descriptor instead.
+func (*RegisterUserRequest) Descriptor() ([]byte, []int) {
 	return file_user_user_type_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *RegisterRequest) GetEmail() string {
+func (x *RegisterUserRequest) GetEmail() string {
 	if x != nil {
 		return x.Email
 	}
 	return ""
 }
 
-func (x *RegisterRequest) GetPassword() string {
+func (x *RegisterUserRequest) GetPassword() string {
 	if x != nil {
 		return x.Password
 	}
 	return ""
 }
 
-func (x *RegisterRequest) GetProfile() *ProfileInfo {
+func (x *RegisterUserRequest) GetProfile() *UserProfileInfo {
 	if x != nil {
 		return x.Profile
 	}
 	return nil
 }
 
-type RegisterResponse struct {
+type RegisterUserResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	SessionToken  string                 `protobuf:"bytes,1,opt,name=session_token,json=sessionToken,proto3" json:"session_token,omitempty"`
 	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
@@ -143,20 +143,20 @@ type RegisterResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RegisterResponse) Reset() {
-	*x = RegisterResponse{}
+func (x *RegisterUserResponse) Reset() {
+	*x = RegisterUserResponse{}
 	mi := &file_user_user_type_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RegisterResponse) String() string {
+func (x *RegisterUserResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RegisterResponse) ProtoMessage() {}
+func (*RegisterUserResponse) ProtoMessage() {}
 
-func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
+func (x *RegisterUserResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_user_user_type_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -168,26 +168,26 @@ func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RegisterResponse.ProtoReflect.Descriptor instead.
-func (*RegisterResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use RegisterUserResponse.ProtoReflect.Descriptor instead.
+func (*RegisterUserResponse) Descriptor() ([]byte, []int) {
 	return file_user_user_type_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *RegisterResponse) GetSessionToken() string {
+func (x *RegisterUserResponse) GetSessionToken() string {
 	if x != nil {
 		return x.SessionToken
 	}
 	return ""
 }
 
-func (x *RegisterResponse) GetExpiresAt() *timestamppb.Timestamp {
+func (x *RegisterUserResponse) GetExpiresAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.ExpiresAt
 	}
 	return nil
 }
 
-type LoginRequest struct {
+type LoginUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
 	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
@@ -195,20 +195,20 @@ type LoginRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *LoginRequest) Reset() {
-	*x = LoginRequest{}
+func (x *LoginUserRequest) Reset() {
+	*x = LoginUserRequest{}
 	mi := &file_user_user_type_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *LoginRequest) String() string {
+func (x *LoginUserRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*LoginRequest) ProtoMessage() {}
+func (*LoginUserRequest) ProtoMessage() {}
 
-func (x *LoginRequest) ProtoReflect() protoreflect.Message {
+func (x *LoginUserRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_user_user_type_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -220,26 +220,26 @@ func (x *LoginRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
-func (*LoginRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use LoginUserRequest.ProtoReflect.Descriptor instead.
+func (*LoginUserRequest) Descriptor() ([]byte, []int) {
 	return file_user_user_type_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *LoginRequest) GetEmail() string {
+func (x *LoginUserRequest) GetEmail() string {
 	if x != nil {
 		return x.Email
 	}
 	return ""
 }
 
-func (x *LoginRequest) GetPassword() string {
+func (x *LoginUserRequest) GetPassword() string {
 	if x != nil {
 		return x.Password
 	}
 	return ""
 }
 
-type LoginResponse struct {
+type LoginUserResponse struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	AccessToken      string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
 	RefreshToken     string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
@@ -249,20 +249,20 @@ type LoginResponse struct {
 	sizeCache        protoimpl.SizeCache
 }
 
-func (x *LoginResponse) Reset() {
-	*x = LoginResponse{}
+func (x *LoginUserResponse) Reset() {
+	*x = LoginUserResponse{}
 	mi := &file_user_user_type_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *LoginResponse) String() string {
+func (x *LoginUserResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*LoginResponse) ProtoMessage() {}
+func (*LoginUserResponse) ProtoMessage() {}
 
-func (x *LoginResponse) ProtoReflect() protoreflect.Message {
+func (x *LoginUserResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_user_user_type_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -274,33 +274,33 @@ func (x *LoginResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LoginResponse.ProtoReflect.Descriptor instead.
-func (*LoginResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use LoginUserResponse.ProtoReflect.Descriptor instead.
+func (*LoginUserResponse) Descriptor() ([]byte, []int) {
 	return file_user_user_type_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *LoginResponse) GetAccessToken() string {
+func (x *LoginUserResponse) GetAccessToken() string {
 	if x != nil {
 		return x.AccessToken
 	}
 	return ""
 }
 
-func (x *LoginResponse) GetRefreshToken() string {
+func (x *LoginUserResponse) GetRefreshToken() string {
 	if x != nil {
 		return x.RefreshToken
 	}
 	return ""
 }
 
-func (x *LoginResponse) GetAccessExpiresAt() *timestamppb.Timestamp {
+func (x *LoginUserResponse) GetAccessExpiresAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.AccessExpiresAt
 	}
 	return nil
 }
 
-func (x *LoginResponse) GetRefreshExpiresAt() *timestamppb.Timestamp {
+func (x *LoginUserResponse) GetRefreshExpiresAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.RefreshExpiresAt
 	}
@@ -359,7 +359,7 @@ func (x *LocationInfo) GetName() string {
 	return ""
 }
 
-type AddAddressRequest struct {
+type AddUserAddressRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Country       *LocationInfo          `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
@@ -375,20 +375,20 @@ type AddAddressRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AddAddressRequest) Reset() {
-	*x = AddAddressRequest{}
+func (x *AddUserAddressRequest) Reset() {
+	*x = AddUserAddressRequest{}
 	mi := &file_user_user_type_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AddAddressRequest) String() string {
+func (x *AddUserAddressRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddAddressRequest) ProtoMessage() {}
+func (*AddUserAddressRequest) ProtoMessage() {}
 
-func (x *AddAddressRequest) ProtoReflect() protoreflect.Message {
+func (x *AddUserAddressRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_user_user_type_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -400,102 +400,102 @@ func (x *AddAddressRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddAddressRequest.ProtoReflect.Descriptor instead.
-func (*AddAddressRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddUserAddressRequest.ProtoReflect.Descriptor instead.
+func (*AddUserAddressRequest) Descriptor() ([]byte, []int) {
 	return file_user_user_type_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *AddAddressRequest) GetUserId() string {
+func (x *AddUserAddressRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
 	return ""
 }
 
-func (x *AddAddressRequest) GetCountry() *LocationInfo {
+func (x *AddUserAddressRequest) GetCountry() *LocationInfo {
 	if x != nil {
 		return x.Country
 	}
 	return nil
 }
 
-func (x *AddAddressRequest) GetCity() *LocationInfo {
+func (x *AddUserAddressRequest) GetCity() *LocationInfo {
 	if x != nil {
 		return x.City
 	}
 	return nil
 }
 
-func (x *AddAddressRequest) GetDistrict() *LocationInfo {
+func (x *AddUserAddressRequest) GetDistrict() *LocationInfo {
 	if x != nil {
 		return x.District
 	}
 	return nil
 }
 
-func (x *AddAddressRequest) GetWard() *LocationInfo {
+func (x *AddUserAddressRequest) GetWard() *LocationInfo {
 	if x != nil {
 		return x.Ward
 	}
 	return nil
 }
 
-func (x *AddAddressRequest) GetAddressLine() string {
+func (x *AddUserAddressRequest) GetAddressLine() string {
 	if x != nil {
 		return x.AddressLine
 	}
 	return ""
 }
 
-func (x *AddAddressRequest) GetReceiverName() string {
+func (x *AddUserAddressRequest) GetReceiverName() string {
 	if x != nil {
 		return x.ReceiverName
 	}
 	return ""
 }
 
-func (x *AddAddressRequest) GetPhoneNumber() string {
+func (x *AddUserAddressRequest) GetPhoneNumber() string {
 	if x != nil {
 		return x.PhoneNumber
 	}
 	return ""
 }
 
-func (x *AddAddressRequest) GetLabel() string {
+func (x *AddUserAddressRequest) GetLabel() string {
 	if x != nil {
 		return x.Label
 	}
 	return ""
 }
 
-func (x *AddAddressRequest) GetIsDefault() bool {
+func (x *AddUserAddressRequest) GetIsDefault() bool {
 	if x != nil {
 		return x.IsDefault
 	}
 	return false
 }
 
-type AddAddressResponse struct {
+type AddUserAddressResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AddressId     string                 `protobuf:"bytes,1,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *AddAddressResponse) Reset() {
-	*x = AddAddressResponse{}
+func (x *AddUserAddressResponse) Reset() {
+	*x = AddUserAddressResponse{}
 	mi := &file_user_user_type_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AddAddressResponse) String() string {
+func (x *AddUserAddressResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AddAddressResponse) ProtoMessage() {}
+func (*AddUserAddressResponse) ProtoMessage() {}
 
-func (x *AddAddressResponse) ProtoReflect() protoreflect.Message {
+func (x *AddUserAddressResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_user_user_type_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -507,12 +507,12 @@ func (x *AddAddressResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddAddressResponse.ProtoReflect.Descriptor instead.
-func (*AddAddressResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use AddUserAddressResponse.ProtoReflect.Descriptor instead.
+func (*AddUserAddressResponse) Descriptor() ([]byte, []int) {
 	return file_user_user_type_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *AddAddressResponse) GetAddressId() string {
+func (x *AddUserAddressResponse) GetAddressId() string {
 	if x != nil {
 		return x.AddressId
 	}
@@ -667,30 +667,30 @@ var File_user_user_type_proto protoreflect.FileDescriptor
 
 const file_user_user_type_proto_rawDesc = "" +
 	"\n" +
-	"\x14user/user_type.proto\x12\auser.v1\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"g\n" +
-	"\vProfileInfo\x12$\n" +
+	"\x14user/user_type.proto\x12\auser.v1\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"k\n" +
+	"\x0fUserProfileInfo\x12$\n" +
 	"\tfull_name\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\bfullName\x122\n" +
-	"\x06gender\x18\x04 \x01(\tB\x1a\xfaB\x17r\x15R\x04MaleR\x06FemaleR\x05OtherR\x06gender\"\x8f\x01\n" +
-	"\x0fRegisterRequest\x12\x1d\n" +
+	"\x06gender\x18\x04 \x01(\tB\x1a\xfaB\x17r\x15R\x04MaleR\x06FemaleR\x05OtherR\x06gender\"\x97\x01\n" +
+	"\x13RegisterUserRequest\x12\x1d\n" +
 	"\x05email\x18\x01 \x01(\tB\a\xfaB\x04r\x02`\x01R\x05email\x12#\n" +
-	"\bpassword\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\bR\bpassword\x128\n" +
-	"\aprofile\x18\x03 \x01(\v2\x14.user.v1.ProfileInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\aprofile\"r\n" +
-	"\x10RegisterResponse\x12#\n" +
+	"\bpassword\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\bR\bpassword\x12<\n" +
+	"\aprofile\x18\x03 \x01(\v2\x18.user.v1.UserProfileInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\aprofile\"v\n" +
+	"\x14RegisterUserResponse\x12#\n" +
 	"\rsession_token\x18\x01 \x01(\tR\fsessionToken\x129\n" +
 	"\n" +
-	"expires_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"R\n" +
-	"\fLoginRequest\x12\x1d\n" +
+	"expires_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"V\n" +
+	"\x10LoginUserRequest\x12\x1d\n" +
 	"\x05email\x18\x01 \x01(\tB\a\xfaB\x04r\x02`\x01R\x05email\x12#\n" +
-	"\bpassword\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\bR\bpassword\"\xe9\x01\n" +
-	"\rLoginResponse\x12!\n" +
+	"\bpassword\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\bR\bpassword\"\xed\x01\n" +
+	"\x11LoginUserResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
 	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12F\n" +
 	"\x11access_expires_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0faccessExpiresAt\x12H\n" +
 	"\x12refresh_expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x10refreshExpiresAt\"D\n" +
 	"\fLocationInfo\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x02id\x12\x1b\n" +
-	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\"\xf5\x03\n" +
-	"\x11AddAddressRequest\x12 \n" +
+	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\"\xf9\x03\n" +
+	"\x15AddUserAddressRequest\x12 \n" +
 	"\auser_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06userId\x129\n" +
 	"\acountry\x18\x02 \x01(\v2\x15.user.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\acountry\x123\n" +
 	"\x04city\x18\x03 \x01(\v2\x15.user.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\x04city\x12;\n" +
@@ -702,8 +702,8 @@ const file_user_user_type_proto_rawDesc = "" +
 	"\x05label\x18\t \x01(\tB\x13\xfaB\x10r\x0eR\x04HomeR\x06OfficeR\x05label\x12\x1d\n" +
 	"\n" +
 	"is_default\x18\n" +
-	" \x01(\bR\tisDefault\"3\n" +
-	"\x12AddAddressResponse\x12\x1d\n" +
+	" \x01(\bR\tisDefault\"7\n" +
+	"\x16AddUserAddressResponse\x12\x1d\n" +
 	"\n" +
 	"address_id\x18\x01 \x01(\tR\taddressId\"\x12\n" +
 	"\x10GetDetailRequest\"\x13\n" +
@@ -725,29 +725,29 @@ func file_user_user_type_proto_rawDescGZIP() []byte {
 
 var file_user_user_type_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_user_user_type_proto_goTypes = []any{
-	(*ProfileInfo)(nil),           // 0: user.v1.ProfileInfo
-	(*RegisterRequest)(nil),       // 1: user.v1.RegisterRequest
-	(*RegisterResponse)(nil),      // 2: user.v1.RegisterResponse
-	(*LoginRequest)(nil),          // 3: user.v1.LoginRequest
-	(*LoginResponse)(nil),         // 4: user.v1.LoginResponse
-	(*LocationInfo)(nil),          // 5: user.v1.LocationInfo
-	(*AddAddressRequest)(nil),     // 6: user.v1.AddAddressRequest
-	(*AddAddressResponse)(nil),    // 7: user.v1.AddAddressResponse
-	(*GetDetailRequest)(nil),      // 8: user.v1.GetDetailRequest
-	(*GetDetailResponse)(nil),     // 9: user.v1.GetDetailResponse
-	(*ListAddressesRequest)(nil),  // 10: user.v1.ListAddressesRequest
-	(*ListAddressesResponse)(nil), // 11: user.v1.ListAddressesResponse
-	(*timestamppb.Timestamp)(nil), // 12: google.protobuf.Timestamp
+	(*UserProfileInfo)(nil),        // 0: user.v1.UserProfileInfo
+	(*RegisterUserRequest)(nil),    // 1: user.v1.RegisterUserRequest
+	(*RegisterUserResponse)(nil),   // 2: user.v1.RegisterUserResponse
+	(*LoginUserRequest)(nil),       // 3: user.v1.LoginUserRequest
+	(*LoginUserResponse)(nil),      // 4: user.v1.LoginUserResponse
+	(*LocationInfo)(nil),           // 5: user.v1.LocationInfo
+	(*AddUserAddressRequest)(nil),  // 6: user.v1.AddUserAddressRequest
+	(*AddUserAddressResponse)(nil), // 7: user.v1.AddUserAddressResponse
+	(*GetDetailRequest)(nil),       // 8: user.v1.GetDetailRequest
+	(*GetDetailResponse)(nil),      // 9: user.v1.GetDetailResponse
+	(*ListAddressesRequest)(nil),   // 10: user.v1.ListAddressesRequest
+	(*ListAddressesResponse)(nil),  // 11: user.v1.ListAddressesResponse
+	(*timestamppb.Timestamp)(nil),  // 12: google.protobuf.Timestamp
 }
 var file_user_user_type_proto_depIdxs = []int32{
-	0,  // 0: user.v1.RegisterRequest.profile:type_name -> user.v1.ProfileInfo
-	12, // 1: user.v1.RegisterResponse.expires_at:type_name -> google.protobuf.Timestamp
-	12, // 2: user.v1.LoginResponse.access_expires_at:type_name -> google.protobuf.Timestamp
-	12, // 3: user.v1.LoginResponse.refresh_expires_at:type_name -> google.protobuf.Timestamp
-	5,  // 4: user.v1.AddAddressRequest.country:type_name -> user.v1.LocationInfo
-	5,  // 5: user.v1.AddAddressRequest.city:type_name -> user.v1.LocationInfo
-	5,  // 6: user.v1.AddAddressRequest.district:type_name -> user.v1.LocationInfo
-	5,  // 7: user.v1.AddAddressRequest.ward:type_name -> user.v1.LocationInfo
+	0,  // 0: user.v1.RegisterUserRequest.profile:type_name -> user.v1.UserProfileInfo
+	12, // 1: user.v1.RegisterUserResponse.expires_at:type_name -> google.protobuf.Timestamp
+	12, // 2: user.v1.LoginUserResponse.access_expires_at:type_name -> google.protobuf.Timestamp
+	12, // 3: user.v1.LoginUserResponse.refresh_expires_at:type_name -> google.protobuf.Timestamp
+	5,  // 4: user.v1.AddUserAddressRequest.country:type_name -> user.v1.LocationInfo
+	5,  // 5: user.v1.AddUserAddressRequest.city:type_name -> user.v1.LocationInfo
+	5,  // 6: user.v1.AddUserAddressRequest.district:type_name -> user.v1.LocationInfo
+	5,  // 7: user.v1.AddUserAddressRequest.ward:type_name -> user.v1.LocationInfo
 	8,  // [8:8] is the sub-list for method output_type
 	8,  // [8:8] is the sub-list for method input_type
 	8,  // [8:8] is the sub-list for extension type_name

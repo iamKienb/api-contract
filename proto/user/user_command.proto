@@ -7,7 +7,7 @@ option go_package = "github.com/iamKienb/api-contract-module/gen/user";
 
 service UserCommandService {
   //  Public Commands
-  rpc Register(RegisterRequest) returns (RegisterResponse);
-  rpc Login(LoginRequest) returns (LoginResponse);
-  rpc AddAddress(AddAddressRequest) returns (AddAddressResponse);
+  rpc RegisterUser(RegisterUserRequest) returns (RegisterUserResponse);
+  rpc LoginUser(LoginUserRequest) returns (LoginUserResponse);
+  rpc AddUserAddress(AddUserAddressRequest) returns (AddUserAddressResponse);
 }

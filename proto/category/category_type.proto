@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package category.v1;
+
+import "validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/iamKienb/api-contract-module/gen/category";
+
+message CreateCategoryRequest {
+  string shop_id   = 1 [(validate.rules).string.min_len = 1];
+  string user_id   = 6 [(validate.rules).string.min_len = 1];
+  string parent_id = 2 [(validate.rules).string = {ignore_empty: true}];
+  string name      = 3 [(validate.rules).string.min_len = 1];
+  string slug      = 4 [(validate.rules).string.pattern = "^[a-z0-9]+(?:-[a-z0-9]+)*$"];
+  string status    = 5 [(validate.rules).string = {in :["DRAFT", "ACTIVE", "ARCHIVED"]}];
+}
+
+message CreateCategoryResponse {
+  string category_id = 1;
+}
