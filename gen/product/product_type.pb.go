@@ -351,7 +351,7 @@ const file_product_product_type_proto_rawDesc = "" +
 	"\bvariants\x18\n" +
 	" \x03(\v2 .product.v1.ProductVariantOptionB\b\xfaB\x05\x92\x01\x02\b\x01R\bvariants\"2\n" +
 	"\x16CreateProductsResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccessB5Z3github.com/iamKienb/api-contract-module/gen/productb\x06proto3"
+	"\asuccess\x18\x01 \x01(\bR\asuccessB.Z,github.com/iamKienb/api-contract/gen/productb\x06proto3"
 
 var (
 	file_product_product_type_proto_rawDescOnce sync.Once

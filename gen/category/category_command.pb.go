@@ -26,7 +26,7 @@ const file_category_category_command_proto_rawDesc = "" +
 	"\n" +
 	"\x1fcategory/category_command.proto\x12\vcategory.v1\x1a\x1ccategory/category_type.proto2s\n" +
 	"\x16CategoryCommandService\x12Y\n" +
-	"\x0eCreateCategory\x12\".category.v1.CreateCategoryRequest\x1a#.category.v1.CreateCategoryResponseB6Z4github.com/iamKienb/api-contract-module/gen/categoryb\x06proto3"
+	"\x0eCreateCategory\x12\".category.v1.CreateCategoryRequest\x1a#.category.v1.CreateCategoryResponseB/Z-github.com/iamKienb/api-contract/gen/categoryb\x06proto3"
 
 var file_category_category_command_proto_goTypes = []any{
 	(*CreateCategoryRequest)(nil),  // 0: category.v1.CreateCategoryRequest

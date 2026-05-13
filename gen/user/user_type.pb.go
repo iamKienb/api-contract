@@ -709,7 +709,7 @@ const file_user_user_type_proto_rawDesc = "" +
 	"\x10GetDetailRequest\"\x13\n" +
 	"\x11GetDetailResponse\"\x16\n" +
 	"\x14ListAddressesRequest\"\x17\n" +
-	"\x15ListAddressesResponseB2Z0github.com/iamKienb/api-contract-module/gen/userb\x06proto3"
+	"\x15ListAddressesResponseB+Z)github.com/iamKienb/api-contract/gen/userb\x06proto3"
 
 var (
 	file_user_user_type_proto_rawDescOnce sync.Once

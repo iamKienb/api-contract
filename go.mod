@@ -1,4 +1,4 @@
-module github.com/iamKienb/api-contract-module
+module github.com/iamKienb/api-contract
 
 go 1.25.8
 

@@ -27,7 +27,7 @@ const file_product_product_command_proto_rawDesc = "" +
 	"\x1dproduct/product_command.proto\x12\n" +
 	"product.v1\x1a\x1aproduct/product_type.proto2o\n" +
 	"\x15ProductCommandService\x12V\n" +
-	"\rCreateProduct\x12!.product.v1.CreateProductsRequest\x1a\".product.v1.CreateProductsResponseB5Z3github.com/iamKienb/api-contract-module/gen/productb\x06proto3"
+	"\rCreateProduct\x12!.product.v1.CreateProductsRequest\x1a\".product.v1.CreateProductsResponseB.Z,github.com/iamKienb/api-contract/gen/productb\x06proto3"
 
 var file_product_product_command_proto_goTypes = []any{
 	(*CreateProductsRequest)(nil),  // 0: product.v1.CreateProductsRequest

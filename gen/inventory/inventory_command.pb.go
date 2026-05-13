@@ -26,7 +26,7 @@ const file_inventory_inventory_command_proto_rawDesc = "" +
 	"\n" +
 	"!inventory/inventory_command.proto\x12\finventory.v1\x1a\x1einventory/inventory_type.proto2\x7f\n" +
 	"\x17InventoryCommandService\x12d\n" +
-	"\x11CreateInventories\x12&.inventory.v1.CreateInventoriesRequest\x1a'.inventory.v1.CreateInventoriesResponseB7Z5github.com/iamKienb/api-contract-module/gen/inventoryb\x06proto3"
+	"\x11CreateInventories\x12&.inventory.v1.CreateInventoriesRequest\x1a'.inventory.v1.CreateInventoriesResponseB0Z.github.com/iamKienb/api-contract/gen/inventoryb\x06proto3"
 
 var file_inventory_inventory_command_proto_goTypes = []any{
 	(*CreateInventoriesRequest)(nil),  // 0: inventory.v1.CreateInventoriesRequest

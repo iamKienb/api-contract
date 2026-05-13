@@ -248,7 +248,7 @@ const file_otp_otp_proto_rawDesc = "" +
 	"\rsession_token\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\fsessionToken\"K\n" +
 	"\x0eResendResponse\x129\n" +
 	"\n" +
-	"expires_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAtB1Z/github.com/iamKienb/api-contract-module/gen/otpb\x06proto3"
+	"expires_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAtB*Z(github.com/iamKienb/api-contract/gen/otpb\x06proto3"
 
 var (
 	file_otp_otp_proto_rawDescOnce sync.Once

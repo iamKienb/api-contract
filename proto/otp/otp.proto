@@ -5,7 +5,7 @@ package otp.v1;
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/iamKienb/api-contract-module/gen/otp";
+option go_package = "github.com/iamKienb/api-contract/gen/otp";
 
 message VerifyRequest {
   string session_token = 1 [(validate.rules).string.min_len = 1];

@@ -5,7 +5,7 @@ package category.v1;
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/iamKienb/api-contract-module/gen/category";
+option go_package = "github.com/iamKienb/api-contract/gen/category";
 
 message CreateCategoryRequest {
   string shop_id   = 1 [(validate.rules).string.min_len = 1];

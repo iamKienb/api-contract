@@ -3,7 +3,7 @@ package otp.v1;
 
 import "otp/otp.proto";
 
-option go_package = "github.com/iamKienb/api-contract-module/gen/otp";
+option go_package = "github.com/iamKienb/api-contract/gen/otp";
 
 // OTPCommandService provides commands for user management.
 service OTPCommandService {

@@ -8,7 +8,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	inventory "github.com/iamKienb/api-contract-module/gen/inventory"
+	inventory "github.com/iamKienb/api-contract/gen/inventory"
 	http "net/http"
 	strings "strings"
 )

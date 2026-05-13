@@ -3,7 +3,7 @@ package inventory.v1;
 
 import "inventory/inventory_type.proto";
 
-option go_package = "github.com/iamKienb/api-contract-module/gen/inventory";
+option go_package = "github.com/iamKienb/api-contract/gen/inventory";
 
 service InventoryCommandService {
   //  Public Commands

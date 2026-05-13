@@ -8,7 +8,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	product "github.com/iamKienb/api-contract-module/gen/product"
+	product "github.com/iamKienb/api-contract/gen/product"
 	http "net/http"
 	strings "strings"
 )

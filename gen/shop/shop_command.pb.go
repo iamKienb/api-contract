@@ -29,7 +29,7 @@ const file_shop_shop_command_proto_rawDesc = "" +
 	"\n" +
 	"CreateShop\x12\x1a.shop.v1.CreateShopRequest\x1a\x1b.shop.v1.CreateShopResponse\x12Q\n" +
 	"\x0eAddShopAddress\x12\x1e.shop.v1.AddShopAddressRequest\x1a\x1f.shop.v1.AddShopAddressResponse\x12Z\n" +
-	"\x11AssignMemberRoles\x12!.shop.v1.AssignMemberRolesRequest\x1a\".shop.v1.AssignMemberRolesResponseB2Z0github.com/iamKienb/api-contract-module/gen/shopb\x06proto3"
+	"\x11AssignMemberRoles\x12!.shop.v1.AssignMemberRolesRequest\x1a\".shop.v1.AssignMemberRolesResponseB+Z)github.com/iamKienb/api-contract/gen/shopb\x06proto3"
 
 var file_shop_shop_command_proto_goTypes = []any{
 	(*CreateShopRequest)(nil),         // 0: shop.v1.CreateShopRequest

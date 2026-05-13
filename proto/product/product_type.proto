@@ -5,7 +5,7 @@ package product.v1;
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/iamKienb/api-contract-module/gen/product";
+option go_package = "github.com/iamKienb/api-contract/gen/product";
 
 message ProductAttributeOption {
   string          name   = 1;

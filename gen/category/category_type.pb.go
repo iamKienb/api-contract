@@ -165,7 +165,7 @@ const file_category_category_type_proto_rawDesc = "" +
 	"\x06status\x18\x05 \x01(\tB\x1e\xfaB\x1br\x19R\x05DRAFTR\x06ACTIVER\bARCHIVEDR\x06status\"9\n" +
 	"\x16CreateCategoryResponse\x12\x1f\n" +
 	"\vcategory_id\x18\x01 \x01(\tR\n" +
-	"categoryIdB6Z4github.com/iamKienb/api-contract-module/gen/categoryb\x06proto3"
+	"categoryIdB/Z-github.com/iamKienb/api-contract/gen/categoryb\x06proto3"
 
 var (
 	file_category_category_type_proto_rawDescOnce sync.Once

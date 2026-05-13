@@ -28,7 +28,7 @@ const file_user_user_command_proto_rawDesc = "" +
 	"\x12UserCommandService\x12K\n" +
 	"\fRegisterUser\x12\x1c.user.v1.RegisterUserRequest\x1a\x1d.user.v1.RegisterUserResponse\x12B\n" +
 	"\tLoginUser\x12\x19.user.v1.LoginUserRequest\x1a\x1a.user.v1.LoginUserResponse\x12Q\n" +
-	"\x0eAddUserAddress\x12\x1e.user.v1.AddUserAddressRequest\x1a\x1f.user.v1.AddUserAddressResponseB2Z0github.com/iamKienb/api-contract-module/gen/userb\x06proto3"
+	"\x0eAddUserAddress\x12\x1e.user.v1.AddUserAddressRequest\x1a\x1f.user.v1.AddUserAddressResponseB+Z)github.com/iamKienb/api-contract/gen/userb\x06proto3"
 
 var file_user_user_command_proto_goTypes = []any{
 	(*RegisterUserRequest)(nil),    // 0: user.v1.RegisterUserRequest

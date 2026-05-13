@@ -8,7 +8,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	otp "github.com/iamKienb/api-contract-module/gen/otp"
+	otp "github.com/iamKienb/api-contract/gen/otp"
 	http "net/http"
 	strings "strings"
 )

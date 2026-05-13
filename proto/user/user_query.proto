@@ -3,7 +3,7 @@ package user.v1;
 
 import "user/user_type.proto";
 
-option go_package = "github.com/iamKienb/api-contract-module/gen/user";
+option go_package = "github.com/iamKienb/api-contract/gen/user";
 
 service UserQueryService {
   rpc GetShopDetail(GetDetailRequest) returns (GetDetailResponse);

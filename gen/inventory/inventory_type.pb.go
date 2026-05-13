@@ -183,7 +183,7 @@ const file_inventory_inventory_type_proto_rawDesc = "" +
 	"\ashop_id\x18\x01 \x01(\tB\b\xfaB\x05r\x03\xb0\x01\x01R\x06shopId\x12;\n" +
 	"\x05items\x18\x02 \x03(\v2\x1b.inventory.v1.InventoryItemB\b\xfaB\x05\x92\x01\x02\b\x01R\x05items\"5\n" +
 	"\x19CreateInventoriesResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccessB7Z5github.com/iamKienb/api-contract-module/gen/inventoryb\x06proto3"
+	"\asuccess\x18\x01 \x01(\bR\asuccessB0Z.github.com/iamKienb/api-contract/gen/inventoryb\x06proto3"
 
 var (
 	file_inventory_inventory_type_proto_rawDescOnce sync.Once

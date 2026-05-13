@@ -5,7 +5,7 @@ package shop.v1;
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/iamKienb/api-contract-module/gen/shop";
+option go_package = "github.com/iamKienb/api-contract/gen/shop";
 
 message ShopProfileInfo {
   optional string description = 1;
