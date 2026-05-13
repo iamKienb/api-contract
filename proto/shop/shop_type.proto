@@ -54,8 +54,8 @@ message AddShopAddressResponse {
 }
 
 message MemberRole {
-  string          member_id = 3 [(validate.rules).string.min_len = 1];
-  repeated string roles     = 4 [(validate.rules).repeated = {min_items: 1, unique: true}];
+  string         member_id = 3 [(validate.rules).string.min_len = 1];
+  repeated int32 role_ids  = 4 [(validate.rules).repeated = {min_items: 1, unique: true}];
 }
 
 message AssignMemberRolesRequest {

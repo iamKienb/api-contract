@@ -410,7 +410,7 @@ func (x *AddShopAddressResponse) GetAddressId() string {
 type MemberRole struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MemberId      string                 `protobuf:"bytes,3,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Roles         []string               `protobuf:"bytes,4,rep,name=roles,proto3" json:"roles,omitempty"`
+	RoleIds       []int32                `protobuf:"varint,4,rep,packed,name=role_ids,json=roleIds,proto3" json:"role_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -452,9 +452,9 @@ func (x *MemberRole) GetMemberId() string {
 	return ""
 }
 
-func (x *MemberRole) GetRoles() []string {
+func (x *MemberRole) GetRoleIds() []int32 {
 	if x != nil {
-		return x.Roles
+		return x.RoleIds
 	}
 	return nil
 }
@@ -826,12 +826,12 @@ const file_shop_shop_type_proto_rawDesc = "" +
 	" \x01(\tB\x15\xfaB\x12r\x10R\x06PickupR\x06ReturnR\x04type\"7\n" +
 	"\x16AddShopAddressResponse\x12\x1d\n" +
 	"\n" +
-	"address_id\x18\x01 \x01(\tR\taddressId\"T\n" +
+	"address_id\x18\x01 \x01(\tR\taddressId\"Y\n" +
 	"\n" +
 	"MemberRole\x12$\n" +
-	"\tmember_id\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\bmemberId\x12 \n" +
-	"\x05roles\x18\x04 \x03(\tB\n" +
-	"\xfaB\a\x92\x01\x04\b\x01\x18\x01R\x05roles\"\xc6\x01\n" +
+	"\tmember_id\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\bmemberId\x12%\n" +
+	"\brole_ids\x18\x04 \x03(\x05B\n" +
+	"\xfaB\a\x92\x01\x04\b\x01\x18\x01R\aroleIds\"\xc6\x01\n" +
 	"\x18AssignMemberRolesRequest\x12 \n" +
 	"\ashop_id\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12'\n" +
 	"\vadded_by_id\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\taddedById\x126\n" +

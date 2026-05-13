@@ -1025,9 +1025,9 @@ func (m *MemberRole) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if len(m.GetRoles()) < 1 {
+	if len(m.GetRoleIds()) < 1 {
 		err := MemberRoleValidationError{
-			field:  "Roles",
+			field:  "RoleIds",
 			reason: "value must contain at least 1 item(s)",
 		}
 		if !all {
@@ -1036,14 +1036,14 @@ func (m *MemberRole) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	_MemberRole_Roles_Unique := make(map[string]struct{}, len(m.GetRoles()))
+	_MemberRole_RoleIds_Unique := make(map[int32]struct{}, len(m.GetRoleIds()))
 
-	for idx, item := range m.GetRoles() {
+	for idx, item := range m.GetRoleIds() {
 		_, _ = idx, item
 
-		if _, exists := _MemberRole_Roles_Unique[item]; exists {
+		if _, exists := _MemberRole_RoleIds_Unique[item]; exists {
 			err := MemberRoleValidationError{
-				field:  fmt.Sprintf("Roles[%v]", idx),
+				field:  fmt.Sprintf("RoleIds[%v]", idx),
 				reason: "repeated value must contain unique items",
 			}
 			if !all {
@@ -1051,10 +1051,10 @@ func (m *MemberRole) validate(all bool) error {
 			}
 			errors = append(errors, err)
 		} else {
-			_MemberRole_Roles_Unique[item] = struct{}{}
+			_MemberRole_RoleIds_Unique[item] = struct{}{}
 		}
 
-		// no validation rules for Roles[idx]
+		// no validation rules for RoleIds[idx]
 	}
 
 	if len(errors) > 0 {
