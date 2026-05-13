@@ -29,7 +29,7 @@ message CreateShopResponse {
 }
 
 message LocationInfo {
-  string id   = 1 [(validate.rules).string.min_len = 1];
+  int64  id   = 1 [(validate.rules).int64.gt = 0];
   string name = 2 [(validate.rules).string.min_len = 1];
 }
 
@@ -54,9 +54,10 @@ message AddShopAddressResponse {
 }
 
 message AssignMemberRolesRequest {
-  string          shop_id   = 2 [(validate.rules).string.min_len = 1];
-  string          member_id = 3 [(validate.rules).string.min_len = 1];
-  repeated string roles     = 4 [(validate.rules).repeated = {min_items: 1, unique: true}];
+  string          shop_id    = 2 [(validate.rules).string.min_len = 1];
+  string          member_id  = 3 [(validate.rules).string.min_len = 1];
+  repeated string roles      = 4 [(validate.rules).repeated = {min_items: 1, unique: true}];
+  string          permission = 5 [(validate.rules).string.min_len = 1];
 }
 
 message AssignMemberRolesResponse {

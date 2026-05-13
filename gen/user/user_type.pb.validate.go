@@ -870,10 +870,10 @@ func (m *LocationInfo) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetId()) < 1 {
+	if m.GetId() <= 0 {
 		err := LocationInfoValidationError{
 			field:  "Id",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err

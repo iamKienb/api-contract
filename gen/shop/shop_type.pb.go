@@ -197,7 +197,7 @@ func (x *CreateShopResponse) GetShopId() string {
 
 type LocationInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -233,11 +233,11 @@ func (*LocationInfo) Descriptor() ([]byte, []int) {
 	return file_shop_shop_type_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *LocationInfo) GetId() string {
+func (x *LocationInfo) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
-	return ""
+	return 0
 }
 
 func (x *LocationInfo) GetName() string {
@@ -412,6 +412,7 @@ type AssignMemberRolesRequest struct {
 	ShopId        string                 `protobuf:"bytes,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
 	MemberId      string                 `protobuf:"bytes,3,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
 	Roles         []string               `protobuf:"bytes,4,rep,name=roles,proto3" json:"roles,omitempty"`
+	Permission    string                 `protobuf:"bytes,5,opt,name=permission,proto3" json:"permission,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -465,6 +466,13 @@ func (x *AssignMemberRolesRequest) GetRoles() []string {
 		return x.Roles
 	}
 	return nil
+}
+
+func (x *AssignMemberRolesRequest) GetPermission() string {
+	if x != nil {
+		return x.Permission
+	}
+	return ""
 }
 
 type AssignMemberRolesResponse struct {
@@ -750,7 +758,7 @@ const file_shop_shop_type_proto_rawDesc = "" +
 	"\x12CreateShopResponse\x12\x17\n" +
 	"\ashop_id\x18\x01 \x01(\tR\x06shopId\"D\n" +
 	"\fLocationInfo\x12\x17\n" +
-	"\x02id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x02id\x12\x1b\n" +
+	"\x02id\x18\x01 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\x02id\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\"\xfa\x03\n" +
 	"\x15AddShopAddressRequest\x12 \n" +
 	"\auser_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06userId\x12 \n" +
@@ -766,12 +774,15 @@ const file_shop_shop_type_proto_rawDesc = "" +
 	" \x01(\tB\x15\xfaB\x12r\x10R\x06PickupR\x06ReturnR\x04type\"7\n" +
 	"\x16AddShopAddressResponse\x12\x1d\n" +
 	"\n" +
-	"address_id\x18\x01 \x01(\tR\taddressId\"\x84\x01\n" +
+	"address_id\x18\x01 \x01(\tR\taddressId\"\xad\x01\n" +
 	"\x18AssignMemberRolesRequest\x12 \n" +
 	"\ashop_id\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12$\n" +
 	"\tmember_id\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\bmemberId\x12 \n" +
 	"\x05roles\x18\x04 \x03(\tB\n" +
-	"\xfaB\a\x92\x01\x04\b\x01\x18\x01R\x05roles\"5\n" +
+	"\xfaB\a\x92\x01\x04\b\x01\x18\x01R\x05roles\x12'\n" +
+	"\n" +
+	"permission\x18\x05 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\n" +
+	"permission\"5\n" +
 	"\x19AssignMemberRolesResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"\x14\n" +
 	"\x12SearchShopsRequest\"\x15\n" +
