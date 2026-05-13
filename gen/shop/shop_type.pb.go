@@ -407,11 +407,63 @@ func (x *AddShopAddressResponse) GetAddressId() string {
 	return ""
 }
 
+type MemberRole struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MemberId      string                 `protobuf:"bytes,3,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
+	Roles         []string               `protobuf:"bytes,4,rep,name=roles,proto3" json:"roles,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MemberRole) Reset() {
+	*x = MemberRole{}
+	mi := &file_shop_shop_type_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MemberRole) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MemberRole) ProtoMessage() {}
+
+func (x *MemberRole) ProtoReflect() protoreflect.Message {
+	mi := &file_shop_shop_type_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MemberRole.ProtoReflect.Descriptor instead.
+func (*MemberRole) Descriptor() ([]byte, []int) {
+	return file_shop_shop_type_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *MemberRole) GetMemberId() string {
+	if x != nil {
+		return x.MemberId
+	}
+	return ""
+}
+
+func (x *MemberRole) GetRoles() []string {
+	if x != nil {
+		return x.Roles
+	}
+	return nil
+}
+
 type AssignMemberRolesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ShopId        string                 `protobuf:"bytes,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
-	MemberId      string                 `protobuf:"bytes,3,opt,name=member_id,json=memberId,proto3" json:"member_id,omitempty"`
-	Roles         []string               `protobuf:"bytes,4,rep,name=roles,proto3" json:"roles,omitempty"`
+	AddedById     string                 `protobuf:"bytes,3,opt,name=added_by_id,json=addedById,proto3" json:"added_by_id,omitempty"`
+	MemberRoles   []*MemberRole          `protobuf:"bytes,4,rep,name=member_roles,json=memberRoles,proto3" json:"member_roles,omitempty"`
 	Permission    string                 `protobuf:"bytes,5,opt,name=permission,proto3" json:"permission,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -419,7 +471,7 @@ type AssignMemberRolesRequest struct {
 
 func (x *AssignMemberRolesRequest) Reset() {
 	*x = AssignMemberRolesRequest{}
-	mi := &file_shop_shop_type_proto_msgTypes[6]
+	mi := &file_shop_shop_type_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -431,7 +483,7 @@ func (x *AssignMemberRolesRequest) String() string {
 func (*AssignMemberRolesRequest) ProtoMessage() {}
 
 func (x *AssignMemberRolesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_shop_type_proto_msgTypes[6]
+	mi := &file_shop_shop_type_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -444,7 +496,7 @@ func (x *AssignMemberRolesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AssignMemberRolesRequest.ProtoReflect.Descriptor instead.
 func (*AssignMemberRolesRequest) Descriptor() ([]byte, []int) {
-	return file_shop_shop_type_proto_rawDescGZIP(), []int{6}
+	return file_shop_shop_type_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *AssignMemberRolesRequest) GetShopId() string {
@@ -454,16 +506,16 @@ func (x *AssignMemberRolesRequest) GetShopId() string {
 	return ""
 }
 
-func (x *AssignMemberRolesRequest) GetMemberId() string {
+func (x *AssignMemberRolesRequest) GetAddedById() string {
 	if x != nil {
-		return x.MemberId
+		return x.AddedById
 	}
 	return ""
 }
 
-func (x *AssignMemberRolesRequest) GetRoles() []string {
+func (x *AssignMemberRolesRequest) GetMemberRoles() []*MemberRole {
 	if x != nil {
-		return x.Roles
+		return x.MemberRoles
 	}
 	return nil
 }
@@ -484,7 +536,7 @@ type AssignMemberRolesResponse struct {
 
 func (x *AssignMemberRolesResponse) Reset() {
 	*x = AssignMemberRolesResponse{}
-	mi := &file_shop_shop_type_proto_msgTypes[7]
+	mi := &file_shop_shop_type_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -496,7 +548,7 @@ func (x *AssignMemberRolesResponse) String() string {
 func (*AssignMemberRolesResponse) ProtoMessage() {}
 
 func (x *AssignMemberRolesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_shop_type_proto_msgTypes[7]
+	mi := &file_shop_shop_type_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -509,7 +561,7 @@ func (x *AssignMemberRolesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AssignMemberRolesResponse.ProtoReflect.Descriptor instead.
 func (*AssignMemberRolesResponse) Descriptor() ([]byte, []int) {
-	return file_shop_shop_type_proto_rawDescGZIP(), []int{7}
+	return file_shop_shop_type_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *AssignMemberRolesResponse) GetSuccess() bool {
@@ -527,7 +579,7 @@ type SearchShopsRequest struct {
 
 func (x *SearchShopsRequest) Reset() {
 	*x = SearchShopsRequest{}
-	mi := &file_shop_shop_type_proto_msgTypes[8]
+	mi := &file_shop_shop_type_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -539,7 +591,7 @@ func (x *SearchShopsRequest) String() string {
 func (*SearchShopsRequest) ProtoMessage() {}
 
 func (x *SearchShopsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_shop_type_proto_msgTypes[8]
+	mi := &file_shop_shop_type_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -552,7 +604,7 @@ func (x *SearchShopsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchShopsRequest.ProtoReflect.Descriptor instead.
 func (*SearchShopsRequest) Descriptor() ([]byte, []int) {
-	return file_shop_shop_type_proto_rawDescGZIP(), []int{8}
+	return file_shop_shop_type_proto_rawDescGZIP(), []int{9}
 }
 
 type SearchShopsResponse struct {
@@ -563,7 +615,7 @@ type SearchShopsResponse struct {
 
 func (x *SearchShopsResponse) Reset() {
 	*x = SearchShopsResponse{}
-	mi := &file_shop_shop_type_proto_msgTypes[9]
+	mi := &file_shop_shop_type_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -575,7 +627,7 @@ func (x *SearchShopsResponse) String() string {
 func (*SearchShopsResponse) ProtoMessage() {}
 
 func (x *SearchShopsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_shop_type_proto_msgTypes[9]
+	mi := &file_shop_shop_type_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -588,7 +640,7 @@ func (x *SearchShopsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchShopsResponse.ProtoReflect.Descriptor instead.
 func (*SearchShopsResponse) Descriptor() ([]byte, []int) {
-	return file_shop_shop_type_proto_rawDescGZIP(), []int{9}
+	return file_shop_shop_type_proto_rawDescGZIP(), []int{10}
 }
 
 type GetShopDetailRequest struct {
@@ -599,7 +651,7 @@ type GetShopDetailRequest struct {
 
 func (x *GetShopDetailRequest) Reset() {
 	*x = GetShopDetailRequest{}
-	mi := &file_shop_shop_type_proto_msgTypes[10]
+	mi := &file_shop_shop_type_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -611,7 +663,7 @@ func (x *GetShopDetailRequest) String() string {
 func (*GetShopDetailRequest) ProtoMessage() {}
 
 func (x *GetShopDetailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_shop_type_proto_msgTypes[10]
+	mi := &file_shop_shop_type_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -624,7 +676,7 @@ func (x *GetShopDetailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetShopDetailRequest.ProtoReflect.Descriptor instead.
 func (*GetShopDetailRequest) Descriptor() ([]byte, []int) {
-	return file_shop_shop_type_proto_rawDescGZIP(), []int{10}
+	return file_shop_shop_type_proto_rawDescGZIP(), []int{11}
 }
 
 type GetShopDetailResponse struct {
@@ -635,7 +687,7 @@ type GetShopDetailResponse struct {
 
 func (x *GetShopDetailResponse) Reset() {
 	*x = GetShopDetailResponse{}
-	mi := &file_shop_shop_type_proto_msgTypes[11]
+	mi := &file_shop_shop_type_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -647,7 +699,7 @@ func (x *GetShopDetailResponse) String() string {
 func (*GetShopDetailResponse) ProtoMessage() {}
 
 func (x *GetShopDetailResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_shop_type_proto_msgTypes[11]
+	mi := &file_shop_shop_type_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -660,7 +712,7 @@ func (x *GetShopDetailResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetShopDetailResponse.ProtoReflect.Descriptor instead.
 func (*GetShopDetailResponse) Descriptor() ([]byte, []int) {
-	return file_shop_shop_type_proto_rawDescGZIP(), []int{11}
+	return file_shop_shop_type_proto_rawDescGZIP(), []int{12}
 }
 
 type GetMembersRequest struct {
@@ -671,7 +723,7 @@ type GetMembersRequest struct {
 
 func (x *GetMembersRequest) Reset() {
 	*x = GetMembersRequest{}
-	mi := &file_shop_shop_type_proto_msgTypes[12]
+	mi := &file_shop_shop_type_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -683,7 +735,7 @@ func (x *GetMembersRequest) String() string {
 func (*GetMembersRequest) ProtoMessage() {}
 
 func (x *GetMembersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_shop_type_proto_msgTypes[12]
+	mi := &file_shop_shop_type_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -696,7 +748,7 @@ func (x *GetMembersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMembersRequest.ProtoReflect.Descriptor instead.
 func (*GetMembersRequest) Descriptor() ([]byte, []int) {
-	return file_shop_shop_type_proto_rawDescGZIP(), []int{12}
+	return file_shop_shop_type_proto_rawDescGZIP(), []int{13}
 }
 
 type GetMembersResponse struct {
@@ -707,7 +759,7 @@ type GetMembersResponse struct {
 
 func (x *GetMembersResponse) Reset() {
 	*x = GetMembersResponse{}
-	mi := &file_shop_shop_type_proto_msgTypes[13]
+	mi := &file_shop_shop_type_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -719,7 +771,7 @@ func (x *GetMembersResponse) String() string {
 func (*GetMembersResponse) ProtoMessage() {}
 
 func (x *GetMembersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_shop_type_proto_msgTypes[13]
+	mi := &file_shop_shop_type_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -732,7 +784,7 @@ func (x *GetMembersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMembersResponse.ProtoReflect.Descriptor instead.
 func (*GetMembersResponse) Descriptor() ([]byte, []int) {
-	return file_shop_shop_type_proto_rawDescGZIP(), []int{13}
+	return file_shop_shop_type_proto_rawDescGZIP(), []int{14}
 }
 
 var File_shop_shop_type_proto protoreflect.FileDescriptor
@@ -774,12 +826,16 @@ const file_shop_shop_type_proto_rawDesc = "" +
 	" \x01(\tB\x15\xfaB\x12r\x10R\x06PickupR\x06ReturnR\x04type\"7\n" +
 	"\x16AddShopAddressResponse\x12\x1d\n" +
 	"\n" +
-	"address_id\x18\x01 \x01(\tR\taddressId\"\xad\x01\n" +
-	"\x18AssignMemberRolesRequest\x12 \n" +
-	"\ashop_id\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12$\n" +
+	"address_id\x18\x01 \x01(\tR\taddressId\"T\n" +
+	"\n" +
+	"MemberRole\x12$\n" +
 	"\tmember_id\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\bmemberId\x12 \n" +
 	"\x05roles\x18\x04 \x03(\tB\n" +
-	"\xfaB\a\x92\x01\x04\b\x01\x18\x01R\x05roles\x12'\n" +
+	"\xfaB\a\x92\x01\x04\b\x01\x18\x01R\x05roles\"\xc6\x01\n" +
+	"\x18AssignMemberRolesRequest\x12 \n" +
+	"\ashop_id\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12'\n" +
+	"\vadded_by_id\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\taddedById\x126\n" +
+	"\fmember_roles\x18\x04 \x03(\v2\x13.shop.v1.MemberRoleR\vmemberRoles\x12'\n" +
 	"\n" +
 	"permission\x18\x05 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\n" +
 	"permission\"5\n" +
@@ -804,7 +860,7 @@ func file_shop_shop_type_proto_rawDescGZIP() []byte {
 	return file_shop_shop_type_proto_rawDescData
 }
 
-var file_shop_shop_type_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_shop_shop_type_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_shop_shop_type_proto_goTypes = []any{
 	(*ShopProfileInfo)(nil),           // 0: shop.v1.ShopProfileInfo
 	(*CreateShopRequest)(nil),         // 1: shop.v1.CreateShopRequest
@@ -812,14 +868,15 @@ var file_shop_shop_type_proto_goTypes = []any{
 	(*LocationInfo)(nil),              // 3: shop.v1.LocationInfo
 	(*AddShopAddressRequest)(nil),     // 4: shop.v1.AddShopAddressRequest
 	(*AddShopAddressResponse)(nil),    // 5: shop.v1.AddShopAddressResponse
-	(*AssignMemberRolesRequest)(nil),  // 6: shop.v1.AssignMemberRolesRequest
-	(*AssignMemberRolesResponse)(nil), // 7: shop.v1.AssignMemberRolesResponse
-	(*SearchShopsRequest)(nil),        // 8: shop.v1.SearchShopsRequest
-	(*SearchShopsResponse)(nil),       // 9: shop.v1.SearchShopsResponse
-	(*GetShopDetailRequest)(nil),      // 10: shop.v1.GetShopDetailRequest
-	(*GetShopDetailResponse)(nil),     // 11: shop.v1.GetShopDetailResponse
-	(*GetMembersRequest)(nil),         // 12: shop.v1.GetMembersRequest
-	(*GetMembersResponse)(nil),        // 13: shop.v1.GetMembersResponse
+	(*MemberRole)(nil),                // 6: shop.v1.MemberRole
+	(*AssignMemberRolesRequest)(nil),  // 7: shop.v1.AssignMemberRolesRequest
+	(*AssignMemberRolesResponse)(nil), // 8: shop.v1.AssignMemberRolesResponse
+	(*SearchShopsRequest)(nil),        // 9: shop.v1.SearchShopsRequest
+	(*SearchShopsResponse)(nil),       // 10: shop.v1.SearchShopsResponse
+	(*GetShopDetailRequest)(nil),      // 11: shop.v1.GetShopDetailRequest
+	(*GetShopDetailResponse)(nil),     // 12: shop.v1.GetShopDetailResponse
+	(*GetMembersRequest)(nil),         // 13: shop.v1.GetMembersRequest
+	(*GetMembersResponse)(nil),        // 14: shop.v1.GetMembersResponse
 }
 var file_shop_shop_type_proto_depIdxs = []int32{
 	0, // 0: shop.v1.CreateShopRequest.profile:type_name -> shop.v1.ShopProfileInfo
@@ -827,11 +884,12 @@ var file_shop_shop_type_proto_depIdxs = []int32{
 	3, // 2: shop.v1.AddShopAddressRequest.city:type_name -> shop.v1.LocationInfo
 	3, // 3: shop.v1.AddShopAddressRequest.district:type_name -> shop.v1.LocationInfo
 	3, // 4: shop.v1.AddShopAddressRequest.ward:type_name -> shop.v1.LocationInfo
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	6, // 5: shop.v1.AssignMemberRolesRequest.member_roles:type_name -> shop.v1.MemberRole
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_shop_shop_type_proto_init() }
@@ -847,7 +905,7 @@ func file_shop_shop_type_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_shop_shop_type_proto_rawDesc), len(file_shop_shop_type_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
