@@ -14,8 +14,7 @@ message ShopProfileInfo {
 }
 
 message CreateShopRequest {
-  string user_id = 1 [(validate.rules).string.min_len = 1];
-  string name    = 2 [(validate.rules).string.min_len = 1];
+  string name = 2 [(validate.rules).string.min_len = 1];
   string slug = 3 [(validate.rules).string = {
     pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$",
     min_len: 1,
@@ -53,17 +52,21 @@ message AddShopAddressResponse {
   string address_id = 1;
 }
 
-message MemberRole {
-  string         member_id = 3 [(validate.rules).string.min_len = 1];
-  repeated int32 role_ids  = 4 [(validate.rules).repeated = {min_items: 1, unique: true}];
+message Role {
+  int32 id = 1;
 }
 
-message AssignMemberRolesRequest {
-  string shop_id     = 2 [(validate.rules).string.min_len = 1];
-  string added_by_id = 3 [(validate.rules).string.min_len = 1];
+message Member  {
+  string        id    = 1 [(validate.rules).string.min_len = 1];
+  string        name  = 2 [(validate.rules).string.min_len = 1];
+  repeated Role roles = 3  [(validate.rules).repeated.min_items = 1];
+}
 
-  repeated MemberRole member_roles = 4;
-  string              permission   = 5 [(validate.rules).string.min_len = 1];
+message AssignMemberRolesRequest  {
+  string shop_id = 1;
+
+  repeated Member member_roles = 2 [(validate.rules).repeated.min_items = 1];
+  string          permission   = 3[(validate.rules).string.min_len = 1];
 }
 
 message AssignMemberRolesResponse {

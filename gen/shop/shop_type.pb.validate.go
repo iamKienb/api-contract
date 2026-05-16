@@ -169,17 +169,6 @@ func (m *CreateShopRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetUserId()) < 1 {
-		err := CreateShopRequestValidationError{
-			field:  "UserId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
 	if utf8.RuneCountInString(m.GetName()) < 1 {
 		err := CreateShopRequestValidationError{
 			field:  "Name",
@@ -992,84 +981,42 @@ var _ interface {
 	ErrorName() string
 } = AddShopAddressResponseValidationError{}
 
-// Validate checks the field values on MemberRole with the rules defined in the
-// proto definition for this message. If any rules are violated, the first
-// error encountered is returned, or nil if there are no violations.
-func (m *MemberRole) Validate() error {
+// Validate checks the field values on Role with the rules defined in the proto
+// definition for this message. If any rules are violated, the first error
+// encountered is returned, or nil if there are no violations.
+func (m *Role) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on MemberRole with the rules defined in
-// the proto definition for this message. If any rules are violated, the
-// result is a list of violation errors wrapped in MemberRoleMultiError, or
-// nil if none found.
-func (m *MemberRole) ValidateAll() error {
+// ValidateAll checks the field values on Role with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in RoleMultiError, or nil if none found.
+func (m *Role) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *MemberRole) validate(all bool) error {
+func (m *Role) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetMemberId()) < 1 {
-		err := MemberRoleValidationError{
-			field:  "MemberId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if len(m.GetRoleIds()) < 1 {
-		err := MemberRoleValidationError{
-			field:  "RoleIds",
-			reason: "value must contain at least 1 item(s)",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	_MemberRole_RoleIds_Unique := make(map[int32]struct{}, len(m.GetRoleIds()))
-
-	for idx, item := range m.GetRoleIds() {
-		_, _ = idx, item
-
-		if _, exists := _MemberRole_RoleIds_Unique[item]; exists {
-			err := MemberRoleValidationError{
-				field:  fmt.Sprintf("RoleIds[%v]", idx),
-				reason: "repeated value must contain unique items",
-			}
-			if !all {
-				return err
-			}
-			errors = append(errors, err)
-		} else {
-			_MemberRole_RoleIds_Unique[item] = struct{}{}
-		}
-
-		// no validation rules for RoleIds[idx]
-	}
+	// no validation rules for Id
 
 	if len(errors) > 0 {
-		return MemberRoleMultiError(errors)
+		return RoleMultiError(errors)
 	}
 
 	return nil
 }
 
-// MemberRoleMultiError is an error wrapping multiple validation errors
-// returned by MemberRole.ValidateAll() if the designated constraints aren't met.
-type MemberRoleMultiError []error
+// RoleMultiError is an error wrapping multiple validation errors returned by
+// Role.ValidateAll() if the designated constraints aren't met.
+type RoleMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m MemberRoleMultiError) Error() string {
+func (m RoleMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1078,11 +1025,11 @@ func (m MemberRoleMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m MemberRoleMultiError) AllErrors() []error { return m }
+func (m RoleMultiError) AllErrors() []error { return m }
 
-// MemberRoleValidationError is the validation error returned by
-// MemberRole.Validate if the designated constraints aren't met.
-type MemberRoleValidationError struct {
+// RoleValidationError is the validation error returned by Role.Validate if the
+// designated constraints aren't met.
+type RoleValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1090,22 +1037,22 @@ type MemberRoleValidationError struct {
 }
 
 // Field function returns field value.
-func (e MemberRoleValidationError) Field() string { return e.field }
+func (e RoleValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e MemberRoleValidationError) Reason() string { return e.reason }
+func (e RoleValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e MemberRoleValidationError) Cause() error { return e.cause }
+func (e RoleValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e MemberRoleValidationError) Key() bool { return e.key }
+func (e RoleValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e MemberRoleValidationError) ErrorName() string { return "MemberRoleValidationError" }
+func (e RoleValidationError) ErrorName() string { return "RoleValidationError" }
 
 // Error satisfies the builtin error interface
-func (e MemberRoleValidationError) Error() string {
+func (e RoleValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1117,14 +1064,14 @@ func (e MemberRoleValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sMemberRole.%s: %s%s",
+		"invalid %sRole.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = MemberRoleValidationError{}
+var _ error = RoleValidationError{}
 
 var _ interface {
 	Field() string
@@ -1132,7 +1079,172 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = MemberRoleValidationError{}
+} = RoleValidationError{}
+
+// Validate checks the field values on Member with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Member) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Member with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in MemberMultiError, or nil if none found.
+func (m *Member) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Member) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetId()) < 1 {
+		err := MemberValidationError{
+			field:  "Id",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetName()) < 1 {
+		err := MemberValidationError{
+			field:  "Name",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(m.GetRoles()) < 1 {
+		err := MemberValidationError{
+			field:  "Roles",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	for idx, item := range m.GetRoles() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, MemberValidationError{
+						field:  fmt.Sprintf("Roles[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, MemberValidationError{
+						field:  fmt.Sprintf("Roles[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return MemberValidationError{
+					field:  fmt.Sprintf("Roles[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return MemberMultiError(errors)
+	}
+
+	return nil
+}
+
+// MemberMultiError is an error wrapping multiple validation errors returned by
+// Member.ValidateAll() if the designated constraints aren't met.
+type MemberMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m MemberMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m MemberMultiError) AllErrors() []error { return m }
+
+// MemberValidationError is the validation error returned by Member.Validate if
+// the designated constraints aren't met.
+type MemberValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e MemberValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e MemberValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e MemberValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e MemberValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e MemberValidationError) ErrorName() string { return "MemberValidationError" }
+
+// Error satisfies the builtin error interface
+func (e MemberValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sMember.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = MemberValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = MemberValidationError{}
 
 // Validate checks the field values on AssignMemberRolesRequest with the rules
 // defined in the proto definition for this message. If any rules are
@@ -1156,21 +1268,12 @@ func (m *AssignMemberRolesRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetShopId()) < 1 {
-		err := AssignMemberRolesRequestValidationError{
-			field:  "ShopId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for ShopId
 
-	if utf8.RuneCountInString(m.GetAddedById()) < 1 {
+	if len(m.GetMemberRoles()) < 1 {
 		err := AssignMemberRolesRequestValidationError{
-			field:  "AddedById",
-			reason: "value length must be at least 1 runes",
+			field:  "MemberRoles",
+			reason: "value must contain at least 1 item(s)",
 		}
 		if !all {
 			return err
