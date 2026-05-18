@@ -10,4 +10,8 @@ service ShopCommandService {
   rpc CreateShop(CreateShopRequest) returns (CreateShopResponse);
   rpc AddShopAddress(AddShopAddressRequest) returns (AddShopAddressResponse);
   rpc AssignMemberRoles(AssignMemberRolesRequest) returns (AssignMemberRolesResponse);
+
+  // internal call
+  rpc VerifyPermission(VerifyPermissionRequest) returns (VerifyPermissionResponse);
+
 }

@@ -65,11 +65,22 @@ message Member  {
 message AssignMemberRolesRequest  {
   string          shop_id      = 1;
   repeated Member member_roles = 2 [(validate.rules).repeated.min_items = 1];
-  string          permission   = 3[(validate.rules).string.min_len = 1];
+  string          action       = 3[(validate.rules).string.min_len = 1];
 }
 
 message AssignMemberRolesResponse {
   bool success = 1;
+}
+
+message VerifyPermissionRequest  {
+  string shop_id = 1;
+  string user_id = 2;
+  string action  = 3;
+}
+
+message VerifyPermissionResponse {
+  bool   is_allowed    = 1;
+  string error_message = 2;
 }
 
 message SearchShopsRequest {

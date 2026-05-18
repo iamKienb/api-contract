@@ -24,30 +24,35 @@ var File_shop_shop_command_proto protoreflect.FileDescriptor
 
 const file_shop_shop_command_proto_rawDesc = "" +
 	"\n" +
-	"\x17shop/shop_command.proto\x12\ashop.v1\x1a\x14shop/shop_type.proto2\x8a\x02\n" +
+	"\x17shop/shop_command.proto\x12\ashop.v1\x1a\x14shop/shop_type.proto2\xe3\x02\n" +
 	"\x12ShopCommandService\x12E\n" +
 	"\n" +
 	"CreateShop\x12\x1a.shop.v1.CreateShopRequest\x1a\x1b.shop.v1.CreateShopResponse\x12Q\n" +
 	"\x0eAddShopAddress\x12\x1e.shop.v1.AddShopAddressRequest\x1a\x1f.shop.v1.AddShopAddressResponse\x12Z\n" +
-	"\x11AssignMemberRoles\x12!.shop.v1.AssignMemberRolesRequest\x1a\".shop.v1.AssignMemberRolesResponseB+Z)github.com/iamKienb/api-contract/gen/shopb\x06proto3"
+	"\x11AssignMemberRoles\x12!.shop.v1.AssignMemberRolesRequest\x1a\".shop.v1.AssignMemberRolesResponse\x12W\n" +
+	"\x10VerifyPermission\x12 .shop.v1.VerifyPermissionRequest\x1a!.shop.v1.VerifyPermissionResponseB+Z)github.com/iamKienb/api-contract/gen/shopb\x06proto3"
 
 var file_shop_shop_command_proto_goTypes = []any{
 	(*CreateShopRequest)(nil),         // 0: shop.v1.CreateShopRequest
 	(*AddShopAddressRequest)(nil),     // 1: shop.v1.AddShopAddressRequest
 	(*AssignMemberRolesRequest)(nil),  // 2: shop.v1.AssignMemberRolesRequest
-	(*CreateShopResponse)(nil),        // 3: shop.v1.CreateShopResponse
-	(*AddShopAddressResponse)(nil),    // 4: shop.v1.AddShopAddressResponse
-	(*AssignMemberRolesResponse)(nil), // 5: shop.v1.AssignMemberRolesResponse
+	(*VerifyPermissionRequest)(nil),   // 3: shop.v1.VerifyPermissionRequest
+	(*CreateShopResponse)(nil),        // 4: shop.v1.CreateShopResponse
+	(*AddShopAddressResponse)(nil),    // 5: shop.v1.AddShopAddressResponse
+	(*AssignMemberRolesResponse)(nil), // 6: shop.v1.AssignMemberRolesResponse
+	(*VerifyPermissionResponse)(nil),  // 7: shop.v1.VerifyPermissionResponse
 }
 var file_shop_shop_command_proto_depIdxs = []int32{
 	0, // 0: shop.v1.ShopCommandService.CreateShop:input_type -> shop.v1.CreateShopRequest
 	1, // 1: shop.v1.ShopCommandService.AddShopAddress:input_type -> shop.v1.AddShopAddressRequest
 	2, // 2: shop.v1.ShopCommandService.AssignMemberRoles:input_type -> shop.v1.AssignMemberRolesRequest
-	3, // 3: shop.v1.ShopCommandService.CreateShop:output_type -> shop.v1.CreateShopResponse
-	4, // 4: shop.v1.ShopCommandService.AddShopAddress:output_type -> shop.v1.AddShopAddressResponse
-	5, // 5: shop.v1.ShopCommandService.AssignMemberRoles:output_type -> shop.v1.AssignMemberRolesResponse
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
+	3, // 3: shop.v1.ShopCommandService.VerifyPermission:input_type -> shop.v1.VerifyPermissionRequest
+	4, // 4: shop.v1.ShopCommandService.CreateShop:output_type -> shop.v1.CreateShopResponse
+	5, // 5: shop.v1.ShopCommandService.AddShopAddress:output_type -> shop.v1.AddShopAddressResponse
+	6, // 6: shop.v1.ShopCommandService.AssignMemberRoles:output_type -> shop.v1.AssignMemberRolesResponse
+	7, // 7: shop.v1.ShopCommandService.VerifyPermission:output_type -> shop.v1.VerifyPermissionResponse
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
