@@ -6,11 +6,8 @@ package shopconnect
 
 import (
 	connect "connectrpc.com/connect"
-	context "context"
-	errors "errors"
-	shop "github.com/iamKienb/api-contract/gen/shop"
+	_ "github.com/iamKienb/api-contract/gen/shop"
 	http "net/http"
-	strings "strings"
 )
 
 // This is a compile-time assertion to ensure that this generated file and the connect package are
@@ -25,23 +22,8 @@ const (
 	ShopQueryServiceName = "shop.v1.ShopQueryService"
 )
 
-// These constants are the fully-qualified names of the RPCs defined in this package. They're
-// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
-//
-// Note that these are different from the fully-qualified method names used by
-// google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
-// reflection-formatted method names, remove the leading slash and convert the remaining slash to a
-// period.
-const (
-	// ShopQueryServiceCheckPermissionProcedure is the fully-qualified name of the ShopQueryService's
-	// CheckPermission RPC.
-	ShopQueryServiceCheckPermissionProcedure = "/shop.v1.ShopQueryService/CheckPermission"
-)
-
 // ShopQueryServiceClient is a client for the shop.v1.ShopQueryService service.
 type ShopQueryServiceClient interface {
-	// Internal Service Call
-	CheckPermission(context.Context, *connect.Request[shop.CheckPermissionRequest]) (*connect.Response[shop.CheckPermissionResponse], error)
 }
 
 // NewShopQueryServiceClient constructs a client for the shop.v1.ShopQueryService service. By
@@ -52,32 +34,15 @@ type ShopQueryServiceClient interface {
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
 func NewShopQueryServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ShopQueryServiceClient {
-	baseURL = strings.TrimRight(baseURL, "/")
-	shopQueryServiceMethods := shop.File_shop_shop_query_proto.Services().ByName("ShopQueryService").Methods()
-	return &shopQueryServiceClient{
-		checkPermission: connect.NewClient[shop.CheckPermissionRequest, shop.CheckPermissionResponse](
-			httpClient,
-			baseURL+ShopQueryServiceCheckPermissionProcedure,
-			connect.WithSchema(shopQueryServiceMethods.ByName("CheckPermission")),
-			connect.WithClientOptions(opts...),
-		),
-	}
+	return &shopQueryServiceClient{}
 }
 
 // shopQueryServiceClient implements ShopQueryServiceClient.
 type shopQueryServiceClient struct {
-	checkPermission *connect.Client[shop.CheckPermissionRequest, shop.CheckPermissionResponse]
-}
-
-// CheckPermission calls shop.v1.ShopQueryService.CheckPermission.
-func (c *shopQueryServiceClient) CheckPermission(ctx context.Context, req *connect.Request[shop.CheckPermissionRequest]) (*connect.Response[shop.CheckPermissionResponse], error) {
-	return c.checkPermission.CallUnary(ctx, req)
 }
 
 // ShopQueryServiceHandler is an implementation of the shop.v1.ShopQueryService service.
 type ShopQueryServiceHandler interface {
-	// Internal Service Call
-	CheckPermission(context.Context, *connect.Request[shop.CheckPermissionRequest]) (*connect.Response[shop.CheckPermissionResponse], error)
 }
 
 // NewShopQueryServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -86,17 +51,8 @@ type ShopQueryServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewShopQueryServiceHandler(svc ShopQueryServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	shopQueryServiceMethods := shop.File_shop_shop_query_proto.Services().ByName("ShopQueryService").Methods()
-	shopQueryServiceCheckPermissionHandler := connect.NewUnaryHandler(
-		ShopQueryServiceCheckPermissionProcedure,
-		svc.CheckPermission,
-		connect.WithSchema(shopQueryServiceMethods.ByName("CheckPermission")),
-		connect.WithHandlerOptions(opts...),
-	)
 	return "/shop.v1.ShopQueryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case ShopQueryServiceCheckPermissionProcedure:
-			shopQueryServiceCheckPermissionHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -105,7 +61,3 @@ func NewShopQueryServiceHandler(svc ShopQueryServiceHandler, opts ...connect.Han
 
 // UnimplementedShopQueryServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedShopQueryServiceHandler struct{}
-
-func (UnimplementedShopQueryServiceHandler) CheckPermission(context.Context, *connect.Request[shop.CheckPermissionRequest]) (*connect.Response[shop.CheckPermissionResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopQueryService.CheckPermission is not implemented"))
-}

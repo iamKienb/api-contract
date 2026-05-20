@@ -24,19 +24,13 @@ var File_shop_shop_query_proto protoreflect.FileDescriptor
 
 const file_shop_shop_query_proto_rawDesc = "" +
 	"\n" +
-	"\x15shop/shop_query.proto\x12\ashop.v1\x1a\x14shop/shop_type.proto2h\n" +
-	"\x10ShopQueryService\x12T\n" +
-	"\x0fCheckPermission\x12\x1f.shop.v1.CheckPermissionRequest\x1a .shop.v1.CheckPermissionResponseB+Z)github.com/iamKienb/api-contract/gen/shopb\x06proto3"
+	"\x15shop/shop_query.proto\x12\ashop.v1\x1a\x14shop/shop_type.proto2\x12\n" +
+	"\x10ShopQueryServiceB+Z)github.com/iamKienb/api-contract/gen/shopb\x06proto3"
 
-var file_shop_shop_query_proto_goTypes = []any{
-	(*CheckPermissionRequest)(nil),  // 0: shop.v1.CheckPermissionRequest
-	(*CheckPermissionResponse)(nil), // 1: shop.v1.CheckPermissionResponse
-}
+var file_shop_shop_query_proto_goTypes = []any{}
 var file_shop_shop_query_proto_depIdxs = []int32{
-	0, // 0: shop.v1.ShopQueryService.CheckPermission:input_type -> shop.v1.CheckPermissionRequest
-	1, // 1: shop.v1.ShopQueryService.CheckPermission:output_type -> shop.v1.CheckPermissionResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	0, // [0:0] is the sub-list for method output_type
+	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

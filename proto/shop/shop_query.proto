@@ -6,6 +6,5 @@ import "shop/shop_type.proto";
 option go_package = "github.com/iamKienb/api-contract/gen/shop";
 
 service ShopQueryService {
-// Internal Service Call
-  rpc CheckPermission (CheckPermissionRequest) returns (CheckPermissionResponse);
+
 }

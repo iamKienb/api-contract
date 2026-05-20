@@ -42,6 +42,9 @@ const (
 	// ShopCommandServiceAssignMemberRolesProcedure is the fully-qualified name of the
 	// ShopCommandService's AssignMemberRoles RPC.
 	ShopCommandServiceAssignMemberRolesProcedure = "/shop.v1.ShopCommandService/AssignMemberRoles"
+	// ShopCommandServiceCheckPermissionProcedure is the fully-qualified name of the
+	// ShopCommandService's CheckPermission RPC.
+	ShopCommandServiceCheckPermissionProcedure = "/shop.v1.ShopCommandService/CheckPermission"
 )
 
 // ShopCommandServiceClient is a client for the shop.v1.ShopCommandService service.
@@ -50,6 +53,8 @@ type ShopCommandServiceClient interface {
 	CreateShop(context.Context, *connect.Request[shop.CreateShopRequest]) (*connect.Response[shop.CreateShopResponse], error)
 	AddShopAddress(context.Context, *connect.Request[shop.AddShopAddressRequest]) (*connect.Response[shop.AddShopAddressResponse], error)
 	AssignMemberRoles(context.Context, *connect.Request[shop.AssignMemberRolesRequest]) (*connect.Response[shop.AssignMemberRolesResponse], error)
+	// Internal Service Call
+	CheckPermission(context.Context, *connect.Request[shop.CheckPermissionRequest]) (*connect.Response[shop.CheckPermissionResponse], error)
 }
 
 // NewShopCommandServiceClient constructs a client for the shop.v1.ShopCommandService service. By
@@ -81,6 +86,12 @@ func NewShopCommandServiceClient(httpClient connect.HTTPClient, baseURL string, 
 			connect.WithSchema(shopCommandServiceMethods.ByName("AssignMemberRoles")),
 			connect.WithClientOptions(opts...),
 		),
+		checkPermission: connect.NewClient[shop.CheckPermissionRequest, shop.CheckPermissionResponse](
+			httpClient,
+			baseURL+ShopCommandServiceCheckPermissionProcedure,
+			connect.WithSchema(shopCommandServiceMethods.ByName("CheckPermission")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -89,6 +100,7 @@ type shopCommandServiceClient struct {
 	createShop        *connect.Client[shop.CreateShopRequest, shop.CreateShopResponse]
 	addShopAddress    *connect.Client[shop.AddShopAddressRequest, shop.AddShopAddressResponse]
 	assignMemberRoles *connect.Client[shop.AssignMemberRolesRequest, shop.AssignMemberRolesResponse]
+	checkPermission   *connect.Client[shop.CheckPermissionRequest, shop.CheckPermissionResponse]
 }
 
 // CreateShop calls shop.v1.ShopCommandService.CreateShop.
@@ -106,12 +118,19 @@ func (c *shopCommandServiceClient) AssignMemberRoles(ctx context.Context, req *c
 	return c.assignMemberRoles.CallUnary(ctx, req)
 }
 
+// CheckPermission calls shop.v1.ShopCommandService.CheckPermission.
+func (c *shopCommandServiceClient) CheckPermission(ctx context.Context, req *connect.Request[shop.CheckPermissionRequest]) (*connect.Response[shop.CheckPermissionResponse], error) {
+	return c.checkPermission.CallUnary(ctx, req)
+}
+
 // ShopCommandServiceHandler is an implementation of the shop.v1.ShopCommandService service.
 type ShopCommandServiceHandler interface {
 	// Public Commands
 	CreateShop(context.Context, *connect.Request[shop.CreateShopRequest]) (*connect.Response[shop.CreateShopResponse], error)
 	AddShopAddress(context.Context, *connect.Request[shop.AddShopAddressRequest]) (*connect.Response[shop.AddShopAddressResponse], error)
 	AssignMemberRoles(context.Context, *connect.Request[shop.AssignMemberRolesRequest]) (*connect.Response[shop.AssignMemberRolesResponse], error)
+	// Internal Service Call
+	CheckPermission(context.Context, *connect.Request[shop.CheckPermissionRequest]) (*connect.Response[shop.CheckPermissionResponse], error)
 }
 
 // NewShopCommandServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -139,6 +158,12 @@ func NewShopCommandServiceHandler(svc ShopCommandServiceHandler, opts ...connect
 		connect.WithSchema(shopCommandServiceMethods.ByName("AssignMemberRoles")),
 		connect.WithHandlerOptions(opts...),
 	)
+	shopCommandServiceCheckPermissionHandler := connect.NewUnaryHandler(
+		ShopCommandServiceCheckPermissionProcedure,
+		svc.CheckPermission,
+		connect.WithSchema(shopCommandServiceMethods.ByName("CheckPermission")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/shop.v1.ShopCommandService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ShopCommandServiceCreateShopProcedure:
@@ -147,6 +172,8 @@ func NewShopCommandServiceHandler(svc ShopCommandServiceHandler, opts ...connect
 			shopCommandServiceAddShopAddressHandler.ServeHTTP(w, r)
 		case ShopCommandServiceAssignMemberRolesProcedure:
 			shopCommandServiceAssignMemberRolesHandler.ServeHTTP(w, r)
+		case ShopCommandServiceCheckPermissionProcedure:
+			shopCommandServiceCheckPermissionHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -166,4 +193,8 @@ func (UnimplementedShopCommandServiceHandler) AddShopAddress(context.Context, *c
 
 func (UnimplementedShopCommandServiceHandler) AssignMemberRoles(context.Context, *connect.Request[shop.AssignMemberRolesRequest]) (*connect.Response[shop.AssignMemberRolesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopCommandService.AssignMemberRoles is not implemented"))
+}
+
+func (UnimplementedShopCommandServiceHandler) CheckPermission(context.Context, *connect.Request[shop.CheckPermissionRequest]) (*connect.Response[shop.CheckPermissionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopCommandService.CheckPermission is not implemented"))
 }
