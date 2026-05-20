@@ -33,15 +33,15 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// ShopQueryServiceIsAuthorizedProcedure is the fully-qualified name of the ShopQueryService's
-	// IsAuthorized RPC.
-	ShopQueryServiceIsAuthorizedProcedure = "/shop.v1.ShopQueryService/IsAuthorized"
+	// ShopQueryServiceCheckPermissionProcedure is the fully-qualified name of the ShopQueryService's
+	// CheckPermission RPC.
+	ShopQueryServiceCheckPermissionProcedure = "/shop.v1.ShopQueryService/CheckPermission"
 )
 
 // ShopQueryServiceClient is a client for the shop.v1.ShopQueryService service.
 type ShopQueryServiceClient interface {
 	// Internal Service Call
-	IsAuthorized(context.Context, *connect.Request[shop.IsAuthorizedRequest]) (*connect.Response[shop.IsAuthorizedResponse], error)
+	CheckPermission(context.Context, *connect.Request[shop.CheckPermissionRequest]) (*connect.Response[shop.CheckPermissionResponse], error)
 }
 
 // NewShopQueryServiceClient constructs a client for the shop.v1.ShopQueryService service. By
@@ -55,10 +55,10 @@ func NewShopQueryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 	baseURL = strings.TrimRight(baseURL, "/")
 	shopQueryServiceMethods := shop.File_shop_shop_query_proto.Services().ByName("ShopQueryService").Methods()
 	return &shopQueryServiceClient{
-		isAuthorized: connect.NewClient[shop.IsAuthorizedRequest, shop.IsAuthorizedResponse](
+		checkPermission: connect.NewClient[shop.CheckPermissionRequest, shop.CheckPermissionResponse](
 			httpClient,
-			baseURL+ShopQueryServiceIsAuthorizedProcedure,
-			connect.WithSchema(shopQueryServiceMethods.ByName("IsAuthorized")),
+			baseURL+ShopQueryServiceCheckPermissionProcedure,
+			connect.WithSchema(shopQueryServiceMethods.ByName("CheckPermission")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -66,18 +66,18 @@ func NewShopQueryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 
 // shopQueryServiceClient implements ShopQueryServiceClient.
 type shopQueryServiceClient struct {
-	isAuthorized *connect.Client[shop.IsAuthorizedRequest, shop.IsAuthorizedResponse]
+	checkPermission *connect.Client[shop.CheckPermissionRequest, shop.CheckPermissionResponse]
 }
 
-// IsAuthorized calls shop.v1.ShopQueryService.IsAuthorized.
-func (c *shopQueryServiceClient) IsAuthorized(ctx context.Context, req *connect.Request[shop.IsAuthorizedRequest]) (*connect.Response[shop.IsAuthorizedResponse], error) {
-	return c.isAuthorized.CallUnary(ctx, req)
+// CheckPermission calls shop.v1.ShopQueryService.CheckPermission.
+func (c *shopQueryServiceClient) CheckPermission(ctx context.Context, req *connect.Request[shop.CheckPermissionRequest]) (*connect.Response[shop.CheckPermissionResponse], error) {
+	return c.checkPermission.CallUnary(ctx, req)
 }
 
 // ShopQueryServiceHandler is an implementation of the shop.v1.ShopQueryService service.
 type ShopQueryServiceHandler interface {
 	// Internal Service Call
-	IsAuthorized(context.Context, *connect.Request[shop.IsAuthorizedRequest]) (*connect.Response[shop.IsAuthorizedResponse], error)
+	CheckPermission(context.Context, *connect.Request[shop.CheckPermissionRequest]) (*connect.Response[shop.CheckPermissionResponse], error)
 }
 
 // NewShopQueryServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -87,16 +87,16 @@ type ShopQueryServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewShopQueryServiceHandler(svc ShopQueryServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	shopQueryServiceMethods := shop.File_shop_shop_query_proto.Services().ByName("ShopQueryService").Methods()
-	shopQueryServiceIsAuthorizedHandler := connect.NewUnaryHandler(
-		ShopQueryServiceIsAuthorizedProcedure,
-		svc.IsAuthorized,
-		connect.WithSchema(shopQueryServiceMethods.ByName("IsAuthorized")),
+	shopQueryServiceCheckPermissionHandler := connect.NewUnaryHandler(
+		ShopQueryServiceCheckPermissionProcedure,
+		svc.CheckPermission,
+		connect.WithSchema(shopQueryServiceMethods.ByName("CheckPermission")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/shop.v1.ShopQueryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case ShopQueryServiceIsAuthorizedProcedure:
-			shopQueryServiceIsAuthorizedHandler.ServeHTTP(w, r)
+		case ShopQueryServiceCheckPermissionProcedure:
+			shopQueryServiceCheckPermissionHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -106,6 +106,6 @@ func NewShopQueryServiceHandler(svc ShopQueryServiceHandler, opts ...connect.Han
 // UnimplementedShopQueryServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedShopQueryServiceHandler struct{}
 
-func (UnimplementedShopQueryServiceHandler) IsAuthorized(context.Context, *connect.Request[shop.IsAuthorizedRequest]) (*connect.Response[shop.IsAuthorizedResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopQueryService.IsAuthorized is not implemented"))
+func (UnimplementedShopQueryServiceHandler) CheckPermission(context.Context, *connect.Request[shop.CheckPermissionRequest]) (*connect.Response[shop.CheckPermissionResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopQueryService.CheckPermission is not implemented"))
 }

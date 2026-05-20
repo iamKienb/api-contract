@@ -1510,22 +1510,22 @@ var _ interface {
 	ErrorName() string
 } = AssignMemberRolesResponseValidationError{}
 
-// Validate checks the field values on IsAuthorizedRequest with the rules
+// Validate checks the field values on CheckPermissionRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *IsAuthorizedRequest) Validate() error {
+func (m *CheckPermissionRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on IsAuthorizedRequest with the rules
+// ValidateAll checks the field values on CheckPermissionRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// IsAuthorizedRequestMultiError, or nil if none found.
-func (m *IsAuthorizedRequest) ValidateAll() error {
+// CheckPermissionRequestMultiError, or nil if none found.
+func (m *CheckPermissionRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *IsAuthorizedRequest) validate(all bool) error {
+func (m *CheckPermissionRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1539,19 +1539,19 @@ func (m *IsAuthorizedRequest) validate(all bool) error {
 	// no validation rules for Action
 
 	if len(errors) > 0 {
-		return IsAuthorizedRequestMultiError(errors)
+		return CheckPermissionRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// IsAuthorizedRequestMultiError is an error wrapping multiple validation
-// errors returned by IsAuthorizedRequest.ValidateAll() if the designated
+// CheckPermissionRequestMultiError is an error wrapping multiple validation
+// errors returned by CheckPermissionRequest.ValidateAll() if the designated
 // constraints aren't met.
-type IsAuthorizedRequestMultiError []error
+type CheckPermissionRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m IsAuthorizedRequestMultiError) Error() string {
+func (m CheckPermissionRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1560,11 +1560,11 @@ func (m IsAuthorizedRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m IsAuthorizedRequestMultiError) AllErrors() []error { return m }
+func (m CheckPermissionRequestMultiError) AllErrors() []error { return m }
 
-// IsAuthorizedRequestValidationError is the validation error returned by
-// IsAuthorizedRequest.Validate if the designated constraints aren't met.
-type IsAuthorizedRequestValidationError struct {
+// CheckPermissionRequestValidationError is the validation error returned by
+// CheckPermissionRequest.Validate if the designated constraints aren't met.
+type CheckPermissionRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1572,24 +1572,24 @@ type IsAuthorizedRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e IsAuthorizedRequestValidationError) Field() string { return e.field }
+func (e CheckPermissionRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e IsAuthorizedRequestValidationError) Reason() string { return e.reason }
+func (e CheckPermissionRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e IsAuthorizedRequestValidationError) Cause() error { return e.cause }
+func (e CheckPermissionRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e IsAuthorizedRequestValidationError) Key() bool { return e.key }
+func (e CheckPermissionRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e IsAuthorizedRequestValidationError) ErrorName() string {
-	return "IsAuthorizedRequestValidationError"
+func (e CheckPermissionRequestValidationError) ErrorName() string {
+	return "CheckPermissionRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e IsAuthorizedRequestValidationError) Error() string {
+func (e CheckPermissionRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1601,14 +1601,14 @@ func (e IsAuthorizedRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sIsAuthorizedRequest.%s: %s%s",
+		"invalid %sCheckPermissionRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = IsAuthorizedRequestValidationError{}
+var _ error = CheckPermissionRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1616,48 +1616,48 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = IsAuthorizedRequestValidationError{}
+} = CheckPermissionRequestValidationError{}
 
-// Validate checks the field values on IsAuthorizedResponse with the rules
+// Validate checks the field values on CheckPermissionResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *IsAuthorizedResponse) Validate() error {
+func (m *CheckPermissionResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on IsAuthorizedResponse with the rules
-// defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on CheckPermissionResponse with the
+// rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// IsAuthorizedResponseMultiError, or nil if none found.
-func (m *IsAuthorizedResponse) ValidateAll() error {
+// CheckPermissionResponseMultiError, or nil if none found.
+func (m *CheckPermissionResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *IsAuthorizedResponse) validate(all bool) error {
+func (m *CheckPermissionResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for Allowed
+	// no validation rules for IsAllowed
 
 	// no validation rules for Message
 
 	if len(errors) > 0 {
-		return IsAuthorizedResponseMultiError(errors)
+		return CheckPermissionResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// IsAuthorizedResponseMultiError is an error wrapping multiple validation
-// errors returned by IsAuthorizedResponse.ValidateAll() if the designated
+// CheckPermissionResponseMultiError is an error wrapping multiple validation
+// errors returned by CheckPermissionResponse.ValidateAll() if the designated
 // constraints aren't met.
-type IsAuthorizedResponseMultiError []error
+type CheckPermissionResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m IsAuthorizedResponseMultiError) Error() string {
+func (m CheckPermissionResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1666,11 +1666,11 @@ func (m IsAuthorizedResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m IsAuthorizedResponseMultiError) AllErrors() []error { return m }
+func (m CheckPermissionResponseMultiError) AllErrors() []error { return m }
 
-// IsAuthorizedResponseValidationError is the validation error returned by
-// IsAuthorizedResponse.Validate if the designated constraints aren't met.
-type IsAuthorizedResponseValidationError struct {
+// CheckPermissionResponseValidationError is the validation error returned by
+// CheckPermissionResponse.Validate if the designated constraints aren't met.
+type CheckPermissionResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1678,24 +1678,24 @@ type IsAuthorizedResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e IsAuthorizedResponseValidationError) Field() string { return e.field }
+func (e CheckPermissionResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e IsAuthorizedResponseValidationError) Reason() string { return e.reason }
+func (e CheckPermissionResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e IsAuthorizedResponseValidationError) Cause() error { return e.cause }
+func (e CheckPermissionResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e IsAuthorizedResponseValidationError) Key() bool { return e.key }
+func (e CheckPermissionResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e IsAuthorizedResponseValidationError) ErrorName() string {
-	return "IsAuthorizedResponseValidationError"
+func (e CheckPermissionResponseValidationError) ErrorName() string {
+	return "CheckPermissionResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e IsAuthorizedResponseValidationError) Error() string {
+func (e CheckPermissionResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1707,14 +1707,14 @@ func (e IsAuthorizedResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sIsAuthorizedResponse.%s: %s%s",
+		"invalid %sCheckPermissionResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = IsAuthorizedResponseValidationError{}
+var _ error = CheckPermissionResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1722,4 +1722,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = IsAuthorizedResponseValidationError{}
+} = CheckPermissionResponseValidationError{}

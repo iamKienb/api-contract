@@ -72,13 +72,13 @@ message AssignMemberRolesResponse {
   bool success = 1;
 }
 
-message IsAuthorizedRequest {
+message CheckPermissionRequest {
   string shop_id = 1;
   string user_id = 2;
   string action  = 3;
 }
 
-message IsAuthorizedResponse {
-  bool   allowed = 1;
-  string message = 2;
+message CheckPermissionResponse {
+  bool   is_allowed = 1;
+  string message    = 2;
 }

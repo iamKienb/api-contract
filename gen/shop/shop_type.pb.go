@@ -607,7 +607,7 @@ func (x *AssignMemberRolesResponse) GetSuccess() bool {
 	return false
 }
 
-type IsAuthorizedRequest struct {
+type CheckPermissionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ShopId        string                 `protobuf:"bytes,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
 	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -616,20 +616,20 @@ type IsAuthorizedRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsAuthorizedRequest) Reset() {
-	*x = IsAuthorizedRequest{}
+func (x *CheckPermissionRequest) Reset() {
+	*x = CheckPermissionRequest{}
 	mi := &file_shop_shop_type_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsAuthorizedRequest) String() string {
+func (x *CheckPermissionRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsAuthorizedRequest) ProtoMessage() {}
+func (*CheckPermissionRequest) ProtoMessage() {}
 
-func (x *IsAuthorizedRequest) ProtoReflect() protoreflect.Message {
+func (x *CheckPermissionRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_shop_shop_type_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -641,54 +641,54 @@ func (x *IsAuthorizedRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsAuthorizedRequest.ProtoReflect.Descriptor instead.
-func (*IsAuthorizedRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use CheckPermissionRequest.ProtoReflect.Descriptor instead.
+func (*CheckPermissionRequest) Descriptor() ([]byte, []int) {
 	return file_shop_shop_type_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *IsAuthorizedRequest) GetShopId() string {
+func (x *CheckPermissionRequest) GetShopId() string {
 	if x != nil {
 		return x.ShopId
 	}
 	return ""
 }
 
-func (x *IsAuthorizedRequest) GetUserId() string {
+func (x *CheckPermissionRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
 	return ""
 }
 
-func (x *IsAuthorizedRequest) GetAction() string {
+func (x *CheckPermissionRequest) GetAction() string {
 	if x != nil {
 		return x.Action
 	}
 	return ""
 }
 
-type IsAuthorizedResponse struct {
+type CheckPermissionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Allowed       bool                   `protobuf:"varint,1,opt,name=allowed,proto3" json:"allowed,omitempty"`
+	IsAllowed     bool                   `protobuf:"varint,1,opt,name=is_allowed,json=isAllowed,proto3" json:"is_allowed,omitempty"`
 	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *IsAuthorizedResponse) Reset() {
-	*x = IsAuthorizedResponse{}
+func (x *CheckPermissionResponse) Reset() {
+	*x = CheckPermissionResponse{}
 	mi := &file_shop_shop_type_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *IsAuthorizedResponse) String() string {
+func (x *CheckPermissionResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*IsAuthorizedResponse) ProtoMessage() {}
+func (*CheckPermissionResponse) ProtoMessage() {}
 
-func (x *IsAuthorizedResponse) ProtoReflect() protoreflect.Message {
+func (x *CheckPermissionResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_shop_shop_type_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -700,19 +700,19 @@ func (x *IsAuthorizedResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IsAuthorizedResponse.ProtoReflect.Descriptor instead.
-func (*IsAuthorizedResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use CheckPermissionResponse.ProtoReflect.Descriptor instead.
+func (*CheckPermissionResponse) Descriptor() ([]byte, []int) {
 	return file_shop_shop_type_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *IsAuthorizedResponse) GetAllowed() bool {
+func (x *CheckPermissionResponse) GetIsAllowed() bool {
 	if x != nil {
-		return x.Allowed
+		return x.IsAllowed
 	}
 	return false
 }
 
-func (x *IsAuthorizedResponse) GetMessage() string {
+func (x *CheckPermissionResponse) GetMessage() string {
 	if x != nil {
 		return x.Message
 	}
@@ -769,13 +769,14 @@ const file_shop_shop_type_proto_rawDesc = "" +
 	"\fmember_roles\x18\x02 \x03(\v2\x0f.shop.v1.MemberB\b\xfaB\x05\x92\x01\x02\b\x01R\vmemberRoles\x12\x1f\n" +
 	"\x06action\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06action\"5\n" +
 	"\x19AssignMemberRolesResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"_\n" +
-	"\x13IsAuthorizedRequest\x12\x17\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"b\n" +
+	"\x16CheckPermissionRequest\x12\x17\n" +
 	"\ashop_id\x18\x01 \x01(\tR\x06shopId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x16\n" +
-	"\x06action\x18\x03 \x01(\tR\x06action\"J\n" +
-	"\x14IsAuthorizedResponse\x12\x18\n" +
-	"\aallowed\x18\x01 \x01(\bR\aallowed\x12\x18\n" +
+	"\x06action\x18\x03 \x01(\tR\x06action\"R\n" +
+	"\x17CheckPermissionResponse\x12\x1d\n" +
+	"\n" +
+	"is_allowed\x18\x01 \x01(\bR\tisAllowed\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessageB+Z)github.com/iamKienb/api-contract/gen/shopb\x06proto3"
 
 var (
@@ -802,8 +803,8 @@ var file_shop_shop_type_proto_goTypes = []any{
 	(*Member)(nil),                    // 7: shop.v1.Member
 	(*AssignMemberRolesRequest)(nil),  // 8: shop.v1.AssignMemberRolesRequest
 	(*AssignMemberRolesResponse)(nil), // 9: shop.v1.AssignMemberRolesResponse
-	(*IsAuthorizedRequest)(nil),       // 10: shop.v1.IsAuthorizedRequest
-	(*IsAuthorizedResponse)(nil),      // 11: shop.v1.IsAuthorizedResponse
+	(*CheckPermissionRequest)(nil),    // 10: shop.v1.CheckPermissionRequest
+	(*CheckPermissionResponse)(nil),   // 11: shop.v1.CheckPermissionResponse
 }
 var file_shop_shop_type_proto_depIdxs = []int32{
 	0, // 0: shop.v1.CreateShopRequest.profile:type_name -> shop.v1.ShopProfileInfo
