@@ -33,22 +33,15 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// ShopQueryServiceSearchShopsProcedure is the fully-qualified name of the ShopQueryService's
-	// SearchShops RPC.
-	ShopQueryServiceSearchShopsProcedure = "/shop.v1.ShopQueryService/SearchShops"
-	// ShopQueryServiceGetShopDetailProcedure is the fully-qualified name of the ShopQueryService's
-	// GetShopDetail RPC.
-	ShopQueryServiceGetShopDetailProcedure = "/shop.v1.ShopQueryService/GetShopDetail"
-	// ShopQueryServiceGetMembersProcedure is the fully-qualified name of the ShopQueryService's
-	// GetMembers RPC.
-	ShopQueryServiceGetMembersProcedure = "/shop.v1.ShopQueryService/GetMembers"
+	// ShopQueryServiceIsAuthorizedProcedure is the fully-qualified name of the ShopQueryService's
+	// IsAuthorized RPC.
+	ShopQueryServiceIsAuthorizedProcedure = "/shop.v1.ShopQueryService/IsAuthorized"
 )
 
 // ShopQueryServiceClient is a client for the shop.v1.ShopQueryService service.
 type ShopQueryServiceClient interface {
-	SearchShops(context.Context, *connect.Request[shop.SearchShopsRequest]) (*connect.Response[shop.SearchShopsResponse], error)
-	GetShopDetail(context.Context, *connect.Request[shop.GetShopDetailRequest]) (*connect.Response[shop.GetShopDetailResponse], error)
-	GetMembers(context.Context, *connect.Request[shop.GetMembersRequest]) (*connect.Response[shop.GetMembersResponse], error)
+	// Internal Service Call
+	IsAuthorized(context.Context, *connect.Request[shop.IsAuthorizedRequest]) (*connect.Response[shop.IsAuthorizedResponse], error)
 }
 
 // NewShopQueryServiceClient constructs a client for the shop.v1.ShopQueryService service. By
@@ -62,22 +55,10 @@ func NewShopQueryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 	baseURL = strings.TrimRight(baseURL, "/")
 	shopQueryServiceMethods := shop.File_shop_shop_query_proto.Services().ByName("ShopQueryService").Methods()
 	return &shopQueryServiceClient{
-		searchShops: connect.NewClient[shop.SearchShopsRequest, shop.SearchShopsResponse](
+		isAuthorized: connect.NewClient[shop.IsAuthorizedRequest, shop.IsAuthorizedResponse](
 			httpClient,
-			baseURL+ShopQueryServiceSearchShopsProcedure,
-			connect.WithSchema(shopQueryServiceMethods.ByName("SearchShops")),
-			connect.WithClientOptions(opts...),
-		),
-		getShopDetail: connect.NewClient[shop.GetShopDetailRequest, shop.GetShopDetailResponse](
-			httpClient,
-			baseURL+ShopQueryServiceGetShopDetailProcedure,
-			connect.WithSchema(shopQueryServiceMethods.ByName("GetShopDetail")),
-			connect.WithClientOptions(opts...),
-		),
-		getMembers: connect.NewClient[shop.GetMembersRequest, shop.GetMembersResponse](
-			httpClient,
-			baseURL+ShopQueryServiceGetMembersProcedure,
-			connect.WithSchema(shopQueryServiceMethods.ByName("GetMembers")),
+			baseURL+ShopQueryServiceIsAuthorizedProcedure,
+			connect.WithSchema(shopQueryServiceMethods.ByName("IsAuthorized")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -85,31 +66,18 @@ func NewShopQueryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 
 // shopQueryServiceClient implements ShopQueryServiceClient.
 type shopQueryServiceClient struct {
-	searchShops   *connect.Client[shop.SearchShopsRequest, shop.SearchShopsResponse]
-	getShopDetail *connect.Client[shop.GetShopDetailRequest, shop.GetShopDetailResponse]
-	getMembers    *connect.Client[shop.GetMembersRequest, shop.GetMembersResponse]
+	isAuthorized *connect.Client[shop.IsAuthorizedRequest, shop.IsAuthorizedResponse]
 }
 
-// SearchShops calls shop.v1.ShopQueryService.SearchShops.
-func (c *shopQueryServiceClient) SearchShops(ctx context.Context, req *connect.Request[shop.SearchShopsRequest]) (*connect.Response[shop.SearchShopsResponse], error) {
-	return c.searchShops.CallUnary(ctx, req)
-}
-
-// GetShopDetail calls shop.v1.ShopQueryService.GetShopDetail.
-func (c *shopQueryServiceClient) GetShopDetail(ctx context.Context, req *connect.Request[shop.GetShopDetailRequest]) (*connect.Response[shop.GetShopDetailResponse], error) {
-	return c.getShopDetail.CallUnary(ctx, req)
-}
-
-// GetMembers calls shop.v1.ShopQueryService.GetMembers.
-func (c *shopQueryServiceClient) GetMembers(ctx context.Context, req *connect.Request[shop.GetMembersRequest]) (*connect.Response[shop.GetMembersResponse], error) {
-	return c.getMembers.CallUnary(ctx, req)
+// IsAuthorized calls shop.v1.ShopQueryService.IsAuthorized.
+func (c *shopQueryServiceClient) IsAuthorized(ctx context.Context, req *connect.Request[shop.IsAuthorizedRequest]) (*connect.Response[shop.IsAuthorizedResponse], error) {
+	return c.isAuthorized.CallUnary(ctx, req)
 }
 
 // ShopQueryServiceHandler is an implementation of the shop.v1.ShopQueryService service.
 type ShopQueryServiceHandler interface {
-	SearchShops(context.Context, *connect.Request[shop.SearchShopsRequest]) (*connect.Response[shop.SearchShopsResponse], error)
-	GetShopDetail(context.Context, *connect.Request[shop.GetShopDetailRequest]) (*connect.Response[shop.GetShopDetailResponse], error)
-	GetMembers(context.Context, *connect.Request[shop.GetMembersRequest]) (*connect.Response[shop.GetMembersResponse], error)
+	// Internal Service Call
+	IsAuthorized(context.Context, *connect.Request[shop.IsAuthorizedRequest]) (*connect.Response[shop.IsAuthorizedResponse], error)
 }
 
 // NewShopQueryServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -119,32 +87,16 @@ type ShopQueryServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewShopQueryServiceHandler(svc ShopQueryServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	shopQueryServiceMethods := shop.File_shop_shop_query_proto.Services().ByName("ShopQueryService").Methods()
-	shopQueryServiceSearchShopsHandler := connect.NewUnaryHandler(
-		ShopQueryServiceSearchShopsProcedure,
-		svc.SearchShops,
-		connect.WithSchema(shopQueryServiceMethods.ByName("SearchShops")),
-		connect.WithHandlerOptions(opts...),
-	)
-	shopQueryServiceGetShopDetailHandler := connect.NewUnaryHandler(
-		ShopQueryServiceGetShopDetailProcedure,
-		svc.GetShopDetail,
-		connect.WithSchema(shopQueryServiceMethods.ByName("GetShopDetail")),
-		connect.WithHandlerOptions(opts...),
-	)
-	shopQueryServiceGetMembersHandler := connect.NewUnaryHandler(
-		ShopQueryServiceGetMembersProcedure,
-		svc.GetMembers,
-		connect.WithSchema(shopQueryServiceMethods.ByName("GetMembers")),
+	shopQueryServiceIsAuthorizedHandler := connect.NewUnaryHandler(
+		ShopQueryServiceIsAuthorizedProcedure,
+		svc.IsAuthorized,
+		connect.WithSchema(shopQueryServiceMethods.ByName("IsAuthorized")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/shop.v1.ShopQueryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case ShopQueryServiceSearchShopsProcedure:
-			shopQueryServiceSearchShopsHandler.ServeHTTP(w, r)
-		case ShopQueryServiceGetShopDetailProcedure:
-			shopQueryServiceGetShopDetailHandler.ServeHTTP(w, r)
-		case ShopQueryServiceGetMembersProcedure:
-			shopQueryServiceGetMembersHandler.ServeHTTP(w, r)
+		case ShopQueryServiceIsAuthorizedProcedure:
+			shopQueryServiceIsAuthorizedHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -154,14 +106,6 @@ func NewShopQueryServiceHandler(svc ShopQueryServiceHandler, opts ...connect.Han
 // UnimplementedShopQueryServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedShopQueryServiceHandler struct{}
 
-func (UnimplementedShopQueryServiceHandler) SearchShops(context.Context, *connect.Request[shop.SearchShopsRequest]) (*connect.Response[shop.SearchShopsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopQueryService.SearchShops is not implemented"))
-}
-
-func (UnimplementedShopQueryServiceHandler) GetShopDetail(context.Context, *connect.Request[shop.GetShopDetailRequest]) (*connect.Response[shop.GetShopDetailResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopQueryService.GetShopDetail is not implemented"))
-}
-
-func (UnimplementedShopQueryServiceHandler) GetMembers(context.Context, *connect.Request[shop.GetMembersRequest]) (*connect.Response[shop.GetMembersResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopQueryService.GetMembers is not implemented"))
+func (UnimplementedShopQueryServiceHandler) IsAuthorized(context.Context, *connect.Request[shop.IsAuthorizedRequest]) (*connect.Response[shop.IsAuthorizedResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopQueryService.IsAuthorized is not implemented"))
 }

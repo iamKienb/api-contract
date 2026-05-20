@@ -24,30 +24,19 @@ var File_shop_shop_query_proto protoreflect.FileDescriptor
 
 const file_shop_shop_query_proto_rawDesc = "" +
 	"\n" +
-	"\x15shop/shop_query.proto\x12\ashop.v1\x1a\x14shop/shop_type.proto2\xf3\x01\n" +
-	"\x10ShopQueryService\x12H\n" +
-	"\vSearchShops\x12\x1b.shop.v1.SearchShopsRequest\x1a\x1c.shop.v1.SearchShopsResponse\x12N\n" +
-	"\rGetShopDetail\x12\x1d.shop.v1.GetShopDetailRequest\x1a\x1e.shop.v1.GetShopDetailResponse\x12E\n" +
-	"\n" +
-	"GetMembers\x12\x1a.shop.v1.GetMembersRequest\x1a\x1b.shop.v1.GetMembersResponseB+Z)github.com/iamKienb/api-contract/gen/shopb\x06proto3"
+	"\x15shop/shop_query.proto\x12\ashop.v1\x1a\x14shop/shop_type.proto2_\n" +
+	"\x10ShopQueryService\x12K\n" +
+	"\fIsAuthorized\x12\x1c.shop.v1.IsAuthorizedRequest\x1a\x1d.shop.v1.IsAuthorizedResponseB+Z)github.com/iamKienb/api-contract/gen/shopb\x06proto3"
 
 var file_shop_shop_query_proto_goTypes = []any{
-	(*SearchShopsRequest)(nil),    // 0: shop.v1.SearchShopsRequest
-	(*GetShopDetailRequest)(nil),  // 1: shop.v1.GetShopDetailRequest
-	(*GetMembersRequest)(nil),     // 2: shop.v1.GetMembersRequest
-	(*SearchShopsResponse)(nil),   // 3: shop.v1.SearchShopsResponse
-	(*GetShopDetailResponse)(nil), // 4: shop.v1.GetShopDetailResponse
-	(*GetMembersResponse)(nil),    // 5: shop.v1.GetMembersResponse
+	(*IsAuthorizedRequest)(nil),  // 0: shop.v1.IsAuthorizedRequest
+	(*IsAuthorizedResponse)(nil), // 1: shop.v1.IsAuthorizedResponse
 }
 var file_shop_shop_query_proto_depIdxs = []int32{
-	0, // 0: shop.v1.ShopQueryService.SearchShops:input_type -> shop.v1.SearchShopsRequest
-	1, // 1: shop.v1.ShopQueryService.GetShopDetail:input_type -> shop.v1.GetShopDetailRequest
-	2, // 2: shop.v1.ShopQueryService.GetMembers:input_type -> shop.v1.GetMembersRequest
-	3, // 3: shop.v1.ShopQueryService.SearchShops:output_type -> shop.v1.SearchShopsResponse
-	4, // 4: shop.v1.ShopQueryService.GetShopDetail:output_type -> shop.v1.GetShopDetailResponse
-	5, // 5: shop.v1.ShopQueryService.GetMembers:output_type -> shop.v1.GetMembersResponse
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
+	0, // 0: shop.v1.ShopQueryService.IsAuthorized:input_type -> shop.v1.IsAuthorizedRequest
+	1, // 1: shop.v1.ShopQueryService.IsAuthorized:output_type -> shop.v1.IsAuthorizedResponse
+	1, // [1:2] is the sub-list for method output_type
+	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

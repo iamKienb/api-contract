@@ -1510,22 +1510,22 @@ var _ interface {
 	ErrorName() string
 } = AssignMemberRolesResponseValidationError{}
 
-// Validate checks the field values on VerifyPermissionRequest with the rules
+// Validate checks the field values on IsAuthorizedRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *VerifyPermissionRequest) Validate() error {
+func (m *IsAuthorizedRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on VerifyPermissionRequest with the
-// rules defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on IsAuthorizedRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// VerifyPermissionRequestMultiError, or nil if none found.
-func (m *VerifyPermissionRequest) ValidateAll() error {
+// IsAuthorizedRequestMultiError, or nil if none found.
+func (m *IsAuthorizedRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *VerifyPermissionRequest) validate(all bool) error {
+func (m *IsAuthorizedRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1539,19 +1539,19 @@ func (m *VerifyPermissionRequest) validate(all bool) error {
 	// no validation rules for Action
 
 	if len(errors) > 0 {
-		return VerifyPermissionRequestMultiError(errors)
+		return IsAuthorizedRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// VerifyPermissionRequestMultiError is an error wrapping multiple validation
-// errors returned by VerifyPermissionRequest.ValidateAll() if the designated
+// IsAuthorizedRequestMultiError is an error wrapping multiple validation
+// errors returned by IsAuthorizedRequest.ValidateAll() if the designated
 // constraints aren't met.
-type VerifyPermissionRequestMultiError []error
+type IsAuthorizedRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m VerifyPermissionRequestMultiError) Error() string {
+func (m IsAuthorizedRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1560,11 +1560,11 @@ func (m VerifyPermissionRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m VerifyPermissionRequestMultiError) AllErrors() []error { return m }
+func (m IsAuthorizedRequestMultiError) AllErrors() []error { return m }
 
-// VerifyPermissionRequestValidationError is the validation error returned by
-// VerifyPermissionRequest.Validate if the designated constraints aren't met.
-type VerifyPermissionRequestValidationError struct {
+// IsAuthorizedRequestValidationError is the validation error returned by
+// IsAuthorizedRequest.Validate if the designated constraints aren't met.
+type IsAuthorizedRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1572,24 +1572,24 @@ type VerifyPermissionRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e VerifyPermissionRequestValidationError) Field() string { return e.field }
+func (e IsAuthorizedRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e VerifyPermissionRequestValidationError) Reason() string { return e.reason }
+func (e IsAuthorizedRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e VerifyPermissionRequestValidationError) Cause() error { return e.cause }
+func (e IsAuthorizedRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e VerifyPermissionRequestValidationError) Key() bool { return e.key }
+func (e IsAuthorizedRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e VerifyPermissionRequestValidationError) ErrorName() string {
-	return "VerifyPermissionRequestValidationError"
+func (e IsAuthorizedRequestValidationError) ErrorName() string {
+	return "IsAuthorizedRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e VerifyPermissionRequestValidationError) Error() string {
+func (e IsAuthorizedRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1601,14 +1601,14 @@ func (e VerifyPermissionRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sVerifyPermissionRequest.%s: %s%s",
+		"invalid %sIsAuthorizedRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = VerifyPermissionRequestValidationError{}
+var _ error = IsAuthorizedRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1616,48 +1616,48 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = VerifyPermissionRequestValidationError{}
+} = IsAuthorizedRequestValidationError{}
 
-// Validate checks the field values on VerifyPermissionResponse with the rules
+// Validate checks the field values on IsAuthorizedResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *VerifyPermissionResponse) Validate() error {
+func (m *IsAuthorizedResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on VerifyPermissionResponse with the
-// rules defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on IsAuthorizedResponse with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// VerifyPermissionResponseMultiError, or nil if none found.
-func (m *VerifyPermissionResponse) ValidateAll() error {
+// IsAuthorizedResponseMultiError, or nil if none found.
+func (m *IsAuthorizedResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *VerifyPermissionResponse) validate(all bool) error {
+func (m *IsAuthorizedResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
 
 	var errors []error
 
-	// no validation rules for IsAllowed
+	// no validation rules for Allowed
 
-	// no validation rules for ErrorMessage
+	// no validation rules for Message
 
 	if len(errors) > 0 {
-		return VerifyPermissionResponseMultiError(errors)
+		return IsAuthorizedResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// VerifyPermissionResponseMultiError is an error wrapping multiple validation
-// errors returned by VerifyPermissionResponse.ValidateAll() if the designated
+// IsAuthorizedResponseMultiError is an error wrapping multiple validation
+// errors returned by IsAuthorizedResponse.ValidateAll() if the designated
 // constraints aren't met.
-type VerifyPermissionResponseMultiError []error
+type IsAuthorizedResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m VerifyPermissionResponseMultiError) Error() string {
+func (m IsAuthorizedResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1666,11 +1666,11 @@ func (m VerifyPermissionResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m VerifyPermissionResponseMultiError) AllErrors() []error { return m }
+func (m IsAuthorizedResponseMultiError) AllErrors() []error { return m }
 
-// VerifyPermissionResponseValidationError is the validation error returned by
-// VerifyPermissionResponse.Validate if the designated constraints aren't met.
-type VerifyPermissionResponseValidationError struct {
+// IsAuthorizedResponseValidationError is the validation error returned by
+// IsAuthorizedResponse.Validate if the designated constraints aren't met.
+type IsAuthorizedResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1678,24 +1678,24 @@ type VerifyPermissionResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e VerifyPermissionResponseValidationError) Field() string { return e.field }
+func (e IsAuthorizedResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e VerifyPermissionResponseValidationError) Reason() string { return e.reason }
+func (e IsAuthorizedResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e VerifyPermissionResponseValidationError) Cause() error { return e.cause }
+func (e IsAuthorizedResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e VerifyPermissionResponseValidationError) Key() bool { return e.key }
+func (e IsAuthorizedResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e VerifyPermissionResponseValidationError) ErrorName() string {
-	return "VerifyPermissionResponseValidationError"
+func (e IsAuthorizedResponseValidationError) ErrorName() string {
+	return "IsAuthorizedResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e VerifyPermissionResponseValidationError) Error() string {
+func (e IsAuthorizedResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1707,14 +1707,14 @@ func (e VerifyPermissionResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sVerifyPermissionResponse.%s: %s%s",
+		"invalid %sIsAuthorizedResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = VerifyPermissionResponseValidationError{}
+var _ error = IsAuthorizedResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1722,616 +1722,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = VerifyPermissionResponseValidationError{}
-
-// Validate checks the field values on SearchShopsRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SearchShopsRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on SearchShopsRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// SearchShopsRequestMultiError, or nil if none found.
-func (m *SearchShopsRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *SearchShopsRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return SearchShopsRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// SearchShopsRequestMultiError is an error wrapping multiple validation errors
-// returned by SearchShopsRequest.ValidateAll() if the designated constraints
-// aren't met.
-type SearchShopsRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m SearchShopsRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m SearchShopsRequestMultiError) AllErrors() []error { return m }
-
-// SearchShopsRequestValidationError is the validation error returned by
-// SearchShopsRequest.Validate if the designated constraints aren't met.
-type SearchShopsRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SearchShopsRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SearchShopsRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SearchShopsRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SearchShopsRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SearchShopsRequestValidationError) ErrorName() string {
-	return "SearchShopsRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e SearchShopsRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSearchShopsRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SearchShopsRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SearchShopsRequestValidationError{}
-
-// Validate checks the field values on SearchShopsResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *SearchShopsResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on SearchShopsResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// SearchShopsResponseMultiError, or nil if none found.
-func (m *SearchShopsResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *SearchShopsResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return SearchShopsResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// SearchShopsResponseMultiError is an error wrapping multiple validation
-// errors returned by SearchShopsResponse.ValidateAll() if the designated
-// constraints aren't met.
-type SearchShopsResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m SearchShopsResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m SearchShopsResponseMultiError) AllErrors() []error { return m }
-
-// SearchShopsResponseValidationError is the validation error returned by
-// SearchShopsResponse.Validate if the designated constraints aren't met.
-type SearchShopsResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e SearchShopsResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e SearchShopsResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e SearchShopsResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e SearchShopsResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e SearchShopsResponseValidationError) ErrorName() string {
-	return "SearchShopsResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e SearchShopsResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sSearchShopsResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = SearchShopsResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = SearchShopsResponseValidationError{}
-
-// Validate checks the field values on GetShopDetailRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetShopDetailRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GetShopDetailRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GetShopDetailRequestMultiError, or nil if none found.
-func (m *GetShopDetailRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetShopDetailRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return GetShopDetailRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetShopDetailRequestMultiError is an error wrapping multiple validation
-// errors returned by GetShopDetailRequest.ValidateAll() if the designated
-// constraints aren't met.
-type GetShopDetailRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetShopDetailRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetShopDetailRequestMultiError) AllErrors() []error { return m }
-
-// GetShopDetailRequestValidationError is the validation error returned by
-// GetShopDetailRequest.Validate if the designated constraints aren't met.
-type GetShopDetailRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetShopDetailRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetShopDetailRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetShopDetailRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetShopDetailRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetShopDetailRequestValidationError) ErrorName() string {
-	return "GetShopDetailRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetShopDetailRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetShopDetailRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetShopDetailRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetShopDetailRequestValidationError{}
-
-// Validate checks the field values on GetShopDetailResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetShopDetailResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GetShopDetailResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GetShopDetailResponseMultiError, or nil if none found.
-func (m *GetShopDetailResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetShopDetailResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return GetShopDetailResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetShopDetailResponseMultiError is an error wrapping multiple validation
-// errors returned by GetShopDetailResponse.ValidateAll() if the designated
-// constraints aren't met.
-type GetShopDetailResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetShopDetailResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetShopDetailResponseMultiError) AllErrors() []error { return m }
-
-// GetShopDetailResponseValidationError is the validation error returned by
-// GetShopDetailResponse.Validate if the designated constraints aren't met.
-type GetShopDetailResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetShopDetailResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetShopDetailResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetShopDetailResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetShopDetailResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetShopDetailResponseValidationError) ErrorName() string {
-	return "GetShopDetailResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetShopDetailResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetShopDetailResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetShopDetailResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetShopDetailResponseValidationError{}
-
-// Validate checks the field values on GetMembersRequest with the rules defined
-// in the proto definition for this message. If any rules are violated, the
-// first error encountered is returned, or nil if there are no violations.
-func (m *GetMembersRequest) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GetMembersRequest with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GetMembersRequestMultiError, or nil if none found.
-func (m *GetMembersRequest) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetMembersRequest) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return GetMembersRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetMembersRequestMultiError is an error wrapping multiple validation errors
-// returned by GetMembersRequest.ValidateAll() if the designated constraints
-// aren't met.
-type GetMembersRequestMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetMembersRequestMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetMembersRequestMultiError) AllErrors() []error { return m }
-
-// GetMembersRequestValidationError is the validation error returned by
-// GetMembersRequest.Validate if the designated constraints aren't met.
-type GetMembersRequestValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetMembersRequestValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetMembersRequestValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetMembersRequestValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetMembersRequestValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetMembersRequestValidationError) ErrorName() string {
-	return "GetMembersRequestValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetMembersRequestValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetMembersRequest.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetMembersRequestValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetMembersRequestValidationError{}
-
-// Validate checks the field values on GetMembersResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the first error encountered is returned, or nil if there are no violations.
-func (m *GetMembersResponse) Validate() error {
-	return m.validate(false)
-}
-
-// ValidateAll checks the field values on GetMembersResponse with the rules
-// defined in the proto definition for this message. If any rules are
-// violated, the result is a list of violation errors wrapped in
-// GetMembersResponseMultiError, or nil if none found.
-func (m *GetMembersResponse) ValidateAll() error {
-	return m.validate(true)
-}
-
-func (m *GetMembersResponse) validate(all bool) error {
-	if m == nil {
-		return nil
-	}
-
-	var errors []error
-
-	if len(errors) > 0 {
-		return GetMembersResponseMultiError(errors)
-	}
-
-	return nil
-}
-
-// GetMembersResponseMultiError is an error wrapping multiple validation errors
-// returned by GetMembersResponse.ValidateAll() if the designated constraints
-// aren't met.
-type GetMembersResponseMultiError []error
-
-// Error returns a concatenation of all the error messages it wraps.
-func (m GetMembersResponseMultiError) Error() string {
-	msgs := make([]string, 0, len(m))
-	for _, err := range m {
-		msgs = append(msgs, err.Error())
-	}
-	return strings.Join(msgs, "; ")
-}
-
-// AllErrors returns a list of validation violation errors.
-func (m GetMembersResponseMultiError) AllErrors() []error { return m }
-
-// GetMembersResponseValidationError is the validation error returned by
-// GetMembersResponse.Validate if the designated constraints aren't met.
-type GetMembersResponseValidationError struct {
-	field  string
-	reason string
-	cause  error
-	key    bool
-}
-
-// Field function returns field value.
-func (e GetMembersResponseValidationError) Field() string { return e.field }
-
-// Reason function returns reason value.
-func (e GetMembersResponseValidationError) Reason() string { return e.reason }
-
-// Cause function returns cause value.
-func (e GetMembersResponseValidationError) Cause() error { return e.cause }
-
-// Key function returns key value.
-func (e GetMembersResponseValidationError) Key() bool { return e.key }
-
-// ErrorName returns error name.
-func (e GetMembersResponseValidationError) ErrorName() string {
-	return "GetMembersResponseValidationError"
-}
-
-// Error satisfies the builtin error interface
-func (e GetMembersResponseValidationError) Error() string {
-	cause := ""
-	if e.cause != nil {
-		cause = fmt.Sprintf(" | caused by: %v", e.cause)
-	}
-
-	key := ""
-	if e.key {
-		key = "key for "
-	}
-
-	return fmt.Sprintf(
-		"invalid %sGetMembersResponse.%s: %s%s",
-		key,
-		e.field,
-		e.reason,
-		cause)
-}
-
-var _ error = GetMembersResponseValidationError{}
-
-var _ interface {
-	Field() string
-	Reason() string
-	Key() bool
-	Cause() error
-	ErrorName() string
-} = GetMembersResponseValidationError{}
+} = IsAuthorizedResponseValidationError{}

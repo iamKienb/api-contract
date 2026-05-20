@@ -18,7 +18,7 @@ message ProductVariantOption {
   string          currency              = 3 [(validate.rules).string.len = 3];
   string          image_url             = 4;
   repeated string attribute_value_names = 5;
-  int32           stock                 = 6 [(validate.rules).int32.gte = 0];
+  int32           quantity              = 6 [(validate.rules).int32.gte = 0];
 }
 
 message CreateProductsRequest {
@@ -34,8 +34,9 @@ message CreateProductsRequest {
   bool                            has_variant = 8;
   repeated ProductAttributeOption attributes  = 9;
   repeated ProductVariantOption   variants    = 10 [(validate.rules).repeated.min_items = 1];
+  string                          action      = 11;
 }
 
 message CreateProductsResponse {
-  bool success = 1;
+  string workflow_id = 1;
 }

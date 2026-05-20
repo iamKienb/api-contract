@@ -72,37 +72,13 @@ message AssignMemberRolesResponse {
   bool success = 1;
 }
 
-message VerifyPermissionRequest  {
+message IsAuthorizedRequest {
   string shop_id = 1;
   string user_id = 2;
   string action  = 3;
 }
 
-message VerifyPermissionResponse {
-  bool   is_allowed    = 1;
-  string error_message = 2;
-}
-
-message SearchShopsRequest {
-
-}
-
-message SearchShopsResponse {
-
-}
-
-message GetShopDetailRequest {
-
-}
-
-message GetShopDetailResponse {
-
-}
-
-message GetMembersRequest {
-
-}
-
-message GetMembersResponse {
-
+message IsAuthorizedResponse {
+  bool   allowed = 1;
+  string message = 2;
 }

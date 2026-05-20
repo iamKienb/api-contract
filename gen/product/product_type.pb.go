@@ -82,7 +82,7 @@ type ProductVariantOption struct {
 	Currency            string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
 	ImageUrl            string                 `protobuf:"bytes,4,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 	AttributeValueNames []string               `protobuf:"bytes,5,rep,name=attribute_value_names,json=attributeValueNames,proto3" json:"attribute_value_names,omitempty"`
-	Stock               int32                  `protobuf:"varint,6,opt,name=stock,proto3" json:"stock,omitempty"`
+	Quantity            int32                  `protobuf:"varint,6,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -152,9 +152,9 @@ func (x *ProductVariantOption) GetAttributeValueNames() []string {
 	return nil
 }
 
-func (x *ProductVariantOption) GetStock() int32 {
+func (x *ProductVariantOption) GetQuantity() int32 {
 	if x != nil {
-		return x.Stock
+		return x.Quantity
 	}
 	return 0
 }
@@ -171,6 +171,7 @@ type CreateProductsRequest struct {
 	HasVariant    bool                      `protobuf:"varint,8,opt,name=has_variant,json=hasVariant,proto3" json:"has_variant,omitempty"`
 	Attributes    []*ProductAttributeOption `protobuf:"bytes,9,rep,name=attributes,proto3" json:"attributes,omitempty"`
 	Variants      []*ProductVariantOption   `protobuf:"bytes,10,rep,name=variants,proto3" json:"variants,omitempty"`
+	Action        string                    `protobuf:"bytes,11,opt,name=action,proto3" json:"action,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -275,9 +276,16 @@ func (x *CreateProductsRequest) GetVariants() []*ProductVariantOption {
 	return nil
 }
 
+func (x *CreateProductsRequest) GetAction() string {
+	if x != nil {
+		return x.Action
+	}
+	return ""
+}
+
 type CreateProductsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	WorkflowId    string                 `protobuf:"bytes,1,opt,name=workflow_id,json=workflowId,proto3" json:"workflow_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -312,11 +320,11 @@ func (*CreateProductsResponse) Descriptor() ([]byte, []int) {
 	return file_product_product_type_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *CreateProductsResponse) GetSuccess() bool {
+func (x *CreateProductsResponse) GetWorkflowId() string {
 	if x != nil {
-		return x.Success
+		return x.WorkflowId
 	}
-	return false
+	return ""
 }
 
 var File_product_product_type_proto protoreflect.FileDescriptor
@@ -327,14 +335,14 @@ const file_product_product_type_proto_rawDesc = "" +
 	"product.v1\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"D\n" +
 	"\x16ProductAttributeOption\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
-	"\x06values\x18\x02 \x03(\tR\x06values\"\x81\x02\n" +
+	"\x06values\x18\x02 \x03(\tR\x06values\"\x87\x02\n" +
 	"\x14ProductVariantOption\x124\n" +
 	"\bsku_code\x18\x01 \x01(\tB\x19\xfaB\x16r\x142\x12^[A-Z0-9_-]{3,50}$R\askuCode\x12\x1d\n" +
 	"\x05price\x18\x02 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\x05price\x12$\n" +
 	"\bcurrency\x18\x03 \x01(\tB\b\xfaB\x05r\x03\x98\x01\x03R\bcurrency\x12\x1b\n" +
 	"\timage_url\x18\x04 \x01(\tR\bimageUrl\x122\n" +
-	"\x15attribute_value_names\x18\x05 \x03(\tR\x13attributeValueNames\x12\x1d\n" +
-	"\x05stock\x18\x06 \x01(\x05B\a\xfaB\x04\x1a\x02(\x00R\x05stock\"\xac\x03\n" +
+	"\x15attribute_value_names\x18\x05 \x03(\tR\x13attributeValueNames\x12#\n" +
+	"\bquantity\x18\x06 \x01(\x05B\a\xfaB\x04\x1a\x02(\x00R\bquantity\"\xc4\x03\n" +
 	"\x15CreateProductsRequest\x12 \n" +
 	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\x125\n" +
@@ -349,9 +357,11 @@ const file_product_product_type_proto_rawDesc = "" +
 	"attributes\x18\t \x03(\v2\".product.v1.ProductAttributeOptionR\n" +
 	"attributes\x12F\n" +
 	"\bvariants\x18\n" +
-	" \x03(\v2 .product.v1.ProductVariantOptionB\b\xfaB\x05\x92\x01\x02\b\x01R\bvariants\"2\n" +
-	"\x16CreateProductsResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccessB.Z,github.com/iamKienb/api-contract/gen/productb\x06proto3"
+	" \x03(\v2 .product.v1.ProductVariantOptionB\b\xfaB\x05\x92\x01\x02\b\x01R\bvariants\x12\x16\n" +
+	"\x06action\x18\v \x01(\tR\x06action\"9\n" +
+	"\x16CreateProductsResponse\x12\x1f\n" +
+	"\vworkflow_id\x18\x01 \x01(\tR\n" +
+	"workflowIdB.Z,github.com/iamKienb/api-contract/gen/productb\x06proto3"
 
 var (
 	file_product_product_type_proto_rawDescOnce sync.Once

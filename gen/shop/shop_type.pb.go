@@ -607,7 +607,7 @@ func (x *AssignMemberRolesResponse) GetSuccess() bool {
 	return false
 }
 
-type VerifyPermissionRequest struct {
+type IsAuthorizedRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ShopId        string                 `protobuf:"bytes,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
 	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -616,20 +616,20 @@ type VerifyPermissionRequest struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *VerifyPermissionRequest) Reset() {
-	*x = VerifyPermissionRequest{}
+func (x *IsAuthorizedRequest) Reset() {
+	*x = IsAuthorizedRequest{}
 	mi := &file_shop_shop_type_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *VerifyPermissionRequest) String() string {
+func (x *IsAuthorizedRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*VerifyPermissionRequest) ProtoMessage() {}
+func (*IsAuthorizedRequest) ProtoMessage() {}
 
-func (x *VerifyPermissionRequest) ProtoReflect() protoreflect.Message {
+func (x *IsAuthorizedRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_shop_shop_type_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -641,54 +641,54 @@ func (x *VerifyPermissionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use VerifyPermissionRequest.ProtoReflect.Descriptor instead.
-func (*VerifyPermissionRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use IsAuthorizedRequest.ProtoReflect.Descriptor instead.
+func (*IsAuthorizedRequest) Descriptor() ([]byte, []int) {
 	return file_shop_shop_type_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *VerifyPermissionRequest) GetShopId() string {
+func (x *IsAuthorizedRequest) GetShopId() string {
 	if x != nil {
 		return x.ShopId
 	}
 	return ""
 }
 
-func (x *VerifyPermissionRequest) GetUserId() string {
+func (x *IsAuthorizedRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
 	return ""
 }
 
-func (x *VerifyPermissionRequest) GetAction() string {
+func (x *IsAuthorizedRequest) GetAction() string {
 	if x != nil {
 		return x.Action
 	}
 	return ""
 }
 
-type VerifyPermissionResponse struct {
+type IsAuthorizedResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	IsAllowed     bool                   `protobuf:"varint,1,opt,name=is_allowed,json=isAllowed,proto3" json:"is_allowed,omitempty"`
-	ErrorMessage  string                 `protobuf:"bytes,2,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	Allowed       bool                   `protobuf:"varint,1,opt,name=allowed,proto3" json:"allowed,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *VerifyPermissionResponse) Reset() {
-	*x = VerifyPermissionResponse{}
+func (x *IsAuthorizedResponse) Reset() {
+	*x = IsAuthorizedResponse{}
 	mi := &file_shop_shop_type_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *VerifyPermissionResponse) String() string {
+func (x *IsAuthorizedResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*VerifyPermissionResponse) ProtoMessage() {}
+func (*IsAuthorizedResponse) ProtoMessage() {}
 
-func (x *VerifyPermissionResponse) ProtoReflect() protoreflect.Message {
+func (x *IsAuthorizedResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_shop_shop_type_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -700,239 +700,23 @@ func (x *VerifyPermissionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use VerifyPermissionResponse.ProtoReflect.Descriptor instead.
-func (*VerifyPermissionResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use IsAuthorizedResponse.ProtoReflect.Descriptor instead.
+func (*IsAuthorizedResponse) Descriptor() ([]byte, []int) {
 	return file_shop_shop_type_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *VerifyPermissionResponse) GetIsAllowed() bool {
+func (x *IsAuthorizedResponse) GetAllowed() bool {
 	if x != nil {
-		return x.IsAllowed
+		return x.Allowed
 	}
 	return false
 }
 
-func (x *VerifyPermissionResponse) GetErrorMessage() string {
+func (x *IsAuthorizedResponse) GetMessage() string {
 	if x != nil {
-		return x.ErrorMessage
+		return x.Message
 	}
 	return ""
-}
-
-type SearchShopsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SearchShopsRequest) Reset() {
-	*x = SearchShopsRequest{}
-	mi := &file_shop_shop_type_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SearchShopsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SearchShopsRequest) ProtoMessage() {}
-
-func (x *SearchShopsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_shop_type_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SearchShopsRequest.ProtoReflect.Descriptor instead.
-func (*SearchShopsRequest) Descriptor() ([]byte, []int) {
-	return file_shop_shop_type_proto_rawDescGZIP(), []int{12}
-}
-
-type SearchShopsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SearchShopsResponse) Reset() {
-	*x = SearchShopsResponse{}
-	mi := &file_shop_shop_type_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SearchShopsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SearchShopsResponse) ProtoMessage() {}
-
-func (x *SearchShopsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_shop_type_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SearchShopsResponse.ProtoReflect.Descriptor instead.
-func (*SearchShopsResponse) Descriptor() ([]byte, []int) {
-	return file_shop_shop_type_proto_rawDescGZIP(), []int{13}
-}
-
-type GetShopDetailRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetShopDetailRequest) Reset() {
-	*x = GetShopDetailRequest{}
-	mi := &file_shop_shop_type_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetShopDetailRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetShopDetailRequest) ProtoMessage() {}
-
-func (x *GetShopDetailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_shop_type_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetShopDetailRequest.ProtoReflect.Descriptor instead.
-func (*GetShopDetailRequest) Descriptor() ([]byte, []int) {
-	return file_shop_shop_type_proto_rawDescGZIP(), []int{14}
-}
-
-type GetShopDetailResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetShopDetailResponse) Reset() {
-	*x = GetShopDetailResponse{}
-	mi := &file_shop_shop_type_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetShopDetailResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetShopDetailResponse) ProtoMessage() {}
-
-func (x *GetShopDetailResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_shop_type_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetShopDetailResponse.ProtoReflect.Descriptor instead.
-func (*GetShopDetailResponse) Descriptor() ([]byte, []int) {
-	return file_shop_shop_type_proto_rawDescGZIP(), []int{15}
-}
-
-type GetMembersRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetMembersRequest) Reset() {
-	*x = GetMembersRequest{}
-	mi := &file_shop_shop_type_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetMembersRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetMembersRequest) ProtoMessage() {}
-
-func (x *GetMembersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_shop_type_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetMembersRequest.ProtoReflect.Descriptor instead.
-func (*GetMembersRequest) Descriptor() ([]byte, []int) {
-	return file_shop_shop_type_proto_rawDescGZIP(), []int{16}
-}
-
-type GetMembersResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetMembersResponse) Reset() {
-	*x = GetMembersResponse{}
-	mi := &file_shop_shop_type_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetMembersResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetMembersResponse) ProtoMessage() {}
-
-func (x *GetMembersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_shop_type_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetMembersResponse.ProtoReflect.Descriptor instead.
-func (*GetMembersResponse) Descriptor() ([]byte, []int) {
-	return file_shop_shop_type_proto_rawDescGZIP(), []int{17}
 }
 
 var File_shop_shop_type_proto protoreflect.FileDescriptor
@@ -985,21 +769,14 @@ const file_shop_shop_type_proto_rawDesc = "" +
 	"\fmember_roles\x18\x02 \x03(\v2\x0f.shop.v1.MemberB\b\xfaB\x05\x92\x01\x02\b\x01R\vmemberRoles\x12\x1f\n" +
 	"\x06action\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06action\"5\n" +
 	"\x19AssignMemberRolesResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"c\n" +
-	"\x17VerifyPermissionRequest\x12\x17\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"_\n" +
+	"\x13IsAuthorizedRequest\x12\x17\n" +
 	"\ashop_id\x18\x01 \x01(\tR\x06shopId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x16\n" +
-	"\x06action\x18\x03 \x01(\tR\x06action\"^\n" +
-	"\x18VerifyPermissionResponse\x12\x1d\n" +
-	"\n" +
-	"is_allowed\x18\x01 \x01(\bR\tisAllowed\x12#\n" +
-	"\rerror_message\x18\x02 \x01(\tR\ferrorMessage\"\x14\n" +
-	"\x12SearchShopsRequest\"\x15\n" +
-	"\x13SearchShopsResponse\"\x16\n" +
-	"\x14GetShopDetailRequest\"\x17\n" +
-	"\x15GetShopDetailResponse\"\x13\n" +
-	"\x11GetMembersRequest\"\x14\n" +
-	"\x12GetMembersResponseB+Z)github.com/iamKienb/api-contract/gen/shopb\x06proto3"
+	"\x06action\x18\x03 \x01(\tR\x06action\"J\n" +
+	"\x14IsAuthorizedResponse\x12\x18\n" +
+	"\aallowed\x18\x01 \x01(\bR\aallowed\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessageB+Z)github.com/iamKienb/api-contract/gen/shopb\x06proto3"
 
 var (
 	file_shop_shop_type_proto_rawDescOnce sync.Once
@@ -1013,7 +790,7 @@ func file_shop_shop_type_proto_rawDescGZIP() []byte {
 	return file_shop_shop_type_proto_rawDescData
 }
 
-var file_shop_shop_type_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_shop_shop_type_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_shop_shop_type_proto_goTypes = []any{
 	(*ShopProfileInfo)(nil),           // 0: shop.v1.ShopProfileInfo
 	(*CreateShopRequest)(nil),         // 1: shop.v1.CreateShopRequest
@@ -1025,14 +802,8 @@ var file_shop_shop_type_proto_goTypes = []any{
 	(*Member)(nil),                    // 7: shop.v1.Member
 	(*AssignMemberRolesRequest)(nil),  // 8: shop.v1.AssignMemberRolesRequest
 	(*AssignMemberRolesResponse)(nil), // 9: shop.v1.AssignMemberRolesResponse
-	(*VerifyPermissionRequest)(nil),   // 10: shop.v1.VerifyPermissionRequest
-	(*VerifyPermissionResponse)(nil),  // 11: shop.v1.VerifyPermissionResponse
-	(*SearchShopsRequest)(nil),        // 12: shop.v1.SearchShopsRequest
-	(*SearchShopsResponse)(nil),       // 13: shop.v1.SearchShopsResponse
-	(*GetShopDetailRequest)(nil),      // 14: shop.v1.GetShopDetailRequest
-	(*GetShopDetailResponse)(nil),     // 15: shop.v1.GetShopDetailResponse
-	(*GetMembersRequest)(nil),         // 16: shop.v1.GetMembersRequest
-	(*GetMembersResponse)(nil),        // 17: shop.v1.GetMembersResponse
+	(*IsAuthorizedRequest)(nil),       // 10: shop.v1.IsAuthorizedRequest
+	(*IsAuthorizedResponse)(nil),      // 11: shop.v1.IsAuthorizedResponse
 }
 var file_shop_shop_type_proto_depIdxs = []int32{
 	0, // 0: shop.v1.CreateShopRequest.profile:type_name -> shop.v1.ShopProfileInfo
@@ -1062,7 +833,7 @@ func file_shop_shop_type_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_shop_shop_type_proto_rawDesc), len(file_shop_shop_type_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -197,9 +197,9 @@ func (m *ProductVariantOption) validate(all bool) error {
 
 	// no validation rules for ImageUrl
 
-	if m.GetStock() < 0 {
+	if m.GetQuantity() < 0 {
 		err := ProductVariantOptionValidationError{
-			field:  "Stock",
+			field:  "Quantity",
 			reason: "value must be greater than or equal to 0",
 		}
 		if !all {
@@ -434,6 +434,8 @@ func (m *CreateProductsRequest) validate(all bool) error {
 
 	}
 
+	// no validation rules for Action
+
 	if len(errors) > 0 {
 		return CreateProductsRequestMultiError(errors)
 	}
@@ -538,7 +540,7 @@ func (m *CreateProductsResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Success
+	// no validation rules for WorkflowId
 
 	if len(errors) > 0 {
 		return CreateProductsResponseMultiError(errors)
