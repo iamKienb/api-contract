@@ -24,19 +24,24 @@ var File_inventory_inventory_command_proto protoreflect.FileDescriptor
 
 const file_inventory_inventory_command_proto_rawDesc = "" +
 	"\n" +
-	"!inventory/inventory_command.proto\x12\finventory.v1\x1a\x1einventory/inventory_type.proto2\x7f\n" +
+	"!inventory/inventory_command.proto\x12\finventory.v1\x1a\x1einventory/inventory_type.proto2\xe5\x01\n" +
 	"\x17InventoryCommandService\x12d\n" +
-	"\x11CreateInventories\x12&.inventory.v1.CreateInventoriesRequest\x1a'.inventory.v1.CreateInventoriesResponseB0Z.github.com/iamKienb/api-contract/gen/inventoryb\x06proto3"
+	"\x11CreateInventories\x12&.inventory.v1.CreateInventoriesRequest\x1a'.inventory.v1.CreateInventoriesResponse\x12d\n" +
+	"\x11DeleteInventories\x12&.inventory.v1.DeleteInventoriesRequest\x1a'.inventory.v1.DeleteInventoriesResponseB0Z.github.com/iamKienb/api-contract/gen/inventoryb\x06proto3"
 
 var file_inventory_inventory_command_proto_goTypes = []any{
 	(*CreateInventoriesRequest)(nil),  // 0: inventory.v1.CreateInventoriesRequest
-	(*CreateInventoriesResponse)(nil), // 1: inventory.v1.CreateInventoriesResponse
+	(*DeleteInventoriesRequest)(nil),  // 1: inventory.v1.DeleteInventoriesRequest
+	(*CreateInventoriesResponse)(nil), // 2: inventory.v1.CreateInventoriesResponse
+	(*DeleteInventoriesResponse)(nil), // 3: inventory.v1.DeleteInventoriesResponse
 }
 var file_inventory_inventory_command_proto_depIdxs = []int32{
 	0, // 0: inventory.v1.InventoryCommandService.CreateInventories:input_type -> inventory.v1.CreateInventoriesRequest
-	1, // 1: inventory.v1.InventoryCommandService.CreateInventories:output_type -> inventory.v1.CreateInventoriesResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	1, // 1: inventory.v1.InventoryCommandService.DeleteInventories:input_type -> inventory.v1.DeleteInventoriesRequest
+	2, // 2: inventory.v1.InventoryCommandService.CreateInventories:output_type -> inventory.v1.CreateInventoriesResponse
+	3, // 3: inventory.v1.InventoryCommandService.DeleteInventories:output_type -> inventory.v1.DeleteInventoriesResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

@@ -430,3 +430,209 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = CreateInventoriesResponseValidationError{}
+
+// Validate checks the field values on DeleteInventoriesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteInventoriesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteInventoriesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteInventoriesRequestMultiError, or nil if none found.
+func (m *DeleteInventoriesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteInventoriesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if len(errors) > 0 {
+		return DeleteInventoriesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteInventoriesRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteInventoriesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteInventoriesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteInventoriesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteInventoriesRequestMultiError) AllErrors() []error { return m }
+
+// DeleteInventoriesRequestValidationError is the validation error returned by
+// DeleteInventoriesRequest.Validate if the designated constraints aren't met.
+type DeleteInventoriesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteInventoriesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteInventoriesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteInventoriesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteInventoriesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteInventoriesRequestValidationError) ErrorName() string {
+	return "DeleteInventoriesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteInventoriesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteInventoriesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteInventoriesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteInventoriesRequestValidationError{}
+
+// Validate checks the field values on DeleteInventoriesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteInventoriesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteInventoriesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteInventoriesResponseMultiError, or nil if none found.
+func (m *DeleteInventoriesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteInventoriesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Success
+
+	if len(errors) > 0 {
+		return DeleteInventoriesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteInventoriesResponseMultiError is an error wrapping multiple validation
+// errors returned by DeleteInventoriesResponse.ValidateAll() if the
+// designated constraints aren't met.
+type DeleteInventoriesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteInventoriesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteInventoriesResponseMultiError) AllErrors() []error { return m }
+
+// DeleteInventoriesResponseValidationError is the validation error returned by
+// DeleteInventoriesResponse.Validate if the designated constraints aren't met.
+type DeleteInventoriesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteInventoriesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteInventoriesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteInventoriesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteInventoriesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteInventoriesResponseValidationError) ErrorName() string {
+	return "DeleteInventoriesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteInventoriesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteInventoriesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteInventoriesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteInventoriesResponseValidationError{}
