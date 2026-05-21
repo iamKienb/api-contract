@@ -33,19 +33,19 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// InventoryCommandServiceCreateInventoriesProcedure is the fully-qualified name of the
-	// InventoryCommandService's CreateInventories RPC.
-	InventoryCommandServiceCreateInventoriesProcedure = "/inventory.v1.InventoryCommandService/CreateInventories"
-	// InventoryCommandServiceDeleteInventoriesProcedure is the fully-qualified name of the
-	// InventoryCommandService's DeleteInventories RPC.
-	InventoryCommandServiceDeleteInventoriesProcedure = "/inventory.v1.InventoryCommandService/DeleteInventories"
+	// InventoryCommandServiceCreateInventoryProcedure is the fully-qualified name of the
+	// InventoryCommandService's CreateInventory RPC.
+	InventoryCommandServiceCreateInventoryProcedure = "/inventory.v1.InventoryCommandService/CreateInventory"
+	// InventoryCommandServiceDeleteInventoryProcedure is the fully-qualified name of the
+	// InventoryCommandService's DeleteInventory RPC.
+	InventoryCommandServiceDeleteInventoryProcedure = "/inventory.v1.InventoryCommandService/DeleteInventory"
 )
 
 // InventoryCommandServiceClient is a client for the inventory.v1.InventoryCommandService service.
 type InventoryCommandServiceClient interface {
 	// Public Commands
-	CreateInventories(context.Context, *connect.Request[inventory.CreateInventoriesRequest]) (*connect.Response[inventory.CreateInventoriesResponse], error)
-	DeleteInventories(context.Context, *connect.Request[inventory.DeleteInventoriesRequest]) (*connect.Response[inventory.DeleteInventoriesResponse], error)
+	CreateInventory(context.Context, *connect.Request[inventory.CreateInventoryRequest]) (*connect.Response[inventory.CreateInventoryResponse], error)
+	DeleteInventory(context.Context, *connect.Request[inventory.DeleteInventoryRequest]) (*connect.Response[inventory.DeleteInventoryResponse], error)
 }
 
 // NewInventoryCommandServiceClient constructs a client for the inventory.v1.InventoryCommandService
@@ -59,16 +59,16 @@ func NewInventoryCommandServiceClient(httpClient connect.HTTPClient, baseURL str
 	baseURL = strings.TrimRight(baseURL, "/")
 	inventoryCommandServiceMethods := inventory.File_inventory_inventory_command_proto.Services().ByName("InventoryCommandService").Methods()
 	return &inventoryCommandServiceClient{
-		createInventories: connect.NewClient[inventory.CreateInventoriesRequest, inventory.CreateInventoriesResponse](
+		createInventory: connect.NewClient[inventory.CreateInventoryRequest, inventory.CreateInventoryResponse](
 			httpClient,
-			baseURL+InventoryCommandServiceCreateInventoriesProcedure,
-			connect.WithSchema(inventoryCommandServiceMethods.ByName("CreateInventories")),
+			baseURL+InventoryCommandServiceCreateInventoryProcedure,
+			connect.WithSchema(inventoryCommandServiceMethods.ByName("CreateInventory")),
 			connect.WithClientOptions(opts...),
 		),
-		deleteInventories: connect.NewClient[inventory.DeleteInventoriesRequest, inventory.DeleteInventoriesResponse](
+		deleteInventory: connect.NewClient[inventory.DeleteInventoryRequest, inventory.DeleteInventoryResponse](
 			httpClient,
-			baseURL+InventoryCommandServiceDeleteInventoriesProcedure,
-			connect.WithSchema(inventoryCommandServiceMethods.ByName("DeleteInventories")),
+			baseURL+InventoryCommandServiceDeleteInventoryProcedure,
+			connect.WithSchema(inventoryCommandServiceMethods.ByName("DeleteInventory")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -76,26 +76,26 @@ func NewInventoryCommandServiceClient(httpClient connect.HTTPClient, baseURL str
 
 // inventoryCommandServiceClient implements InventoryCommandServiceClient.
 type inventoryCommandServiceClient struct {
-	createInventories *connect.Client[inventory.CreateInventoriesRequest, inventory.CreateInventoriesResponse]
-	deleteInventories *connect.Client[inventory.DeleteInventoriesRequest, inventory.DeleteInventoriesResponse]
+	createInventory *connect.Client[inventory.CreateInventoryRequest, inventory.CreateInventoryResponse]
+	deleteInventory *connect.Client[inventory.DeleteInventoryRequest, inventory.DeleteInventoryResponse]
 }
 
-// CreateInventories calls inventory.v1.InventoryCommandService.CreateInventories.
-func (c *inventoryCommandServiceClient) CreateInventories(ctx context.Context, req *connect.Request[inventory.CreateInventoriesRequest]) (*connect.Response[inventory.CreateInventoriesResponse], error) {
-	return c.createInventories.CallUnary(ctx, req)
+// CreateInventory calls inventory.v1.InventoryCommandService.CreateInventory.
+func (c *inventoryCommandServiceClient) CreateInventory(ctx context.Context, req *connect.Request[inventory.CreateInventoryRequest]) (*connect.Response[inventory.CreateInventoryResponse], error) {
+	return c.createInventory.CallUnary(ctx, req)
 }
 
-// DeleteInventories calls inventory.v1.InventoryCommandService.DeleteInventories.
-func (c *inventoryCommandServiceClient) DeleteInventories(ctx context.Context, req *connect.Request[inventory.DeleteInventoriesRequest]) (*connect.Response[inventory.DeleteInventoriesResponse], error) {
-	return c.deleteInventories.CallUnary(ctx, req)
+// DeleteInventory calls inventory.v1.InventoryCommandService.DeleteInventory.
+func (c *inventoryCommandServiceClient) DeleteInventory(ctx context.Context, req *connect.Request[inventory.DeleteInventoryRequest]) (*connect.Response[inventory.DeleteInventoryResponse], error) {
+	return c.deleteInventory.CallUnary(ctx, req)
 }
 
 // InventoryCommandServiceHandler is an implementation of the inventory.v1.InventoryCommandService
 // service.
 type InventoryCommandServiceHandler interface {
 	// Public Commands
-	CreateInventories(context.Context, *connect.Request[inventory.CreateInventoriesRequest]) (*connect.Response[inventory.CreateInventoriesResponse], error)
-	DeleteInventories(context.Context, *connect.Request[inventory.DeleteInventoriesRequest]) (*connect.Response[inventory.DeleteInventoriesResponse], error)
+	CreateInventory(context.Context, *connect.Request[inventory.CreateInventoryRequest]) (*connect.Response[inventory.CreateInventoryResponse], error)
+	DeleteInventory(context.Context, *connect.Request[inventory.DeleteInventoryRequest]) (*connect.Response[inventory.DeleteInventoryResponse], error)
 }
 
 // NewInventoryCommandServiceHandler builds an HTTP handler from the service implementation. It
@@ -105,24 +105,24 @@ type InventoryCommandServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewInventoryCommandServiceHandler(svc InventoryCommandServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	inventoryCommandServiceMethods := inventory.File_inventory_inventory_command_proto.Services().ByName("InventoryCommandService").Methods()
-	inventoryCommandServiceCreateInventoriesHandler := connect.NewUnaryHandler(
-		InventoryCommandServiceCreateInventoriesProcedure,
-		svc.CreateInventories,
-		connect.WithSchema(inventoryCommandServiceMethods.ByName("CreateInventories")),
+	inventoryCommandServiceCreateInventoryHandler := connect.NewUnaryHandler(
+		InventoryCommandServiceCreateInventoryProcedure,
+		svc.CreateInventory,
+		connect.WithSchema(inventoryCommandServiceMethods.ByName("CreateInventory")),
 		connect.WithHandlerOptions(opts...),
 	)
-	inventoryCommandServiceDeleteInventoriesHandler := connect.NewUnaryHandler(
-		InventoryCommandServiceDeleteInventoriesProcedure,
-		svc.DeleteInventories,
-		connect.WithSchema(inventoryCommandServiceMethods.ByName("DeleteInventories")),
+	inventoryCommandServiceDeleteInventoryHandler := connect.NewUnaryHandler(
+		InventoryCommandServiceDeleteInventoryProcedure,
+		svc.DeleteInventory,
+		connect.WithSchema(inventoryCommandServiceMethods.ByName("DeleteInventory")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/inventory.v1.InventoryCommandService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case InventoryCommandServiceCreateInventoriesProcedure:
-			inventoryCommandServiceCreateInventoriesHandler.ServeHTTP(w, r)
-		case InventoryCommandServiceDeleteInventoriesProcedure:
-			inventoryCommandServiceDeleteInventoriesHandler.ServeHTTP(w, r)
+		case InventoryCommandServiceCreateInventoryProcedure:
+			inventoryCommandServiceCreateInventoryHandler.ServeHTTP(w, r)
+		case InventoryCommandServiceDeleteInventoryProcedure:
+			inventoryCommandServiceDeleteInventoryHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -132,10 +132,10 @@ func NewInventoryCommandServiceHandler(svc InventoryCommandServiceHandler, opts 
 // UnimplementedInventoryCommandServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedInventoryCommandServiceHandler struct{}
 
-func (UnimplementedInventoryCommandServiceHandler) CreateInventories(context.Context, *connect.Request[inventory.CreateInventoriesRequest]) (*connect.Response[inventory.CreateInventoriesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryCommandService.CreateInventories is not implemented"))
+func (UnimplementedInventoryCommandServiceHandler) CreateInventory(context.Context, *connect.Request[inventory.CreateInventoryRequest]) (*connect.Response[inventory.CreateInventoryResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryCommandService.CreateInventory is not implemented"))
 }
 
-func (UnimplementedInventoryCommandServiceHandler) DeleteInventories(context.Context, *connect.Request[inventory.DeleteInventoriesRequest]) (*connect.Response[inventory.DeleteInventoriesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryCommandService.DeleteInventories is not implemented"))
+func (UnimplementedInventoryCommandServiceHandler) DeleteInventory(context.Context, *connect.Request[inventory.DeleteInventoryRequest]) (*connect.Response[inventory.DeleteInventoryResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryCommandService.DeleteInventory is not implemented"))
 }

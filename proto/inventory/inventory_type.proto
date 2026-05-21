@@ -13,19 +13,19 @@ message InventoryItem {
   int32 quantity = 2 [(validate.rules).int32.gte = 0];
 }
 
-message CreateInventoriesRequest {
+message CreateInventoryRequest {
   string                 shop_id = 1 [(validate.rules).string.uuid = true];
   repeated InventoryItem items   = 2 [(validate.rules).repeated.min_items = 1];
 }
 
-message CreateInventoriesResponse {
+message CreateInventoryResponse {
   bool success = 1;
 }
 
-message DeleteInventoriesRequest {
-  repeated string sku_ids = 1 ;
+message DeleteInventoryRequest {
+  repeated string sku_ids = 1;
 }
 
-message DeleteInventoriesResponse {
+message DeleteInventoryResponse {
   bool success = 1;
 }

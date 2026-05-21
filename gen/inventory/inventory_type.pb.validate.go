@@ -160,22 +160,22 @@ var _ interface {
 	ErrorName() string
 } = InventoryItemValidationError{}
 
-// Validate checks the field values on CreateInventoriesRequest with the rules
+// Validate checks the field values on CreateInventoryRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *CreateInventoriesRequest) Validate() error {
+func (m *CreateInventoryRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on CreateInventoriesRequest with the
-// rules defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on CreateInventoryRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// CreateInventoriesRequestMultiError, or nil if none found.
-func (m *CreateInventoriesRequest) ValidateAll() error {
+// CreateInventoryRequestMultiError, or nil if none found.
+func (m *CreateInventoryRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *CreateInventoriesRequest) validate(all bool) error {
+func (m *CreateInventoryRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -183,7 +183,7 @@ func (m *CreateInventoriesRequest) validate(all bool) error {
 	var errors []error
 
 	if err := m._validateUuid(m.GetShopId()); err != nil {
-		err = CreateInventoriesRequestValidationError{
+		err = CreateInventoryRequestValidationError{
 			field:  "ShopId",
 			reason: "value must be a valid UUID",
 			cause:  err,
@@ -195,7 +195,7 @@ func (m *CreateInventoriesRequest) validate(all bool) error {
 	}
 
 	if len(m.GetItems()) < 1 {
-		err := CreateInventoriesRequestValidationError{
+		err := CreateInventoryRequestValidationError{
 			field:  "Items",
 			reason: "value must contain at least 1 item(s)",
 		}
@@ -212,7 +212,7 @@ func (m *CreateInventoriesRequest) validate(all bool) error {
 			switch v := interface{}(item).(type) {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, CreateInventoriesRequestValidationError{
+					errors = append(errors, CreateInventoryRequestValidationError{
 						field:  fmt.Sprintf("Items[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -220,7 +220,7 @@ func (m *CreateInventoriesRequest) validate(all bool) error {
 				}
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
-					errors = append(errors, CreateInventoriesRequestValidationError{
+					errors = append(errors, CreateInventoryRequestValidationError{
 						field:  fmt.Sprintf("Items[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
@@ -229,7 +229,7 @@ func (m *CreateInventoriesRequest) validate(all bool) error {
 			}
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
-				return CreateInventoriesRequestValidationError{
+				return CreateInventoryRequestValidationError{
 					field:  fmt.Sprintf("Items[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
@@ -240,13 +240,13 @@ func (m *CreateInventoriesRequest) validate(all bool) error {
 	}
 
 	if len(errors) > 0 {
-		return CreateInventoriesRequestMultiError(errors)
+		return CreateInventoryRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-func (m *CreateInventoriesRequest) _validateUuid(uuid string) error {
+func (m *CreateInventoryRequest) _validateUuid(uuid string) error {
 	if matched := _inventory_type_uuidPattern.MatchString(uuid); !matched {
 		return errors.New("invalid uuid format")
 	}
@@ -254,13 +254,13 @@ func (m *CreateInventoriesRequest) _validateUuid(uuid string) error {
 	return nil
 }
 
-// CreateInventoriesRequestMultiError is an error wrapping multiple validation
-// errors returned by CreateInventoriesRequest.ValidateAll() if the designated
+// CreateInventoryRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateInventoryRequest.ValidateAll() if the designated
 // constraints aren't met.
-type CreateInventoriesRequestMultiError []error
+type CreateInventoryRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CreateInventoriesRequestMultiError) Error() string {
+func (m CreateInventoryRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -269,11 +269,11 @@ func (m CreateInventoriesRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CreateInventoriesRequestMultiError) AllErrors() []error { return m }
+func (m CreateInventoryRequestMultiError) AllErrors() []error { return m }
 
-// CreateInventoriesRequestValidationError is the validation error returned by
-// CreateInventoriesRequest.Validate if the designated constraints aren't met.
-type CreateInventoriesRequestValidationError struct {
+// CreateInventoryRequestValidationError is the validation error returned by
+// CreateInventoryRequest.Validate if the designated constraints aren't met.
+type CreateInventoryRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -281,24 +281,24 @@ type CreateInventoriesRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e CreateInventoriesRequestValidationError) Field() string { return e.field }
+func (e CreateInventoryRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CreateInventoriesRequestValidationError) Reason() string { return e.reason }
+func (e CreateInventoryRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CreateInventoriesRequestValidationError) Cause() error { return e.cause }
+func (e CreateInventoryRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CreateInventoriesRequestValidationError) Key() bool { return e.key }
+func (e CreateInventoryRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CreateInventoriesRequestValidationError) ErrorName() string {
-	return "CreateInventoriesRequestValidationError"
+func (e CreateInventoryRequestValidationError) ErrorName() string {
+	return "CreateInventoryRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e CreateInventoriesRequestValidationError) Error() string {
+func (e CreateInventoryRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -310,14 +310,14 @@ func (e CreateInventoriesRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCreateInventoriesRequest.%s: %s%s",
+		"invalid %sCreateInventoryRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CreateInventoriesRequestValidationError{}
+var _ error = CreateInventoryRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -325,24 +325,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CreateInventoriesRequestValidationError{}
+} = CreateInventoryRequestValidationError{}
 
-// Validate checks the field values on CreateInventoriesResponse with the rules
+// Validate checks the field values on CreateInventoryResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *CreateInventoriesResponse) Validate() error {
+func (m *CreateInventoryResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on CreateInventoriesResponse with the
+// ValidateAll checks the field values on CreateInventoryResponse with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// CreateInventoriesResponseMultiError, or nil if none found.
-func (m *CreateInventoriesResponse) ValidateAll() error {
+// CreateInventoryResponseMultiError, or nil if none found.
+func (m *CreateInventoryResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *CreateInventoriesResponse) validate(all bool) error {
+func (m *CreateInventoryResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -352,19 +352,19 @@ func (m *CreateInventoriesResponse) validate(all bool) error {
 	// no validation rules for Success
 
 	if len(errors) > 0 {
-		return CreateInventoriesResponseMultiError(errors)
+		return CreateInventoryResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// CreateInventoriesResponseMultiError is an error wrapping multiple validation
-// errors returned by CreateInventoriesResponse.ValidateAll() if the
-// designated constraints aren't met.
-type CreateInventoriesResponseMultiError []error
+// CreateInventoryResponseMultiError is an error wrapping multiple validation
+// errors returned by CreateInventoryResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CreateInventoryResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m CreateInventoriesResponseMultiError) Error() string {
+func (m CreateInventoryResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -373,11 +373,11 @@ func (m CreateInventoriesResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m CreateInventoriesResponseMultiError) AllErrors() []error { return m }
+func (m CreateInventoryResponseMultiError) AllErrors() []error { return m }
 
-// CreateInventoriesResponseValidationError is the validation error returned by
-// CreateInventoriesResponse.Validate if the designated constraints aren't met.
-type CreateInventoriesResponseValidationError struct {
+// CreateInventoryResponseValidationError is the validation error returned by
+// CreateInventoryResponse.Validate if the designated constraints aren't met.
+type CreateInventoryResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -385,24 +385,24 @@ type CreateInventoriesResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e CreateInventoriesResponseValidationError) Field() string { return e.field }
+func (e CreateInventoryResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e CreateInventoriesResponseValidationError) Reason() string { return e.reason }
+func (e CreateInventoryResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e CreateInventoriesResponseValidationError) Cause() error { return e.cause }
+func (e CreateInventoryResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e CreateInventoriesResponseValidationError) Key() bool { return e.key }
+func (e CreateInventoryResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e CreateInventoriesResponseValidationError) ErrorName() string {
-	return "CreateInventoriesResponseValidationError"
+func (e CreateInventoryResponseValidationError) ErrorName() string {
+	return "CreateInventoryResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e CreateInventoriesResponseValidationError) Error() string {
+func (e CreateInventoryResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -414,14 +414,14 @@ func (e CreateInventoriesResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sCreateInventoriesResponse.%s: %s%s",
+		"invalid %sCreateInventoryResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = CreateInventoriesResponseValidationError{}
+var _ error = CreateInventoryResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -429,24 +429,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = CreateInventoriesResponseValidationError{}
+} = CreateInventoryResponseValidationError{}
 
-// Validate checks the field values on DeleteInventoriesRequest with the rules
+// Validate checks the field values on DeleteInventoryRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *DeleteInventoriesRequest) Validate() error {
+func (m *DeleteInventoryRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on DeleteInventoriesRequest with the
-// rules defined in the proto definition for this message. If any rules are
+// ValidateAll checks the field values on DeleteInventoryRequest with the rules
+// defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// DeleteInventoriesRequestMultiError, or nil if none found.
-func (m *DeleteInventoriesRequest) ValidateAll() error {
+// DeleteInventoryRequestMultiError, or nil if none found.
+func (m *DeleteInventoryRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *DeleteInventoriesRequest) validate(all bool) error {
+func (m *DeleteInventoryRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -454,19 +454,19 @@ func (m *DeleteInventoriesRequest) validate(all bool) error {
 	var errors []error
 
 	if len(errors) > 0 {
-		return DeleteInventoriesRequestMultiError(errors)
+		return DeleteInventoryRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// DeleteInventoriesRequestMultiError is an error wrapping multiple validation
-// errors returned by DeleteInventoriesRequest.ValidateAll() if the designated
+// DeleteInventoryRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteInventoryRequest.ValidateAll() if the designated
 // constraints aren't met.
-type DeleteInventoriesRequestMultiError []error
+type DeleteInventoryRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m DeleteInventoriesRequestMultiError) Error() string {
+func (m DeleteInventoryRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -475,11 +475,11 @@ func (m DeleteInventoriesRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m DeleteInventoriesRequestMultiError) AllErrors() []error { return m }
+func (m DeleteInventoryRequestMultiError) AllErrors() []error { return m }
 
-// DeleteInventoriesRequestValidationError is the validation error returned by
-// DeleteInventoriesRequest.Validate if the designated constraints aren't met.
-type DeleteInventoriesRequestValidationError struct {
+// DeleteInventoryRequestValidationError is the validation error returned by
+// DeleteInventoryRequest.Validate if the designated constraints aren't met.
+type DeleteInventoryRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -487,24 +487,24 @@ type DeleteInventoriesRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e DeleteInventoriesRequestValidationError) Field() string { return e.field }
+func (e DeleteInventoryRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e DeleteInventoriesRequestValidationError) Reason() string { return e.reason }
+func (e DeleteInventoryRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e DeleteInventoriesRequestValidationError) Cause() error { return e.cause }
+func (e DeleteInventoryRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e DeleteInventoriesRequestValidationError) Key() bool { return e.key }
+func (e DeleteInventoryRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e DeleteInventoriesRequestValidationError) ErrorName() string {
-	return "DeleteInventoriesRequestValidationError"
+func (e DeleteInventoryRequestValidationError) ErrorName() string {
+	return "DeleteInventoryRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e DeleteInventoriesRequestValidationError) Error() string {
+func (e DeleteInventoryRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -516,14 +516,14 @@ func (e DeleteInventoriesRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sDeleteInventoriesRequest.%s: %s%s",
+		"invalid %sDeleteInventoryRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = DeleteInventoriesRequestValidationError{}
+var _ error = DeleteInventoryRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -531,24 +531,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = DeleteInventoriesRequestValidationError{}
+} = DeleteInventoryRequestValidationError{}
 
-// Validate checks the field values on DeleteInventoriesResponse with the rules
+// Validate checks the field values on DeleteInventoryResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *DeleteInventoriesResponse) Validate() error {
+func (m *DeleteInventoryResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on DeleteInventoriesResponse with the
+// ValidateAll checks the field values on DeleteInventoryResponse with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// DeleteInventoriesResponseMultiError, or nil if none found.
-func (m *DeleteInventoriesResponse) ValidateAll() error {
+// DeleteInventoryResponseMultiError, or nil if none found.
+func (m *DeleteInventoryResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *DeleteInventoriesResponse) validate(all bool) error {
+func (m *DeleteInventoryResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -558,19 +558,19 @@ func (m *DeleteInventoriesResponse) validate(all bool) error {
 	// no validation rules for Success
 
 	if len(errors) > 0 {
-		return DeleteInventoriesResponseMultiError(errors)
+		return DeleteInventoryResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// DeleteInventoriesResponseMultiError is an error wrapping multiple validation
-// errors returned by DeleteInventoriesResponse.ValidateAll() if the
-// designated constraints aren't met.
-type DeleteInventoriesResponseMultiError []error
+// DeleteInventoryResponseMultiError is an error wrapping multiple validation
+// errors returned by DeleteInventoryResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteInventoryResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m DeleteInventoriesResponseMultiError) Error() string {
+func (m DeleteInventoryResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -579,11 +579,11 @@ func (m DeleteInventoriesResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m DeleteInventoriesResponseMultiError) AllErrors() []error { return m }
+func (m DeleteInventoryResponseMultiError) AllErrors() []error { return m }
 
-// DeleteInventoriesResponseValidationError is the validation error returned by
-// DeleteInventoriesResponse.Validate if the designated constraints aren't met.
-type DeleteInventoriesResponseValidationError struct {
+// DeleteInventoryResponseValidationError is the validation error returned by
+// DeleteInventoryResponse.Validate if the designated constraints aren't met.
+type DeleteInventoryResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -591,24 +591,24 @@ type DeleteInventoriesResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e DeleteInventoriesResponseValidationError) Field() string { return e.field }
+func (e DeleteInventoryResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e DeleteInventoriesResponseValidationError) Reason() string { return e.reason }
+func (e DeleteInventoryResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e DeleteInventoriesResponseValidationError) Cause() error { return e.cause }
+func (e DeleteInventoryResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e DeleteInventoriesResponseValidationError) Key() bool { return e.key }
+func (e DeleteInventoryResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e DeleteInventoriesResponseValidationError) ErrorName() string {
-	return "DeleteInventoriesResponseValidationError"
+func (e DeleteInventoryResponseValidationError) ErrorName() string {
+	return "DeleteInventoryResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e DeleteInventoriesResponseValidationError) Error() string {
+func (e DeleteInventoryResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -620,14 +620,14 @@ func (e DeleteInventoriesResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sDeleteInventoriesResponse.%s: %s%s",
+		"invalid %sDeleteInventoryResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = DeleteInventoriesResponseValidationError{}
+var _ error = DeleteInventoryResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -635,4 +635,4 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = DeleteInventoriesResponseValidationError{}
+} = DeleteInventoryResponseValidationError{}
