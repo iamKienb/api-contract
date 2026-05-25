@@ -24,21 +24,21 @@ var File_inventory_inventory_command_proto protoreflect.FileDescriptor
 
 const file_inventory_inventory_command_proto_rawDesc = "" +
 	"\n" +
-	"!inventory/inventory_command.proto\x12\finventory.v1\x1a\x1einventory/inventory_type.proto2\xd9\x01\n" +
-	"\x17InventoryCommandService\x12^\n" +
-	"\x0fCreateInventory\x12$.inventory.v1.CreateInventoryRequest\x1a%.inventory.v1.CreateInventoryResponse\x12^\n" +
+	"!inventory/inventory_command.proto\x12\finventory.v1\x1a\x1einventory/inventory_type.proto2\xdf\x01\n" +
+	"\x17InventoryCommandService\x12d\n" +
+	"\x11CreateInventories\x12&.inventory.v1.CreateInventoriesRequest\x1a'.inventory.v1.CreateInventoriesResponse\x12^\n" +
 	"\x0fDeleteInventory\x12$.inventory.v1.DeleteInventoryRequest\x1a%.inventory.v1.DeleteInventoryResponseB0Z.github.com/iamKienb/api-contract/gen/inventoryb\x06proto3"
 
 var file_inventory_inventory_command_proto_goTypes = []any{
-	(*CreateInventoryRequest)(nil),  // 0: inventory.v1.CreateInventoryRequest
-	(*DeleteInventoryRequest)(nil),  // 1: inventory.v1.DeleteInventoryRequest
-	(*CreateInventoryResponse)(nil), // 2: inventory.v1.CreateInventoryResponse
-	(*DeleteInventoryResponse)(nil), // 3: inventory.v1.DeleteInventoryResponse
+	(*CreateInventoriesRequest)(nil),  // 0: inventory.v1.CreateInventoriesRequest
+	(*DeleteInventoryRequest)(nil),    // 1: inventory.v1.DeleteInventoryRequest
+	(*CreateInventoriesResponse)(nil), // 2: inventory.v1.CreateInventoriesResponse
+	(*DeleteInventoryResponse)(nil),   // 3: inventory.v1.DeleteInventoryResponse
 }
 var file_inventory_inventory_command_proto_depIdxs = []int32{
-	0, // 0: inventory.v1.InventoryCommandService.CreateInventory:input_type -> inventory.v1.CreateInventoryRequest
+	0, // 0: inventory.v1.InventoryCommandService.CreateInventories:input_type -> inventory.v1.CreateInventoriesRequest
 	1, // 1: inventory.v1.InventoryCommandService.DeleteInventory:input_type -> inventory.v1.DeleteInventoryRequest
-	2, // 2: inventory.v1.InventoryCommandService.CreateInventory:output_type -> inventory.v1.CreateInventoryResponse
+	2, // 2: inventory.v1.InventoryCommandService.CreateInventories:output_type -> inventory.v1.CreateInventoriesResponse
 	3, // 3: inventory.v1.InventoryCommandService.DeleteInventory:output_type -> inventory.v1.DeleteInventoryResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
