@@ -35,9 +35,6 @@ var (
 	_ = sort.Sort
 )
 
-// define the regex for a UUID once up-front
-var _inventory_type_uuidPattern = regexp.MustCompile("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-
 // Validate checks the field values on InventoryItem with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -182,11 +179,10 @@ func (m *CreateInventoriesRequest) validate(all bool) error {
 
 	var errors []error
 
-	if err := m._validateUuid(m.GetShopId()); err != nil {
-		err = CreateInventoriesRequestValidationError{
+	if utf8.RuneCountInString(m.GetShopId()) < 1 {
+		err := CreateInventoriesRequestValidationError{
 			field:  "ShopId",
-			reason: "value must be a valid UUID",
-			cause:  err,
+			reason: "value length must be at least 1 runes",
 		}
 		if !all {
 			return err
@@ -241,14 +237,6 @@ func (m *CreateInventoriesRequest) validate(all bool) error {
 
 	if len(errors) > 0 {
 		return CreateInventoriesRequestMultiError(errors)
-	}
-
-	return nil
-}
-
-func (m *CreateInventoriesRequest) _validateUuid(uuid string) error {
-	if matched := _inventory_type_uuidPattern.MatchString(uuid); !matched {
-		return errors.New("invalid uuid format")
 	}
 
 	return nil
@@ -636,3 +624,2143 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = DeleteInventoryResponseValidationError{}
+
+// Validate checks the field values on StockReservationItem with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *StockReservationItem) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on StockReservationItem with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// StockReservationItemMultiError, or nil if none found.
+func (m *StockReservationItem) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *StockReservationItem) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetSkuId()) < 1 {
+		err := StockReservationItemValidationError{
+			field:  "SkuId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetQuantity() <= 0 {
+		err := StockReservationItemValidationError{
+			field:  "Quantity",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return StockReservationItemMultiError(errors)
+	}
+
+	return nil
+}
+
+// StockReservationItemMultiError is an error wrapping multiple validation
+// errors returned by StockReservationItem.ValidateAll() if the designated
+// constraints aren't met.
+type StockReservationItemMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m StockReservationItemMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m StockReservationItemMultiError) AllErrors() []error { return m }
+
+// StockReservationItemValidationError is the validation error returned by
+// StockReservationItem.Validate if the designated constraints aren't met.
+type StockReservationItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StockReservationItemValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e StockReservationItemValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e StockReservationItemValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e StockReservationItemValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e StockReservationItemValidationError) ErrorName() string {
+	return "StockReservationItemValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e StockReservationItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStockReservationItem.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StockReservationItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StockReservationItemValidationError{}
+
+// Validate checks the field values on ReserveStockRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ReserveStockRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReserveStockRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ReserveStockRequestMultiError, or nil if none found.
+func (m *ReserveStockRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReserveStockRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetShopId()) < 1 {
+		err := ReserveStockRequestValidationError{
+			field:  "ShopId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetOrderId()) < 1 {
+		err := ReserveStockRequestValidationError{
+			field:  "OrderId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(m.GetItems()) < 1 {
+		err := ReserveStockRequestValidationError{
+			field:  "Items",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	for idx, item := range m.GetItems() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ReserveStockRequestValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ReserveStockRequestValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ReserveStockRequestValidationError{
+					field:  fmt.Sprintf("Items[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ReserveStockRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReserveStockRequestMultiError is an error wrapping multiple validation
+// errors returned by ReserveStockRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ReserveStockRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReserveStockRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReserveStockRequestMultiError) AllErrors() []error { return m }
+
+// ReserveStockRequestValidationError is the validation error returned by
+// ReserveStockRequest.Validate if the designated constraints aren't met.
+type ReserveStockRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReserveStockRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReserveStockRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReserveStockRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReserveStockRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReserveStockRequestValidationError) ErrorName() string {
+	return "ReserveStockRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ReserveStockRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReserveStockRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReserveStockRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReserveStockRequestValidationError{}
+
+// Validate checks the field values on ReserveStockResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ReserveStockResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReserveStockResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ReserveStockResponseMultiError, or nil if none found.
+func (m *ReserveStockResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReserveStockResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Success
+
+	if len(errors) > 0 {
+		return ReserveStockResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReserveStockResponseMultiError is an error wrapping multiple validation
+// errors returned by ReserveStockResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ReserveStockResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReserveStockResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReserveStockResponseMultiError) AllErrors() []error { return m }
+
+// ReserveStockResponseValidationError is the validation error returned by
+// ReserveStockResponse.Validate if the designated constraints aren't met.
+type ReserveStockResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReserveStockResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReserveStockResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReserveStockResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReserveStockResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReserveStockResponseValidationError) ErrorName() string {
+	return "ReserveStockResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ReserveStockResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReserveStockResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReserveStockResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReserveStockResponseValidationError{}
+
+// Validate checks the field values on ReleaseStockRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ReleaseStockRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReleaseStockRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ReleaseStockRequestMultiError, or nil if none found.
+func (m *ReleaseStockRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReleaseStockRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetShopId()) < 1 {
+		err := ReleaseStockRequestValidationError{
+			field:  "ShopId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetOrderId()) < 1 {
+		err := ReleaseStockRequestValidationError{
+			field:  "OrderId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return ReleaseStockRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReleaseStockRequestMultiError is an error wrapping multiple validation
+// errors returned by ReleaseStockRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ReleaseStockRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReleaseStockRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReleaseStockRequestMultiError) AllErrors() []error { return m }
+
+// ReleaseStockRequestValidationError is the validation error returned by
+// ReleaseStockRequest.Validate if the designated constraints aren't met.
+type ReleaseStockRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReleaseStockRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReleaseStockRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReleaseStockRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReleaseStockRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReleaseStockRequestValidationError) ErrorName() string {
+	return "ReleaseStockRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ReleaseStockRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReleaseStockRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReleaseStockRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReleaseStockRequestValidationError{}
+
+// Validate checks the field values on ReleaseStockResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ReleaseStockResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ReleaseStockResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ReleaseStockResponseMultiError, or nil if none found.
+func (m *ReleaseStockResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ReleaseStockResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Success
+
+	if len(errors) > 0 {
+		return ReleaseStockResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReleaseStockResponseMultiError is an error wrapping multiple validation
+// errors returned by ReleaseStockResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ReleaseStockResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReleaseStockResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReleaseStockResponseMultiError) AllErrors() []error { return m }
+
+// ReleaseStockResponseValidationError is the validation error returned by
+// ReleaseStockResponse.Validate if the designated constraints aren't met.
+type ReleaseStockResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReleaseStockResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReleaseStockResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReleaseStockResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReleaseStockResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReleaseStockResponseValidationError) ErrorName() string {
+	return "ReleaseStockResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ReleaseStockResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReleaseStockResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReleaseStockResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReleaseStockResponseValidationError{}
+
+// Validate checks the field values on AdjustStockRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AdjustStockRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdjustStockRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdjustStockRequestMultiError, or nil if none found.
+func (m *AdjustStockRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdjustStockRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetShopId()) < 1 {
+		err := AdjustStockRequestValidationError{
+			field:  "ShopId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetSkuId()) < 1 {
+		err := AdjustStockRequestValidationError{
+			field:  "SkuId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for QuantityDelta
+
+	if utf8.RuneCountInString(m.GetReferenceType()) < 1 {
+		err := AdjustStockRequestValidationError{
+			field:  "ReferenceType",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetReferenceId()) < 1 {
+		err := AdjustStockRequestValidationError{
+			field:  "ReferenceId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for Note
+
+	// no validation rules for IdempotencyKey
+
+	if len(errors) > 0 {
+		return AdjustStockRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdjustStockRequestMultiError is an error wrapping multiple validation errors
+// returned by AdjustStockRequest.ValidateAll() if the designated constraints
+// aren't met.
+type AdjustStockRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdjustStockRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdjustStockRequestMultiError) AllErrors() []error { return m }
+
+// AdjustStockRequestValidationError is the validation error returned by
+// AdjustStockRequest.Validate if the designated constraints aren't met.
+type AdjustStockRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdjustStockRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdjustStockRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdjustStockRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdjustStockRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdjustStockRequestValidationError) ErrorName() string {
+	return "AdjustStockRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdjustStockRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdjustStockRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdjustStockRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdjustStockRequestValidationError{}
+
+// Validate checks the field values on AdjustStockResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *AdjustStockResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AdjustStockResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AdjustStockResponseMultiError, or nil if none found.
+func (m *AdjustStockResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AdjustStockResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Success
+
+	if len(errors) > 0 {
+		return AdjustStockResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// AdjustStockResponseMultiError is an error wrapping multiple validation
+// errors returned by AdjustStockResponse.ValidateAll() if the designated
+// constraints aren't met.
+type AdjustStockResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AdjustStockResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AdjustStockResponseMultiError) AllErrors() []error { return m }
+
+// AdjustStockResponseValidationError is the validation error returned by
+// AdjustStockResponse.Validate if the designated constraints aren't met.
+type AdjustStockResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AdjustStockResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AdjustStockResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AdjustStockResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AdjustStockResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AdjustStockResponseValidationError) ErrorName() string {
+	return "AdjustStockResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e AdjustStockResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAdjustStockResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AdjustStockResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AdjustStockResponseValidationError{}
+
+// Validate checks the field values on InventoryStockView with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *InventoryStockView) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on InventoryStockView with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// InventoryStockViewMultiError, or nil if none found.
+func (m *InventoryStockView) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *InventoryStockView) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for InventoryId
+
+	// no validation rules for SkuId
+
+	// no validation rules for ShopId
+
+	// no validation rules for Quantity
+
+	// no validation rules for Reserved
+
+	// no validation rules for Available
+
+	// no validation rules for Status
+
+	// no validation rules for UpdatedAt
+
+	if len(errors) > 0 {
+		return InventoryStockViewMultiError(errors)
+	}
+
+	return nil
+}
+
+// InventoryStockViewMultiError is an error wrapping multiple validation errors
+// returned by InventoryStockView.ValidateAll() if the designated constraints
+// aren't met.
+type InventoryStockViewMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m InventoryStockViewMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m InventoryStockViewMultiError) AllErrors() []error { return m }
+
+// InventoryStockViewValidationError is the validation error returned by
+// InventoryStockView.Validate if the designated constraints aren't met.
+type InventoryStockViewValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e InventoryStockViewValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e InventoryStockViewValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e InventoryStockViewValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e InventoryStockViewValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e InventoryStockViewValidationError) ErrorName() string {
+	return "InventoryStockViewValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e InventoryStockViewValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sInventoryStockView.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = InventoryStockViewValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = InventoryStockViewValidationError{}
+
+// Validate checks the field values on StockMovementView with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *StockMovementView) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on StockMovementView with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// StockMovementViewMultiError, or nil if none found.
+func (m *StockMovementView) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *StockMovementView) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for InventoryId
+
+	// no validation rules for SkuId
+
+	// no validation rules for ShopId
+
+	// no validation rules for Type
+
+	// no validation rules for Quantity
+
+	// no validation rules for BalanceBefore
+
+	// no validation rules for BalanceAfter
+
+	// no validation rules for ReferenceType
+
+	// no validation rules for ReferenceId
+
+	// no validation rules for CreatedAt
+
+	if len(errors) > 0 {
+		return StockMovementViewMultiError(errors)
+	}
+
+	return nil
+}
+
+// StockMovementViewMultiError is an error wrapping multiple validation errors
+// returned by StockMovementView.ValidateAll() if the designated constraints
+// aren't met.
+type StockMovementViewMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m StockMovementViewMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m StockMovementViewMultiError) AllErrors() []error { return m }
+
+// StockMovementViewValidationError is the validation error returned by
+// StockMovementView.Validate if the designated constraints aren't met.
+type StockMovementViewValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e StockMovementViewValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e StockMovementViewValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e StockMovementViewValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e StockMovementViewValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e StockMovementViewValidationError) ErrorName() string {
+	return "StockMovementViewValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e StockMovementViewValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sStockMovementView.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = StockMovementViewValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = StockMovementViewValidationError{}
+
+// Validate checks the field values on GetInventoryItemRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetInventoryItemRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetInventoryItemRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetInventoryItemRequestMultiError, or nil if none found.
+func (m *GetInventoryItemRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetInventoryItemRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetSkuId()) < 1 {
+		err := GetInventoryItemRequestValidationError{
+			field:  "SkuId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return GetInventoryItemRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetInventoryItemRequestMultiError is an error wrapping multiple validation
+// errors returned by GetInventoryItemRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetInventoryItemRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetInventoryItemRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetInventoryItemRequestMultiError) AllErrors() []error { return m }
+
+// GetInventoryItemRequestValidationError is the validation error returned by
+// GetInventoryItemRequest.Validate if the designated constraints aren't met.
+type GetInventoryItemRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetInventoryItemRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetInventoryItemRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetInventoryItemRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetInventoryItemRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetInventoryItemRequestValidationError) ErrorName() string {
+	return "GetInventoryItemRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetInventoryItemRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetInventoryItemRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetInventoryItemRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetInventoryItemRequestValidationError{}
+
+// Validate checks the field values on GetInventoryItemResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetInventoryItemResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetInventoryItemResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetInventoryItemResponseMultiError, or nil if none found.
+func (m *GetInventoryItemResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetInventoryItemResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetItem()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetInventoryItemResponseValidationError{
+					field:  "Item",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetInventoryItemResponseValidationError{
+					field:  "Item",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetItem()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetInventoryItemResponseValidationError{
+				field:  "Item",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetInventoryItemResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetInventoryItemResponseMultiError is an error wrapping multiple validation
+// errors returned by GetInventoryItemResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetInventoryItemResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetInventoryItemResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetInventoryItemResponseMultiError) AllErrors() []error { return m }
+
+// GetInventoryItemResponseValidationError is the validation error returned by
+// GetInventoryItemResponse.Validate if the designated constraints aren't met.
+type GetInventoryItemResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetInventoryItemResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetInventoryItemResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetInventoryItemResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetInventoryItemResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetInventoryItemResponseValidationError) ErrorName() string {
+	return "GetInventoryItemResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetInventoryItemResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetInventoryItemResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetInventoryItemResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetInventoryItemResponseValidationError{}
+
+// Validate checks the field values on ListInventoryItemsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListInventoryItemsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListInventoryItemsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListInventoryItemsRequestMultiError, or nil if none found.
+func (m *ListInventoryItemsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListInventoryItemsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetShopId()) < 1 {
+		err := ListInventoryItemsRequestValidationError{
+			field:  "ShopId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for PageSize
+
+	// no validation rules for PageToken
+
+	if len(errors) > 0 {
+		return ListInventoryItemsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListInventoryItemsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListInventoryItemsRequest.ValidateAll() if the
+// designated constraints aren't met.
+type ListInventoryItemsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListInventoryItemsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListInventoryItemsRequestMultiError) AllErrors() []error { return m }
+
+// ListInventoryItemsRequestValidationError is the validation error returned by
+// ListInventoryItemsRequest.Validate if the designated constraints aren't met.
+type ListInventoryItemsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListInventoryItemsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListInventoryItemsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListInventoryItemsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListInventoryItemsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListInventoryItemsRequestValidationError) ErrorName() string {
+	return "ListInventoryItemsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListInventoryItemsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListInventoryItemsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListInventoryItemsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListInventoryItemsRequestValidationError{}
+
+// Validate checks the field values on ListInventoryItemsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListInventoryItemsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListInventoryItemsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListInventoryItemsResponseMultiError, or nil if none found.
+func (m *ListInventoryItemsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListInventoryItemsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetItems() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListInventoryItemsResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListInventoryItemsResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListInventoryItemsResponseValidationError{
+					field:  fmt.Sprintf("Items[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for NextPageToken
+
+	if len(errors) > 0 {
+		return ListInventoryItemsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListInventoryItemsResponseMultiError is an error wrapping multiple
+// validation errors returned by ListInventoryItemsResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListInventoryItemsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListInventoryItemsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListInventoryItemsResponseMultiError) AllErrors() []error { return m }
+
+// ListInventoryItemsResponseValidationError is the validation error returned
+// by ListInventoryItemsResponse.Validate if the designated constraints aren't met.
+type ListInventoryItemsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListInventoryItemsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListInventoryItemsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListInventoryItemsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListInventoryItemsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListInventoryItemsResponseValidationError) ErrorName() string {
+	return "ListInventoryItemsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListInventoryItemsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListInventoryItemsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListInventoryItemsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListInventoryItemsResponseValidationError{}
+
+// Validate checks the field values on ListLowStockItemsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListLowStockItemsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListLowStockItemsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListLowStockItemsRequestMultiError, or nil if none found.
+func (m *ListLowStockItemsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListLowStockItemsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetShopId()) < 1 {
+		err := ListLowStockItemsRequestValidationError{
+			field:  "ShopId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for Threshold
+
+	// no validation rules for PageSize
+
+	// no validation rules for PageToken
+
+	if len(errors) > 0 {
+		return ListLowStockItemsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListLowStockItemsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListLowStockItemsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListLowStockItemsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListLowStockItemsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListLowStockItemsRequestMultiError) AllErrors() []error { return m }
+
+// ListLowStockItemsRequestValidationError is the validation error returned by
+// ListLowStockItemsRequest.Validate if the designated constraints aren't met.
+type ListLowStockItemsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListLowStockItemsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListLowStockItemsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListLowStockItemsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListLowStockItemsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListLowStockItemsRequestValidationError) ErrorName() string {
+	return "ListLowStockItemsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListLowStockItemsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListLowStockItemsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListLowStockItemsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListLowStockItemsRequestValidationError{}
+
+// Validate checks the field values on ListLowStockItemsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListLowStockItemsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListLowStockItemsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListLowStockItemsResponseMultiError, or nil if none found.
+func (m *ListLowStockItemsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListLowStockItemsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetItems() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListLowStockItemsResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListLowStockItemsResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListLowStockItemsResponseValidationError{
+					field:  fmt.Sprintf("Items[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for NextPageToken
+
+	if len(errors) > 0 {
+		return ListLowStockItemsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListLowStockItemsResponseMultiError is an error wrapping multiple validation
+// errors returned by ListLowStockItemsResponse.ValidateAll() if the
+// designated constraints aren't met.
+type ListLowStockItemsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListLowStockItemsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListLowStockItemsResponseMultiError) AllErrors() []error { return m }
+
+// ListLowStockItemsResponseValidationError is the validation error returned by
+// ListLowStockItemsResponse.Validate if the designated constraints aren't met.
+type ListLowStockItemsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListLowStockItemsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListLowStockItemsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListLowStockItemsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListLowStockItemsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListLowStockItemsResponseValidationError) ErrorName() string {
+	return "ListLowStockItemsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListLowStockItemsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListLowStockItemsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListLowStockItemsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListLowStockItemsResponseValidationError{}
+
+// Validate checks the field values on ListStockMovementsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListStockMovementsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListStockMovementsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListStockMovementsRequestMultiError, or nil if none found.
+func (m *ListStockMovementsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListStockMovementsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetSkuId()) < 1 {
+		err := ListStockMovementsRequestValidationError{
+			field:  "SkuId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for PageSize
+
+	// no validation rules for PageToken
+
+	if len(errors) > 0 {
+		return ListStockMovementsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListStockMovementsRequestMultiError is an error wrapping multiple validation
+// errors returned by ListStockMovementsRequest.ValidateAll() if the
+// designated constraints aren't met.
+type ListStockMovementsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListStockMovementsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListStockMovementsRequestMultiError) AllErrors() []error { return m }
+
+// ListStockMovementsRequestValidationError is the validation error returned by
+// ListStockMovementsRequest.Validate if the designated constraints aren't met.
+type ListStockMovementsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListStockMovementsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListStockMovementsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListStockMovementsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListStockMovementsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListStockMovementsRequestValidationError) ErrorName() string {
+	return "ListStockMovementsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListStockMovementsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListStockMovementsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListStockMovementsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListStockMovementsRequestValidationError{}
+
+// Validate checks the field values on ListStockMovementsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListStockMovementsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListStockMovementsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListStockMovementsResponseMultiError, or nil if none found.
+func (m *ListStockMovementsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListStockMovementsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetItems() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListStockMovementsResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListStockMovementsResponseValidationError{
+						field:  fmt.Sprintf("Items[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListStockMovementsResponseValidationError{
+					field:  fmt.Sprintf("Items[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for NextPageToken
+
+	if len(errors) > 0 {
+		return ListStockMovementsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListStockMovementsResponseMultiError is an error wrapping multiple
+// validation errors returned by ListStockMovementsResponse.ValidateAll() if
+// the designated constraints aren't met.
+type ListStockMovementsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListStockMovementsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListStockMovementsResponseMultiError) AllErrors() []error { return m }
+
+// ListStockMovementsResponseValidationError is the validation error returned
+// by ListStockMovementsResponse.Validate if the designated constraints aren't met.
+type ListStockMovementsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListStockMovementsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListStockMovementsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListStockMovementsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListStockMovementsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListStockMovementsResponseValidationError) ErrorName() string {
+	return "ListStockMovementsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListStockMovementsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListStockMovementsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListStockMovementsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListStockMovementsResponseValidationError{}

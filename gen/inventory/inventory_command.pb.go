@@ -24,24 +24,39 @@ var File_inventory_inventory_command_proto protoreflect.FileDescriptor
 
 const file_inventory_inventory_command_proto_rawDesc = "" +
 	"\n" +
-	"!inventory/inventory_command.proto\x12\finventory.v1\x1a\x1einventory/inventory_type.proto2\xdf\x01\n" +
+	"!inventory/inventory_command.proto\x12\finventory.v1\x1a\x1einventory/inventory_type.proto2\xe1\x03\n" +
 	"\x17InventoryCommandService\x12d\n" +
 	"\x11CreateInventories\x12&.inventory.v1.CreateInventoriesRequest\x1a'.inventory.v1.CreateInventoriesResponse\x12^\n" +
-	"\x0fDeleteInventory\x12$.inventory.v1.DeleteInventoryRequest\x1a%.inventory.v1.DeleteInventoryResponseB0Z.github.com/iamKienb/api-contract/gen/inventoryb\x06proto3"
+	"\x0fDeleteInventory\x12$.inventory.v1.DeleteInventoryRequest\x1a%.inventory.v1.DeleteInventoryResponse\x12U\n" +
+	"\fReserveStock\x12!.inventory.v1.ReserveStockRequest\x1a\".inventory.v1.ReserveStockResponse\x12U\n" +
+	"\fReleaseStock\x12!.inventory.v1.ReleaseStockRequest\x1a\".inventory.v1.ReleaseStockResponse\x12R\n" +
+	"\vAdjustStock\x12 .inventory.v1.AdjustStockRequest\x1a!.inventory.v1.AdjustStockResponseB0Z.github.com/iamKienb/api-contract/gen/inventoryb\x06proto3"
 
 var file_inventory_inventory_command_proto_goTypes = []any{
 	(*CreateInventoriesRequest)(nil),  // 0: inventory.v1.CreateInventoriesRequest
 	(*DeleteInventoryRequest)(nil),    // 1: inventory.v1.DeleteInventoryRequest
-	(*CreateInventoriesResponse)(nil), // 2: inventory.v1.CreateInventoriesResponse
-	(*DeleteInventoryResponse)(nil),   // 3: inventory.v1.DeleteInventoryResponse
+	(*ReserveStockRequest)(nil),       // 2: inventory.v1.ReserveStockRequest
+	(*ReleaseStockRequest)(nil),       // 3: inventory.v1.ReleaseStockRequest
+	(*AdjustStockRequest)(nil),        // 4: inventory.v1.AdjustStockRequest
+	(*CreateInventoriesResponse)(nil), // 5: inventory.v1.CreateInventoriesResponse
+	(*DeleteInventoryResponse)(nil),   // 6: inventory.v1.DeleteInventoryResponse
+	(*ReserveStockResponse)(nil),      // 7: inventory.v1.ReserveStockResponse
+	(*ReleaseStockResponse)(nil),      // 8: inventory.v1.ReleaseStockResponse
+	(*AdjustStockResponse)(nil),       // 9: inventory.v1.AdjustStockResponse
 }
 var file_inventory_inventory_command_proto_depIdxs = []int32{
 	0, // 0: inventory.v1.InventoryCommandService.CreateInventories:input_type -> inventory.v1.CreateInventoriesRequest
 	1, // 1: inventory.v1.InventoryCommandService.DeleteInventory:input_type -> inventory.v1.DeleteInventoryRequest
-	2, // 2: inventory.v1.InventoryCommandService.CreateInventories:output_type -> inventory.v1.CreateInventoriesResponse
-	3, // 3: inventory.v1.InventoryCommandService.DeleteInventory:output_type -> inventory.v1.DeleteInventoryResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	2, // 2: inventory.v1.InventoryCommandService.ReserveStock:input_type -> inventory.v1.ReserveStockRequest
+	3, // 3: inventory.v1.InventoryCommandService.ReleaseStock:input_type -> inventory.v1.ReleaseStockRequest
+	4, // 4: inventory.v1.InventoryCommandService.AdjustStock:input_type -> inventory.v1.AdjustStockRequest
+	5, // 5: inventory.v1.InventoryCommandService.CreateInventories:output_type -> inventory.v1.CreateInventoriesResponse
+	6, // 6: inventory.v1.InventoryCommandService.DeleteInventory:output_type -> inventory.v1.DeleteInventoryResponse
+	7, // 7: inventory.v1.InventoryCommandService.ReserveStock:output_type -> inventory.v1.ReserveStockResponse
+	8, // 8: inventory.v1.InventoryCommandService.ReleaseStock:output_type -> inventory.v1.ReleaseStockResponse
+	9, // 9: inventory.v1.InventoryCommandService.AdjustStock:output_type -> inventory.v1.AdjustStockResponse
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

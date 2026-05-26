@@ -9,4 +9,7 @@ service InventoryCommandService {
   //  Public Commands
   rpc CreateInventories(CreateInventoriesRequest) returns (CreateInventoriesResponse);
   rpc DeleteInventory(DeleteInventoryRequest) returns (DeleteInventoryResponse);
+  rpc ReserveStock(ReserveStockRequest) returns (ReserveStockResponse);
+  rpc ReleaseStock(ReleaseStockRequest) returns (ReleaseStockResponse);
+  rpc AdjustStock(AdjustStockRequest) returns (AdjustStockResponse);
 }

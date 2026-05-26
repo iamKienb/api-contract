@@ -1,0 +1,13 @@
+syntax = "proto3";
+package inventory.v1;
+
+import "inventory/inventory_type.proto";
+
+option go_package = "github.com/iamKienb/api-contract/gen/inventory";
+
+service InventoryQueryService {
+  rpc GetInventoryItem(GetInventoryItemRequest) returns (GetInventoryItemResponse);
+  rpc ListInventoryItems(ListInventoryItemsRequest) returns (ListInventoryItemsResponse);
+  rpc ListLowStockItems(ListLowStockItemsRequest) returns (ListLowStockItemsResponse);
+  rpc ListStockMovements(ListStockMovementsRequest) returns (ListStockMovementsResponse);
+}

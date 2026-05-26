@@ -39,6 +39,15 @@ const (
 	// InventoryCommandServiceDeleteInventoryProcedure is the fully-qualified name of the
 	// InventoryCommandService's DeleteInventory RPC.
 	InventoryCommandServiceDeleteInventoryProcedure = "/inventory.v1.InventoryCommandService/DeleteInventory"
+	// InventoryCommandServiceReserveStockProcedure is the fully-qualified name of the
+	// InventoryCommandService's ReserveStock RPC.
+	InventoryCommandServiceReserveStockProcedure = "/inventory.v1.InventoryCommandService/ReserveStock"
+	// InventoryCommandServiceReleaseStockProcedure is the fully-qualified name of the
+	// InventoryCommandService's ReleaseStock RPC.
+	InventoryCommandServiceReleaseStockProcedure = "/inventory.v1.InventoryCommandService/ReleaseStock"
+	// InventoryCommandServiceAdjustStockProcedure is the fully-qualified name of the
+	// InventoryCommandService's AdjustStock RPC.
+	InventoryCommandServiceAdjustStockProcedure = "/inventory.v1.InventoryCommandService/AdjustStock"
 )
 
 // InventoryCommandServiceClient is a client for the inventory.v1.InventoryCommandService service.
@@ -46,6 +55,9 @@ type InventoryCommandServiceClient interface {
 	// Public Commands
 	CreateInventories(context.Context, *connect.Request[inventory.CreateInventoriesRequest]) (*connect.Response[inventory.CreateInventoriesResponse], error)
 	DeleteInventory(context.Context, *connect.Request[inventory.DeleteInventoryRequest]) (*connect.Response[inventory.DeleteInventoryResponse], error)
+	ReserveStock(context.Context, *connect.Request[inventory.ReserveStockRequest]) (*connect.Response[inventory.ReserveStockResponse], error)
+	ReleaseStock(context.Context, *connect.Request[inventory.ReleaseStockRequest]) (*connect.Response[inventory.ReleaseStockResponse], error)
+	AdjustStock(context.Context, *connect.Request[inventory.AdjustStockRequest]) (*connect.Response[inventory.AdjustStockResponse], error)
 }
 
 // NewInventoryCommandServiceClient constructs a client for the inventory.v1.InventoryCommandService
@@ -71,6 +83,24 @@ func NewInventoryCommandServiceClient(httpClient connect.HTTPClient, baseURL str
 			connect.WithSchema(inventoryCommandServiceMethods.ByName("DeleteInventory")),
 			connect.WithClientOptions(opts...),
 		),
+		reserveStock: connect.NewClient[inventory.ReserveStockRequest, inventory.ReserveStockResponse](
+			httpClient,
+			baseURL+InventoryCommandServiceReserveStockProcedure,
+			connect.WithSchema(inventoryCommandServiceMethods.ByName("ReserveStock")),
+			connect.WithClientOptions(opts...),
+		),
+		releaseStock: connect.NewClient[inventory.ReleaseStockRequest, inventory.ReleaseStockResponse](
+			httpClient,
+			baseURL+InventoryCommandServiceReleaseStockProcedure,
+			connect.WithSchema(inventoryCommandServiceMethods.ByName("ReleaseStock")),
+			connect.WithClientOptions(opts...),
+		),
+		adjustStock: connect.NewClient[inventory.AdjustStockRequest, inventory.AdjustStockResponse](
+			httpClient,
+			baseURL+InventoryCommandServiceAdjustStockProcedure,
+			connect.WithSchema(inventoryCommandServiceMethods.ByName("AdjustStock")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -78,6 +108,9 @@ func NewInventoryCommandServiceClient(httpClient connect.HTTPClient, baseURL str
 type inventoryCommandServiceClient struct {
 	createInventories *connect.Client[inventory.CreateInventoriesRequest, inventory.CreateInventoriesResponse]
 	deleteInventory   *connect.Client[inventory.DeleteInventoryRequest, inventory.DeleteInventoryResponse]
+	reserveStock      *connect.Client[inventory.ReserveStockRequest, inventory.ReserveStockResponse]
+	releaseStock      *connect.Client[inventory.ReleaseStockRequest, inventory.ReleaseStockResponse]
+	adjustStock       *connect.Client[inventory.AdjustStockRequest, inventory.AdjustStockResponse]
 }
 
 // CreateInventories calls inventory.v1.InventoryCommandService.CreateInventories.
@@ -90,12 +123,30 @@ func (c *inventoryCommandServiceClient) DeleteInventory(ctx context.Context, req
 	return c.deleteInventory.CallUnary(ctx, req)
 }
 
+// ReserveStock calls inventory.v1.InventoryCommandService.ReserveStock.
+func (c *inventoryCommandServiceClient) ReserveStock(ctx context.Context, req *connect.Request[inventory.ReserveStockRequest]) (*connect.Response[inventory.ReserveStockResponse], error) {
+	return c.reserveStock.CallUnary(ctx, req)
+}
+
+// ReleaseStock calls inventory.v1.InventoryCommandService.ReleaseStock.
+func (c *inventoryCommandServiceClient) ReleaseStock(ctx context.Context, req *connect.Request[inventory.ReleaseStockRequest]) (*connect.Response[inventory.ReleaseStockResponse], error) {
+	return c.releaseStock.CallUnary(ctx, req)
+}
+
+// AdjustStock calls inventory.v1.InventoryCommandService.AdjustStock.
+func (c *inventoryCommandServiceClient) AdjustStock(ctx context.Context, req *connect.Request[inventory.AdjustStockRequest]) (*connect.Response[inventory.AdjustStockResponse], error) {
+	return c.adjustStock.CallUnary(ctx, req)
+}
+
 // InventoryCommandServiceHandler is an implementation of the inventory.v1.InventoryCommandService
 // service.
 type InventoryCommandServiceHandler interface {
 	// Public Commands
 	CreateInventories(context.Context, *connect.Request[inventory.CreateInventoriesRequest]) (*connect.Response[inventory.CreateInventoriesResponse], error)
 	DeleteInventory(context.Context, *connect.Request[inventory.DeleteInventoryRequest]) (*connect.Response[inventory.DeleteInventoryResponse], error)
+	ReserveStock(context.Context, *connect.Request[inventory.ReserveStockRequest]) (*connect.Response[inventory.ReserveStockResponse], error)
+	ReleaseStock(context.Context, *connect.Request[inventory.ReleaseStockRequest]) (*connect.Response[inventory.ReleaseStockResponse], error)
+	AdjustStock(context.Context, *connect.Request[inventory.AdjustStockRequest]) (*connect.Response[inventory.AdjustStockResponse], error)
 }
 
 // NewInventoryCommandServiceHandler builds an HTTP handler from the service implementation. It
@@ -117,12 +168,36 @@ func NewInventoryCommandServiceHandler(svc InventoryCommandServiceHandler, opts 
 		connect.WithSchema(inventoryCommandServiceMethods.ByName("DeleteInventory")),
 		connect.WithHandlerOptions(opts...),
 	)
+	inventoryCommandServiceReserveStockHandler := connect.NewUnaryHandler(
+		InventoryCommandServiceReserveStockProcedure,
+		svc.ReserveStock,
+		connect.WithSchema(inventoryCommandServiceMethods.ByName("ReserveStock")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryCommandServiceReleaseStockHandler := connect.NewUnaryHandler(
+		InventoryCommandServiceReleaseStockProcedure,
+		svc.ReleaseStock,
+		connect.WithSchema(inventoryCommandServiceMethods.ByName("ReleaseStock")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryCommandServiceAdjustStockHandler := connect.NewUnaryHandler(
+		InventoryCommandServiceAdjustStockProcedure,
+		svc.AdjustStock,
+		connect.WithSchema(inventoryCommandServiceMethods.ByName("AdjustStock")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/inventory.v1.InventoryCommandService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case InventoryCommandServiceCreateInventoriesProcedure:
 			inventoryCommandServiceCreateInventoriesHandler.ServeHTTP(w, r)
 		case InventoryCommandServiceDeleteInventoryProcedure:
 			inventoryCommandServiceDeleteInventoryHandler.ServeHTTP(w, r)
+		case InventoryCommandServiceReserveStockProcedure:
+			inventoryCommandServiceReserveStockHandler.ServeHTTP(w, r)
+		case InventoryCommandServiceReleaseStockProcedure:
+			inventoryCommandServiceReleaseStockHandler.ServeHTTP(w, r)
+		case InventoryCommandServiceAdjustStockProcedure:
+			inventoryCommandServiceAdjustStockHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -138,4 +213,16 @@ func (UnimplementedInventoryCommandServiceHandler) CreateInventories(context.Con
 
 func (UnimplementedInventoryCommandServiceHandler) DeleteInventory(context.Context, *connect.Request[inventory.DeleteInventoryRequest]) (*connect.Response[inventory.DeleteInventoryResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryCommandService.DeleteInventory is not implemented"))
+}
+
+func (UnimplementedInventoryCommandServiceHandler) ReserveStock(context.Context, *connect.Request[inventory.ReserveStockRequest]) (*connect.Response[inventory.ReserveStockResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryCommandService.ReserveStock is not implemented"))
+}
+
+func (UnimplementedInventoryCommandServiceHandler) ReleaseStock(context.Context, *connect.Request[inventory.ReleaseStockRequest]) (*connect.Response[inventory.ReleaseStockResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryCommandService.ReleaseStock is not implemented"))
+}
+
+func (UnimplementedInventoryCommandServiceHandler) AdjustStock(context.Context, *connect.Request[inventory.AdjustStockRequest]) (*connect.Response[inventory.AdjustStockResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryCommandService.AdjustStock is not implemented"))
 }

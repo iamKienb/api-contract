@@ -14,7 +14,7 @@ message InventoryItem {
 }
 
 message CreateInventoriesRequest {
-  string                 shop_id = 1 [(validate.rules).string.uuid = true];
+  string                 shop_id = 1 [(validate.rules).string.min_len = 1];
   repeated InventoryItem items   = 2 [(validate.rules).repeated.min_items = 1];
 }
 
@@ -28,4 +28,114 @@ message DeleteInventoryRequest {
 
 message DeleteInventoryResponse {
   bool success = 1;
+}
+
+message StockReservationItem {
+  string sku_id = 1 [(validate.rules).string.min_len = 1];
+
+  int32 quantity = 2 [(validate.rules).int32.gt = 0];
+}
+
+message ReserveStockRequest {
+  string shop_id  = 1 [(validate.rules).string.min_len = 1];
+  string order_id = 2 [(validate.rules).string.min_len = 1];
+
+  repeated StockReservationItem items = 3 [(validate.rules).repeated.min_items = 1];
+}
+
+message ReserveStockResponse {
+  bool success = 1;
+}
+
+message ReleaseStockRequest {
+  string shop_id  = 1 [(validate.rules).string.min_len = 1];
+  string order_id = 2 [(validate.rules).string.min_len = 1];
+}
+
+message ReleaseStockResponse {
+  bool success = 1;
+}
+
+message AdjustStockRequest {
+  string shop_id         = 1 [(validate.rules).string.min_len = 1];
+  string sku_id          = 2 [(validate.rules).string.min_len = 1];
+  int64  quantity_delta  = 3;
+  string reference_type  = 4 [(validate.rules).string.min_len = 1];
+  string reference_id    = 5 [(validate.rules).string.min_len = 1];
+  string note            = 6;
+  string idempotency_key = 7;
+}
+
+message AdjustStockResponse {
+  bool success = 1;
+}
+
+message InventoryStockView {
+  string inventory_id = 1;
+  string sku_id       = 2;
+  string shop_id      = 3;
+  int64  quantity     = 4;
+  int64  reserved     = 5;
+  int64  available    = 6;
+  string status       = 7;
+  string updated_at   = 8;
+}
+
+message StockMovementView {
+  string id             = 1;
+  string inventory_id   = 2;
+  string sku_id         = 3;
+  string shop_id        = 4;
+  string type           = 5;
+  int64  quantity       = 6;
+  int64  balance_before = 7;
+  int64  balance_after  = 8;
+  string reference_type = 9;
+  string reference_id   = 10;
+  string created_at     = 11;
+}
+
+message GetInventoryItemRequest {
+  string sku_id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message GetInventoryItemResponse {
+  InventoryStockView item = 1;
+}
+
+message ListInventoryItemsRequest {
+  string shop_id    = 1 [(validate.rules).string.min_len = 1];
+  int32  page_size  = 2;
+  string page_token = 3;
+}
+
+message ListInventoryItemsResponse {
+  repeated InventoryStockView items           = 1;
+  int64                       total           = 2;
+  string                      next_page_token = 3;
+}
+
+message ListLowStockItemsRequest {
+  string shop_id    = 1 [(validate.rules).string.min_len = 1];
+  int64  threshold  = 2;
+  int32  page_size  = 3;
+  string page_token = 4;
+}
+
+message ListLowStockItemsResponse {
+  repeated InventoryStockView items           = 1;
+  int64                       total           = 2;
+  string                      next_page_token = 3;
+}
+
+message ListStockMovementsRequest {
+  string sku_id     = 1 [(validate.rules).string.min_len = 1];
+  int32  page_size  = 2;
+  string page_token = 3;
+}
+
+message ListStockMovementsResponse {
+  repeated StockMovementView items           = 1;
+  int64                      total           = 2;
+  string                     next_page_token = 3;
 }
