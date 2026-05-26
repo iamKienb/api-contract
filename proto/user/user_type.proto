@@ -4,6 +4,7 @@ package user.v1;
 
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 
 option go_package = "github.com/iamKienb/api-contract/gen/user";
 
@@ -60,18 +61,67 @@ message AddUserAddressResponse {
   string address_id = 1;
 }
 
-message GetDetailRequest {
-
+message UserProfileView {
+  string full_name = 1;
+  string gender    = 2;
+  google.protobuf.Struct extra = 3;
 }
 
-message GetDetailResponse {
-
+message UserAddressView {
+  string id            = 1;
+  string user_id       = 2;
+  string full_address  = 3;
+  string address_line  = 4;
+  string receiver_name = 5;
+  string phone_number  = 6;
+  string label         = 7;
+  bool   is_default    = 8;
+  google.protobuf.Struct extra = 9;
 }
 
-message ListAddressesRequest {
-
+message UserView {
+  string id      = 1;
+  string email   = 2;
+  string status  = 3;
+  repeated string roles = 4;
+  UserProfileView profile = 5;
+  repeated UserAddressView addresses = 6;
+  google.protobuf.Struct extra = 7;
 }
 
-message ListAddressesResponse {
+message GetUserDetailRequest {
+  string user_id = 1 [(validate.rules).string.min_len = 1];
+}
 
+message GetUserDetailResponse {
+  UserView user = 1;
+}
+
+message GetUserProfileRequest {
+  string user_id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message GetUserProfileResponse {
+  UserProfileView profile = 1;
+}
+
+message ListUserAddressesRequest {
+  string user_id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message ListUserAddressesResponse {
+  repeated UserAddressView addresses = 1;
+}
+
+message SearchUsersRequest {
+  string keyword = 1;
+  string status = 2;
+  int32 page_size = 3;
+  string page_token = 4;
+}
+
+message SearchUsersResponse {
+  repeated UserView users = 1;
+  int64 total = 2;
+  string next_page_token = 3;
 }

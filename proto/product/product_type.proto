@@ -4,6 +4,7 @@ package product.v1;
 
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 
 option go_package = "github.com/iamKienb/api-contract/gen/product";
 
@@ -39,4 +40,76 @@ message CreateProductsRequest {
 
 message CreateProductsResponse {
   string workflow_id = 1;
+}
+
+message ProductVariantView {
+  string sku_id    = 1;
+  string sku_code  = 2;
+  int64  price     = 3;
+  string currency  = 4;
+  string image_url = 5;
+  google.protobuf.Struct extra = 6;
+}
+
+message ProductCategoryView {
+  string category_id = 1;
+  string name        = 2;
+  string slug        = 3;
+  google.protobuf.Struct extra = 4;
+}
+
+message ProductView {
+  string product_id  = 1;
+  string shop_id     = 2;
+  string name        = 3;
+  string slug        = 4;
+  string description = 5;
+  string brand       = 6;
+  string thumb_url   = 7;
+  string video_url   = 8;
+  int64  price_min   = 9;
+  int64  price_max   = 10;
+  string status      = 11;
+  bool   has_variant = 12;
+  repeated ProductVariantView variants = 13;
+  repeated ProductCategoryView categories = 14;
+  google.protobuf.Struct extra = 15;
+}
+
+message GetProductDetailRequest {
+  string product_id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message GetProductDetailResponse {
+  ProductView product = 1;
+}
+
+message SearchProductsRequest {
+  string shop_id = 1;
+  string keyword = 2;
+  string status = 3;
+  int32 page_size = 4;
+  string page_token = 5;
+}
+
+message SearchProductsResponse {
+  repeated ProductView products = 1;
+  int64 total = 2;
+  string next_page_token = 3;
+}
+
+message ListProductVariantsRequest {
+  string product_id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message ListProductVariantsResponse {
+  repeated ProductVariantView variants = 1;
+}
+
+message ListProductCategoriesRequest {
+  string product_id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message ListProductCategoriesResponse {
+  repeated ProductCategoryView categories = 1;
 }

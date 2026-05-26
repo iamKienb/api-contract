@@ -6,6 +6,8 @@ import "user/user_type.proto";
 option go_package = "github.com/iamKienb/api-contract/gen/user";
 
 service UserQueryService {
-  rpc GetShopDetail(GetDetailRequest) returns (GetDetailResponse);
-  rpc ListAddresses(ListAddressesRequest) returns (ListAddressesResponse);
+  rpc GetUserDetail(GetUserDetailRequest) returns (GetUserDetailResponse);
+  rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse);
+  rpc ListUserAddresses(ListUserAddressesRequest) returns (ListUserAddressesResponse);
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse);
 }

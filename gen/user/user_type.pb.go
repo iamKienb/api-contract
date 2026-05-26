@@ -10,6 +10,7 @@ import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -519,26 +520,29 @@ func (x *AddUserAddressResponse) GetAddressId() string {
 	return ""
 }
 
-type GetDetailRequest struct {
+type UserProfileView struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	FullName      string                 `protobuf:"bytes,1,opt,name=full_name,json=fullName,proto3" json:"full_name,omitempty"`
+	Gender        string                 `protobuf:"bytes,2,opt,name=gender,proto3" json:"gender,omitempty"`
+	Extra         *structpb.Struct       `protobuf:"bytes,3,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetDetailRequest) Reset() {
-	*x = GetDetailRequest{}
+func (x *UserProfileView) Reset() {
+	*x = UserProfileView{}
 	mi := &file_user_user_type_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetDetailRequest) String() string {
+func (x *UserProfileView) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetDetailRequest) ProtoMessage() {}
+func (*UserProfileView) ProtoMessage() {}
 
-func (x *GetDetailRequest) ProtoReflect() protoreflect.Message {
+func (x *UserProfileView) ProtoReflect() protoreflect.Message {
 	mi := &file_user_user_type_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -550,31 +554,61 @@ func (x *GetDetailRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetDetailRequest.ProtoReflect.Descriptor instead.
-func (*GetDetailRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserProfileView.ProtoReflect.Descriptor instead.
+func (*UserProfileView) Descriptor() ([]byte, []int) {
 	return file_user_user_type_proto_rawDescGZIP(), []int{8}
 }
 
-type GetDetailResponse struct {
+func (x *UserProfileView) GetFullName() string {
+	if x != nil {
+		return x.FullName
+	}
+	return ""
+}
+
+func (x *UserProfileView) GetGender() string {
+	if x != nil {
+		return x.Gender
+	}
+	return ""
+}
+
+func (x *UserProfileView) GetExtra() *structpb.Struct {
+	if x != nil {
+		return x.Extra
+	}
+	return nil
+}
+
+type UserAddressView struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	FullAddress   string                 `protobuf:"bytes,3,opt,name=full_address,json=fullAddress,proto3" json:"full_address,omitempty"`
+	AddressLine   string                 `protobuf:"bytes,4,opt,name=address_line,json=addressLine,proto3" json:"address_line,omitempty"`
+	ReceiverName  string                 `protobuf:"bytes,5,opt,name=receiver_name,json=receiverName,proto3" json:"receiver_name,omitempty"`
+	PhoneNumber   string                 `protobuf:"bytes,6,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
+	Label         string                 `protobuf:"bytes,7,opt,name=label,proto3" json:"label,omitempty"`
+	IsDefault     bool                   `protobuf:"varint,8,opt,name=is_default,json=isDefault,proto3" json:"is_default,omitempty"`
+	Extra         *structpb.Struct       `protobuf:"bytes,9,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetDetailResponse) Reset() {
-	*x = GetDetailResponse{}
+func (x *UserAddressView) Reset() {
+	*x = UserAddressView{}
 	mi := &file_user_user_type_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetDetailResponse) String() string {
+func (x *UserAddressView) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetDetailResponse) ProtoMessage() {}
+func (*UserAddressView) ProtoMessage() {}
 
-func (x *GetDetailResponse) ProtoReflect() protoreflect.Message {
+func (x *UserAddressView) ProtoReflect() protoreflect.Message {
 	mi := &file_user_user_type_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -586,31 +620,101 @@ func (x *GetDetailResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetDetailResponse.ProtoReflect.Descriptor instead.
-func (*GetDetailResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserAddressView.ProtoReflect.Descriptor instead.
+func (*UserAddressView) Descriptor() ([]byte, []int) {
 	return file_user_user_type_proto_rawDescGZIP(), []int{9}
 }
 
-type ListAddressesRequest struct {
+func (x *UserAddressView) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *UserAddressView) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *UserAddressView) GetFullAddress() string {
+	if x != nil {
+		return x.FullAddress
+	}
+	return ""
+}
+
+func (x *UserAddressView) GetAddressLine() string {
+	if x != nil {
+		return x.AddressLine
+	}
+	return ""
+}
+
+func (x *UserAddressView) GetReceiverName() string {
+	if x != nil {
+		return x.ReceiverName
+	}
+	return ""
+}
+
+func (x *UserAddressView) GetPhoneNumber() string {
+	if x != nil {
+		return x.PhoneNumber
+	}
+	return ""
+}
+
+func (x *UserAddressView) GetLabel() string {
+	if x != nil {
+		return x.Label
+	}
+	return ""
+}
+
+func (x *UserAddressView) GetIsDefault() bool {
+	if x != nil {
+		return x.IsDefault
+	}
+	return false
+}
+
+func (x *UserAddressView) GetExtra() *structpb.Struct {
+	if x != nil {
+		return x.Extra
+	}
+	return nil
+}
+
+type UserView struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	Status        string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
+	Roles         []string               `protobuf:"bytes,4,rep,name=roles,proto3" json:"roles,omitempty"`
+	Profile       *UserProfileView       `protobuf:"bytes,5,opt,name=profile,proto3" json:"profile,omitempty"`
+	Addresses     []*UserAddressView     `protobuf:"bytes,6,rep,name=addresses,proto3" json:"addresses,omitempty"`
+	Extra         *structpb.Struct       `protobuf:"bytes,7,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListAddressesRequest) Reset() {
-	*x = ListAddressesRequest{}
+func (x *UserView) Reset() {
+	*x = UserView{}
 	mi := &file_user_user_type_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListAddressesRequest) String() string {
+func (x *UserView) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListAddressesRequest) ProtoMessage() {}
+func (*UserView) ProtoMessage() {}
 
-func (x *ListAddressesRequest) ProtoReflect() protoreflect.Message {
+func (x *UserView) ProtoReflect() protoreflect.Message {
 	mi := &file_user_user_type_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -622,31 +726,81 @@ func (x *ListAddressesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListAddressesRequest.ProtoReflect.Descriptor instead.
-func (*ListAddressesRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserView.ProtoReflect.Descriptor instead.
+func (*UserView) Descriptor() ([]byte, []int) {
 	return file_user_user_type_proto_rawDescGZIP(), []int{10}
 }
 
-type ListAddressesResponse struct {
+func (x *UserView) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *UserView) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *UserView) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *UserView) GetRoles() []string {
+	if x != nil {
+		return x.Roles
+	}
+	return nil
+}
+
+func (x *UserView) GetProfile() *UserProfileView {
+	if x != nil {
+		return x.Profile
+	}
+	return nil
+}
+
+func (x *UserView) GetAddresses() []*UserAddressView {
+	if x != nil {
+		return x.Addresses
+	}
+	return nil
+}
+
+func (x *UserView) GetExtra() *structpb.Struct {
+	if x != nil {
+		return x.Extra
+	}
+	return nil
+}
+
+type GetUserDetailRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListAddressesResponse) Reset() {
-	*x = ListAddressesResponse{}
+func (x *GetUserDetailRequest) Reset() {
+	*x = GetUserDetailRequest{}
 	mi := &file_user_user_type_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListAddressesResponse) String() string {
+func (x *GetUserDetailRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListAddressesResponse) ProtoMessage() {}
+func (*GetUserDetailRequest) ProtoMessage() {}
 
-func (x *ListAddressesResponse) ProtoReflect() protoreflect.Message {
+func (x *GetUserDetailRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_user_user_type_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -658,16 +812,371 @@ func (x *ListAddressesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListAddressesResponse.ProtoReflect.Descriptor instead.
-func (*ListAddressesResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserDetailRequest.ProtoReflect.Descriptor instead.
+func (*GetUserDetailRequest) Descriptor() ([]byte, []int) {
 	return file_user_user_type_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *GetUserDetailRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+type GetUserDetailResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	User          *UserView              `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserDetailResponse) Reset() {
+	*x = GetUserDetailResponse{}
+	mi := &file_user_user_type_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserDetailResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserDetailResponse) ProtoMessage() {}
+
+func (x *GetUserDetailResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_user_type_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserDetailResponse.ProtoReflect.Descriptor instead.
+func (*GetUserDetailResponse) Descriptor() ([]byte, []int) {
+	return file_user_user_type_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *GetUserDetailResponse) GetUser() *UserView {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+type GetUserProfileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserProfileRequest) Reset() {
+	*x = GetUserProfileRequest{}
+	mi := &file_user_user_type_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserProfileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserProfileRequest) ProtoMessage() {}
+
+func (x *GetUserProfileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_user_type_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserProfileRequest.ProtoReflect.Descriptor instead.
+func (*GetUserProfileRequest) Descriptor() ([]byte, []int) {
+	return file_user_user_type_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetUserProfileRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+type GetUserProfileResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Profile       *UserProfileView       `protobuf:"bytes,1,opt,name=profile,proto3" json:"profile,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserProfileResponse) Reset() {
+	*x = GetUserProfileResponse{}
+	mi := &file_user_user_type_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserProfileResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserProfileResponse) ProtoMessage() {}
+
+func (x *GetUserProfileResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_user_type_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserProfileResponse.ProtoReflect.Descriptor instead.
+func (*GetUserProfileResponse) Descriptor() ([]byte, []int) {
+	return file_user_user_type_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetUserProfileResponse) GetProfile() *UserProfileView {
+	if x != nil {
+		return x.Profile
+	}
+	return nil
+}
+
+type ListUserAddressesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUserAddressesRequest) Reset() {
+	*x = ListUserAddressesRequest{}
+	mi := &file_user_user_type_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUserAddressesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUserAddressesRequest) ProtoMessage() {}
+
+func (x *ListUserAddressesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_user_type_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUserAddressesRequest.ProtoReflect.Descriptor instead.
+func (*ListUserAddressesRequest) Descriptor() ([]byte, []int) {
+	return file_user_user_type_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *ListUserAddressesRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+type ListUserAddressesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Addresses     []*UserAddressView     `protobuf:"bytes,1,rep,name=addresses,proto3" json:"addresses,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUserAddressesResponse) Reset() {
+	*x = ListUserAddressesResponse{}
+	mi := &file_user_user_type_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUserAddressesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUserAddressesResponse) ProtoMessage() {}
+
+func (x *ListUserAddressesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_user_type_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUserAddressesResponse.ProtoReflect.Descriptor instead.
+func (*ListUserAddressesResponse) Descriptor() ([]byte, []int) {
+	return file_user_user_type_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ListUserAddressesResponse) GetAddresses() []*UserAddressView {
+	if x != nil {
+		return x.Addresses
+	}
+	return nil
+}
+
+type SearchUsersRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Keyword       string                 `protobuf:"bytes,1,opt,name=keyword,proto3" json:"keyword,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageToken     string                 `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SearchUsersRequest) Reset() {
+	*x = SearchUsersRequest{}
+	mi := &file_user_user_type_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SearchUsersRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchUsersRequest) ProtoMessage() {}
+
+func (x *SearchUsersRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_user_type_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchUsersRequest.ProtoReflect.Descriptor instead.
+func (*SearchUsersRequest) Descriptor() ([]byte, []int) {
+	return file_user_user_type_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *SearchUsersRequest) GetKeyword() string {
+	if x != nil {
+		return x.Keyword
+	}
+	return ""
+}
+
+func (x *SearchUsersRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *SearchUsersRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *SearchUsersRequest) GetPageToken() string {
+	if x != nil {
+		return x.PageToken
+	}
+	return ""
+}
+
+type SearchUsersResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Users         []*UserView            `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
+	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	NextPageToken string                 `protobuf:"bytes,3,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SearchUsersResponse) Reset() {
+	*x = SearchUsersResponse{}
+	mi := &file_user_user_type_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SearchUsersResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchUsersResponse) ProtoMessage() {}
+
+func (x *SearchUsersResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_user_type_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchUsersResponse.ProtoReflect.Descriptor instead.
+func (*SearchUsersResponse) Descriptor() ([]byte, []int) {
+	return file_user_user_type_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *SearchUsersResponse) GetUsers() []*UserView {
+	if x != nil {
+		return x.Users
+	}
+	return nil
+}
+
+func (x *SearchUsersResponse) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *SearchUsersResponse) GetNextPageToken() string {
+	if x != nil {
+		return x.NextPageToken
+	}
+	return ""
 }
 
 var File_user_user_type_proto protoreflect.FileDescriptor
 
 const file_user_user_type_proto_rawDesc = "" +
 	"\n" +
-	"\x14user/user_type.proto\x12\auser.v1\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"k\n" +
+	"\x14user/user_type.proto\x12\auser.v1\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\"k\n" +
 	"\x0fUserProfileInfo\x12$\n" +
 	"\tfull_name\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\bfullName\x122\n" +
 	"\x06gender\x18\x04 \x01(\tB\x1a\xfaB\x17r\x15R\x04MaleR\x06FemaleR\x05OtherR\x06gender\"\x97\x01\n" +
@@ -705,11 +1214,52 @@ const file_user_user_type_proto_rawDesc = "" +
 	" \x01(\bR\tisDefault\"7\n" +
 	"\x16AddUserAddressResponse\x12\x1d\n" +
 	"\n" +
-	"address_id\x18\x01 \x01(\tR\taddressId\"\x12\n" +
-	"\x10GetDetailRequest\"\x13\n" +
-	"\x11GetDetailResponse\"\x16\n" +
-	"\x14ListAddressesRequest\"\x17\n" +
-	"\x15ListAddressesResponseB+Z)github.com/iamKienb/api-contract/gen/userb\x06proto3"
+	"address_id\x18\x01 \x01(\tR\taddressId\"u\n" +
+	"\x0fUserProfileView\x12\x1b\n" +
+	"\tfull_name\x18\x01 \x01(\tR\bfullName\x12\x16\n" +
+	"\x06gender\x18\x02 \x01(\tR\x06gender\x12-\n" +
+	"\x05extra\x18\x03 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xac\x02\n" +
+	"\x0fUserAddressView\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12!\n" +
+	"\ffull_address\x18\x03 \x01(\tR\vfullAddress\x12!\n" +
+	"\faddress_line\x18\x04 \x01(\tR\vaddressLine\x12#\n" +
+	"\rreceiver_name\x18\x05 \x01(\tR\freceiverName\x12!\n" +
+	"\fphone_number\x18\x06 \x01(\tR\vphoneNumber\x12\x14\n" +
+	"\x05label\x18\a \x01(\tR\x05label\x12\x1d\n" +
+	"\n" +
+	"is_default\x18\b \x01(\bR\tisDefault\x12-\n" +
+	"\x05extra\x18\t \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xf9\x01\n" +
+	"\bUserView\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x16\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\x12\x14\n" +
+	"\x05roles\x18\x04 \x03(\tR\x05roles\x122\n" +
+	"\aprofile\x18\x05 \x01(\v2\x18.user.v1.UserProfileViewR\aprofile\x126\n" +
+	"\taddresses\x18\x06 \x03(\v2\x18.user.v1.UserAddressViewR\taddresses\x12-\n" +
+	"\x05extra\x18\a \x01(\v2\x17.google.protobuf.StructR\x05extra\"8\n" +
+	"\x14GetUserDetailRequest\x12 \n" +
+	"\auser_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06userId\">\n" +
+	"\x15GetUserDetailResponse\x12%\n" +
+	"\x04user\x18\x01 \x01(\v2\x11.user.v1.UserViewR\x04user\"9\n" +
+	"\x15GetUserProfileRequest\x12 \n" +
+	"\auser_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06userId\"L\n" +
+	"\x16GetUserProfileResponse\x122\n" +
+	"\aprofile\x18\x01 \x01(\v2\x18.user.v1.UserProfileViewR\aprofile\"<\n" +
+	"\x18ListUserAddressesRequest\x12 \n" +
+	"\auser_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06userId\"S\n" +
+	"\x19ListUserAddressesResponse\x126\n" +
+	"\taddresses\x18\x01 \x03(\v2\x18.user.v1.UserAddressViewR\taddresses\"\x82\x01\n" +
+	"\x12SearchUsersRequest\x12\x18\n" +
+	"\akeyword\x18\x01 \x01(\tR\akeyword\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1b\n" +
+	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_token\x18\x04 \x01(\tR\tpageToken\"|\n" +
+	"\x13SearchUsersResponse\x12'\n" +
+	"\x05users\x18\x01 \x03(\v2\x11.user.v1.UserViewR\x05users\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\x12&\n" +
+	"\x0fnext_page_token\x18\x03 \x01(\tR\rnextPageTokenB+Z)github.com/iamKienb/api-contract/gen/userb\x06proto3"
 
 var (
 	file_user_user_type_proto_rawDescOnce sync.Once
@@ -723,36 +1273,53 @@ func file_user_user_type_proto_rawDescGZIP() []byte {
 	return file_user_user_type_proto_rawDescData
 }
 
-var file_user_user_type_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_user_user_type_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_user_user_type_proto_goTypes = []any{
-	(*UserProfileInfo)(nil),        // 0: user.v1.UserProfileInfo
-	(*RegisterUserRequest)(nil),    // 1: user.v1.RegisterUserRequest
-	(*RegisterUserResponse)(nil),   // 2: user.v1.RegisterUserResponse
-	(*LoginUserRequest)(nil),       // 3: user.v1.LoginUserRequest
-	(*LoginUserResponse)(nil),      // 4: user.v1.LoginUserResponse
-	(*LocationInfo)(nil),           // 5: user.v1.LocationInfo
-	(*AddUserAddressRequest)(nil),  // 6: user.v1.AddUserAddressRequest
-	(*AddUserAddressResponse)(nil), // 7: user.v1.AddUserAddressResponse
-	(*GetDetailRequest)(nil),       // 8: user.v1.GetDetailRequest
-	(*GetDetailResponse)(nil),      // 9: user.v1.GetDetailResponse
-	(*ListAddressesRequest)(nil),   // 10: user.v1.ListAddressesRequest
-	(*ListAddressesResponse)(nil),  // 11: user.v1.ListAddressesResponse
-	(*timestamppb.Timestamp)(nil),  // 12: google.protobuf.Timestamp
+	(*UserProfileInfo)(nil),           // 0: user.v1.UserProfileInfo
+	(*RegisterUserRequest)(nil),       // 1: user.v1.RegisterUserRequest
+	(*RegisterUserResponse)(nil),      // 2: user.v1.RegisterUserResponse
+	(*LoginUserRequest)(nil),          // 3: user.v1.LoginUserRequest
+	(*LoginUserResponse)(nil),         // 4: user.v1.LoginUserResponse
+	(*LocationInfo)(nil),              // 5: user.v1.LocationInfo
+	(*AddUserAddressRequest)(nil),     // 6: user.v1.AddUserAddressRequest
+	(*AddUserAddressResponse)(nil),    // 7: user.v1.AddUserAddressResponse
+	(*UserProfileView)(nil),           // 8: user.v1.UserProfileView
+	(*UserAddressView)(nil),           // 9: user.v1.UserAddressView
+	(*UserView)(nil),                  // 10: user.v1.UserView
+	(*GetUserDetailRequest)(nil),      // 11: user.v1.GetUserDetailRequest
+	(*GetUserDetailResponse)(nil),     // 12: user.v1.GetUserDetailResponse
+	(*GetUserProfileRequest)(nil),     // 13: user.v1.GetUserProfileRequest
+	(*GetUserProfileResponse)(nil),    // 14: user.v1.GetUserProfileResponse
+	(*ListUserAddressesRequest)(nil),  // 15: user.v1.ListUserAddressesRequest
+	(*ListUserAddressesResponse)(nil), // 16: user.v1.ListUserAddressesResponse
+	(*SearchUsersRequest)(nil),        // 17: user.v1.SearchUsersRequest
+	(*SearchUsersResponse)(nil),       // 18: user.v1.SearchUsersResponse
+	(*timestamppb.Timestamp)(nil),     // 19: google.protobuf.Timestamp
+	(*structpb.Struct)(nil),           // 20: google.protobuf.Struct
 }
 var file_user_user_type_proto_depIdxs = []int32{
 	0,  // 0: user.v1.RegisterUserRequest.profile:type_name -> user.v1.UserProfileInfo
-	12, // 1: user.v1.RegisterUserResponse.expires_at:type_name -> google.protobuf.Timestamp
-	12, // 2: user.v1.LoginUserResponse.access_expires_at:type_name -> google.protobuf.Timestamp
-	12, // 3: user.v1.LoginUserResponse.refresh_expires_at:type_name -> google.protobuf.Timestamp
+	19, // 1: user.v1.RegisterUserResponse.expires_at:type_name -> google.protobuf.Timestamp
+	19, // 2: user.v1.LoginUserResponse.access_expires_at:type_name -> google.protobuf.Timestamp
+	19, // 3: user.v1.LoginUserResponse.refresh_expires_at:type_name -> google.protobuf.Timestamp
 	5,  // 4: user.v1.AddUserAddressRequest.country:type_name -> user.v1.LocationInfo
 	5,  // 5: user.v1.AddUserAddressRequest.city:type_name -> user.v1.LocationInfo
 	5,  // 6: user.v1.AddUserAddressRequest.district:type_name -> user.v1.LocationInfo
 	5,  // 7: user.v1.AddUserAddressRequest.ward:type_name -> user.v1.LocationInfo
-	8,  // [8:8] is the sub-list for method output_type
-	8,  // [8:8] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	20, // 8: user.v1.UserProfileView.extra:type_name -> google.protobuf.Struct
+	20, // 9: user.v1.UserAddressView.extra:type_name -> google.protobuf.Struct
+	8,  // 10: user.v1.UserView.profile:type_name -> user.v1.UserProfileView
+	9,  // 11: user.v1.UserView.addresses:type_name -> user.v1.UserAddressView
+	20, // 12: user.v1.UserView.extra:type_name -> google.protobuf.Struct
+	10, // 13: user.v1.GetUserDetailResponse.user:type_name -> user.v1.UserView
+	8,  // 14: user.v1.GetUserProfileResponse.profile:type_name -> user.v1.UserProfileView
+	9,  // 15: user.v1.ListUserAddressesResponse.addresses:type_name -> user.v1.UserAddressView
+	10, // 16: user.v1.SearchUsersResponse.users:type_name -> user.v1.UserView
+	17, // [17:17] is the sub-list for method output_type
+	17, // [17:17] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_user_user_type_proto_init() }
@@ -766,7 +1333,7 @@ func file_user_user_type_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_user_type_proto_rawDesc), len(file_user_user_type_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -24,24 +24,34 @@ var File_user_user_query_proto protoreflect.FileDescriptor
 
 const file_user_user_query_proto_rawDesc = "" +
 	"\n" +
-	"\x15user/user_query.proto\x12\auser.v1\x1a\x14user/user_type.proto2\xaa\x01\n" +
-	"\x10UserQueryService\x12F\n" +
-	"\rGetShopDetail\x12\x19.user.v1.GetDetailRequest\x1a\x1a.user.v1.GetDetailResponse\x12N\n" +
-	"\rListAddresses\x12\x1d.user.v1.ListAddressesRequest\x1a\x1e.user.v1.ListAddressesResponseB+Z)github.com/iamKienb/api-contract/gen/userb\x06proto3"
+	"\x15user/user_query.proto\x12\auser.v1\x1a\x14user/user_type.proto2\xdb\x02\n" +
+	"\x10UserQueryService\x12N\n" +
+	"\rGetUserDetail\x12\x1d.user.v1.GetUserDetailRequest\x1a\x1e.user.v1.GetUserDetailResponse\x12Q\n" +
+	"\x0eGetUserProfile\x12\x1e.user.v1.GetUserProfileRequest\x1a\x1f.user.v1.GetUserProfileResponse\x12Z\n" +
+	"\x11ListUserAddresses\x12!.user.v1.ListUserAddressesRequest\x1a\".user.v1.ListUserAddressesResponse\x12H\n" +
+	"\vSearchUsers\x12\x1b.user.v1.SearchUsersRequest\x1a\x1c.user.v1.SearchUsersResponseB+Z)github.com/iamKienb/api-contract/gen/userb\x06proto3"
 
 var file_user_user_query_proto_goTypes = []any{
-	(*GetDetailRequest)(nil),      // 0: user.v1.GetDetailRequest
-	(*ListAddressesRequest)(nil),  // 1: user.v1.ListAddressesRequest
-	(*GetDetailResponse)(nil),     // 2: user.v1.GetDetailResponse
-	(*ListAddressesResponse)(nil), // 3: user.v1.ListAddressesResponse
+	(*GetUserDetailRequest)(nil),      // 0: user.v1.GetUserDetailRequest
+	(*GetUserProfileRequest)(nil),     // 1: user.v1.GetUserProfileRequest
+	(*ListUserAddressesRequest)(nil),  // 2: user.v1.ListUserAddressesRequest
+	(*SearchUsersRequest)(nil),        // 3: user.v1.SearchUsersRequest
+	(*GetUserDetailResponse)(nil),     // 4: user.v1.GetUserDetailResponse
+	(*GetUserProfileResponse)(nil),    // 5: user.v1.GetUserProfileResponse
+	(*ListUserAddressesResponse)(nil), // 6: user.v1.ListUserAddressesResponse
+	(*SearchUsersResponse)(nil),       // 7: user.v1.SearchUsersResponse
 }
 var file_user_user_query_proto_depIdxs = []int32{
-	0, // 0: user.v1.UserQueryService.GetShopDetail:input_type -> user.v1.GetDetailRequest
-	1, // 1: user.v1.UserQueryService.ListAddresses:input_type -> user.v1.ListAddressesRequest
-	2, // 2: user.v1.UserQueryService.GetShopDetail:output_type -> user.v1.GetDetailResponse
-	3, // 3: user.v1.UserQueryService.ListAddresses:output_type -> user.v1.ListAddressesResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	0, // 0: user.v1.UserQueryService.GetUserDetail:input_type -> user.v1.GetUserDetailRequest
+	1, // 1: user.v1.UserQueryService.GetUserProfile:input_type -> user.v1.GetUserProfileRequest
+	2, // 2: user.v1.UserQueryService.ListUserAddresses:input_type -> user.v1.ListUserAddressesRequest
+	3, // 3: user.v1.UserQueryService.SearchUsers:input_type -> user.v1.SearchUsersRequest
+	4, // 4: user.v1.UserQueryService.GetUserDetail:output_type -> user.v1.GetUserDetailResponse
+	5, // 5: user.v1.UserQueryService.GetUserProfile:output_type -> user.v1.GetUserProfileResponse
+	6, // 6: user.v1.UserQueryService.ListUserAddresses:output_type -> user.v1.ListUserAddressesResponse
+	7, // 7: user.v1.UserQueryService.SearchUsers:output_type -> user.v1.SearchUsersResponse
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

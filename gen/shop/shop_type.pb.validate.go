@@ -1723,3 +1723,1639 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = CheckPermissionResponseValidationError{}
+
+// Validate checks the field values on ShopProfileView with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ShopProfileView) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ShopProfileView with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ShopProfileViewMultiError, or nil if none found.
+func (m *ShopProfileView) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ShopProfileView) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Description
+
+	// no validation rules for LogoUrl
+
+	// no validation rules for BannerUrl
+
+	if all {
+		switch v := interface{}(m.GetExtra()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ShopProfileViewValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ShopProfileViewValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ShopProfileViewValidationError{
+				field:  "Extra",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ShopProfileViewMultiError(errors)
+	}
+
+	return nil
+}
+
+// ShopProfileViewMultiError is an error wrapping multiple validation errors
+// returned by ShopProfileView.ValidateAll() if the designated constraints
+// aren't met.
+type ShopProfileViewMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ShopProfileViewMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ShopProfileViewMultiError) AllErrors() []error { return m }
+
+// ShopProfileViewValidationError is the validation error returned by
+// ShopProfileView.Validate if the designated constraints aren't met.
+type ShopProfileViewValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ShopProfileViewValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ShopProfileViewValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ShopProfileViewValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ShopProfileViewValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ShopProfileViewValidationError) ErrorName() string { return "ShopProfileViewValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ShopProfileViewValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sShopProfileView.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ShopProfileViewValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ShopProfileViewValidationError{}
+
+// Validate checks the field values on ShopAddressView with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ShopAddressView) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ShopAddressView with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ShopAddressViewMultiError, or nil if none found.
+func (m *ShopAddressView) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ShopAddressView) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for ShopId
+
+	// no validation rules for FullAddress
+
+	// no validation rules for AddressLine
+
+	// no validation rules for ContactName
+
+	// no validation rules for PhoneNumber
+
+	// no validation rules for Type
+
+	if all {
+		switch v := interface{}(m.GetExtra()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ShopAddressViewValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ShopAddressViewValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ShopAddressViewValidationError{
+				field:  "Extra",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ShopAddressViewMultiError(errors)
+	}
+
+	return nil
+}
+
+// ShopAddressViewMultiError is an error wrapping multiple validation errors
+// returned by ShopAddressView.ValidateAll() if the designated constraints
+// aren't met.
+type ShopAddressViewMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ShopAddressViewMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ShopAddressViewMultiError) AllErrors() []error { return m }
+
+// ShopAddressViewValidationError is the validation error returned by
+// ShopAddressView.Validate if the designated constraints aren't met.
+type ShopAddressViewValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ShopAddressViewValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ShopAddressViewValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ShopAddressViewValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ShopAddressViewValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ShopAddressViewValidationError) ErrorName() string { return "ShopAddressViewValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ShopAddressViewValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sShopAddressView.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ShopAddressViewValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ShopAddressViewValidationError{}
+
+// Validate checks the field values on ShopMemberView with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ShopMemberView) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ShopMemberView with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ShopMemberViewMultiError,
+// or nil if none found.
+func (m *ShopMemberView) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ShopMemberView) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Name
+
+	if all {
+		switch v := interface{}(m.GetExtra()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ShopMemberViewValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ShopMemberViewValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ShopMemberViewValidationError{
+				field:  "Extra",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ShopMemberViewMultiError(errors)
+	}
+
+	return nil
+}
+
+// ShopMemberViewMultiError is an error wrapping multiple validation errors
+// returned by ShopMemberView.ValidateAll() if the designated constraints
+// aren't met.
+type ShopMemberViewMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ShopMemberViewMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ShopMemberViewMultiError) AllErrors() []error { return m }
+
+// ShopMemberViewValidationError is the validation error returned by
+// ShopMemberView.Validate if the designated constraints aren't met.
+type ShopMemberViewValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ShopMemberViewValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ShopMemberViewValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ShopMemberViewValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ShopMemberViewValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ShopMemberViewValidationError) ErrorName() string { return "ShopMemberViewValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ShopMemberViewValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sShopMemberView.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ShopMemberViewValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ShopMemberViewValidationError{}
+
+// Validate checks the field values on ShopView with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *ShopView) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ShopView with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in ShopViewMultiError, or nil
+// if none found.
+func (m *ShopView) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ShopView) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ShopId
+
+	// no validation rules for Name
+
+	// no validation rules for Slug
+
+	// no validation rules for Status
+
+	if all {
+		switch v := interface{}(m.GetProfile()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ShopViewValidationError{
+					field:  "Profile",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ShopViewValidationError{
+					field:  "Profile",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetProfile()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ShopViewValidationError{
+				field:  "Profile",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	for idx, item := range m.GetAddresses() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ShopViewValidationError{
+						field:  fmt.Sprintf("Addresses[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ShopViewValidationError{
+						field:  fmt.Sprintf("Addresses[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ShopViewValidationError{
+					field:  fmt.Sprintf("Addresses[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetMembers() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ShopViewValidationError{
+						field:  fmt.Sprintf("Members[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ShopViewValidationError{
+						field:  fmt.Sprintf("Members[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ShopViewValidationError{
+					field:  fmt.Sprintf("Members[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if all {
+		switch v := interface{}(m.GetExtra()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ShopViewValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ShopViewValidationError{
+					field:  "Extra",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ShopViewValidationError{
+				field:  "Extra",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return ShopViewMultiError(errors)
+	}
+
+	return nil
+}
+
+// ShopViewMultiError is an error wrapping multiple validation errors returned
+// by ShopView.ValidateAll() if the designated constraints aren't met.
+type ShopViewMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ShopViewMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ShopViewMultiError) AllErrors() []error { return m }
+
+// ShopViewValidationError is the validation error returned by
+// ShopView.Validate if the designated constraints aren't met.
+type ShopViewValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ShopViewValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ShopViewValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ShopViewValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ShopViewValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ShopViewValidationError) ErrorName() string { return "ShopViewValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ShopViewValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sShopView.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ShopViewValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ShopViewValidationError{}
+
+// Validate checks the field values on GetShopDetailRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetShopDetailRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetShopDetailRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetShopDetailRequestMultiError, or nil if none found.
+func (m *GetShopDetailRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetShopDetailRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetShopId()) < 1 {
+		err := GetShopDetailRequestValidationError{
+			field:  "ShopId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return GetShopDetailRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetShopDetailRequestMultiError is an error wrapping multiple validation
+// errors returned by GetShopDetailRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetShopDetailRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetShopDetailRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetShopDetailRequestMultiError) AllErrors() []error { return m }
+
+// GetShopDetailRequestValidationError is the validation error returned by
+// GetShopDetailRequest.Validate if the designated constraints aren't met.
+type GetShopDetailRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetShopDetailRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetShopDetailRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetShopDetailRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetShopDetailRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetShopDetailRequestValidationError) ErrorName() string {
+	return "GetShopDetailRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetShopDetailRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetShopDetailRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetShopDetailRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetShopDetailRequestValidationError{}
+
+// Validate checks the field values on GetShopDetailResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetShopDetailResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetShopDetailResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetShopDetailResponseMultiError, or nil if none found.
+func (m *GetShopDetailResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetShopDetailResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetShop()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetShopDetailResponseValidationError{
+					field:  "Shop",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetShopDetailResponseValidationError{
+					field:  "Shop",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetShop()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetShopDetailResponseValidationError{
+				field:  "Shop",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetShopDetailResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetShopDetailResponseMultiError is an error wrapping multiple validation
+// errors returned by GetShopDetailResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetShopDetailResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetShopDetailResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetShopDetailResponseMultiError) AllErrors() []error { return m }
+
+// GetShopDetailResponseValidationError is the validation error returned by
+// GetShopDetailResponse.Validate if the designated constraints aren't met.
+type GetShopDetailResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetShopDetailResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetShopDetailResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetShopDetailResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetShopDetailResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetShopDetailResponseValidationError) ErrorName() string {
+	return "GetShopDetailResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetShopDetailResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetShopDetailResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetShopDetailResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetShopDetailResponseValidationError{}
+
+// Validate checks the field values on SearchShopsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SearchShopsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SearchShopsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SearchShopsRequestMultiError, or nil if none found.
+func (m *SearchShopsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SearchShopsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Keyword
+
+	// no validation rules for Status
+
+	// no validation rules for PageSize
+
+	// no validation rules for PageToken
+
+	if len(errors) > 0 {
+		return SearchShopsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// SearchShopsRequestMultiError is an error wrapping multiple validation errors
+// returned by SearchShopsRequest.ValidateAll() if the designated constraints
+// aren't met.
+type SearchShopsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SearchShopsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SearchShopsRequestMultiError) AllErrors() []error { return m }
+
+// SearchShopsRequestValidationError is the validation error returned by
+// SearchShopsRequest.Validate if the designated constraints aren't met.
+type SearchShopsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SearchShopsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SearchShopsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SearchShopsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SearchShopsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SearchShopsRequestValidationError) ErrorName() string {
+	return "SearchShopsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SearchShopsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSearchShopsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SearchShopsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SearchShopsRequestValidationError{}
+
+// Validate checks the field values on SearchShopsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *SearchShopsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SearchShopsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// SearchShopsResponseMultiError, or nil if none found.
+func (m *SearchShopsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SearchShopsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetShops() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, SearchShopsResponseValidationError{
+						field:  fmt.Sprintf("Shops[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, SearchShopsResponseValidationError{
+						field:  fmt.Sprintf("Shops[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return SearchShopsResponseValidationError{
+					field:  fmt.Sprintf("Shops[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for Total
+
+	// no validation rules for NextPageToken
+
+	if len(errors) > 0 {
+		return SearchShopsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// SearchShopsResponseMultiError is an error wrapping multiple validation
+// errors returned by SearchShopsResponse.ValidateAll() if the designated
+// constraints aren't met.
+type SearchShopsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SearchShopsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SearchShopsResponseMultiError) AllErrors() []error { return m }
+
+// SearchShopsResponseValidationError is the validation error returned by
+// SearchShopsResponse.Validate if the designated constraints aren't met.
+type SearchShopsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SearchShopsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SearchShopsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SearchShopsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SearchShopsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SearchShopsResponseValidationError) ErrorName() string {
+	return "SearchShopsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e SearchShopsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSearchShopsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SearchShopsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SearchShopsResponseValidationError{}
+
+// Validate checks the field values on ListShopAddressesRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListShopAddressesRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListShopAddressesRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListShopAddressesRequestMultiError, or nil if none found.
+func (m *ListShopAddressesRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListShopAddressesRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetShopId()) < 1 {
+		err := ListShopAddressesRequestValidationError{
+			field:  "ShopId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return ListShopAddressesRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListShopAddressesRequestMultiError is an error wrapping multiple validation
+// errors returned by ListShopAddressesRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListShopAddressesRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListShopAddressesRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListShopAddressesRequestMultiError) AllErrors() []error { return m }
+
+// ListShopAddressesRequestValidationError is the validation error returned by
+// ListShopAddressesRequest.Validate if the designated constraints aren't met.
+type ListShopAddressesRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListShopAddressesRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListShopAddressesRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListShopAddressesRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListShopAddressesRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListShopAddressesRequestValidationError) ErrorName() string {
+	return "ListShopAddressesRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListShopAddressesRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListShopAddressesRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListShopAddressesRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListShopAddressesRequestValidationError{}
+
+// Validate checks the field values on ListShopAddressesResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListShopAddressesResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListShopAddressesResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListShopAddressesResponseMultiError, or nil if none found.
+func (m *ListShopAddressesResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListShopAddressesResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetAddresses() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListShopAddressesResponseValidationError{
+						field:  fmt.Sprintf("Addresses[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListShopAddressesResponseValidationError{
+						field:  fmt.Sprintf("Addresses[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListShopAddressesResponseValidationError{
+					field:  fmt.Sprintf("Addresses[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListShopAddressesResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListShopAddressesResponseMultiError is an error wrapping multiple validation
+// errors returned by ListShopAddressesResponse.ValidateAll() if the
+// designated constraints aren't met.
+type ListShopAddressesResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListShopAddressesResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListShopAddressesResponseMultiError) AllErrors() []error { return m }
+
+// ListShopAddressesResponseValidationError is the validation error returned by
+// ListShopAddressesResponse.Validate if the designated constraints aren't met.
+type ListShopAddressesResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListShopAddressesResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListShopAddressesResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListShopAddressesResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListShopAddressesResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListShopAddressesResponseValidationError) ErrorName() string {
+	return "ListShopAddressesResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListShopAddressesResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListShopAddressesResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListShopAddressesResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListShopAddressesResponseValidationError{}
+
+// Validate checks the field values on ListShopMembersRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListShopMembersRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListShopMembersRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListShopMembersRequestMultiError, or nil if none found.
+func (m *ListShopMembersRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListShopMembersRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if utf8.RuneCountInString(m.GetShopId()) < 1 {
+		err := ListShopMembersRequestValidationError{
+			field:  "ShopId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return ListShopMembersRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListShopMembersRequestMultiError is an error wrapping multiple validation
+// errors returned by ListShopMembersRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListShopMembersRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListShopMembersRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListShopMembersRequestMultiError) AllErrors() []error { return m }
+
+// ListShopMembersRequestValidationError is the validation error returned by
+// ListShopMembersRequest.Validate if the designated constraints aren't met.
+type ListShopMembersRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListShopMembersRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListShopMembersRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListShopMembersRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListShopMembersRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListShopMembersRequestValidationError) ErrorName() string {
+	return "ListShopMembersRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListShopMembersRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListShopMembersRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListShopMembersRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListShopMembersRequestValidationError{}
+
+// Validate checks the field values on ListShopMembersResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListShopMembersResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListShopMembersResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListShopMembersResponseMultiError, or nil if none found.
+func (m *ListShopMembersResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListShopMembersResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetMembers() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListShopMembersResponseValidationError{
+						field:  fmt.Sprintf("Members[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListShopMembersResponseValidationError{
+						field:  fmt.Sprintf("Members[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListShopMembersResponseValidationError{
+					field:  fmt.Sprintf("Members[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return ListShopMembersResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListShopMembersResponseMultiError is an error wrapping multiple validation
+// errors returned by ListShopMembersResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListShopMembersResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListShopMembersResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListShopMembersResponseMultiError) AllErrors() []error { return m }
+
+// ListShopMembersResponseValidationError is the validation error returned by
+// ListShopMembersResponse.Validate if the designated constraints aren't met.
+type ListShopMembersResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListShopMembersResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListShopMembersResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListShopMembersResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListShopMembersResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListShopMembersResponseValidationError) ErrorName() string {
+	return "ListShopMembersResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListShopMembersResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListShopMembersResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListShopMembersResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListShopMembersResponseValidationError{}

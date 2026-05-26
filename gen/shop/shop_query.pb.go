@@ -24,13 +24,34 @@ var File_shop_shop_query_proto protoreflect.FileDescriptor
 
 const file_shop_shop_query_proto_rawDesc = "" +
 	"\n" +
-	"\x15shop/shop_query.proto\x12\ashop.v1\x1a\x14shop/shop_type.proto2\x12\n" +
-	"\x10ShopQueryServiceB+Z)github.com/iamKienb/api-contract/gen/shopb\x06proto3"
+	"\x15shop/shop_query.proto\x12\ashop.v1\x1a\x14shop/shop_type.proto2\xde\x02\n" +
+	"\x10ShopQueryService\x12N\n" +
+	"\rGetShopDetail\x12\x1d.shop.v1.GetShopDetailRequest\x1a\x1e.shop.v1.GetShopDetailResponse\x12H\n" +
+	"\vSearchShops\x12\x1b.shop.v1.SearchShopsRequest\x1a\x1c.shop.v1.SearchShopsResponse\x12Z\n" +
+	"\x11ListShopAddresses\x12!.shop.v1.ListShopAddressesRequest\x1a\".shop.v1.ListShopAddressesResponse\x12T\n" +
+	"\x0fListShopMembers\x12\x1f.shop.v1.ListShopMembersRequest\x1a .shop.v1.ListShopMembersResponseB+Z)github.com/iamKienb/api-contract/gen/shopb\x06proto3"
 
-var file_shop_shop_query_proto_goTypes = []any{}
+var file_shop_shop_query_proto_goTypes = []any{
+	(*GetShopDetailRequest)(nil),      // 0: shop.v1.GetShopDetailRequest
+	(*SearchShopsRequest)(nil),        // 1: shop.v1.SearchShopsRequest
+	(*ListShopAddressesRequest)(nil),  // 2: shop.v1.ListShopAddressesRequest
+	(*ListShopMembersRequest)(nil),    // 3: shop.v1.ListShopMembersRequest
+	(*GetShopDetailResponse)(nil),     // 4: shop.v1.GetShopDetailResponse
+	(*SearchShopsResponse)(nil),       // 5: shop.v1.SearchShopsResponse
+	(*ListShopAddressesResponse)(nil), // 6: shop.v1.ListShopAddressesResponse
+	(*ListShopMembersResponse)(nil),   // 7: shop.v1.ListShopMembersResponse
+}
 var file_shop_shop_query_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
+	0, // 0: shop.v1.ShopQueryService.GetShopDetail:input_type -> shop.v1.GetShopDetailRequest
+	1, // 1: shop.v1.ShopQueryService.SearchShops:input_type -> shop.v1.SearchShopsRequest
+	2, // 2: shop.v1.ShopQueryService.ListShopAddresses:input_type -> shop.v1.ListShopAddressesRequest
+	3, // 3: shop.v1.ShopQueryService.ListShopMembers:input_type -> shop.v1.ListShopMembersRequest
+	4, // 4: shop.v1.ShopQueryService.GetShopDetail:output_type -> shop.v1.GetShopDetailResponse
+	5, // 5: shop.v1.ShopQueryService.SearchShops:output_type -> shop.v1.SearchShopsResponse
+	6, // 6: shop.v1.ShopQueryService.ListShopAddresses:output_type -> shop.v1.ListShopAddressesResponse
+	7, // 7: shop.v1.ShopQueryService.ListShopMembers:output_type -> shop.v1.ListShopMembersResponse
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

@@ -33,18 +33,26 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// UserQueryServiceGetShopDetailProcedure is the fully-qualified name of the UserQueryService's
-	// GetShopDetail RPC.
-	UserQueryServiceGetShopDetailProcedure = "/user.v1.UserQueryService/GetShopDetail"
-	// UserQueryServiceListAddressesProcedure is the fully-qualified name of the UserQueryService's
-	// ListAddresses RPC.
-	UserQueryServiceListAddressesProcedure = "/user.v1.UserQueryService/ListAddresses"
+	// UserQueryServiceGetUserDetailProcedure is the fully-qualified name of the UserQueryService's
+	// GetUserDetail RPC.
+	UserQueryServiceGetUserDetailProcedure = "/user.v1.UserQueryService/GetUserDetail"
+	// UserQueryServiceGetUserProfileProcedure is the fully-qualified name of the UserQueryService's
+	// GetUserProfile RPC.
+	UserQueryServiceGetUserProfileProcedure = "/user.v1.UserQueryService/GetUserProfile"
+	// UserQueryServiceListUserAddressesProcedure is the fully-qualified name of the UserQueryService's
+	// ListUserAddresses RPC.
+	UserQueryServiceListUserAddressesProcedure = "/user.v1.UserQueryService/ListUserAddresses"
+	// UserQueryServiceSearchUsersProcedure is the fully-qualified name of the UserQueryService's
+	// SearchUsers RPC.
+	UserQueryServiceSearchUsersProcedure = "/user.v1.UserQueryService/SearchUsers"
 )
 
 // UserQueryServiceClient is a client for the user.v1.UserQueryService service.
 type UserQueryServiceClient interface {
-	GetShopDetail(context.Context, *connect.Request[user.GetDetailRequest]) (*connect.Response[user.GetDetailResponse], error)
-	ListAddresses(context.Context, *connect.Request[user.ListAddressesRequest]) (*connect.Response[user.ListAddressesResponse], error)
+	GetUserDetail(context.Context, *connect.Request[user.GetUserDetailRequest]) (*connect.Response[user.GetUserDetailResponse], error)
+	GetUserProfile(context.Context, *connect.Request[user.GetUserProfileRequest]) (*connect.Response[user.GetUserProfileResponse], error)
+	ListUserAddresses(context.Context, *connect.Request[user.ListUserAddressesRequest]) (*connect.Response[user.ListUserAddressesResponse], error)
+	SearchUsers(context.Context, *connect.Request[user.SearchUsersRequest]) (*connect.Response[user.SearchUsersResponse], error)
 }
 
 // NewUserQueryServiceClient constructs a client for the user.v1.UserQueryService service. By
@@ -58,16 +66,28 @@ func NewUserQueryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 	baseURL = strings.TrimRight(baseURL, "/")
 	userQueryServiceMethods := user.File_user_user_query_proto.Services().ByName("UserQueryService").Methods()
 	return &userQueryServiceClient{
-		getShopDetail: connect.NewClient[user.GetDetailRequest, user.GetDetailResponse](
+		getUserDetail: connect.NewClient[user.GetUserDetailRequest, user.GetUserDetailResponse](
 			httpClient,
-			baseURL+UserQueryServiceGetShopDetailProcedure,
-			connect.WithSchema(userQueryServiceMethods.ByName("GetShopDetail")),
+			baseURL+UserQueryServiceGetUserDetailProcedure,
+			connect.WithSchema(userQueryServiceMethods.ByName("GetUserDetail")),
 			connect.WithClientOptions(opts...),
 		),
-		listAddresses: connect.NewClient[user.ListAddressesRequest, user.ListAddressesResponse](
+		getUserProfile: connect.NewClient[user.GetUserProfileRequest, user.GetUserProfileResponse](
 			httpClient,
-			baseURL+UserQueryServiceListAddressesProcedure,
-			connect.WithSchema(userQueryServiceMethods.ByName("ListAddresses")),
+			baseURL+UserQueryServiceGetUserProfileProcedure,
+			connect.WithSchema(userQueryServiceMethods.ByName("GetUserProfile")),
+			connect.WithClientOptions(opts...),
+		),
+		listUserAddresses: connect.NewClient[user.ListUserAddressesRequest, user.ListUserAddressesResponse](
+			httpClient,
+			baseURL+UserQueryServiceListUserAddressesProcedure,
+			connect.WithSchema(userQueryServiceMethods.ByName("ListUserAddresses")),
+			connect.WithClientOptions(opts...),
+		),
+		searchUsers: connect.NewClient[user.SearchUsersRequest, user.SearchUsersResponse](
+			httpClient,
+			baseURL+UserQueryServiceSearchUsersProcedure,
+			connect.WithSchema(userQueryServiceMethods.ByName("SearchUsers")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -75,24 +95,38 @@ func NewUserQueryServiceClient(httpClient connect.HTTPClient, baseURL string, op
 
 // userQueryServiceClient implements UserQueryServiceClient.
 type userQueryServiceClient struct {
-	getShopDetail *connect.Client[user.GetDetailRequest, user.GetDetailResponse]
-	listAddresses *connect.Client[user.ListAddressesRequest, user.ListAddressesResponse]
+	getUserDetail     *connect.Client[user.GetUserDetailRequest, user.GetUserDetailResponse]
+	getUserProfile    *connect.Client[user.GetUserProfileRequest, user.GetUserProfileResponse]
+	listUserAddresses *connect.Client[user.ListUserAddressesRequest, user.ListUserAddressesResponse]
+	searchUsers       *connect.Client[user.SearchUsersRequest, user.SearchUsersResponse]
 }
 
-// GetShopDetail calls user.v1.UserQueryService.GetShopDetail.
-func (c *userQueryServiceClient) GetShopDetail(ctx context.Context, req *connect.Request[user.GetDetailRequest]) (*connect.Response[user.GetDetailResponse], error) {
-	return c.getShopDetail.CallUnary(ctx, req)
+// GetUserDetail calls user.v1.UserQueryService.GetUserDetail.
+func (c *userQueryServiceClient) GetUserDetail(ctx context.Context, req *connect.Request[user.GetUserDetailRequest]) (*connect.Response[user.GetUserDetailResponse], error) {
+	return c.getUserDetail.CallUnary(ctx, req)
 }
 
-// ListAddresses calls user.v1.UserQueryService.ListAddresses.
-func (c *userQueryServiceClient) ListAddresses(ctx context.Context, req *connect.Request[user.ListAddressesRequest]) (*connect.Response[user.ListAddressesResponse], error) {
-	return c.listAddresses.CallUnary(ctx, req)
+// GetUserProfile calls user.v1.UserQueryService.GetUserProfile.
+func (c *userQueryServiceClient) GetUserProfile(ctx context.Context, req *connect.Request[user.GetUserProfileRequest]) (*connect.Response[user.GetUserProfileResponse], error) {
+	return c.getUserProfile.CallUnary(ctx, req)
+}
+
+// ListUserAddresses calls user.v1.UserQueryService.ListUserAddresses.
+func (c *userQueryServiceClient) ListUserAddresses(ctx context.Context, req *connect.Request[user.ListUserAddressesRequest]) (*connect.Response[user.ListUserAddressesResponse], error) {
+	return c.listUserAddresses.CallUnary(ctx, req)
+}
+
+// SearchUsers calls user.v1.UserQueryService.SearchUsers.
+func (c *userQueryServiceClient) SearchUsers(ctx context.Context, req *connect.Request[user.SearchUsersRequest]) (*connect.Response[user.SearchUsersResponse], error) {
+	return c.searchUsers.CallUnary(ctx, req)
 }
 
 // UserQueryServiceHandler is an implementation of the user.v1.UserQueryService service.
 type UserQueryServiceHandler interface {
-	GetShopDetail(context.Context, *connect.Request[user.GetDetailRequest]) (*connect.Response[user.GetDetailResponse], error)
-	ListAddresses(context.Context, *connect.Request[user.ListAddressesRequest]) (*connect.Response[user.ListAddressesResponse], error)
+	GetUserDetail(context.Context, *connect.Request[user.GetUserDetailRequest]) (*connect.Response[user.GetUserDetailResponse], error)
+	GetUserProfile(context.Context, *connect.Request[user.GetUserProfileRequest]) (*connect.Response[user.GetUserProfileResponse], error)
+	ListUserAddresses(context.Context, *connect.Request[user.ListUserAddressesRequest]) (*connect.Response[user.ListUserAddressesResponse], error)
+	SearchUsers(context.Context, *connect.Request[user.SearchUsersRequest]) (*connect.Response[user.SearchUsersResponse], error)
 }
 
 // NewUserQueryServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -102,24 +136,40 @@ type UserQueryServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewUserQueryServiceHandler(svc UserQueryServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
 	userQueryServiceMethods := user.File_user_user_query_proto.Services().ByName("UserQueryService").Methods()
-	userQueryServiceGetShopDetailHandler := connect.NewUnaryHandler(
-		UserQueryServiceGetShopDetailProcedure,
-		svc.GetShopDetail,
-		connect.WithSchema(userQueryServiceMethods.ByName("GetShopDetail")),
+	userQueryServiceGetUserDetailHandler := connect.NewUnaryHandler(
+		UserQueryServiceGetUserDetailProcedure,
+		svc.GetUserDetail,
+		connect.WithSchema(userQueryServiceMethods.ByName("GetUserDetail")),
 		connect.WithHandlerOptions(opts...),
 	)
-	userQueryServiceListAddressesHandler := connect.NewUnaryHandler(
-		UserQueryServiceListAddressesProcedure,
-		svc.ListAddresses,
-		connect.WithSchema(userQueryServiceMethods.ByName("ListAddresses")),
+	userQueryServiceGetUserProfileHandler := connect.NewUnaryHandler(
+		UserQueryServiceGetUserProfileProcedure,
+		svc.GetUserProfile,
+		connect.WithSchema(userQueryServiceMethods.ByName("GetUserProfile")),
+		connect.WithHandlerOptions(opts...),
+	)
+	userQueryServiceListUserAddressesHandler := connect.NewUnaryHandler(
+		UserQueryServiceListUserAddressesProcedure,
+		svc.ListUserAddresses,
+		connect.WithSchema(userQueryServiceMethods.ByName("ListUserAddresses")),
+		connect.WithHandlerOptions(opts...),
+	)
+	userQueryServiceSearchUsersHandler := connect.NewUnaryHandler(
+		UserQueryServiceSearchUsersProcedure,
+		svc.SearchUsers,
+		connect.WithSchema(userQueryServiceMethods.ByName("SearchUsers")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/user.v1.UserQueryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
-		case UserQueryServiceGetShopDetailProcedure:
-			userQueryServiceGetShopDetailHandler.ServeHTTP(w, r)
-		case UserQueryServiceListAddressesProcedure:
-			userQueryServiceListAddressesHandler.ServeHTTP(w, r)
+		case UserQueryServiceGetUserDetailProcedure:
+			userQueryServiceGetUserDetailHandler.ServeHTTP(w, r)
+		case UserQueryServiceGetUserProfileProcedure:
+			userQueryServiceGetUserProfileHandler.ServeHTTP(w, r)
+		case UserQueryServiceListUserAddressesProcedure:
+			userQueryServiceListUserAddressesHandler.ServeHTTP(w, r)
+		case UserQueryServiceSearchUsersProcedure:
+			userQueryServiceSearchUsersHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -129,10 +179,18 @@ func NewUserQueryServiceHandler(svc UserQueryServiceHandler, opts ...connect.Han
 // UnimplementedUserQueryServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedUserQueryServiceHandler struct{}
 
-func (UnimplementedUserQueryServiceHandler) GetShopDetail(context.Context, *connect.Request[user.GetDetailRequest]) (*connect.Response[user.GetDetailResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserQueryService.GetShopDetail is not implemented"))
+func (UnimplementedUserQueryServiceHandler) GetUserDetail(context.Context, *connect.Request[user.GetUserDetailRequest]) (*connect.Response[user.GetUserDetailResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserQueryService.GetUserDetail is not implemented"))
 }
 
-func (UnimplementedUserQueryServiceHandler) ListAddresses(context.Context, *connect.Request[user.ListAddressesRequest]) (*connect.Response[user.ListAddressesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserQueryService.ListAddresses is not implemented"))
+func (UnimplementedUserQueryServiceHandler) GetUserProfile(context.Context, *connect.Request[user.GetUserProfileRequest]) (*connect.Response[user.GetUserProfileResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserQueryService.GetUserProfile is not implemented"))
+}
+
+func (UnimplementedUserQueryServiceHandler) ListUserAddresses(context.Context, *connect.Request[user.ListUserAddressesRequest]) (*connect.Response[user.ListUserAddressesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserQueryService.ListUserAddresses is not implemented"))
+}
+
+func (UnimplementedUserQueryServiceHandler) SearchUsers(context.Context, *connect.Request[user.SearchUsersRequest]) (*connect.Response[user.SearchUsersResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserQueryService.SearchUsers is not implemented"))
 }

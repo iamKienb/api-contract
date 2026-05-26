@@ -4,6 +4,7 @@ package shop.v1;
 
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 
 option go_package = "github.com/iamKienb/api-contract/gen/shop";
 
@@ -81,4 +82,77 @@ message CheckPermissionRequest {
 message CheckPermissionResponse {
   bool   is_allowed = 1;
   string message    = 2;
+}
+
+message ShopProfileView {
+  string description = 1;
+  string logo_url    = 2;
+  string banner_url  = 3;
+  google.protobuf.Struct extra = 4;
+}
+
+message ShopAddressView {
+  string id           = 1;
+  string shop_id      = 2;
+  string full_address = 3;
+  string address_line = 4;
+  string contact_name = 5;
+  string phone_number = 6;
+  string type         = 7;
+  google.protobuf.Struct extra = 8;
+}
+
+message ShopMemberView {
+  string id = 1;
+  string name = 2;
+  repeated int32 role_ids = 3;
+  google.protobuf.Struct extra = 4;
+}
+
+message ShopView {
+  string shop_id = 1;
+  string name    = 2;
+  string slug    = 3;
+  string status  = 4;
+  ShopProfileView profile = 5;
+  repeated ShopAddressView addresses = 6;
+  repeated ShopMemberView members = 7;
+  google.protobuf.Struct extra = 8;
+}
+
+message GetShopDetailRequest {
+  string shop_id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message GetShopDetailResponse {
+  ShopView shop = 1;
+}
+
+message SearchShopsRequest {
+  string keyword = 1;
+  string status = 2;
+  int32 page_size = 3;
+  string page_token = 4;
+}
+
+message SearchShopsResponse {
+  repeated ShopView shops = 1;
+  int64 total = 2;
+  string next_page_token = 3;
+}
+
+message ListShopAddressesRequest {
+  string shop_id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message ListShopAddressesResponse {
+  repeated ShopAddressView addresses = 1;
+}
+
+message ListShopMembersRequest {
+  string shop_id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message ListShopMembersResponse {
+  repeated ShopMemberView members = 1;
 }

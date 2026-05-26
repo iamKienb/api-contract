@@ -6,8 +6,11 @@ package shopconnect
 
 import (
 	connect "connectrpc.com/connect"
-	_ "github.com/iamKienb/api-contract/gen/shop"
+	context "context"
+	errors "errors"
+	shop "github.com/iamKienb/api-contract/gen/shop"
 	http "net/http"
+	strings "strings"
 )
 
 // This is a compile-time assertion to ensure that this generated file and the connect package are
@@ -22,8 +25,34 @@ const (
 	ShopQueryServiceName = "shop.v1.ShopQueryService"
 )
 
+// These constants are the fully-qualified names of the RPCs defined in this package. They're
+// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+//
+// Note that these are different from the fully-qualified method names used by
+// google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
+// reflection-formatted method names, remove the leading slash and convert the remaining slash to a
+// period.
+const (
+	// ShopQueryServiceGetShopDetailProcedure is the fully-qualified name of the ShopQueryService's
+	// GetShopDetail RPC.
+	ShopQueryServiceGetShopDetailProcedure = "/shop.v1.ShopQueryService/GetShopDetail"
+	// ShopQueryServiceSearchShopsProcedure is the fully-qualified name of the ShopQueryService's
+	// SearchShops RPC.
+	ShopQueryServiceSearchShopsProcedure = "/shop.v1.ShopQueryService/SearchShops"
+	// ShopQueryServiceListShopAddressesProcedure is the fully-qualified name of the ShopQueryService's
+	// ListShopAddresses RPC.
+	ShopQueryServiceListShopAddressesProcedure = "/shop.v1.ShopQueryService/ListShopAddresses"
+	// ShopQueryServiceListShopMembersProcedure is the fully-qualified name of the ShopQueryService's
+	// ListShopMembers RPC.
+	ShopQueryServiceListShopMembersProcedure = "/shop.v1.ShopQueryService/ListShopMembers"
+)
+
 // ShopQueryServiceClient is a client for the shop.v1.ShopQueryService service.
 type ShopQueryServiceClient interface {
+	GetShopDetail(context.Context, *connect.Request[shop.GetShopDetailRequest]) (*connect.Response[shop.GetShopDetailResponse], error)
+	SearchShops(context.Context, *connect.Request[shop.SearchShopsRequest]) (*connect.Response[shop.SearchShopsResponse], error)
+	ListShopAddresses(context.Context, *connect.Request[shop.ListShopAddressesRequest]) (*connect.Response[shop.ListShopAddressesResponse], error)
+	ListShopMembers(context.Context, *connect.Request[shop.ListShopMembersRequest]) (*connect.Response[shop.ListShopMembersResponse], error)
 }
 
 // NewShopQueryServiceClient constructs a client for the shop.v1.ShopQueryService service. By
@@ -34,15 +63,70 @@ type ShopQueryServiceClient interface {
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
 func NewShopQueryServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ShopQueryServiceClient {
-	return &shopQueryServiceClient{}
+	baseURL = strings.TrimRight(baseURL, "/")
+	shopQueryServiceMethods := shop.File_shop_shop_query_proto.Services().ByName("ShopQueryService").Methods()
+	return &shopQueryServiceClient{
+		getShopDetail: connect.NewClient[shop.GetShopDetailRequest, shop.GetShopDetailResponse](
+			httpClient,
+			baseURL+ShopQueryServiceGetShopDetailProcedure,
+			connect.WithSchema(shopQueryServiceMethods.ByName("GetShopDetail")),
+			connect.WithClientOptions(opts...),
+		),
+		searchShops: connect.NewClient[shop.SearchShopsRequest, shop.SearchShopsResponse](
+			httpClient,
+			baseURL+ShopQueryServiceSearchShopsProcedure,
+			connect.WithSchema(shopQueryServiceMethods.ByName("SearchShops")),
+			connect.WithClientOptions(opts...),
+		),
+		listShopAddresses: connect.NewClient[shop.ListShopAddressesRequest, shop.ListShopAddressesResponse](
+			httpClient,
+			baseURL+ShopQueryServiceListShopAddressesProcedure,
+			connect.WithSchema(shopQueryServiceMethods.ByName("ListShopAddresses")),
+			connect.WithClientOptions(opts...),
+		),
+		listShopMembers: connect.NewClient[shop.ListShopMembersRequest, shop.ListShopMembersResponse](
+			httpClient,
+			baseURL+ShopQueryServiceListShopMembersProcedure,
+			connect.WithSchema(shopQueryServiceMethods.ByName("ListShopMembers")),
+			connect.WithClientOptions(opts...),
+		),
+	}
 }
 
 // shopQueryServiceClient implements ShopQueryServiceClient.
 type shopQueryServiceClient struct {
+	getShopDetail     *connect.Client[shop.GetShopDetailRequest, shop.GetShopDetailResponse]
+	searchShops       *connect.Client[shop.SearchShopsRequest, shop.SearchShopsResponse]
+	listShopAddresses *connect.Client[shop.ListShopAddressesRequest, shop.ListShopAddressesResponse]
+	listShopMembers   *connect.Client[shop.ListShopMembersRequest, shop.ListShopMembersResponse]
+}
+
+// GetShopDetail calls shop.v1.ShopQueryService.GetShopDetail.
+func (c *shopQueryServiceClient) GetShopDetail(ctx context.Context, req *connect.Request[shop.GetShopDetailRequest]) (*connect.Response[shop.GetShopDetailResponse], error) {
+	return c.getShopDetail.CallUnary(ctx, req)
+}
+
+// SearchShops calls shop.v1.ShopQueryService.SearchShops.
+func (c *shopQueryServiceClient) SearchShops(ctx context.Context, req *connect.Request[shop.SearchShopsRequest]) (*connect.Response[shop.SearchShopsResponse], error) {
+	return c.searchShops.CallUnary(ctx, req)
+}
+
+// ListShopAddresses calls shop.v1.ShopQueryService.ListShopAddresses.
+func (c *shopQueryServiceClient) ListShopAddresses(ctx context.Context, req *connect.Request[shop.ListShopAddressesRequest]) (*connect.Response[shop.ListShopAddressesResponse], error) {
+	return c.listShopAddresses.CallUnary(ctx, req)
+}
+
+// ListShopMembers calls shop.v1.ShopQueryService.ListShopMembers.
+func (c *shopQueryServiceClient) ListShopMembers(ctx context.Context, req *connect.Request[shop.ListShopMembersRequest]) (*connect.Response[shop.ListShopMembersResponse], error) {
+	return c.listShopMembers.CallUnary(ctx, req)
 }
 
 // ShopQueryServiceHandler is an implementation of the shop.v1.ShopQueryService service.
 type ShopQueryServiceHandler interface {
+	GetShopDetail(context.Context, *connect.Request[shop.GetShopDetailRequest]) (*connect.Response[shop.GetShopDetailResponse], error)
+	SearchShops(context.Context, *connect.Request[shop.SearchShopsRequest]) (*connect.Response[shop.SearchShopsResponse], error)
+	ListShopAddresses(context.Context, *connect.Request[shop.ListShopAddressesRequest]) (*connect.Response[shop.ListShopAddressesResponse], error)
+	ListShopMembers(context.Context, *connect.Request[shop.ListShopMembersRequest]) (*connect.Response[shop.ListShopMembersResponse], error)
 }
 
 // NewShopQueryServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -51,8 +135,41 @@ type ShopQueryServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewShopQueryServiceHandler(svc ShopQueryServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	shopQueryServiceMethods := shop.File_shop_shop_query_proto.Services().ByName("ShopQueryService").Methods()
+	shopQueryServiceGetShopDetailHandler := connect.NewUnaryHandler(
+		ShopQueryServiceGetShopDetailProcedure,
+		svc.GetShopDetail,
+		connect.WithSchema(shopQueryServiceMethods.ByName("GetShopDetail")),
+		connect.WithHandlerOptions(opts...),
+	)
+	shopQueryServiceSearchShopsHandler := connect.NewUnaryHandler(
+		ShopQueryServiceSearchShopsProcedure,
+		svc.SearchShops,
+		connect.WithSchema(shopQueryServiceMethods.ByName("SearchShops")),
+		connect.WithHandlerOptions(opts...),
+	)
+	shopQueryServiceListShopAddressesHandler := connect.NewUnaryHandler(
+		ShopQueryServiceListShopAddressesProcedure,
+		svc.ListShopAddresses,
+		connect.WithSchema(shopQueryServiceMethods.ByName("ListShopAddresses")),
+		connect.WithHandlerOptions(opts...),
+	)
+	shopQueryServiceListShopMembersHandler := connect.NewUnaryHandler(
+		ShopQueryServiceListShopMembersProcedure,
+		svc.ListShopMembers,
+		connect.WithSchema(shopQueryServiceMethods.ByName("ListShopMembers")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/shop.v1.ShopQueryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case ShopQueryServiceGetShopDetailProcedure:
+			shopQueryServiceGetShopDetailHandler.ServeHTTP(w, r)
+		case ShopQueryServiceSearchShopsProcedure:
+			shopQueryServiceSearchShopsHandler.ServeHTTP(w, r)
+		case ShopQueryServiceListShopAddressesProcedure:
+			shopQueryServiceListShopAddressesHandler.ServeHTTP(w, r)
+		case ShopQueryServiceListShopMembersProcedure:
+			shopQueryServiceListShopMembersHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -61,3 +178,19 @@ func NewShopQueryServiceHandler(svc ShopQueryServiceHandler, opts ...connect.Han
 
 // UnimplementedShopQueryServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedShopQueryServiceHandler struct{}
+
+func (UnimplementedShopQueryServiceHandler) GetShopDetail(context.Context, *connect.Request[shop.GetShopDetailRequest]) (*connect.Response[shop.GetShopDetailResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopQueryService.GetShopDetail is not implemented"))
+}
+
+func (UnimplementedShopQueryServiceHandler) SearchShops(context.Context, *connect.Request[shop.SearchShopsRequest]) (*connect.Response[shop.SearchShopsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopQueryService.SearchShops is not implemented"))
+}
+
+func (UnimplementedShopQueryServiceHandler) ListShopAddresses(context.Context, *connect.Request[shop.ListShopAddressesRequest]) (*connect.Response[shop.ListShopAddressesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopQueryService.ListShopAddresses is not implemented"))
+}
+
+func (UnimplementedShopQueryServiceHandler) ListShopMembers(context.Context, *connect.Request[shop.ListShopMembersRequest]) (*connect.Response[shop.ListShopMembersResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("shop.v1.ShopQueryService.ListShopMembers is not implemented"))
+}
