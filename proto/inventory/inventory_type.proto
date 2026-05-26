@@ -4,6 +4,7 @@ package inventory.v1;
 
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 
 option go_package = "github.com/iamKienb/api-contract/gen/inventory";
 
@@ -79,6 +80,7 @@ message InventoryStockView {
   int64  available    = 6;
   string status       = 7;
   string updated_at   = 8;
+  google.protobuf.Struct extra = 9;
 }
 
 message StockMovementView {
@@ -93,6 +95,7 @@ message StockMovementView {
   string reference_type = 9;
   string reference_id   = 10;
   string created_at     = 11;
+  google.protobuf.Struct extra = 12;
 }
 
 message GetInventoryItemRequest {
