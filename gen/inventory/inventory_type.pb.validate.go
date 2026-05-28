@@ -658,6 +658,17 @@ func (m *StockReservationItem) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if utf8.RuneCountInString(m.GetInventoryId()) < 1 {
+		err := StockReservationItemValidationError{
+			field:  "InventoryId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if m.GetQuantity() <= 0 {
 		err := StockReservationItemValidationError{
 			field:  "Quantity",
@@ -940,7 +951,34 @@ func (m *ReserveStockResponse) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Success
+	if all {
+		switch v := interface{}(m.GetExpiresAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ReserveStockResponseValidationError{
+					field:  "ExpiresAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ReserveStockResponseValidationError{
+					field:  "ExpiresAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExpiresAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ReserveStockResponseValidationError{
+				field:  "ExpiresAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
 
 	if len(errors) > 0 {
 		return ReserveStockResponseMultiError(errors)
@@ -1250,22 +1288,22 @@ var _ interface {
 	ErrorName() string
 } = ReleaseStockResponseValidationError{}
 
-// Validate checks the field values on AdjustStockRequest with the rules
+// Validate checks the field values on FulfillStockRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AdjustStockRequest) Validate() error {
+func (m *FulfillStockRequest) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AdjustStockRequest with the rules
+// ValidateAll checks the field values on FulfillStockRequest with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// AdjustStockRequestMultiError, or nil if none found.
-func (m *AdjustStockRequest) ValidateAll() error {
+// FulfillStockRequestMultiError, or nil if none found.
+func (m *FulfillStockRequest) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AdjustStockRequest) validate(all bool) error {
+func (m *FulfillStockRequest) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1273,7 +1311,7 @@ func (m *AdjustStockRequest) validate(all bool) error {
 	var errors []error
 
 	if utf8.RuneCountInString(m.GetShopId()) < 1 {
-		err := AdjustStockRequestValidationError{
+		err := FulfillStockRequestValidationError{
 			field:  "ShopId",
 			reason: "value length must be at least 1 runes",
 		}
@@ -1283,9 +1321,9 @@ func (m *AdjustStockRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetSkuId()) < 1 {
-		err := AdjustStockRequestValidationError{
-			field:  "SkuId",
+	if utf8.RuneCountInString(m.GetOrderId()) < 1 {
+		err := FulfillStockRequestValidationError{
+			field:  "OrderId",
 			reason: "value length must be at least 1 runes",
 		}
 		if !all {
@@ -1293,49 +1331,21 @@ func (m *AdjustStockRequest) validate(all bool) error {
 		}
 		errors = append(errors, err)
 	}
-
-	// no validation rules for QuantityDelta
-
-	if utf8.RuneCountInString(m.GetReferenceType()) < 1 {
-		err := AdjustStockRequestValidationError{
-			field:  "ReferenceType",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if utf8.RuneCountInString(m.GetReferenceId()) < 1 {
-		err := AdjustStockRequestValidationError{
-			field:  "ReferenceId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	// no validation rules for Note
-
-	// no validation rules for IdempotencyKey
 
 	if len(errors) > 0 {
-		return AdjustStockRequestMultiError(errors)
+		return FulfillStockRequestMultiError(errors)
 	}
 
 	return nil
 }
 
-// AdjustStockRequestMultiError is an error wrapping multiple validation errors
-// returned by AdjustStockRequest.ValidateAll() if the designated constraints
-// aren't met.
-type AdjustStockRequestMultiError []error
+// FulfillStockRequestMultiError is an error wrapping multiple validation
+// errors returned by FulfillStockRequest.ValidateAll() if the designated
+// constraints aren't met.
+type FulfillStockRequestMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AdjustStockRequestMultiError) Error() string {
+func (m FulfillStockRequestMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1344,11 +1354,11 @@ func (m AdjustStockRequestMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AdjustStockRequestMultiError) AllErrors() []error { return m }
+func (m FulfillStockRequestMultiError) AllErrors() []error { return m }
 
-// AdjustStockRequestValidationError is the validation error returned by
-// AdjustStockRequest.Validate if the designated constraints aren't met.
-type AdjustStockRequestValidationError struct {
+// FulfillStockRequestValidationError is the validation error returned by
+// FulfillStockRequest.Validate if the designated constraints aren't met.
+type FulfillStockRequestValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1356,24 +1366,24 @@ type AdjustStockRequestValidationError struct {
 }
 
 // Field function returns field value.
-func (e AdjustStockRequestValidationError) Field() string { return e.field }
+func (e FulfillStockRequestValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AdjustStockRequestValidationError) Reason() string { return e.reason }
+func (e FulfillStockRequestValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AdjustStockRequestValidationError) Cause() error { return e.cause }
+func (e FulfillStockRequestValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AdjustStockRequestValidationError) Key() bool { return e.key }
+func (e FulfillStockRequestValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AdjustStockRequestValidationError) ErrorName() string {
-	return "AdjustStockRequestValidationError"
+func (e FulfillStockRequestValidationError) ErrorName() string {
+	return "FulfillStockRequestValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AdjustStockRequestValidationError) Error() string {
+func (e FulfillStockRequestValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1385,14 +1395,14 @@ func (e AdjustStockRequestValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAdjustStockRequest.%s: %s%s",
+		"invalid %sFulfillStockRequest.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AdjustStockRequestValidationError{}
+var _ error = FulfillStockRequestValidationError{}
 
 var _ interface {
 	Field() string
@@ -1400,24 +1410,24 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AdjustStockRequestValidationError{}
+} = FulfillStockRequestValidationError{}
 
-// Validate checks the field values on AdjustStockResponse with the rules
+// Validate checks the field values on FulfillStockResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
-func (m *AdjustStockResponse) Validate() error {
+func (m *FulfillStockResponse) Validate() error {
 	return m.validate(false)
 }
 
-// ValidateAll checks the field values on AdjustStockResponse with the rules
+// ValidateAll checks the field values on FulfillStockResponse with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the result is a list of violation errors wrapped in
-// AdjustStockResponseMultiError, or nil if none found.
-func (m *AdjustStockResponse) ValidateAll() error {
+// FulfillStockResponseMultiError, or nil if none found.
+func (m *FulfillStockResponse) ValidateAll() error {
 	return m.validate(true)
 }
 
-func (m *AdjustStockResponse) validate(all bool) error {
+func (m *FulfillStockResponse) validate(all bool) error {
 	if m == nil {
 		return nil
 	}
@@ -1427,19 +1437,19 @@ func (m *AdjustStockResponse) validate(all bool) error {
 	// no validation rules for Success
 
 	if len(errors) > 0 {
-		return AdjustStockResponseMultiError(errors)
+		return FulfillStockResponseMultiError(errors)
 	}
 
 	return nil
 }
 
-// AdjustStockResponseMultiError is an error wrapping multiple validation
-// errors returned by AdjustStockResponse.ValidateAll() if the designated
+// FulfillStockResponseMultiError is an error wrapping multiple validation
+// errors returned by FulfillStockResponse.ValidateAll() if the designated
 // constraints aren't met.
-type AdjustStockResponseMultiError []error
+type FulfillStockResponseMultiError []error
 
 // Error returns a concatenation of all the error messages it wraps.
-func (m AdjustStockResponseMultiError) Error() string {
+func (m FulfillStockResponseMultiError) Error() string {
 	msgs := make([]string, 0, len(m))
 	for _, err := range m {
 		msgs = append(msgs, err.Error())
@@ -1448,11 +1458,11 @@ func (m AdjustStockResponseMultiError) Error() string {
 }
 
 // AllErrors returns a list of validation violation errors.
-func (m AdjustStockResponseMultiError) AllErrors() []error { return m }
+func (m FulfillStockResponseMultiError) AllErrors() []error { return m }
 
-// AdjustStockResponseValidationError is the validation error returned by
-// AdjustStockResponse.Validate if the designated constraints aren't met.
-type AdjustStockResponseValidationError struct {
+// FulfillStockResponseValidationError is the validation error returned by
+// FulfillStockResponse.Validate if the designated constraints aren't met.
+type FulfillStockResponseValidationError struct {
 	field  string
 	reason string
 	cause  error
@@ -1460,24 +1470,24 @@ type AdjustStockResponseValidationError struct {
 }
 
 // Field function returns field value.
-func (e AdjustStockResponseValidationError) Field() string { return e.field }
+func (e FulfillStockResponseValidationError) Field() string { return e.field }
 
 // Reason function returns reason value.
-func (e AdjustStockResponseValidationError) Reason() string { return e.reason }
+func (e FulfillStockResponseValidationError) Reason() string { return e.reason }
 
 // Cause function returns cause value.
-func (e AdjustStockResponseValidationError) Cause() error { return e.cause }
+func (e FulfillStockResponseValidationError) Cause() error { return e.cause }
 
 // Key function returns key value.
-func (e AdjustStockResponseValidationError) Key() bool { return e.key }
+func (e FulfillStockResponseValidationError) Key() bool { return e.key }
 
 // ErrorName returns error name.
-func (e AdjustStockResponseValidationError) ErrorName() string {
-	return "AdjustStockResponseValidationError"
+func (e FulfillStockResponseValidationError) ErrorName() string {
+	return "FulfillStockResponseValidationError"
 }
 
 // Error satisfies the builtin error interface
-func (e AdjustStockResponseValidationError) Error() string {
+func (e FulfillStockResponseValidationError) Error() string {
 	cause := ""
 	if e.cause != nil {
 		cause = fmt.Sprintf(" | caused by: %v", e.cause)
@@ -1489,14 +1499,14 @@ func (e AdjustStockResponseValidationError) Error() string {
 	}
 
 	return fmt.Sprintf(
-		"invalid %sAdjustStockResponse.%s: %s%s",
+		"invalid %sFulfillStockResponse.%s: %s%s",
 		key,
 		e.field,
 		e.reason,
 		cause)
 }
 
-var _ error = AdjustStockResponseValidationError{}
+var _ error = FulfillStockResponseValidationError{}
 
 var _ interface {
 	Field() string
@@ -1504,7 +1514,7 @@ var _ interface {
 	Key() bool
 	Cause() error
 	ErrorName() string
-} = AdjustStockResponseValidationError{}
+} = FulfillStockResponseValidationError{}
 
 // Validate checks the field values on InventoryStockView with the rules
 // defined in the proto definition for this message. If any rules are
