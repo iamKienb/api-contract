@@ -1,0 +1,13 @@
+syntax = "proto3";
+package shop.v1;
+
+import "shop/type.proto";
+
+option go_package = "github.com/iamKienb/api-contract/gen/shop";
+
+service ShopQueryService {
+  rpc GetShopDetail(GetShopDetailRequest) returns (GetShopDetailResponse);
+  rpc SearchShops(SearchShopsRequest) returns (SearchShopsResponse);
+  rpc ListShopAddresses(ListShopAddressesRequest) returns (ListShopAddressesResponse);
+  rpc ListShopMembers(ListShopMembersRequest) returns (ListShopMembersResponse);
+}

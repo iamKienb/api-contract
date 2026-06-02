@@ -1,0 +1,11 @@
+// package name;
+
+// GetOrderHistory (Xem lịch sử đơn): API phân trang, tìm kiếm đơn hàng dành cho User (Đọc từ Elasticsearch)
+// .GetShopOrders (Quản lý đơn hàng đổ về): API dành cho chủ Shop để duyệt đơn, bấm giao hàng (Đọc từ Elasticsearch).
+
+syntax = "proto3";
+package order.v1;
+
+import "order/type.proto";
+
+option go_package = "github.com/iamKienb/api-contract/gen/order";

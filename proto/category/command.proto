@@ -1,0 +1,10 @@
+syntax = "proto3";
+package category.v1;
+
+import "category/type.proto";
+
+option go_package = "github.com/iamKienb/api-contract/gen/category";
+
+service CategoryCommandService {
+  rpc CreateCategory(CreateCategoryRequest) returns(CreateCategoryResponse);
+}

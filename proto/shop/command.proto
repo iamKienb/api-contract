@@ -1,0 +1,16 @@
+syntax = "proto3";
+package shop.v1;
+
+import "shop/type.proto";
+
+option go_package = "github.com/iamKienb/api-contract/gen/shop";
+
+service ShopCommandService {
+  //  Public Commands
+  rpc CreateShop(CreateShopRequest) returns (CreateShopResponse);
+  rpc AddShopAddress(AddShopAddressRequest) returns (AddShopAddressResponse);
+  rpc AssignMemberRoles(AssignMemberRolesRequest) returns (AssignMemberRolesResponse);
+
+  // Internal Service Call
+  rpc CheckPermission (CheckPermissionRequest) returns (CheckPermissionResponse);
+}

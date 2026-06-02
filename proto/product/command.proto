@@ -1,0 +1,12 @@
+syntax = "proto3";
+package product.v1;
+
+import "product/type.proto";
+
+option go_package = "github.com/iamKienb/api-contract/gen/product";
+
+service ProductCommandService {
+  //  Public Commands
+  rpc CreateProduct(CreateProductsRequest) returns(CreateProductsResponse);
+
+}

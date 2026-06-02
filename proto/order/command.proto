@@ -1,0 +1,6 @@
+syntax = "proto3";
+package order.v1;
+
+import "order/type.proto";
+
+option go_package = "github.com/iamKienb/api-contract/gen/order";

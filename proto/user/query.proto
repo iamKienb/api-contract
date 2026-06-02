@@ -1,0 +1,13 @@
+syntax = "proto3";
+package user.v1;
+
+import "user/type.proto";
+
+option go_package = "github.com/iamKienb/api-contract/gen/user";
+
+service UserQueryService {
+  rpc GetUserDetail(GetUserDetailRequest) returns (GetUserDetailResponse);
+  rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse);
+  rpc ListUserAddresses(ListUserAddressesRequest) returns (ListUserAddressesResponse);
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse);
+}
