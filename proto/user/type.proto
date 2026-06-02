@@ -45,7 +45,7 @@ message AddUserAddressRequest {
   string user_id = 1 [(validate.rules).string.min_len = 1];
 
   LocationInfo country  = 2 [(validate.rules).message.required = true];
-  LocationInfo city     = 3 [(validate.rules).message.required = true];
+  LocationInfo province = 3 [(validate.rules).message.required = true];
   LocationInfo district = 4 [(validate.rules).message.required = true];
   LocationInfo ward     = 5 [(validate.rules).message.required = true];
 
@@ -126,8 +126,8 @@ message SearchUsersResponse {
 }
 
 message GetUserAddressByIDRequest {
-  string user_id = 1;
-
+  string user_id         = 1;
+  string user_address_id = 2;
 }
 
 message GetUserAddressByIDResponse {

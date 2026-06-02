@@ -364,7 +364,7 @@ type AddUserAddressRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Country       *LocationInfo          `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
-	City          *LocationInfo          `protobuf:"bytes,3,opt,name=city,proto3" json:"city,omitempty"`
+	Province      *LocationInfo          `protobuf:"bytes,3,opt,name=province,proto3" json:"province,omitempty"`
 	District      *LocationInfo          `protobuf:"bytes,4,opt,name=district,proto3" json:"district,omitempty"`
 	Ward          *LocationInfo          `protobuf:"bytes,5,opt,name=ward,proto3" json:"ward,omitempty"`
 	AddressLine   string                 `protobuf:"bytes,6,opt,name=address_line,json=addressLine,proto3" json:"address_line,omitempty"`
@@ -420,9 +420,9 @@ func (x *AddUserAddressRequest) GetCountry() *LocationInfo {
 	return nil
 }
 
-func (x *AddUserAddressRequest) GetCity() *LocationInfo {
+func (x *AddUserAddressRequest) GetProvince() *LocationInfo {
 	if x != nil {
-		return x.City
+		return x.Province
 	}
 	return nil
 }
@@ -1167,6 +1167,7 @@ func (x *SearchUsersResponse) GetNextPageToken() string {
 type GetUserAddressByIDRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	UserAddressId string                 `protobuf:"bytes,2,opt,name=user_address_id,json=userAddressId,proto3" json:"user_address_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1204,6 +1205,13 @@ func (*GetUserAddressByIDRequest) Descriptor() ([]byte, []int) {
 func (x *GetUserAddressByIDRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
+	}
+	return ""
+}
+
+func (x *GetUserAddressByIDRequest) GetUserAddressId() string {
+	if x != nil {
+		return x.UserAddressId
 	}
 	return ""
 }
@@ -1278,11 +1286,11 @@ const file_user_type_proto_rawDesc = "" +
 	"\x12refresh_expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x10refreshExpiresAt\"D\n" +
 	"\fLocationInfo\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\x02id\x12\x1b\n" +
-	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\"\xf9\x03\n" +
+	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\"\x81\x04\n" +
 	"\x15AddUserAddressRequest\x12 \n" +
 	"\auser_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06userId\x129\n" +
-	"\acountry\x18\x02 \x01(\v2\x15.user.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\acountry\x123\n" +
-	"\x04city\x18\x03 \x01(\v2\x15.user.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\x04city\x12;\n" +
+	"\acountry\x18\x02 \x01(\v2\x15.user.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\acountry\x12;\n" +
+	"\bprovince\x18\x03 \x01(\v2\x15.user.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\bprovince\x12;\n" +
 	"\bdistrict\x18\x04 \x01(\v2\x15.user.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\bdistrict\x123\n" +
 	"\x04ward\x18\x05 \x01(\v2\x15.user.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\x04ward\x12*\n" +
 	"\faddress_line\x18\x06 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\vaddressLine\x12,\n" +
@@ -1342,9 +1350,10 @@ const file_user_type_proto_rawDesc = "" +
 	"\x13SearchUsersResponse\x12)\n" +
 	"\x05users\x18\x01 \x03(\v2\x13.user.v1.UserDetailR\x05users\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x03R\x05total\x12&\n" +
-	"\x0fnext_page_token\x18\x03 \x01(\tR\rnextPageToken\"4\n" +
+	"\x0fnext_page_token\x18\x03 \x01(\tR\rnextPageToken\"\\\n" +
 	"\x19GetUserAddressByIDRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"N\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12&\n" +
+	"\x0fuser_address_id\x18\x02 \x01(\tR\ruserAddressId\"N\n" +
 	"\x1aGetUserAddressByIDResponse\x120\n" +
 	"\aaddress\x18\x01 \x01(\v2\x16.user.v1.AddressDetailR\aaddressB+Z)github.com/iamKienb/api-contract/gen/userb\x06proto3"
 
@@ -1391,7 +1400,7 @@ var file_user_type_proto_depIdxs = []int32{
 	21, // 2: user.v1.LoginUserResponse.access_expires_at:type_name -> google.protobuf.Timestamp
 	21, // 3: user.v1.LoginUserResponse.refresh_expires_at:type_name -> google.protobuf.Timestamp
 	5,  // 4: user.v1.AddUserAddressRequest.country:type_name -> user.v1.LocationInfo
-	5,  // 5: user.v1.AddUserAddressRequest.city:type_name -> user.v1.LocationInfo
+	5,  // 5: user.v1.AddUserAddressRequest.province:type_name -> user.v1.LocationInfo
 	5,  // 6: user.v1.AddUserAddressRequest.district:type_name -> user.v1.LocationInfo
 	5,  // 7: user.v1.AddUserAddressRequest.ward:type_name -> user.v1.LocationInfo
 	8,  // 8: user.v1.UserDetail.profile:type_name -> user.v1.ProfileDetail

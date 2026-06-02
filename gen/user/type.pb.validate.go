@@ -1042,9 +1042,9 @@ func (m *AddUserAddressRequest) validate(all bool) error {
 		}
 	}
 
-	if m.GetCity() == nil {
+	if m.GetProvince() == nil {
 		err := AddUserAddressRequestValidationError{
-			field:  "City",
+			field:  "Province",
 			reason: "value is required",
 		}
 		if !all {
@@ -1054,11 +1054,11 @@ func (m *AddUserAddressRequest) validate(all bool) error {
 	}
 
 	if all {
-		switch v := interface{}(m.GetCity()).(type) {
+		switch v := interface{}(m.GetProvince()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, AddUserAddressRequestValidationError{
-					field:  "City",
+					field:  "Province",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -1066,16 +1066,16 @@ func (m *AddUserAddressRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, AddUserAddressRequestValidationError{
-					field:  "City",
+					field:  "Province",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetCity()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetProvince()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return AddUserAddressRequestValidationError{
-				field:  "City",
+				field:  "Province",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -2801,6 +2801,8 @@ func (m *GetUserAddressByIDRequest) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for UserId
+
+	// no validation rules for UserAddressId
 
 	if len(errors) > 0 {
 		return GetUserAddressByIDRequestMultiError(errors)

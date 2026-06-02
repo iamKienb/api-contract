@@ -24,7 +24,8 @@ var File_order_command_proto protoreflect.FileDescriptor
 
 const file_order_command_proto_rawDesc = "" +
 	"\n" +
-	"\x13order/command.proto\x12\border.v1\x1a\x10order/type.protoB,Z*github.com/iamKienb/api-contract/gen/orderb\x06proto3"
+	"\x13order/command.proto\x12\border.v1\x1a\x10order/type.proto2\x0e\n" +
+	"\fOrderCommandB,Z*github.com/iamKienb/api-contract/gen/orderb\x06proto3"
 
 var file_order_command_proto_goTypes = []any{}
 var file_order_command_proto_depIdxs = []int32{
@@ -49,7 +50,7 @@ func file_order_command_proto_init() {
 			NumEnums:      0,
 			NumMessages:   0,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_order_command_proto_goTypes,
 		DependencyIndexes: file_order_command_proto_depIdxs,
