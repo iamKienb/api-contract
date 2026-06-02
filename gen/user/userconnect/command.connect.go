@@ -54,7 +54,7 @@ type UserCommandServiceClient interface {
 	LoginUser(context.Context, *connect.Request[user.LoginUserRequest]) (*connect.Response[user.LoginUserResponse], error)
 	AddUserAddress(context.Context, *connect.Request[user.AddUserAddressRequest]) (*connect.Response[user.AddUserAddressResponse], error)
 	// internal services
-	GetUserAddressByID(context.Context, *connect.Request[user.GetUserAddressByIDRequest]) (*connect.Response[user.GetUserAddressByIDRequest], error)
+	GetUserAddressByID(context.Context, *connect.Request[user.GetUserAddressByIDRequest]) (*connect.Response[user.GetUserAddressByIDResponse], error)
 }
 
 // NewUserCommandServiceClient constructs a client for the user.v1.UserCommandService service. By
@@ -86,7 +86,7 @@ func NewUserCommandServiceClient(httpClient connect.HTTPClient, baseURL string, 
 			connect.WithSchema(userCommandServiceMethods.ByName("AddUserAddress")),
 			connect.WithClientOptions(opts...),
 		),
-		getUserAddressByID: connect.NewClient[user.GetUserAddressByIDRequest, user.GetUserAddressByIDRequest](
+		getUserAddressByID: connect.NewClient[user.GetUserAddressByIDRequest, user.GetUserAddressByIDResponse](
 			httpClient,
 			baseURL+UserCommandServiceGetUserAddressByIDProcedure,
 			connect.WithSchema(userCommandServiceMethods.ByName("GetUserAddressByID")),
@@ -100,7 +100,7 @@ type userCommandServiceClient struct {
 	registerUser       *connect.Client[user.RegisterUserRequest, user.RegisterUserResponse]
 	loginUser          *connect.Client[user.LoginUserRequest, user.LoginUserResponse]
 	addUserAddress     *connect.Client[user.AddUserAddressRequest, user.AddUserAddressResponse]
-	getUserAddressByID *connect.Client[user.GetUserAddressByIDRequest, user.GetUserAddressByIDRequest]
+	getUserAddressByID *connect.Client[user.GetUserAddressByIDRequest, user.GetUserAddressByIDResponse]
 }
 
 // RegisterUser calls user.v1.UserCommandService.RegisterUser.
@@ -119,7 +119,7 @@ func (c *userCommandServiceClient) AddUserAddress(ctx context.Context, req *conn
 }
 
 // GetUserAddressByID calls user.v1.UserCommandService.GetUserAddressByID.
-func (c *userCommandServiceClient) GetUserAddressByID(ctx context.Context, req *connect.Request[user.GetUserAddressByIDRequest]) (*connect.Response[user.GetUserAddressByIDRequest], error) {
+func (c *userCommandServiceClient) GetUserAddressByID(ctx context.Context, req *connect.Request[user.GetUserAddressByIDRequest]) (*connect.Response[user.GetUserAddressByIDResponse], error) {
 	return c.getUserAddressByID.CallUnary(ctx, req)
 }
 
@@ -130,7 +130,7 @@ type UserCommandServiceHandler interface {
 	LoginUser(context.Context, *connect.Request[user.LoginUserRequest]) (*connect.Response[user.LoginUserResponse], error)
 	AddUserAddress(context.Context, *connect.Request[user.AddUserAddressRequest]) (*connect.Response[user.AddUserAddressResponse], error)
 	// internal services
-	GetUserAddressByID(context.Context, *connect.Request[user.GetUserAddressByIDRequest]) (*connect.Response[user.GetUserAddressByIDRequest], error)
+	GetUserAddressByID(context.Context, *connect.Request[user.GetUserAddressByIDRequest]) (*connect.Response[user.GetUserAddressByIDResponse], error)
 }
 
 // NewUserCommandServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -195,6 +195,6 @@ func (UnimplementedUserCommandServiceHandler) AddUserAddress(context.Context, *c
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserCommandService.AddUserAddress is not implemented"))
 }
 
-func (UnimplementedUserCommandServiceHandler) GetUserAddressByID(context.Context, *connect.Request[user.GetUserAddressByIDRequest]) (*connect.Response[user.GetUserAddressByIDRequest], error) {
+func (UnimplementedUserCommandServiceHandler) GetUserAddressByID(context.Context, *connect.Request[user.GetUserAddressByIDRequest]) (*connect.Response[user.GetUserAddressByIDResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserCommandService.GetUserAddressByID is not implemented"))
 }

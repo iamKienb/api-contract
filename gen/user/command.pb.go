@@ -24,21 +24,22 @@ var File_user_command_proto protoreflect.FileDescriptor
 
 const file_user_command_proto_rawDesc = "" +
 	"\n" +
-	"\x12user/command.proto\x12\auser.v1\x1a\x0fuser/type.proto2\xd6\x02\n" +
+	"\x12user/command.proto\x12\auser.v1\x1a\x0fuser/type.proto2\xd7\x02\n" +
 	"\x12UserCommandService\x12K\n" +
 	"\fRegisterUser\x12\x1c.user.v1.RegisterUserRequest\x1a\x1d.user.v1.RegisterUserResponse\x12B\n" +
 	"\tLoginUser\x12\x19.user.v1.LoginUserRequest\x1a\x1a.user.v1.LoginUserResponse\x12Q\n" +
-	"\x0eAddUserAddress\x12\x1e.user.v1.AddUserAddressRequest\x1a\x1f.user.v1.AddUserAddressResponse\x12\\\n" +
-	"\x12GetUserAddressByID\x12\".user.v1.GetUserAddressByIDRequest\x1a\".user.v1.GetUserAddressByIDRequestB+Z)github.com/iamKienb/api-contract/gen/userb\x06proto3"
+	"\x0eAddUserAddress\x12\x1e.user.v1.AddUserAddressRequest\x1a\x1f.user.v1.AddUserAddressResponse\x12]\n" +
+	"\x12GetUserAddressByID\x12\".user.v1.GetUserAddressByIDRequest\x1a#.user.v1.GetUserAddressByIDResponseB+Z)github.com/iamKienb/api-contract/gen/userb\x06proto3"
 
 var file_user_command_proto_goTypes = []any{
-	(*RegisterUserRequest)(nil),       // 0: user.v1.RegisterUserRequest
-	(*LoginUserRequest)(nil),          // 1: user.v1.LoginUserRequest
-	(*AddUserAddressRequest)(nil),     // 2: user.v1.AddUserAddressRequest
-	(*GetUserAddressByIDRequest)(nil), // 3: user.v1.GetUserAddressByIDRequest
-	(*RegisterUserResponse)(nil),      // 4: user.v1.RegisterUserResponse
-	(*LoginUserResponse)(nil),         // 5: user.v1.LoginUserResponse
-	(*AddUserAddressResponse)(nil),    // 6: user.v1.AddUserAddressResponse
+	(*RegisterUserRequest)(nil),        // 0: user.v1.RegisterUserRequest
+	(*LoginUserRequest)(nil),           // 1: user.v1.LoginUserRequest
+	(*AddUserAddressRequest)(nil),      // 2: user.v1.AddUserAddressRequest
+	(*GetUserAddressByIDRequest)(nil),  // 3: user.v1.GetUserAddressByIDRequest
+	(*RegisterUserResponse)(nil),       // 4: user.v1.RegisterUserResponse
+	(*LoginUserResponse)(nil),          // 5: user.v1.LoginUserResponse
+	(*AddUserAddressResponse)(nil),     // 6: user.v1.AddUserAddressResponse
+	(*GetUserAddressByIDResponse)(nil), // 7: user.v1.GetUserAddressByIDResponse
 }
 var file_user_command_proto_depIdxs = []int32{
 	0, // 0: user.v1.UserCommandService.RegisterUser:input_type -> user.v1.RegisterUserRequest
@@ -48,7 +49,7 @@ var file_user_command_proto_depIdxs = []int32{
 	4, // 4: user.v1.UserCommandService.RegisterUser:output_type -> user.v1.RegisterUserResponse
 	5, // 5: user.v1.UserCommandService.LoginUser:output_type -> user.v1.LoginUserResponse
 	6, // 6: user.v1.UserCommandService.AddUserAddress:output_type -> user.v1.AddUserAddressResponse
-	3, // 7: user.v1.UserCommandService.GetUserAddressByID:output_type -> user.v1.GetUserAddressByIDRequest
+	7, // 7: user.v1.UserCommandService.GetUserAddressByID:output_type -> user.v1.GetUserAddressByIDResponse
 	4, // [4:8] is the sub-list for method output_type
 	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
