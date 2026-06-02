@@ -70,9 +70,9 @@ message AddressDetail {
   string address_id    = 1;
   string receiver_name = 2;
   string phone_number  = 3;
-  string province_id   = 4;
+  int32  province_id   = 4;
   string province_name = 5;
-  string ward_id       = 6;
+  int32  ward_id       = 6;
   string ward_name     = 7;
   string address_line  = 8;
   string label         = 9;
