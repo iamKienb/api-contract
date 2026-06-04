@@ -141,7 +141,7 @@ message ListStockMovementsResponse {
 message SkuStock {
   int64  available_quantity = 1;
   string sku_id             = 2;
-
+  string inventory_id       = 3;
 }
 
 message GetStockBySkuIDsRequest {

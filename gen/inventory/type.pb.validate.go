@@ -2859,6 +2859,8 @@ func (m *SkuStock) validate(all bool) error {
 
 	// no validation rules for SkuId
 
+	// no validation rules for InventoryId
+
 	if len(errors) > 0 {
 		return SkuStockMultiError(errors)
 	}

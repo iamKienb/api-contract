@@ -1316,6 +1316,7 @@ type SkuStock struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	AvailableQuantity int64                  `protobuf:"varint,1,opt,name=available_quantity,json=availableQuantity,proto3" json:"available_quantity,omitempty"`
 	SkuId             string                 `protobuf:"bytes,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	InventoryId       string                 `protobuf:"bytes,3,opt,name=inventory_id,json=inventoryId,proto3" json:"inventory_id,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1360,6 +1361,13 @@ func (x *SkuStock) GetAvailableQuantity() int64 {
 func (x *SkuStock) GetSkuId() string {
 	if x != nil {
 		return x.SkuId
+	}
+	return ""
+}
+
+func (x *SkuStock) GetInventoryId() string {
+	if x != nil {
+		return x.InventoryId
 	}
 	return ""
 }
@@ -1555,10 +1563,11 @@ const file_inventory_type_proto_rawDesc = "" +
 	"\x1aListStockMovementsResponse\x125\n" +
 	"\x05items\x18\x01 \x03(\v2\x1f.inventory.v1.StockMovementViewR\x05items\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x03R\x05total\x12&\n" +
-	"\x0fnext_page_token\x18\x03 \x01(\tR\rnextPageToken\"P\n" +
+	"\x0fnext_page_token\x18\x03 \x01(\tR\rnextPageToken\"s\n" +
 	"\bSkuStock\x12-\n" +
 	"\x12available_quantity\x18\x01 \x01(\x03R\x11availableQuantity\x12\x15\n" +
-	"\x06sku_id\x18\x02 \x01(\tR\x05skuId\"K\n" +
+	"\x06sku_id\x18\x02 \x01(\tR\x05skuId\x12!\n" +
+	"\finventory_id\x18\x03 \x01(\tR\vinventoryId\"K\n" +
 	"\x17GetStockBySkuIDsRequest\x12\x17\n" +
 	"\ashop_id\x18\x01 \x01(\tR\x06shopId\x12\x17\n" +
 	"\asku_ids\x18\x02 \x03(\tR\x06skuIds\"O\n" +
