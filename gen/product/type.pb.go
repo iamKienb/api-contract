@@ -1224,6 +1224,154 @@ func (x *GetProductsBySkuIDsResponse) GetItems() []*SkuCheckoutDetail {
 	return nil
 }
 
+type SkuPriceItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SkuId         string                 `protobuf:"bytes,1,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	Price         int64                  `protobuf:"varint,2,opt,name=price,proto3" json:"price,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SkuPriceItem) Reset() {
+	*x = SkuPriceItem{}
+	mi := &file_product_type_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SkuPriceItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SkuPriceItem) ProtoMessage() {}
+
+func (x *SkuPriceItem) ProtoReflect() protoreflect.Message {
+	mi := &file_product_type_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SkuPriceItem.ProtoReflect.Descriptor instead.
+func (*SkuPriceItem) Descriptor() ([]byte, []int) {
+	return file_product_type_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *SkuPriceItem) GetSkuId() string {
+	if x != nil {
+		return x.SkuId
+	}
+	return ""
+}
+
+func (x *SkuPriceItem) GetPrice() int64 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
+type GetPriceSkusByIDsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ShopId        string                 `protobuf:"bytes,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	SkuIds        []string               `protobuf:"bytes,2,rep,name=sku_ids,json=skuIds,proto3" json:"sku_ids,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPriceSkusByIDsRequest) Reset() {
+	*x = GetPriceSkusByIDsRequest{}
+	mi := &file_product_type_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPriceSkusByIDsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPriceSkusByIDsRequest) ProtoMessage() {}
+
+func (x *GetPriceSkusByIDsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_product_type_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPriceSkusByIDsRequest.ProtoReflect.Descriptor instead.
+func (*GetPriceSkusByIDsRequest) Descriptor() ([]byte, []int) {
+	return file_product_type_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *GetPriceSkusByIDsRequest) GetShopId() string {
+	if x != nil {
+		return x.ShopId
+	}
+	return ""
+}
+
+func (x *GetPriceSkusByIDsRequest) GetSkuIds() []string {
+	if x != nil {
+		return x.SkuIds
+	}
+	return nil
+}
+
+type GetPriceSkusByIDsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Skus          []*SkuPriceItem        `protobuf:"bytes,1,rep,name=skus,proto3" json:"skus,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPriceSkusByIDsResponse) Reset() {
+	*x = GetPriceSkusByIDsResponse{}
+	mi := &file_product_type_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPriceSkusByIDsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPriceSkusByIDsResponse) ProtoMessage() {}
+
+func (x *GetPriceSkusByIDsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_product_type_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPriceSkusByIDsResponse.ProtoReflect.Descriptor instead.
+func (*GetPriceSkusByIDsResponse) Descriptor() ([]byte, []int) {
+	return file_product_type_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *GetPriceSkusByIDsResponse) GetSkus() []*SkuPriceItem {
+	if x != nil {
+		return x.Skus
+	}
+	return nil
+}
+
 var File_product_type_proto protoreflect.FileDescriptor
 
 const file_product_type_proto_rawDesc = "" +
@@ -1335,7 +1483,15 @@ const file_product_type_proto_rawDesc = "" +
 	"\ashop_id\x18\x01 \x01(\tR\x06shopId\x12\x17\n" +
 	"\asku_ids\x18\x02 \x03(\tR\x06skuIds\"R\n" +
 	"\x1bGetProductsBySkuIDsResponse\x123\n" +
-	"\x05items\x18\x01 \x03(\v2\x1d.product.v1.SkuCheckoutDetailR\x05itemsB.Z,github.com/iamKienb/api-contract/gen/productb\x06proto3"
+	"\x05items\x18\x01 \x03(\v2\x1d.product.v1.SkuCheckoutDetailR\x05items\";\n" +
+	"\fSkuPriceItem\x12\x15\n" +
+	"\x06sku_id\x18\x01 \x01(\tR\x05skuId\x12\x14\n" +
+	"\x05price\x18\x02 \x01(\x03R\x05price\"L\n" +
+	"\x18GetPriceSkusByIDsRequest\x12\x17\n" +
+	"\ashop_id\x18\x01 \x01(\tR\x06shopId\x12\x17\n" +
+	"\asku_ids\x18\x02 \x03(\tR\x06skuIds\"I\n" +
+	"\x19GetPriceSkusByIDsResponse\x12,\n" +
+	"\x04skus\x18\x01 \x03(\v2\x18.product.v1.SkuPriceItemR\x04skusB.Z,github.com/iamKienb/api-contract/gen/productb\x06proto3"
 
 var (
 	file_product_type_proto_rawDescOnce sync.Once
@@ -1349,7 +1505,7 @@ func file_product_type_proto_rawDescGZIP() []byte {
 	return file_product_type_proto_rawDescData
 }
 
-var file_product_type_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_product_type_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_product_type_proto_goTypes = []any{
 	(*ProductAttributeOption)(nil),        // 0: product.v1.ProductAttributeOption
 	(*ProductVariantOption)(nil),          // 1: product.v1.ProductVariantOption
@@ -1369,6 +1525,9 @@ var file_product_type_proto_goTypes = []any{
 	(*SkuCheckoutDetail)(nil),             // 15: product.v1.SkuCheckoutDetail
 	(*GetProductsBySkuIDsRequest)(nil),    // 16: product.v1.GetProductsBySkuIDsRequest
 	(*GetProductsBySkuIDsResponse)(nil),   // 17: product.v1.GetProductsBySkuIDsResponse
+	(*SkuPriceItem)(nil),                  // 18: product.v1.SkuPriceItem
+	(*GetPriceSkusByIDsRequest)(nil),      // 19: product.v1.GetPriceSkusByIDsRequest
+	(*GetPriceSkusByIDsResponse)(nil),     // 20: product.v1.GetPriceSkusByIDsResponse
 }
 var file_product_type_proto_depIdxs = []int32{
 	0,  // 0: product.v1.CreateProductsRequest.attributes:type_name -> product.v1.ProductAttributeOption
@@ -1380,11 +1539,12 @@ var file_product_type_proto_depIdxs = []int32{
 	4,  // 6: product.v1.ListProductVariantsResponse.variants:type_name -> product.v1.ProductVariantDetail
 	5,  // 7: product.v1.ListProductCategoriesResponse.categories:type_name -> product.v1.ProductCategoryView
 	15, // 8: product.v1.GetProductsBySkuIDsResponse.items:type_name -> product.v1.SkuCheckoutDetail
-	9,  // [9:9] is the sub-list for method output_type
-	9,  // [9:9] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	18, // 9: product.v1.GetPriceSkusByIDsResponse.skus:type_name -> product.v1.SkuPriceItem
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_product_type_proto_init() }
@@ -1398,7 +1558,7 @@ func file_product_type_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_product_type_proto_rawDesc), len(file_product_type_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

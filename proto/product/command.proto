@@ -9,4 +9,6 @@ service ProductCommandService {
   //  Public Commands
   rpc CreateProduct(CreateProductsRequest) returns(CreateProductsResponse);
 
+  // internal service call
+  rpc GetPriceSkusByIDs(GetPriceSkusByIDsRequest) returns (GetPriceSkusByIDsResponse);
 }

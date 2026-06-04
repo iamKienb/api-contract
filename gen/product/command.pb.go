@@ -25,19 +25,24 @@ var File_product_command_proto protoreflect.FileDescriptor
 const file_product_command_proto_rawDesc = "" +
 	"\n" +
 	"\x15product/command.proto\x12\n" +
-	"product.v1\x1a\x12product/type.proto2o\n" +
+	"product.v1\x1a\x12product/type.proto2\xd1\x01\n" +
 	"\x15ProductCommandService\x12V\n" +
-	"\rCreateProduct\x12!.product.v1.CreateProductsRequest\x1a\".product.v1.CreateProductsResponseB.Z,github.com/iamKienb/api-contract/gen/productb\x06proto3"
+	"\rCreateProduct\x12!.product.v1.CreateProductsRequest\x1a\".product.v1.CreateProductsResponse\x12`\n" +
+	"\x11GetPriceSkusByIDs\x12$.product.v1.GetPriceSkusByIDsRequest\x1a%.product.v1.GetPriceSkusByIDsResponseB.Z,github.com/iamKienb/api-contract/gen/productb\x06proto3"
 
 var file_product_command_proto_goTypes = []any{
-	(*CreateProductsRequest)(nil),  // 0: product.v1.CreateProductsRequest
-	(*CreateProductsResponse)(nil), // 1: product.v1.CreateProductsResponse
+	(*CreateProductsRequest)(nil),     // 0: product.v1.CreateProductsRequest
+	(*GetPriceSkusByIDsRequest)(nil),  // 1: product.v1.GetPriceSkusByIDsRequest
+	(*CreateProductsResponse)(nil),    // 2: product.v1.CreateProductsResponse
+	(*GetPriceSkusByIDsResponse)(nil), // 3: product.v1.GetPriceSkusByIDsResponse
 }
 var file_product_command_proto_depIdxs = []int32{
 	0, // 0: product.v1.ProductCommandService.CreateProduct:input_type -> product.v1.CreateProductsRequest
-	1, // 1: product.v1.ProductCommandService.CreateProduct:output_type -> product.v1.CreateProductsResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	1, // 1: product.v1.ProductCommandService.GetPriceSkusByIDs:input_type -> product.v1.GetPriceSkusByIDsRequest
+	2, // 2: product.v1.ProductCommandService.CreateProduct:output_type -> product.v1.CreateProductsResponse
+	3, // 3: product.v1.ProductCommandService.GetPriceSkusByIDs:output_type -> product.v1.GetPriceSkusByIDsResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

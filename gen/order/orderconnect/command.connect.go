@@ -6,8 +6,11 @@ package orderconnect
 
 import (
 	connect "connectrpc.com/connect"
-	_ "github.com/iamKienb/api-contract/gen/order"
+	context "context"
+	errors "errors"
+	order "github.com/iamKienb/api-contract/gen/order"
 	http "net/http"
+	strings "strings"
 )
 
 // This is a compile-time assertion to ensure that this generated file and the connect package are
@@ -22,8 +25,33 @@ const (
 	OrderCommandName = "order.v1.OrderCommand"
 )
 
+// These constants are the fully-qualified names of the RPCs defined in this package. They're
+// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+//
+// Note that these are different from the fully-qualified method names used by
+// google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
+// reflection-formatted method names, remove the leading slash and convert the remaining slash to a
+// period.
+const (
+	// OrderCommandPreviewCheckoutProcedure is the fully-qualified name of the OrderCommand's
+	// PreviewCheckout RPC.
+	OrderCommandPreviewCheckoutProcedure = "/order.v1.OrderCommand/PreviewCheckout"
+	// OrderCommandPlaceOrderProcedure is the fully-qualified name of the OrderCommand's PlaceOrder RPC.
+	OrderCommandPlaceOrderProcedure = "/order.v1.OrderCommand/PlaceOrder"
+	// OrderCommandCancelOrderProcedure is the fully-qualified name of the OrderCommand's CancelOrder
+	// RPC.
+	OrderCommandCancelOrderProcedure = "/order.v1.OrderCommand/CancelOrder"
+	// OrderCommandConfirmOrderProcedure is the fully-qualified name of the OrderCommand's ConfirmOrder
+	// RPC.
+	OrderCommandConfirmOrderProcedure = "/order.v1.OrderCommand/ConfirmOrder"
+)
+
 // OrderCommandClient is a client for the order.v1.OrderCommand service.
 type OrderCommandClient interface {
+	PreviewCheckout(context.Context, *connect.Request[order.PreviewCheckoutRequest]) (*connect.Response[order.PreviewCheckoutResponse], error)
+	PlaceOrder(context.Context, *connect.Request[order.PlaceOrderRequest]) (*connect.Response[order.PlaceOrderResponse], error)
+	CancelOrder(context.Context, *connect.Request[order.CancelOrderRequest]) (*connect.Response[order.CancelOrderResponse], error)
+	ConfirmOrder(context.Context, *connect.Request[order.ConfirmOrderRequest]) (*connect.Response[order.ConfirmOrderResponse], error)
 }
 
 // NewOrderCommandClient constructs a client for the order.v1.OrderCommand service. By default, it
@@ -34,15 +62,70 @@ type OrderCommandClient interface {
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
 func NewOrderCommandClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) OrderCommandClient {
-	return &orderCommandClient{}
+	baseURL = strings.TrimRight(baseURL, "/")
+	orderCommandMethods := order.File_order_command_proto.Services().ByName("OrderCommand").Methods()
+	return &orderCommandClient{
+		previewCheckout: connect.NewClient[order.PreviewCheckoutRequest, order.PreviewCheckoutResponse](
+			httpClient,
+			baseURL+OrderCommandPreviewCheckoutProcedure,
+			connect.WithSchema(orderCommandMethods.ByName("PreviewCheckout")),
+			connect.WithClientOptions(opts...),
+		),
+		placeOrder: connect.NewClient[order.PlaceOrderRequest, order.PlaceOrderResponse](
+			httpClient,
+			baseURL+OrderCommandPlaceOrderProcedure,
+			connect.WithSchema(orderCommandMethods.ByName("PlaceOrder")),
+			connect.WithClientOptions(opts...),
+		),
+		cancelOrder: connect.NewClient[order.CancelOrderRequest, order.CancelOrderResponse](
+			httpClient,
+			baseURL+OrderCommandCancelOrderProcedure,
+			connect.WithSchema(orderCommandMethods.ByName("CancelOrder")),
+			connect.WithClientOptions(opts...),
+		),
+		confirmOrder: connect.NewClient[order.ConfirmOrderRequest, order.ConfirmOrderResponse](
+			httpClient,
+			baseURL+OrderCommandConfirmOrderProcedure,
+			connect.WithSchema(orderCommandMethods.ByName("ConfirmOrder")),
+			connect.WithClientOptions(opts...),
+		),
+	}
 }
 
 // orderCommandClient implements OrderCommandClient.
 type orderCommandClient struct {
+	previewCheckout *connect.Client[order.PreviewCheckoutRequest, order.PreviewCheckoutResponse]
+	placeOrder      *connect.Client[order.PlaceOrderRequest, order.PlaceOrderResponse]
+	cancelOrder     *connect.Client[order.CancelOrderRequest, order.CancelOrderResponse]
+	confirmOrder    *connect.Client[order.ConfirmOrderRequest, order.ConfirmOrderResponse]
+}
+
+// PreviewCheckout calls order.v1.OrderCommand.PreviewCheckout.
+func (c *orderCommandClient) PreviewCheckout(ctx context.Context, req *connect.Request[order.PreviewCheckoutRequest]) (*connect.Response[order.PreviewCheckoutResponse], error) {
+	return c.previewCheckout.CallUnary(ctx, req)
+}
+
+// PlaceOrder calls order.v1.OrderCommand.PlaceOrder.
+func (c *orderCommandClient) PlaceOrder(ctx context.Context, req *connect.Request[order.PlaceOrderRequest]) (*connect.Response[order.PlaceOrderResponse], error) {
+	return c.placeOrder.CallUnary(ctx, req)
+}
+
+// CancelOrder calls order.v1.OrderCommand.CancelOrder.
+func (c *orderCommandClient) CancelOrder(ctx context.Context, req *connect.Request[order.CancelOrderRequest]) (*connect.Response[order.CancelOrderResponse], error) {
+	return c.cancelOrder.CallUnary(ctx, req)
+}
+
+// ConfirmOrder calls order.v1.OrderCommand.ConfirmOrder.
+func (c *orderCommandClient) ConfirmOrder(ctx context.Context, req *connect.Request[order.ConfirmOrderRequest]) (*connect.Response[order.ConfirmOrderResponse], error) {
+	return c.confirmOrder.CallUnary(ctx, req)
 }
 
 // OrderCommandHandler is an implementation of the order.v1.OrderCommand service.
 type OrderCommandHandler interface {
+	PreviewCheckout(context.Context, *connect.Request[order.PreviewCheckoutRequest]) (*connect.Response[order.PreviewCheckoutResponse], error)
+	PlaceOrder(context.Context, *connect.Request[order.PlaceOrderRequest]) (*connect.Response[order.PlaceOrderResponse], error)
+	CancelOrder(context.Context, *connect.Request[order.CancelOrderRequest]) (*connect.Response[order.CancelOrderResponse], error)
+	ConfirmOrder(context.Context, *connect.Request[order.ConfirmOrderRequest]) (*connect.Response[order.ConfirmOrderResponse], error)
 }
 
 // NewOrderCommandHandler builds an HTTP handler from the service implementation. It returns the
@@ -51,8 +134,41 @@ type OrderCommandHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewOrderCommandHandler(svc OrderCommandHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	orderCommandMethods := order.File_order_command_proto.Services().ByName("OrderCommand").Methods()
+	orderCommandPreviewCheckoutHandler := connect.NewUnaryHandler(
+		OrderCommandPreviewCheckoutProcedure,
+		svc.PreviewCheckout,
+		connect.WithSchema(orderCommandMethods.ByName("PreviewCheckout")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderCommandPlaceOrderHandler := connect.NewUnaryHandler(
+		OrderCommandPlaceOrderProcedure,
+		svc.PlaceOrder,
+		connect.WithSchema(orderCommandMethods.ByName("PlaceOrder")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderCommandCancelOrderHandler := connect.NewUnaryHandler(
+		OrderCommandCancelOrderProcedure,
+		svc.CancelOrder,
+		connect.WithSchema(orderCommandMethods.ByName("CancelOrder")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderCommandConfirmOrderHandler := connect.NewUnaryHandler(
+		OrderCommandConfirmOrderProcedure,
+		svc.ConfirmOrder,
+		connect.WithSchema(orderCommandMethods.ByName("ConfirmOrder")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/order.v1.OrderCommand/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case OrderCommandPreviewCheckoutProcedure:
+			orderCommandPreviewCheckoutHandler.ServeHTTP(w, r)
+		case OrderCommandPlaceOrderProcedure:
+			orderCommandPlaceOrderHandler.ServeHTTP(w, r)
+		case OrderCommandCancelOrderProcedure:
+			orderCommandCancelOrderHandler.ServeHTTP(w, r)
+		case OrderCommandConfirmOrderProcedure:
+			orderCommandConfirmOrderHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -61,3 +177,19 @@ func NewOrderCommandHandler(svc OrderCommandHandler, opts ...connect.HandlerOpti
 
 // UnimplementedOrderCommandHandler returns CodeUnimplemented from all methods.
 type UnimplementedOrderCommandHandler struct{}
+
+func (UnimplementedOrderCommandHandler) PreviewCheckout(context.Context, *connect.Request[order.PreviewCheckoutRequest]) (*connect.Response[order.PreviewCheckoutResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order.v1.OrderCommand.PreviewCheckout is not implemented"))
+}
+
+func (UnimplementedOrderCommandHandler) PlaceOrder(context.Context, *connect.Request[order.PlaceOrderRequest]) (*connect.Response[order.PlaceOrderResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order.v1.OrderCommand.PlaceOrder is not implemented"))
+}
+
+func (UnimplementedOrderCommandHandler) CancelOrder(context.Context, *connect.Request[order.CancelOrderRequest]) (*connect.Response[order.CancelOrderResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order.v1.OrderCommand.CancelOrder is not implemented"))
+}
+
+func (UnimplementedOrderCommandHandler) ConfirmOrder(context.Context, *connect.Request[order.ConfirmOrderRequest]) (*connect.Response[order.ConfirmOrderResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order.v1.OrderCommand.ConfirmOrder is not implemented"))
+}

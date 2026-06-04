@@ -6,5 +6,8 @@ import "order/type.proto";
 option go_package = "github.com/iamKienb/api-contract/gen/order";
 
 service OrderCommand {
-
+  rpc PreviewCheckout(PreviewCheckoutRequest) returns (PreviewCheckoutResponse);
+  rpc PlaceOrder(PlaceOrderRequest) returns (PlaceOrderResponse);
+  rpc CancelOrder(CancelOrderRequest) returns (CancelOrderResponse);
+  rpc ConfirmOrder(ConfirmOrderRequest) returns (ConfirmOrderResponse);
 }

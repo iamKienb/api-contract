@@ -134,3 +134,17 @@ message GetProductsBySkuIDsRequest {
 message GetProductsBySkuIDsResponse {
   repeated SkuCheckoutDetail items = 1;
 }
+
+message SkuPriceItem {
+  string sku_id = 1;
+  int64  price  = 2;
+}
+
+message GetPriceSkusByIDsRequest {
+  string          shop_id = 1;
+  repeated string sku_ids = 2;
+}
+
+message GetPriceSkusByIDsResponse {
+  repeated SkuPriceItem skus = 1;
+}

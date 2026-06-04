@@ -36,12 +36,17 @@ const (
 	// ProductCommandServiceCreateProductProcedure is the fully-qualified name of the
 	// ProductCommandService's CreateProduct RPC.
 	ProductCommandServiceCreateProductProcedure = "/product.v1.ProductCommandService/CreateProduct"
+	// ProductCommandServiceGetPriceSkusByIDsProcedure is the fully-qualified name of the
+	// ProductCommandService's GetPriceSkusByIDs RPC.
+	ProductCommandServiceGetPriceSkusByIDsProcedure = "/product.v1.ProductCommandService/GetPriceSkusByIDs"
 )
 
 // ProductCommandServiceClient is a client for the product.v1.ProductCommandService service.
 type ProductCommandServiceClient interface {
 	// Public Commands
 	CreateProduct(context.Context, *connect.Request[product.CreateProductsRequest]) (*connect.Response[product.CreateProductsResponse], error)
+	// internal service call
+	GetPriceSkusByIDs(context.Context, *connect.Request[product.GetPriceSkusByIDsRequest]) (*connect.Response[product.GetPriceSkusByIDsResponse], error)
 }
 
 // NewProductCommandServiceClient constructs a client for the product.v1.ProductCommandService
@@ -61,12 +66,19 @@ func NewProductCommandServiceClient(httpClient connect.HTTPClient, baseURL strin
 			connect.WithSchema(productCommandServiceMethods.ByName("CreateProduct")),
 			connect.WithClientOptions(opts...),
 		),
+		getPriceSkusByIDs: connect.NewClient[product.GetPriceSkusByIDsRequest, product.GetPriceSkusByIDsResponse](
+			httpClient,
+			baseURL+ProductCommandServiceGetPriceSkusByIDsProcedure,
+			connect.WithSchema(productCommandServiceMethods.ByName("GetPriceSkusByIDs")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // productCommandServiceClient implements ProductCommandServiceClient.
 type productCommandServiceClient struct {
-	createProduct *connect.Client[product.CreateProductsRequest, product.CreateProductsResponse]
+	createProduct     *connect.Client[product.CreateProductsRequest, product.CreateProductsResponse]
+	getPriceSkusByIDs *connect.Client[product.GetPriceSkusByIDsRequest, product.GetPriceSkusByIDsResponse]
 }
 
 // CreateProduct calls product.v1.ProductCommandService.CreateProduct.
@@ -74,11 +86,18 @@ func (c *productCommandServiceClient) CreateProduct(ctx context.Context, req *co
 	return c.createProduct.CallUnary(ctx, req)
 }
 
+// GetPriceSkusByIDs calls product.v1.ProductCommandService.GetPriceSkusByIDs.
+func (c *productCommandServiceClient) GetPriceSkusByIDs(ctx context.Context, req *connect.Request[product.GetPriceSkusByIDsRequest]) (*connect.Response[product.GetPriceSkusByIDsResponse], error) {
+	return c.getPriceSkusByIDs.CallUnary(ctx, req)
+}
+
 // ProductCommandServiceHandler is an implementation of the product.v1.ProductCommandService
 // service.
 type ProductCommandServiceHandler interface {
 	// Public Commands
 	CreateProduct(context.Context, *connect.Request[product.CreateProductsRequest]) (*connect.Response[product.CreateProductsResponse], error)
+	// internal service call
+	GetPriceSkusByIDs(context.Context, *connect.Request[product.GetPriceSkusByIDsRequest]) (*connect.Response[product.GetPriceSkusByIDsResponse], error)
 }
 
 // NewProductCommandServiceHandler builds an HTTP handler from the service implementation. It
@@ -94,10 +113,18 @@ func NewProductCommandServiceHandler(svc ProductCommandServiceHandler, opts ...c
 		connect.WithSchema(productCommandServiceMethods.ByName("CreateProduct")),
 		connect.WithHandlerOptions(opts...),
 	)
+	productCommandServiceGetPriceSkusByIDsHandler := connect.NewUnaryHandler(
+		ProductCommandServiceGetPriceSkusByIDsProcedure,
+		svc.GetPriceSkusByIDs,
+		connect.WithSchema(productCommandServiceMethods.ByName("GetPriceSkusByIDs")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/product.v1.ProductCommandService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ProductCommandServiceCreateProductProcedure:
 			productCommandServiceCreateProductHandler.ServeHTTP(w, r)
+		case ProductCommandServiceGetPriceSkusByIDsProcedure:
+			productCommandServiceGetPriceSkusByIDsHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -109,4 +136,8 @@ type UnimplementedProductCommandServiceHandler struct{}
 
 func (UnimplementedProductCommandServiceHandler) CreateProduct(context.Context, *connect.Request[product.CreateProductsRequest]) (*connect.Response[product.CreateProductsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product.v1.ProductCommandService.CreateProduct is not implemented"))
+}
+
+func (UnimplementedProductCommandServiceHandler) GetPriceSkusByIDs(context.Context, *connect.Request[product.GetPriceSkusByIDsRequest]) (*connect.Response[product.GetPriceSkusByIDsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product.v1.ProductCommandService.GetPriceSkusByIDs is not implemented"))
 }

@@ -8,10 +8,10 @@ import "google/protobuf/timestamp.proto";
 option go_package = "github.com/iamKienb/api-contract/gen/order";
 
 message PreviewCheckoutRequest {
-  string                buyer_id   = 1;
-  string                address_id = 2;
-  string                shop_id    = 3; // Ép buộc truyền ShopID lên để đảm bảo tính đơn shop
-  repeated CheckoutItem items      = 4;
+  string                buyer_id        = 1;
+  string                address_user_id = 2;
+  string                shop_id         = 3;
+  repeated CheckoutItem items           = 4;
 }
 
 message CheckoutItem {
@@ -21,18 +21,61 @@ message CheckoutItem {
 
 message PreviewCheckoutResponse {
   string shop_id            = 1;
-  int64  total_item_price   = 2;    // Tổng tiền hàng gốc của shop này
-  int64  total_shipping_fee = 3;  // Phí vận chuyển của shop này
-  int64  grand_total        = 4;         // Tiền khách phải trả (total_item_price + total_shipping_fee)
+  int64  total_item_price   = 2;
+  int64  total_shipping_fee = 3;
+  int64  grand_total        = 4;
 
-  repeated PreviewItemDetails items = 5; // Danh sách sản phẩm mua trong shop này
+  repeated PreviewItemDetails items = 5;
 }
 
 message PreviewItemDetails {
   string sku_id       = 1;
-  string name         = 2;
-  string thumb_url    = 3;
-  int64  price        = 4;
-  int32  quantity     = 5;
-  bool   is_available = 6;         // Cờ báo còn hàng/hết hàng trong kho để hiển thị cảnh báo
+  string inventory_id = 2;
+  string name         = 3;
+  string thumb_url    = 4;
+  int64  price        = 5;
+  int32  quantity     = 6;
+}
+
+message PlaceOrderItem {
+  string sku_id     = 1;
+  int32  quantity   = 2;
+  int64  base_price = 3;
+}
+
+message PlaceOrderRequest {
+  string                  buyer_id        = 1;
+  string                  address_user_id = 2;
+  string                  shop_id         = 3;
+  repeated PlaceOrderItem items           = 4;
+}
+
+message PlaceOrderResponse {
+  bool success = 1;
+}
+
+message CancelOrderRequest {
+  string order_id = 1; // ID của đơn hàng muốn hủy
+  string actor_id = 2; // ID của người bấm nút hủy (Có thể là BuyerID hoặc AdminID)
+  string reason   = 3; // Lý do hủy đơn (để lưu log phục vụ CSKH/Data Analyst)
+}
+
+message CancelOrderResponse {
+  string order_id = 1;
+  string status   = 2; // Trạng thái mới (ví dụ: "CANCELLED")
+  string message  = 3; // Câu thông báo thành công
+}
+
+// ----------------------------------------------------
+// 2. API XÁC NHẬN ĐƠN HÀNG (CONFIRM ORDER)
+// ----------------------------------------------------
+message ConfirmOrderRequest {
+  string order_id = 1; // ID của đơn hàng cần duyệt
+  string shop_id  = 2; // ID của Shop thực hiện duyệt (Để phân quyền, bảo mật dữ liệu)
+  string actor_id = 3; // ID của Nhân viên/Chủ shop bấm nút duyệt đơn
+}
+
+message ConfirmOrderResponse {
+  string order_id = 1;
+  string status   = 2; // Trạng thái mới (ví dụ: "PROCESSING" hoặc "CONFIRMED")
 }

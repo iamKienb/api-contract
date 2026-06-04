@@ -24,13 +24,35 @@ var File_order_command_proto protoreflect.FileDescriptor
 
 const file_order_command_proto_rawDesc = "" +
 	"\n" +
-	"\x13order/command.proto\x12\border.v1\x1a\x10order/type.proto2\x0e\n" +
-	"\fOrderCommandB,Z*github.com/iamKienb/api-contract/gen/orderb\x06proto3"
+	"\x13order/command.proto\x12\border.v1\x1a\x10order/type.proto2\xca\x02\n" +
+	"\fOrderCommand\x12V\n" +
+	"\x0fPreviewCheckout\x12 .order.v1.PreviewCheckoutRequest\x1a!.order.v1.PreviewCheckoutResponse\x12G\n" +
+	"\n" +
+	"PlaceOrder\x12\x1b.order.v1.PlaceOrderRequest\x1a\x1c.order.v1.PlaceOrderResponse\x12J\n" +
+	"\vCancelOrder\x12\x1c.order.v1.CancelOrderRequest\x1a\x1d.order.v1.CancelOrderResponse\x12M\n" +
+	"\fConfirmOrder\x12\x1d.order.v1.ConfirmOrderRequest\x1a\x1e.order.v1.ConfirmOrderResponseB,Z*github.com/iamKienb/api-contract/gen/orderb\x06proto3"
 
-var file_order_command_proto_goTypes = []any{}
+var file_order_command_proto_goTypes = []any{
+	(*PreviewCheckoutRequest)(nil),  // 0: order.v1.PreviewCheckoutRequest
+	(*PlaceOrderRequest)(nil),       // 1: order.v1.PlaceOrderRequest
+	(*CancelOrderRequest)(nil),      // 2: order.v1.CancelOrderRequest
+	(*ConfirmOrderRequest)(nil),     // 3: order.v1.ConfirmOrderRequest
+	(*PreviewCheckoutResponse)(nil), // 4: order.v1.PreviewCheckoutResponse
+	(*PlaceOrderResponse)(nil),      // 5: order.v1.PlaceOrderResponse
+	(*CancelOrderResponse)(nil),     // 6: order.v1.CancelOrderResponse
+	(*ConfirmOrderResponse)(nil),    // 7: order.v1.ConfirmOrderResponse
+}
 var file_order_command_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
+	0, // 0: order.v1.OrderCommand.PreviewCheckout:input_type -> order.v1.PreviewCheckoutRequest
+	1, // 1: order.v1.OrderCommand.PlaceOrder:input_type -> order.v1.PlaceOrderRequest
+	2, // 2: order.v1.OrderCommand.CancelOrder:input_type -> order.v1.CancelOrderRequest
+	3, // 3: order.v1.OrderCommand.ConfirmOrder:input_type -> order.v1.ConfirmOrderRequest
+	4, // 4: order.v1.OrderCommand.PreviewCheckout:output_type -> order.v1.PreviewCheckoutResponse
+	5, // 5: order.v1.OrderCommand.PlaceOrder:output_type -> order.v1.PlaceOrderResponse
+	6, // 6: order.v1.OrderCommand.CancelOrder:output_type -> order.v1.CancelOrderResponse
+	7, // 7: order.v1.OrderCommand.ConfirmOrder:output_type -> order.v1.ConfirmOrderResponse
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

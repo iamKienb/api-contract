@@ -2393,3 +2393,346 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetProductsBySkuIDsResponseValidationError{}
+
+// Validate checks the field values on SkuPriceItem with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *SkuPriceItem) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on SkuPriceItem with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in SkuPriceItemMultiError, or
+// nil if none found.
+func (m *SkuPriceItem) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *SkuPriceItem) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for SkuId
+
+	// no validation rules for Price
+
+	if len(errors) > 0 {
+		return SkuPriceItemMultiError(errors)
+	}
+
+	return nil
+}
+
+// SkuPriceItemMultiError is an error wrapping multiple validation errors
+// returned by SkuPriceItem.ValidateAll() if the designated constraints aren't met.
+type SkuPriceItemMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m SkuPriceItemMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m SkuPriceItemMultiError) AllErrors() []error { return m }
+
+// SkuPriceItemValidationError is the validation error returned by
+// SkuPriceItem.Validate if the designated constraints aren't met.
+type SkuPriceItemValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e SkuPriceItemValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e SkuPriceItemValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e SkuPriceItemValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e SkuPriceItemValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e SkuPriceItemValidationError) ErrorName() string { return "SkuPriceItemValidationError" }
+
+// Error satisfies the builtin error interface
+func (e SkuPriceItemValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sSkuPriceItem.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = SkuPriceItemValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = SkuPriceItemValidationError{}
+
+// Validate checks the field values on GetPriceSkusByIDsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetPriceSkusByIDsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetPriceSkusByIDsRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetPriceSkusByIDsRequestMultiError, or nil if none found.
+func (m *GetPriceSkusByIDsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetPriceSkusByIDsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for ShopId
+
+	if len(errors) > 0 {
+		return GetPriceSkusByIDsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetPriceSkusByIDsRequestMultiError is an error wrapping multiple validation
+// errors returned by GetPriceSkusByIDsRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetPriceSkusByIDsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetPriceSkusByIDsRequestMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetPriceSkusByIDsRequestMultiError) AllErrors() []error { return m }
+
+// GetPriceSkusByIDsRequestValidationError is the validation error returned by
+// GetPriceSkusByIDsRequest.Validate if the designated constraints aren't met.
+type GetPriceSkusByIDsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetPriceSkusByIDsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetPriceSkusByIDsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetPriceSkusByIDsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetPriceSkusByIDsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetPriceSkusByIDsRequestValidationError) ErrorName() string {
+	return "GetPriceSkusByIDsRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetPriceSkusByIDsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetPriceSkusByIDsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetPriceSkusByIDsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetPriceSkusByIDsRequestValidationError{}
+
+// Validate checks the field values on GetPriceSkusByIDsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetPriceSkusByIDsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetPriceSkusByIDsResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetPriceSkusByIDsResponseMultiError, or nil if none found.
+func (m *GetPriceSkusByIDsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetPriceSkusByIDsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetSkus() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetPriceSkusByIDsResponseValidationError{
+						field:  fmt.Sprintf("Skus[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetPriceSkusByIDsResponseValidationError{
+						field:  fmt.Sprintf("Skus[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetPriceSkusByIDsResponseValidationError{
+					field:  fmt.Sprintf("Skus[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetPriceSkusByIDsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetPriceSkusByIDsResponseMultiError is an error wrapping multiple validation
+// errors returned by GetPriceSkusByIDsResponse.ValidateAll() if the
+// designated constraints aren't met.
+type GetPriceSkusByIDsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetPriceSkusByIDsResponseMultiError) Error() string {
+	msgs := make([]string, 0, len(m))
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetPriceSkusByIDsResponseMultiError) AllErrors() []error { return m }
+
+// GetPriceSkusByIDsResponseValidationError is the validation error returned by
+// GetPriceSkusByIDsResponse.Validate if the designated constraints aren't met.
+type GetPriceSkusByIDsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetPriceSkusByIDsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetPriceSkusByIDsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetPriceSkusByIDsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetPriceSkusByIDsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetPriceSkusByIDsResponseValidationError) ErrorName() string {
+	return "GetPriceSkusByIDsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetPriceSkusByIDsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetPriceSkusByIDsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetPriceSkusByIDsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetPriceSkusByIDsResponseValidationError{}
