@@ -1752,35 +1752,6 @@ func (m *ShopProfileView) validate(all bool) error {
 
 	// no validation rules for BannerUrl
 
-	if all {
-		switch v := interface{}(m.GetExtra()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ShopProfileViewValidationError{
-					field:  "Extra",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ShopProfileViewValidationError{
-					field:  "Extra",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ShopProfileViewValidationError{
-				field:  "Extra",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if len(errors) > 0 {
 		return ShopProfileViewMultiError(errors)
 	}
@@ -1895,35 +1866,6 @@ func (m *ShopAddressView) validate(all bool) error {
 
 	// no validation rules for Type
 
-	if all {
-		switch v := interface{}(m.GetExtra()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ShopAddressViewValidationError{
-					field:  "Extra",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ShopAddressViewValidationError{
-					field:  "Extra",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ShopAddressViewValidationError{
-				field:  "Extra",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if len(errors) > 0 {
 		return ShopAddressViewMultiError(errors)
 	}
@@ -2027,35 +1969,6 @@ func (m *ShopMemberView) validate(all bool) error {
 	// no validation rules for Id
 
 	// no validation rules for Name
-
-	if all {
-		switch v := interface{}(m.GetExtra()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ShopMemberViewValidationError{
-					field:  "Extra",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ShopMemberViewValidationError{
-					field:  "Extra",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ShopMemberViewValidationError{
-				field:  "Extra",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
 	if len(errors) > 0 {
 		return ShopMemberViewMultiError(errors)
@@ -2260,35 +2173,6 @@ func (m *ShopView) validate(all bool) error {
 			}
 		}
 
-	}
-
-	if all {
-		switch v := interface{}(m.GetExtra()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ShopViewValidationError{
-					field:  "Extra",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ShopViewValidationError{
-					field:  "Extra",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetExtra()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ShopViewValidationError{
-				field:  "Extra",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
 	}
 
 	if len(errors) > 0 {

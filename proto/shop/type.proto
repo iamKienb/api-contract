@@ -4,7 +4,6 @@ package shop.v1;
 
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/struct.proto";
 
 option go_package = "github.com/iamKienb/api-contract/gen/shop";
 
@@ -88,7 +87,6 @@ message ShopProfileView {
   string description = 1;
   string logo_url    = 2;
   string banner_url  = 3;
-  google.protobuf.Struct extra = 4;
 }
 
 message ShopAddressView {
@@ -99,14 +97,12 @@ message ShopAddressView {
   string contact_name = 5;
   string phone_number = 6;
   string type         = 7;
-  google.protobuf.Struct extra = 8;
 }
 
 message ShopMemberView {
   string id = 1;
   string name = 2;
   repeated int32 role_ids = 3;
-  google.protobuf.Struct extra = 4;
 }
 
 message ShopView {
@@ -117,7 +113,6 @@ message ShopView {
   ShopProfileView profile = 5;
   repeated ShopAddressView addresses = 6;
   repeated ShopMemberView members = 7;
-  google.protobuf.Struct extra = 8;
 }
 
 message GetShopDetailRequest {

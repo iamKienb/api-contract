@@ -10,7 +10,6 @@ import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -626,7 +625,6 @@ type InventoryStockView struct {
 	Available     int64                  `protobuf:"varint,6,opt,name=available,proto3" json:"available,omitempty"`
 	Status        string                 `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
 	UpdatedAt     string                 `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Extra         *structpb.Struct       `protobuf:"bytes,9,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -717,13 +715,6 @@ func (x *InventoryStockView) GetUpdatedAt() string {
 	return ""
 }
 
-func (x *InventoryStockView) GetExtra() *structpb.Struct {
-	if x != nil {
-		return x.Extra
-	}
-	return nil
-}
-
 type StockMovementView struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -737,7 +728,6 @@ type StockMovementView struct {
 	ReferenceType string                 `protobuf:"bytes,9,opt,name=reference_type,json=referenceType,proto3" json:"reference_type,omitempty"`
 	ReferenceId   string                 `protobuf:"bytes,10,opt,name=reference_id,json=referenceId,proto3" json:"reference_id,omitempty"`
 	CreatedAt     string                 `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Extra         *structpb.Struct       `protobuf:"bytes,12,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -847,13 +837,6 @@ func (x *StockMovementView) GetCreatedAt() string {
 		return x.CreatedAt
 	}
 	return ""
-}
-
-func (x *StockMovementView) GetExtra() *structpb.Struct {
-	if x != nil {
-		return x.Extra
-	}
-	return nil
 }
 
 type GetInventoryItemRequest struct {
@@ -1472,7 +1455,7 @@ var File_inventory_type_proto protoreflect.FileDescriptor
 
 const file_inventory_type_proto_rawDesc = "" +
 	"\n" +
-	"\x14inventory/type.proto\x12\finventory.v1\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\"T\n" +
+	"\x14inventory/type.proto\x12\finventory.v1\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"T\n" +
 	"\rInventoryItem\x12\x1e\n" +
 	"\x06sku_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x05skuId\x12#\n" +
 	"\bquantity\x18\x03 \x01(\x05B\a\xfaB\x04\x1a\x02(\x00R\bquantity\"y\n" +
@@ -1505,7 +1488,7 @@ const file_inventory_type_proto_rawDesc = "" +
 	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12\"\n" +
 	"\border_id\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\aorderId\"0\n" +
 	"\x14FulfillStockResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xa3\x02\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xf4\x01\n" +
 	"\x12InventoryStockView\x12!\n" +
 	"\finventory_id\x18\x01 \x01(\tR\vinventoryId\x12\x15\n" +
 	"\x06sku_id\x18\x02 \x01(\tR\x05skuId\x12\x17\n" +
@@ -1515,8 +1498,7 @@ const file_inventory_type_proto_rawDesc = "" +
 	"\tavailable\x18\x06 \x01(\x03R\tavailable\x12\x16\n" +
 	"\x06status\x18\a \x01(\tR\x06status\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\b \x01(\tR\tupdatedAt\x12-\n" +
-	"\x05extra\x18\t \x01(\v2\x17.google.protobuf.StructR\x05extra\"\x8a\x03\n" +
+	"updated_at\x18\b \x01(\tR\tupdatedAt\"\xdb\x02\n" +
 	"\x11StockMovementView\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
 	"\finventory_id\x18\x02 \x01(\tR\vinventoryId\x12\x15\n" +
@@ -1530,8 +1512,7 @@ const file_inventory_type_proto_rawDesc = "" +
 	"\freference_id\x18\n" +
 	" \x01(\tR\vreferenceId\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\v \x01(\tR\tcreatedAt\x12-\n" +
-	"\x05extra\x18\f \x01(\v2\x17.google.protobuf.StructR\x05extra\"9\n" +
+	"created_at\x18\v \x01(\tR\tcreatedAt\"9\n" +
 	"\x17GetInventoryItemRequest\x12\x1e\n" +
 	"\x06sku_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x05skuId\"P\n" +
 	"\x18GetInventoryItemResponse\x124\n" +
@@ -1614,24 +1595,21 @@ var file_inventory_type_proto_goTypes = []any{
 	(*GetStockBySkuIDsRequest)(nil),    // 23: inventory.v1.GetStockBySkuIDsRequest
 	(*GetStockBySkuIDsResponse)(nil),   // 24: inventory.v1.GetStockBySkuIDsResponse
 	(*timestamppb.Timestamp)(nil),      // 25: google.protobuf.Timestamp
-	(*structpb.Struct)(nil),            // 26: google.protobuf.Struct
 }
 var file_inventory_type_proto_depIdxs = []int32{
 	0,  // 0: inventory.v1.CreateInventoriesRequest.items:type_name -> inventory.v1.InventoryItem
 	5,  // 1: inventory.v1.ReserveStockRequest.items:type_name -> inventory.v1.StockReservationItem
 	25, // 2: inventory.v1.ReserveStockResponse.expires_at:type_name -> google.protobuf.Timestamp
-	26, // 3: inventory.v1.InventoryStockView.extra:type_name -> google.protobuf.Struct
-	26, // 4: inventory.v1.StockMovementView.extra:type_name -> google.protobuf.Struct
-	12, // 5: inventory.v1.GetInventoryItemResponse.item:type_name -> inventory.v1.InventoryStockView
-	12, // 6: inventory.v1.ListInventoryItemsResponse.items:type_name -> inventory.v1.InventoryStockView
-	12, // 7: inventory.v1.ListLowStockItemsResponse.items:type_name -> inventory.v1.InventoryStockView
-	13, // 8: inventory.v1.ListStockMovementsResponse.items:type_name -> inventory.v1.StockMovementView
-	22, // 9: inventory.v1.GetStockBySkuIDsResponse.sku_stock:type_name -> inventory.v1.SkuStock
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	12, // 3: inventory.v1.GetInventoryItemResponse.item:type_name -> inventory.v1.InventoryStockView
+	12, // 4: inventory.v1.ListInventoryItemsResponse.items:type_name -> inventory.v1.InventoryStockView
+	12, // 5: inventory.v1.ListLowStockItemsResponse.items:type_name -> inventory.v1.InventoryStockView
+	13, // 6: inventory.v1.ListStockMovementsResponse.items:type_name -> inventory.v1.StockMovementView
+	22, // 7: inventory.v1.GetStockBySkuIDsResponse.sku_stock:type_name -> inventory.v1.SkuStock
+	8,  // [8:8] is the sub-list for method output_type
+	8,  // [8:8] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_inventory_type_proto_init() }

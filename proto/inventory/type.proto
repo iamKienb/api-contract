@@ -4,7 +4,6 @@ package inventory.v1;
 
 import "validate/validate.proto";
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/struct.proto";
 
 option go_package = "github.com/iamKienb/api-contract/gen/inventory";
 
@@ -67,30 +66,28 @@ message FulfillStockResponse {
 }
 
 message InventoryStockView {
-  string                 inventory_id = 1;
-  string                 sku_id       = 2;
-  string                 shop_id      = 3;
-  int64                  quantity     = 4;
-  int64                  reserved     = 5;
-  int64                  available    = 6;
-  string                 status       = 7;
-  string                 updated_at   = 8;
-  google.protobuf.Struct extra        = 9;
+  string inventory_id = 1;
+  string sku_id       = 2;
+  string shop_id      = 3;
+  int64  quantity     = 4;
+  int64  reserved     = 5;
+  int64  available    = 6;
+  string status       = 7;
+  string updated_at   = 8;
 }
 
 message StockMovementView {
-  string                 id             = 1;
-  string                 inventory_id   = 2;
-  string                 sku_id         = 3;
-  string                 shop_id        = 4;
-  string                 type           = 5;
-  int64                  quantity       = 6;
-  int64                  balance_before = 7;
-  int64                  balance_after  = 8;
-  string                 reference_type = 9;
-  string                 reference_id   = 10;
-  string                 created_at     = 11;
-  google.protobuf.Struct extra          = 12;
+  string id             = 1;
+  string inventory_id   = 2;
+  string sku_id         = 3;
+  string shop_id        = 4;
+  string type           = 5;
+  int64  quantity       = 6;
+  int64  balance_before = 7;
+  int64  balance_after  = 8;
+  string reference_type = 9;
+  string reference_id   = 10;
+  string created_at     = 11;
 }
 
 message GetInventoryItemRequest {

@@ -10,7 +10,6 @@ import (
 	_ "github.com/envoyproxy/protoc-gen-validate/validate"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	structpb "google.golang.org/protobuf/types/known/structpb"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -725,7 +724,6 @@ type ShopProfileView struct {
 	Description   string                 `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
 	LogoUrl       string                 `protobuf:"bytes,2,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url,omitempty"`
 	BannerUrl     string                 `protobuf:"bytes,3,opt,name=banner_url,json=bannerUrl,proto3" json:"banner_url,omitempty"`
-	Extra         *structpb.Struct       `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -781,13 +779,6 @@ func (x *ShopProfileView) GetBannerUrl() string {
 	return ""
 }
 
-func (x *ShopProfileView) GetExtra() *structpb.Struct {
-	if x != nil {
-		return x.Extra
-	}
-	return nil
-}
-
 type ShopAddressView struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -797,7 +788,6 @@ type ShopAddressView struct {
 	ContactName   string                 `protobuf:"bytes,5,opt,name=contact_name,json=contactName,proto3" json:"contact_name,omitempty"`
 	PhoneNumber   string                 `protobuf:"bytes,6,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
 	Type          string                 `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
-	Extra         *structpb.Struct       `protobuf:"bytes,8,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -881,19 +871,11 @@ func (x *ShopAddressView) GetType() string {
 	return ""
 }
 
-func (x *ShopAddressView) GetExtra() *structpb.Struct {
-	if x != nil {
-		return x.Extra
-	}
-	return nil
-}
-
 type ShopMemberView struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	RoleIds       []int32                `protobuf:"varint,3,rep,packed,name=role_ids,json=roleIds,proto3" json:"role_ids,omitempty"`
-	Extra         *structpb.Struct       `protobuf:"bytes,4,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -949,13 +931,6 @@ func (x *ShopMemberView) GetRoleIds() []int32 {
 	return nil
 }
 
-func (x *ShopMemberView) GetExtra() *structpb.Struct {
-	if x != nil {
-		return x.Extra
-	}
-	return nil
-}
-
 type ShopView struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ShopId        string                 `protobuf:"bytes,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
@@ -965,7 +940,6 @@ type ShopView struct {
 	Profile       *ShopProfileView       `protobuf:"bytes,5,opt,name=profile,proto3" json:"profile,omitempty"`
 	Addresses     []*ShopAddressView     `protobuf:"bytes,6,rep,name=addresses,proto3" json:"addresses,omitempty"`
 	Members       []*ShopMemberView      `protobuf:"bytes,7,rep,name=members,proto3" json:"members,omitempty"`
-	Extra         *structpb.Struct       `protobuf:"bytes,8,opt,name=extra,proto3" json:"extra,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1045,13 +1019,6 @@ func (x *ShopView) GetAddresses() []*ShopAddressView {
 func (x *ShopView) GetMembers() []*ShopMemberView {
 	if x != nil {
 		return x.Members
-	}
-	return nil
-}
-
-func (x *ShopView) GetExtra() *structpb.Struct {
-	if x != nil {
-		return x.Extra
 	}
 	return nil
 }
@@ -1452,7 +1419,7 @@ var File_shop_type_proto protoreflect.FileDescriptor
 
 const file_shop_type_proto_rawDesc = "" +
 	"\n" +
-	"\x0fshop/type.proto\x12\ashop.v1\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\"\xa8\x01\n" +
+	"\x0fshop/type.proto\x12\ashop.v1\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa8\x01\n" +
 	"\x0fShopProfileInfo\x12%\n" +
 	"\vdescription\x18\x01 \x01(\tH\x00R\vdescription\x88\x01\x01\x12\x1e\n" +
 	"\blogo_url\x18\x02 \x01(\tH\x01R\alogoUrl\x88\x01\x01\x12\"\n" +
@@ -1506,13 +1473,12 @@ const file_shop_type_proto_rawDesc = "" +
 	"\x17CheckPermissionResponse\x12\x1d\n" +
 	"\n" +
 	"is_allowed\x18\x01 \x01(\bR\tisAllowed\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"\x9c\x01\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"m\n" +
 	"\x0fShopProfileView\x12 \n" +
 	"\vdescription\x18\x01 \x01(\tR\vdescription\x12\x19\n" +
 	"\blogo_url\x18\x02 \x01(\tR\alogoUrl\x12\x1d\n" +
 	"\n" +
-	"banner_url\x18\x03 \x01(\tR\tbannerUrl\x12-\n" +
-	"\x05extra\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\x89\x02\n" +
+	"banner_url\x18\x03 \x01(\tR\tbannerUrl\"\xda\x01\n" +
 	"\x0fShopAddressView\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\ashop_id\x18\x02 \x01(\tR\x06shopId\x12!\n" +
@@ -1520,13 +1486,11 @@ const file_shop_type_proto_rawDesc = "" +
 	"\faddress_line\x18\x04 \x01(\tR\vaddressLine\x12!\n" +
 	"\fcontact_name\x18\x05 \x01(\tR\vcontactName\x12!\n" +
 	"\fphone_number\x18\x06 \x01(\tR\vphoneNumber\x12\x12\n" +
-	"\x04type\x18\a \x01(\tR\x04type\x12-\n" +
-	"\x05extra\x18\b \x01(\v2\x17.google.protobuf.StructR\x05extra\"~\n" +
+	"\x04type\x18\a \x01(\tR\x04type\"O\n" +
 	"\x0eShopMemberView\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x19\n" +
-	"\brole_ids\x18\x03 \x03(\x05R\aroleIds\x12-\n" +
-	"\x05extra\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x05extra\"\xb1\x02\n" +
+	"\brole_ids\x18\x03 \x03(\x05R\aroleIds\"\x82\x02\n" +
 	"\bShopView\x12\x17\n" +
 	"\ashop_id\x18\x01 \x01(\tR\x06shopId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
@@ -1534,8 +1498,7 @@ const file_shop_type_proto_rawDesc = "" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x122\n" +
 	"\aprofile\x18\x05 \x01(\v2\x18.shop.v1.ShopProfileViewR\aprofile\x126\n" +
 	"\taddresses\x18\x06 \x03(\v2\x18.shop.v1.ShopAddressViewR\taddresses\x121\n" +
-	"\amembers\x18\a \x03(\v2\x17.shop.v1.ShopMemberViewR\amembers\x12-\n" +
-	"\x05extra\x18\b \x01(\v2\x17.google.protobuf.StructR\x05extra\"8\n" +
+	"\amembers\x18\a \x03(\v2\x17.shop.v1.ShopMemberViewR\amembers\"8\n" +
 	"\x14GetShopDetailRequest\x12 \n" +
 	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\">\n" +
 	"\x15GetShopDetailResponse\x12%\n" +
@@ -1597,7 +1560,6 @@ var file_shop_type_proto_goTypes = []any{
 	(*ListShopAddressesResponse)(nil), // 21: shop.v1.ListShopAddressesResponse
 	(*ListShopMembersRequest)(nil),    // 22: shop.v1.ListShopMembersRequest
 	(*ListShopMembersResponse)(nil),   // 23: shop.v1.ListShopMembersResponse
-	(*structpb.Struct)(nil),           // 24: google.protobuf.Struct
 }
 var file_shop_type_proto_depIdxs = []int32{
 	0,  // 0: shop.v1.CreateShopRequest.profile:type_name -> shop.v1.ShopProfileInfo
@@ -1607,22 +1569,18 @@ var file_shop_type_proto_depIdxs = []int32{
 	3,  // 4: shop.v1.AddShopAddressRequest.ward:type_name -> shop.v1.LocationInfo
 	6,  // 5: shop.v1.Member.roleIDs:type_name -> shop.v1.RoleID
 	7,  // 6: shop.v1.AssignMemberRolesRequest.member_roles:type_name -> shop.v1.Member
-	24, // 7: shop.v1.ShopProfileView.extra:type_name -> google.protobuf.Struct
-	24, // 8: shop.v1.ShopAddressView.extra:type_name -> google.protobuf.Struct
-	24, // 9: shop.v1.ShopMemberView.extra:type_name -> google.protobuf.Struct
-	12, // 10: shop.v1.ShopView.profile:type_name -> shop.v1.ShopProfileView
-	13, // 11: shop.v1.ShopView.addresses:type_name -> shop.v1.ShopAddressView
-	14, // 12: shop.v1.ShopView.members:type_name -> shop.v1.ShopMemberView
-	24, // 13: shop.v1.ShopView.extra:type_name -> google.protobuf.Struct
-	15, // 14: shop.v1.GetShopDetailResponse.shop:type_name -> shop.v1.ShopView
-	15, // 15: shop.v1.SearchShopsResponse.shops:type_name -> shop.v1.ShopView
-	13, // 16: shop.v1.ListShopAddressesResponse.addresses:type_name -> shop.v1.ShopAddressView
-	14, // 17: shop.v1.ListShopMembersResponse.members:type_name -> shop.v1.ShopMemberView
-	18, // [18:18] is the sub-list for method output_type
-	18, // [18:18] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	12, // 7: shop.v1.ShopView.profile:type_name -> shop.v1.ShopProfileView
+	13, // 8: shop.v1.ShopView.addresses:type_name -> shop.v1.ShopAddressView
+	14, // 9: shop.v1.ShopView.members:type_name -> shop.v1.ShopMemberView
+	15, // 10: shop.v1.GetShopDetailResponse.shop:type_name -> shop.v1.ShopView
+	15, // 11: shop.v1.SearchShopsResponse.shops:type_name -> shop.v1.ShopView
+	13, // 12: shop.v1.ListShopAddressesResponse.addresses:type_name -> shop.v1.ShopAddressView
+	14, // 13: shop.v1.ListShopMembersResponse.members:type_name -> shop.v1.ShopMemberView
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_shop_type_proto_init() }
