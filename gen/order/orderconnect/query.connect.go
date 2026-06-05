@@ -6,8 +6,11 @@ package orderconnect
 
 import (
 	connect "connectrpc.com/connect"
-	_ "github.com/iamKienb/api-contract/gen/order"
+	context "context"
+	errors "errors"
+	order "github.com/iamKienb/api-contract/gen/order"
 	http "net/http"
+	strings "strings"
 )
 
 // This is a compile-time assertion to ensure that this generated file and the connect package are
@@ -22,8 +25,33 @@ const (
 	OrderQueryName = "order.v1.OrderQuery"
 )
 
+// These constants are the fully-qualified names of the RPCs defined in this package. They're
+// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+//
+// Note that these are different from the fully-qualified method names used by
+// google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
+// reflection-formatted method names, remove the leading slash and convert the remaining slash to a
+// period.
+const (
+	// OrderQueryGetOrderDetailProcedure is the fully-qualified name of the OrderQuery's GetOrderDetail
+	// RPC.
+	OrderQueryGetOrderDetailProcedure = "/order.v1.OrderQuery/GetOrderDetail"
+	// OrderQueryListBuyerOrdersProcedure is the fully-qualified name of the OrderQuery's
+	// ListBuyerOrders RPC.
+	OrderQueryListBuyerOrdersProcedure = "/order.v1.OrderQuery/ListBuyerOrders"
+	// OrderQueryListShopOrdersProcedure is the fully-qualified name of the OrderQuery's ListShopOrders
+	// RPC.
+	OrderQueryListShopOrdersProcedure = "/order.v1.OrderQuery/ListShopOrders"
+	// OrderQuerySearchOrdersProcedure is the fully-qualified name of the OrderQuery's SearchOrders RPC.
+	OrderQuerySearchOrdersProcedure = "/order.v1.OrderQuery/SearchOrders"
+)
+
 // OrderQueryClient is a client for the order.v1.OrderQuery service.
 type OrderQueryClient interface {
+	GetOrderDetail(context.Context, *connect.Request[order.GetOrderDetailRequest]) (*connect.Response[order.GetOrderDetailResponse], error)
+	ListBuyerOrders(context.Context, *connect.Request[order.ListBuyerOrdersRequest]) (*connect.Response[order.ListBuyerOrdersResponse], error)
+	ListShopOrders(context.Context, *connect.Request[order.ListShopOrdersRequest]) (*connect.Response[order.ListShopOrdersResponse], error)
+	SearchOrders(context.Context, *connect.Request[order.SearchOrdersRequest]) (*connect.Response[order.SearchOrdersResponse], error)
 }
 
 // NewOrderQueryClient constructs a client for the order.v1.OrderQuery service. By default, it uses
@@ -34,15 +62,70 @@ type OrderQueryClient interface {
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
 func NewOrderQueryClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) OrderQueryClient {
-	return &orderQueryClient{}
+	baseURL = strings.TrimRight(baseURL, "/")
+	orderQueryMethods := order.File_order_query_proto.Services().ByName("OrderQuery").Methods()
+	return &orderQueryClient{
+		getOrderDetail: connect.NewClient[order.GetOrderDetailRequest, order.GetOrderDetailResponse](
+			httpClient,
+			baseURL+OrderQueryGetOrderDetailProcedure,
+			connect.WithSchema(orderQueryMethods.ByName("GetOrderDetail")),
+			connect.WithClientOptions(opts...),
+		),
+		listBuyerOrders: connect.NewClient[order.ListBuyerOrdersRequest, order.ListBuyerOrdersResponse](
+			httpClient,
+			baseURL+OrderQueryListBuyerOrdersProcedure,
+			connect.WithSchema(orderQueryMethods.ByName("ListBuyerOrders")),
+			connect.WithClientOptions(opts...),
+		),
+		listShopOrders: connect.NewClient[order.ListShopOrdersRequest, order.ListShopOrdersResponse](
+			httpClient,
+			baseURL+OrderQueryListShopOrdersProcedure,
+			connect.WithSchema(orderQueryMethods.ByName("ListShopOrders")),
+			connect.WithClientOptions(opts...),
+		),
+		searchOrders: connect.NewClient[order.SearchOrdersRequest, order.SearchOrdersResponse](
+			httpClient,
+			baseURL+OrderQuerySearchOrdersProcedure,
+			connect.WithSchema(orderQueryMethods.ByName("SearchOrders")),
+			connect.WithClientOptions(opts...),
+		),
+	}
 }
 
 // orderQueryClient implements OrderQueryClient.
 type orderQueryClient struct {
+	getOrderDetail  *connect.Client[order.GetOrderDetailRequest, order.GetOrderDetailResponse]
+	listBuyerOrders *connect.Client[order.ListBuyerOrdersRequest, order.ListBuyerOrdersResponse]
+	listShopOrders  *connect.Client[order.ListShopOrdersRequest, order.ListShopOrdersResponse]
+	searchOrders    *connect.Client[order.SearchOrdersRequest, order.SearchOrdersResponse]
+}
+
+// GetOrderDetail calls order.v1.OrderQuery.GetOrderDetail.
+func (c *orderQueryClient) GetOrderDetail(ctx context.Context, req *connect.Request[order.GetOrderDetailRequest]) (*connect.Response[order.GetOrderDetailResponse], error) {
+	return c.getOrderDetail.CallUnary(ctx, req)
+}
+
+// ListBuyerOrders calls order.v1.OrderQuery.ListBuyerOrders.
+func (c *orderQueryClient) ListBuyerOrders(ctx context.Context, req *connect.Request[order.ListBuyerOrdersRequest]) (*connect.Response[order.ListBuyerOrdersResponse], error) {
+	return c.listBuyerOrders.CallUnary(ctx, req)
+}
+
+// ListShopOrders calls order.v1.OrderQuery.ListShopOrders.
+func (c *orderQueryClient) ListShopOrders(ctx context.Context, req *connect.Request[order.ListShopOrdersRequest]) (*connect.Response[order.ListShopOrdersResponse], error) {
+	return c.listShopOrders.CallUnary(ctx, req)
+}
+
+// SearchOrders calls order.v1.OrderQuery.SearchOrders.
+func (c *orderQueryClient) SearchOrders(ctx context.Context, req *connect.Request[order.SearchOrdersRequest]) (*connect.Response[order.SearchOrdersResponse], error) {
+	return c.searchOrders.CallUnary(ctx, req)
 }
 
 // OrderQueryHandler is an implementation of the order.v1.OrderQuery service.
 type OrderQueryHandler interface {
+	GetOrderDetail(context.Context, *connect.Request[order.GetOrderDetailRequest]) (*connect.Response[order.GetOrderDetailResponse], error)
+	ListBuyerOrders(context.Context, *connect.Request[order.ListBuyerOrdersRequest]) (*connect.Response[order.ListBuyerOrdersResponse], error)
+	ListShopOrders(context.Context, *connect.Request[order.ListShopOrdersRequest]) (*connect.Response[order.ListShopOrdersResponse], error)
+	SearchOrders(context.Context, *connect.Request[order.SearchOrdersRequest]) (*connect.Response[order.SearchOrdersResponse], error)
 }
 
 // NewOrderQueryHandler builds an HTTP handler from the service implementation. It returns the path
@@ -51,8 +134,41 @@ type OrderQueryHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewOrderQueryHandler(svc OrderQueryHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	orderQueryMethods := order.File_order_query_proto.Services().ByName("OrderQuery").Methods()
+	orderQueryGetOrderDetailHandler := connect.NewUnaryHandler(
+		OrderQueryGetOrderDetailProcedure,
+		svc.GetOrderDetail,
+		connect.WithSchema(orderQueryMethods.ByName("GetOrderDetail")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderQueryListBuyerOrdersHandler := connect.NewUnaryHandler(
+		OrderQueryListBuyerOrdersProcedure,
+		svc.ListBuyerOrders,
+		connect.WithSchema(orderQueryMethods.ByName("ListBuyerOrders")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderQueryListShopOrdersHandler := connect.NewUnaryHandler(
+		OrderQueryListShopOrdersProcedure,
+		svc.ListShopOrders,
+		connect.WithSchema(orderQueryMethods.ByName("ListShopOrders")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orderQuerySearchOrdersHandler := connect.NewUnaryHandler(
+		OrderQuerySearchOrdersProcedure,
+		svc.SearchOrders,
+		connect.WithSchema(orderQueryMethods.ByName("SearchOrders")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/order.v1.OrderQuery/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case OrderQueryGetOrderDetailProcedure:
+			orderQueryGetOrderDetailHandler.ServeHTTP(w, r)
+		case OrderQueryListBuyerOrdersProcedure:
+			orderQueryListBuyerOrdersHandler.ServeHTTP(w, r)
+		case OrderQueryListShopOrdersProcedure:
+			orderQueryListShopOrdersHandler.ServeHTTP(w, r)
+		case OrderQuerySearchOrdersProcedure:
+			orderQuerySearchOrdersHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -61,3 +177,19 @@ func NewOrderQueryHandler(svc OrderQueryHandler, opts ...connect.HandlerOption) 
 
 // UnimplementedOrderQueryHandler returns CodeUnimplemented from all methods.
 type UnimplementedOrderQueryHandler struct{}
+
+func (UnimplementedOrderQueryHandler) GetOrderDetail(context.Context, *connect.Request[order.GetOrderDetailRequest]) (*connect.Response[order.GetOrderDetailResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order.v1.OrderQuery.GetOrderDetail is not implemented"))
+}
+
+func (UnimplementedOrderQueryHandler) ListBuyerOrders(context.Context, *connect.Request[order.ListBuyerOrdersRequest]) (*connect.Response[order.ListBuyerOrdersResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order.v1.OrderQuery.ListBuyerOrders is not implemented"))
+}
+
+func (UnimplementedOrderQueryHandler) ListShopOrders(context.Context, *connect.Request[order.ListShopOrdersRequest]) (*connect.Response[order.ListShopOrdersResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order.v1.OrderQuery.ListShopOrders is not implemented"))
+}
+
+func (UnimplementedOrderQueryHandler) SearchOrders(context.Context, *connect.Request[order.SearchOrdersRequest]) (*connect.Response[order.SearchOrdersResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("order.v1.OrderQuery.SearchOrders is not implemented"))
+}

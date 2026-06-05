@@ -24,14 +24,35 @@ var File_order_query_proto protoreflect.FileDescriptor
 
 const file_order_query_proto_rawDesc = "" +
 	"\n" +
-	"\x11order/query.proto\x12\border.v1\x1a\x10order/type.proto2\f\n" +
+	"\x11order/query.proto\x12\border.v1\x1a\x10order/type.proto2\xdd\x02\n" +
 	"\n" +
-	"OrderQueryB,Z*github.com/iamKienb/api-contract/gen/orderb\x06proto3"
+	"OrderQuery\x12S\n" +
+	"\x0eGetOrderDetail\x12\x1f.order.v1.GetOrderDetailRequest\x1a .order.v1.GetOrderDetailResponse\x12V\n" +
+	"\x0fListBuyerOrders\x12 .order.v1.ListBuyerOrdersRequest\x1a!.order.v1.ListBuyerOrdersResponse\x12S\n" +
+	"\x0eListShopOrders\x12\x1f.order.v1.ListShopOrdersRequest\x1a .order.v1.ListShopOrdersResponse\x12M\n" +
+	"\fSearchOrders\x12\x1d.order.v1.SearchOrdersRequest\x1a\x1e.order.v1.SearchOrdersResponseB,Z*github.com/iamKienb/api-contract/gen/orderb\x06proto3"
 
-var file_order_query_proto_goTypes = []any{}
+var file_order_query_proto_goTypes = []any{
+	(*GetOrderDetailRequest)(nil),   // 0: order.v1.GetOrderDetailRequest
+	(*ListBuyerOrdersRequest)(nil),  // 1: order.v1.ListBuyerOrdersRequest
+	(*ListShopOrdersRequest)(nil),   // 2: order.v1.ListShopOrdersRequest
+	(*SearchOrdersRequest)(nil),     // 3: order.v1.SearchOrdersRequest
+	(*GetOrderDetailResponse)(nil),  // 4: order.v1.GetOrderDetailResponse
+	(*ListBuyerOrdersResponse)(nil), // 5: order.v1.ListBuyerOrdersResponse
+	(*ListShopOrdersResponse)(nil),  // 6: order.v1.ListShopOrdersResponse
+	(*SearchOrdersResponse)(nil),    // 7: order.v1.SearchOrdersResponse
+}
 var file_order_query_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
+	0, // 0: order.v1.OrderQuery.GetOrderDetail:input_type -> order.v1.GetOrderDetailRequest
+	1, // 1: order.v1.OrderQuery.ListBuyerOrders:input_type -> order.v1.ListBuyerOrdersRequest
+	2, // 2: order.v1.OrderQuery.ListShopOrders:input_type -> order.v1.ListShopOrdersRequest
+	3, // 3: order.v1.OrderQuery.SearchOrders:input_type -> order.v1.SearchOrdersRequest
+	4, // 4: order.v1.OrderQuery.GetOrderDetail:output_type -> order.v1.GetOrderDetailResponse
+	5, // 5: order.v1.OrderQuery.ListBuyerOrders:output_type -> order.v1.ListBuyerOrdersResponse
+	6, // 6: order.v1.OrderQuery.ListShopOrders:output_type -> order.v1.ListShopOrdersResponse
+	7, // 7: order.v1.OrderQuery.SearchOrders:output_type -> order.v1.SearchOrdersResponse
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

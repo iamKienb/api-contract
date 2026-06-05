@@ -7,6 +7,10 @@ import "order/type.proto";
 option go_package = "github.com/iamKienb/api-contract/gen/order";
 
 service OrderQuery {
+  rpc GetOrderDetail(GetOrderDetailRequest) returns (GetOrderDetailResponse);
+  rpc ListBuyerOrders(ListBuyerOrdersRequest) returns (ListBuyerOrdersResponse);
+  rpc ListShopOrders(ListShopOrdersRequest) returns (ListShopOrdersResponse);
+  rpc SearchOrders(SearchOrdersRequest) returns (SearchOrdersResponse);
 // GetOrderHistory (Xem lịch sử đơn): API phân trang, tìm kiếm đơn hàng dành cho User (Đọc từ Elasticsearch)
 // .GetShopOrders (Quản lý đơn hàng đổ về): API dành cho chủ Shop để duyệt đơn, bấm giao hàng (Đọc từ Elasticsearch).
 }

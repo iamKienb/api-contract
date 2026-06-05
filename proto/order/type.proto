@@ -75,6 +75,81 @@ message ConfirmOrderRequest {
   string actor_id = 3; // ID của Nhân viên/Chủ shop bấm nút duyệt đơn
 }
 
+message OrderItemView {
+  string inventory_id  = 1;
+  string sku_id        = 2;
+  string sku_code      = 3;
+  string product_id    = 4;
+  string product_name  = 5;
+  int64  quantity      = 6;
+  int64  base_price    = 7;
+  int64  item_subtotal = 8;
+}
+
+message OrderView {
+  string order_id     = 1;
+  string shop_id      = 2;
+  string buyer_id     = 3;
+  string status       = 4;
+  int64  grand_total  = 5;
+  string currency     = 6;
+  string reason       = 7;
+  string created_at   = 8;
+  string confirmed_at = 9;
+  string cancelled_at = 10;
+
+  repeated OrderItemView items = 11;
+}
+
+message GetOrderDetailRequest {
+  string order_id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message GetOrderDetailResponse {
+  OrderView order = 1;
+}
+
+message ListBuyerOrdersRequest {
+  string buyer_id   = 1 [(validate.rules).string.min_len = 1];
+  string status     = 2;
+  int32  page_size  = 3;
+  string page_token = 4;
+}
+
+message ListBuyerOrdersResponse {
+  repeated OrderView orders          = 1;
+  int64              total           = 2;
+  string             next_page_token = 3;
+}
+
+message ListShopOrdersRequest {
+  string shop_id    = 1 [(validate.rules).string.min_len = 1];
+  string status     = 2;
+  int32  page_size  = 3;
+  string page_token = 4;
+}
+
+message ListShopOrdersResponse {
+  repeated OrderView orders          = 1;
+  int64              total           = 2;
+  string             next_page_token = 3;
+}
+
+message SearchOrdersRequest {
+  string shop_id    = 1;
+  string buyer_id   = 2;
+  string status     = 3;
+  string keyword    = 4;
+  int32  page_size  = 5;
+  string page_token = 6;
+}
+
+message SearchOrdersResponse {
+  repeated OrderView orders          = 1;
+  int64              total           = 2;
+  string             next_page_token = 3;
+}
+
 message ConfirmOrderResponse {
   string order_id = 1;
   string status   = 2; // Trạng thái mới (ví dụ: "PROCESSING" hoặc "CONFIRMED")
