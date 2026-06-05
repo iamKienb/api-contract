@@ -706,6 +706,17 @@ func (m *PlaceOrderRequest) validate(all bool) error {
 
 	}
 
+	if utf8.RuneCountInString(m.GetIdempotencyKey()) < 1 {
+		err := PlaceOrderRequestValidationError{
+			field:  "IdempotencyKey",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return PlaceOrderRequestMultiError(errors)
 	}
@@ -809,6 +820,10 @@ func (m *PlaceOrderResponse) validate(all bool) error {
 	var errors []error
 
 	// no validation rules for Success
+
+	// no validation rules for OrderId
+
+	// no validation rules for Status
 
 	if len(errors) > 0 {
 		return PlaceOrderResponseMultiError(errors)

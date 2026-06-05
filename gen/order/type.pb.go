@@ -364,13 +364,14 @@ func (x *PlaceOrderItem) GetBasePrice() int64 {
 }
 
 type PlaceOrderRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	BuyerId       string                 `protobuf:"bytes,1,opt,name=buyer_id,json=buyerId,proto3" json:"buyer_id,omitempty"`
-	AddressUserId string                 `protobuf:"bytes,2,opt,name=address_user_id,json=addressUserId,proto3" json:"address_user_id,omitempty"`
-	ShopId        string                 `protobuf:"bytes,3,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
-	Items         []*PlaceOrderItem      `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	BuyerId        string                 `protobuf:"bytes,1,opt,name=buyer_id,json=buyerId,proto3" json:"buyer_id,omitempty"`
+	AddressUserId  string                 `protobuf:"bytes,2,opt,name=address_user_id,json=addressUserId,proto3" json:"address_user_id,omitempty"`
+	ShopId         string                 `protobuf:"bytes,3,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	Items          []*PlaceOrderItem      `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
+	IdempotencyKey string                 `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *PlaceOrderRequest) Reset() {
@@ -431,9 +432,18 @@ func (x *PlaceOrderRequest) GetItems() []*PlaceOrderItem {
 	return nil
 }
 
+func (x *PlaceOrderRequest) GetIdempotencyKey() string {
+	if x != nil {
+		return x.IdempotencyKey
+	}
+	return ""
+}
+
 type PlaceOrderResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	OrderId       string                 `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	Status        string                 `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -473,6 +483,20 @@ func (x *PlaceOrderResponse) GetSuccess() bool {
 		return x.Success
 	}
 	return false
+}
+
+func (x *PlaceOrderResponse) GetOrderId() string {
+	if x != nil {
+		return x.OrderId
+	}
+	return ""
+}
+
+func (x *PlaceOrderResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
 }
 
 type CancelOrderRequest struct {
@@ -1453,14 +1477,17 @@ const file_order_type_proto_rawDesc = "" +
 	"\x06sku_id\x18\x01 \x01(\tR\x05skuId\x12\x1a\n" +
 	"\bquantity\x18\x02 \x01(\x05R\bquantity\x12\x1d\n" +
 	"\n" +
-	"base_price\x18\x03 \x01(\x03R\tbasePrice\"\x9f\x01\n" +
+	"base_price\x18\x03 \x01(\x03R\tbasePrice\"\xd1\x01\n" +
 	"\x11PlaceOrderRequest\x12\x19\n" +
 	"\bbuyer_id\x18\x01 \x01(\tR\abuyerId\x12&\n" +
 	"\x0faddress_user_id\x18\x02 \x01(\tR\raddressUserId\x12\x17\n" +
 	"\ashop_id\x18\x03 \x01(\tR\x06shopId\x12.\n" +
-	"\x05items\x18\x04 \x03(\v2\x18.order.v1.PlaceOrderItemR\x05items\".\n" +
+	"\x05items\x18\x04 \x03(\v2\x18.order.v1.PlaceOrderItemR\x05items\x120\n" +
+	"\x0fidempotency_key\x18\x05 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x0eidempotencyKey\"a\n" +
 	"\x12PlaceOrderResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x19\n" +
+	"\border_id\x18\x02 \x01(\tR\aorderId\x12\x16\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\"b\n" +
 	"\x12CancelOrderRequest\x12\x19\n" +
 	"\border_id\x18\x01 \x01(\tR\aorderId\x12\x19\n" +
 	"\bactor_id\x18\x02 \x01(\tR\aactorId\x12\x16\n" +

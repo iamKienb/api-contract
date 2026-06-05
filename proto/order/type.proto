@@ -48,10 +48,13 @@ message PlaceOrderRequest {
   string                  address_user_id = 2;
   string                  shop_id         = 3;
   repeated PlaceOrderItem items           = 4;
+  string                  idempotency_key = 5 [(validate.rules).string.min_len = 1];
 }
 
 message PlaceOrderResponse {
-  bool success = 1;
+  bool   success  = 1;
+  string order_id = 2;
+  string status   = 3;
 }
 
 message CancelOrderRequest {
