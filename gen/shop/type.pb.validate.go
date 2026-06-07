@@ -626,9 +626,9 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 		}
 	}
 
-	if m.GetCity() == nil {
+	if m.GetProvince() == nil {
 		err := AddShopAddressRequestValidationError{
-			field:  "City",
+			field:  "Province",
 			reason: "value is required",
 		}
 		if !all {
@@ -638,11 +638,11 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 	}
 
 	if all {
-		switch v := interface{}(m.GetCity()).(type) {
+		switch v := interface{}(m.GetProvince()).(type) {
 		case interface{ ValidateAll() error }:
 			if err := v.ValidateAll(); err != nil {
 				errors = append(errors, AddShopAddressRequestValidationError{
-					field:  "City",
+					field:  "Province",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
@@ -650,56 +650,16 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 		case interface{ Validate() error }:
 			if err := v.Validate(); err != nil {
 				errors = append(errors, AddShopAddressRequestValidationError{
-					field:  "City",
+					field:  "Province",
 					reason: "embedded message failed validation",
 					cause:  err,
 				})
 			}
 		}
-	} else if v, ok := interface{}(m.GetCity()).(interface{ Validate() error }); ok {
+	} else if v, ok := interface{}(m.GetProvince()).(interface{ Validate() error }); ok {
 		if err := v.Validate(); err != nil {
 			return AddShopAddressRequestValidationError{
-				field:  "City",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if m.GetDistrict() == nil {
-		err := AddShopAddressRequestValidationError{
-			field:  "District",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if all {
-		switch v := interface{}(m.GetDistrict()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AddShopAddressRequestValidationError{
-					field:  "District",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, AddShopAddressRequestValidationError{
-					field:  "District",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetDistrict()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return AddShopAddressRequestValidationError{
-				field:  "District",
+				field:  "Province",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -782,7 +742,7 @@ func (m *AddShopAddressRequest) validate(all bool) error {
 	if _, ok := _AddShopAddressRequest_Type_InLookup[m.GetType()]; !ok {
 		err := AddShopAddressRequestValidationError{
 			field:  "Type",
-			reason: "value must be in list [Pickup Return]",
+			reason: "value must be in list [PICKUP RETURN]",
 		}
 		if !all {
 			return err
@@ -873,8 +833,8 @@ var _ interface {
 var _AddShopAddressRequest_PhoneNumber_Pattern = regexp.MustCompile("^[0-9]{10,11}$")
 
 var _AddShopAddressRequest_Type_InLookup = map[string]struct{}{
-	"Pickup": {},
-	"Return": {},
+	"PICKUP": {},
+	"RETURN": {},
 }
 
 // Validate checks the field values on AddShopAddressResponse with the rules

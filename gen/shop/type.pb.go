@@ -244,13 +244,12 @@ type AddShopAddressRequest struct {
 	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	ShopId        string                 `protobuf:"bytes,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
 	Country       *LocationInfo          `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
-	City          *LocationInfo          `protobuf:"bytes,4,opt,name=city,proto3" json:"city,omitempty"`
-	District      *LocationInfo          `protobuf:"bytes,5,opt,name=district,proto3" json:"district,omitempty"`
-	Ward          *LocationInfo          `protobuf:"bytes,6,opt,name=ward,proto3" json:"ward,omitempty"`
-	AddressLine   string                 `protobuf:"bytes,7,opt,name=address_line,json=addressLine,proto3" json:"address_line,omitempty"`
-	ContactName   string                 `protobuf:"bytes,8,opt,name=contact_name,json=contactName,proto3" json:"contact_name,omitempty"`
-	PhoneNumber   string                 `protobuf:"bytes,9,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
-	Type          string                 `protobuf:"bytes,10,opt,name=type,proto3" json:"type,omitempty"`
+	Province      *LocationInfo          `protobuf:"bytes,4,opt,name=province,proto3" json:"province,omitempty"`
+	Ward          *LocationInfo          `protobuf:"bytes,5,opt,name=ward,proto3" json:"ward,omitempty"`
+	AddressLine   string                 `protobuf:"bytes,6,opt,name=address_line,json=addressLine,proto3" json:"address_line,omitempty"`
+	ContactName   string                 `protobuf:"bytes,7,opt,name=contact_name,json=contactName,proto3" json:"contact_name,omitempty"`
+	PhoneNumber   string                 `protobuf:"bytes,8,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
+	Type          string                 `protobuf:"bytes,9,opt,name=type,proto3" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -306,16 +305,9 @@ func (x *AddShopAddressRequest) GetCountry() *LocationInfo {
 	return nil
 }
 
-func (x *AddShopAddressRequest) GetCity() *LocationInfo {
+func (x *AddShopAddressRequest) GetProvince() *LocationInfo {
 	if x != nil {
-		return x.City
-	}
-	return nil
-}
-
-func (x *AddShopAddressRequest) GetDistrict() *LocationInfo {
-	if x != nil {
-		return x.District
+		return x.Province
 	}
 	return nil
 }
@@ -1438,19 +1430,17 @@ const file_shop_type_proto_rawDesc = "" +
 	"\ashop_id\x18\x01 \x01(\tR\x06shopId\"D\n" +
 	"\fLocationInfo\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\x02id\x12\x1b\n" +
-	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\"\xfa\x03\n" +
+	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\"\xc5\x03\n" +
 	"\x15AddShopAddressRequest\x12 \n" +
 	"\auser_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06userId\x12 \n" +
 	"\ashop_id\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x129\n" +
-	"\acountry\x18\x03 \x01(\v2\x15.shop.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\acountry\x123\n" +
-	"\x04city\x18\x04 \x01(\v2\x15.shop.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\x04city\x12;\n" +
-	"\bdistrict\x18\x05 \x01(\v2\x15.shop.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\bdistrict\x123\n" +
-	"\x04ward\x18\x06 \x01(\v2\x15.shop.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\x04ward\x12*\n" +
-	"\faddress_line\x18\a \x01(\tB\a\xfaB\x04r\x02\x10\x01R\vaddressLine\x12*\n" +
-	"\fcontact_name\x18\b \x01(\tB\a\xfaB\x04r\x02\x10\x01R\vcontactName\x128\n" +
-	"\fphone_number\x18\t \x01(\tB\x15\xfaB\x12r\x102\x0e^[0-9]{10,11}$R\vphoneNumber\x12)\n" +
-	"\x04type\x18\n" +
-	" \x01(\tB\x15\xfaB\x12r\x10R\x06PickupR\x06ReturnR\x04type\"7\n" +
+	"\acountry\x18\x03 \x01(\v2\x15.shop.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\acountry\x12;\n" +
+	"\bprovince\x18\x04 \x01(\v2\x15.shop.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\bprovince\x123\n" +
+	"\x04ward\x18\x05 \x01(\v2\x15.shop.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\x04ward\x12*\n" +
+	"\faddress_line\x18\x06 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\vaddressLine\x12*\n" +
+	"\fcontact_name\x18\a \x01(\tB\a\xfaB\x04r\x02\x10\x01R\vcontactName\x128\n" +
+	"\fphone_number\x18\b \x01(\tB\x15\xfaB\x12r\x102\x0e^[0-9]{10,11}$R\vphoneNumber\x12)\n" +
+	"\x04type\x18\t \x01(\tB\x15\xfaB\x12r\x10R\x06PICKUPR\x06RETURNR\x04type\"7\n" +
 	"\x16AddShopAddressResponse\x12\x1d\n" +
 	"\n" +
 	"address_id\x18\x01 \x01(\tR\taddressId\"\x18\n" +
@@ -1564,23 +1554,22 @@ var file_shop_type_proto_goTypes = []any{
 var file_shop_type_proto_depIdxs = []int32{
 	0,  // 0: shop.v1.CreateShopRequest.profile:type_name -> shop.v1.ShopProfileInfo
 	3,  // 1: shop.v1.AddShopAddressRequest.country:type_name -> shop.v1.LocationInfo
-	3,  // 2: shop.v1.AddShopAddressRequest.city:type_name -> shop.v1.LocationInfo
-	3,  // 3: shop.v1.AddShopAddressRequest.district:type_name -> shop.v1.LocationInfo
-	3,  // 4: shop.v1.AddShopAddressRequest.ward:type_name -> shop.v1.LocationInfo
-	6,  // 5: shop.v1.Member.roleIDs:type_name -> shop.v1.RoleID
-	7,  // 6: shop.v1.AssignMemberRolesRequest.member_roles:type_name -> shop.v1.Member
-	12, // 7: shop.v1.ShopView.profile:type_name -> shop.v1.ShopProfileView
-	13, // 8: shop.v1.ShopView.addresses:type_name -> shop.v1.ShopAddressView
-	14, // 9: shop.v1.ShopView.members:type_name -> shop.v1.ShopMemberView
-	15, // 10: shop.v1.GetShopDetailResponse.shop:type_name -> shop.v1.ShopView
-	15, // 11: shop.v1.SearchShopsResponse.shops:type_name -> shop.v1.ShopView
-	13, // 12: shop.v1.ListShopAddressesResponse.addresses:type_name -> shop.v1.ShopAddressView
-	14, // 13: shop.v1.ListShopMembersResponse.members:type_name -> shop.v1.ShopMemberView
-	14, // [14:14] is the sub-list for method output_type
-	14, // [14:14] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	3,  // 2: shop.v1.AddShopAddressRequest.province:type_name -> shop.v1.LocationInfo
+	3,  // 3: shop.v1.AddShopAddressRequest.ward:type_name -> shop.v1.LocationInfo
+	6,  // 4: shop.v1.Member.roleIDs:type_name -> shop.v1.RoleID
+	7,  // 5: shop.v1.AssignMemberRolesRequest.member_roles:type_name -> shop.v1.Member
+	12, // 6: shop.v1.ShopView.profile:type_name -> shop.v1.ShopProfileView
+	13, // 7: shop.v1.ShopView.addresses:type_name -> shop.v1.ShopAddressView
+	14, // 8: shop.v1.ShopView.members:type_name -> shop.v1.ShopMemberView
+	15, // 9: shop.v1.GetShopDetailResponse.shop:type_name -> shop.v1.ShopView
+	15, // 10: shop.v1.SearchShopsResponse.shops:type_name -> shop.v1.ShopView
+	13, // 11: shop.v1.ListShopAddressesResponse.addresses:type_name -> shop.v1.ShopAddressView
+	14, // 12: shop.v1.ListShopMembersResponse.members:type_name -> shop.v1.ShopMemberView
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_shop_type_proto_init() }

@@ -37,15 +37,14 @@ message AddShopAddressRequest {
   string shop_id = 2 [(validate.rules).string.min_len = 1];
 
   LocationInfo country  = 3 [(validate.rules).message.required = true];
-  LocationInfo city     = 4 [(validate.rules).message.required = true];
-  LocationInfo district = 5 [(validate.rules).message.required = true];
-  LocationInfo ward     = 6 [(validate.rules).message.required = true];
+  LocationInfo province = 4 [(validate.rules).message.required = true];
+  LocationInfo ward     = 5 [(validate.rules).message.required = true];
 
-  string address_line = 7 [(validate.rules).string.min_len = 1];
-  string contact_name = 8 [(validate.rules).string.min_len = 1];
-  string phone_number = 9 [(validate.rules).string = {pattern: "^[0-9]{10,11}$"}];
+  string address_line = 6 [(validate.rules).string.min_len = 1];
+  string contact_name = 7 [(validate.rules).string.min_len = 1];
+  string phone_number = 8 [(validate.rules).string = {pattern: "^[0-9]{10,11}$"}];
 
-  string type = 10 [(validate.rules).string = {in: ["Pickup", "Return"]}];
+  string type = 9 [(validate.rules).string = {in: ["PICKUP", "RETURN"]}];
 }
 
 message AddShopAddressResponse {
@@ -100,19 +99,19 @@ message ShopAddressView {
 }
 
 message ShopMemberView {
-  string id = 1;
-  string name = 2;
+  string         id       = 1;
+  string         name     = 2;
   repeated int32 role_ids = 3;
 }
 
 message ShopView {
-  string shop_id = 1;
-  string name    = 2;
-  string slug    = 3;
-  string status  = 4;
-  ShopProfileView profile = 5;
+  string                   shop_id   = 1;
+  string                   name      = 2;
+  string                   slug      = 3;
+  string                   status    = 4;
+  ShopProfileView          profile   = 5;
   repeated ShopAddressView addresses = 6;
-  repeated ShopMemberView members = 7;
+  repeated ShopMemberView  members   = 7;
 }
 
 message GetShopDetailRequest {
@@ -124,16 +123,16 @@ message GetShopDetailResponse {
 }
 
 message SearchShopsRequest {
-  string keyword = 1;
-  string status = 2;
-  int32 page_size = 3;
+  string keyword    = 1;
+  string status     = 2;
+  int32  page_size  = 3;
   string page_token = 4;
 }
 
 message SearchShopsResponse {
-  repeated ShopView shops = 1;
-  int64 total = 2;
-  string next_page_token = 3;
+  repeated ShopView shops           = 1;
+  int64             total           = 2;
+  string            next_page_token = 3;
 }
 
 message ListShopAddressesRequest {
