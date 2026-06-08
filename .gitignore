@@ -10,8 +10,3 @@ bin/
 
 tmp/
 *.log
-
-.DS_Store
-Thumbs.db
-
-user-service.codex.md

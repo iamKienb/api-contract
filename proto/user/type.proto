@@ -42,11 +42,8 @@ message LocationInfo {
 }
 
 message AddUserAddressRequest {
-  string user_id = 1 [(validate.rules).string.min_len = 1];
-
   LocationInfo country  = 2 [(validate.rules).message.required = true];
   LocationInfo province = 3 [(validate.rules).message.required = true];
-  LocationInfo district = 4 [(validate.rules).message.required = true];
   LocationInfo ward     = 5 [(validate.rules).message.required = true];
 
   string address_line  = 6 [(validate.rules).string.min_len = 1];
@@ -105,7 +102,8 @@ message GetUserProfileResponse {
 }
 
 message ListUserAddressesRequest {
-  string user_id = 1 [(validate.rules).string.min_len = 1];
+  int32 page  = 1;
+  int32 limit = 2;
 }
 
 message ListUserAddressesResponse {

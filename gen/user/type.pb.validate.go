@@ -991,17 +991,6 @@ func (m *AddUserAddressRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetUserId()) < 1 {
-		err := AddUserAddressRequestValidationError{
-			field:  "UserId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
 	if m.GetCountry() == nil {
 		err := AddUserAddressRequestValidationError{
 			field:  "Country",
@@ -1076,46 +1065,6 @@ func (m *AddUserAddressRequest) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return AddUserAddressRequestValidationError{
 				field:  "Province",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if m.GetDistrict() == nil {
-		err := AddUserAddressRequestValidationError{
-			field:  "District",
-			reason: "value is required",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if all {
-		switch v := interface{}(m.GetDistrict()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, AddUserAddressRequestValidationError{
-					field:  "District",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, AddUserAddressRequestValidationError{
-					field:  "District",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetDistrict()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return AddUserAddressRequestValidationError{
-				field:  "District",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -2301,16 +2250,9 @@ func (m *ListUserAddressesRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetUserId()) < 1 {
-		err := ListUserAddressesRequestValidationError{
-			field:  "UserId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for Page
+
+	// no validation rules for Limit
 
 	if len(errors) > 0 {
 		return ListUserAddressesRequestMultiError(errors)

@@ -362,10 +362,8 @@ func (x *LocationInfo) GetName() string {
 
 type AddUserAddressRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Country       *LocationInfo          `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
 	Province      *LocationInfo          `protobuf:"bytes,3,opt,name=province,proto3" json:"province,omitempty"`
-	District      *LocationInfo          `protobuf:"bytes,4,opt,name=district,proto3" json:"district,omitempty"`
 	Ward          *LocationInfo          `protobuf:"bytes,5,opt,name=ward,proto3" json:"ward,omitempty"`
 	AddressLine   string                 `protobuf:"bytes,6,opt,name=address_line,json=addressLine,proto3" json:"address_line,omitempty"`
 	ReceiverName  string                 `protobuf:"bytes,7,opt,name=receiver_name,json=receiverName,proto3" json:"receiver_name,omitempty"`
@@ -406,13 +404,6 @@ func (*AddUserAddressRequest) Descriptor() ([]byte, []int) {
 	return file_user_type_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *AddUserAddressRequest) GetUserId() string {
-	if x != nil {
-		return x.UserId
-	}
-	return ""
-}
-
 func (x *AddUserAddressRequest) GetCountry() *LocationInfo {
 	if x != nil {
 		return x.Country
@@ -423,13 +414,6 @@ func (x *AddUserAddressRequest) GetCountry() *LocationInfo {
 func (x *AddUserAddressRequest) GetProvince() *LocationInfo {
 	if x != nil {
 		return x.Province
-	}
-	return nil
-}
-
-func (x *AddUserAddressRequest) GetDistrict() *LocationInfo {
-	if x != nil {
-		return x.District
 	}
 	return nil
 }
@@ -950,7 +934,8 @@ func (x *GetUserProfileResponse) GetProfile() *ProfileDetail {
 
 type ListUserAddressesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	Limit         int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -985,11 +970,18 @@ func (*ListUserAddressesRequest) Descriptor() ([]byte, []int) {
 	return file_user_type_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *ListUserAddressesRequest) GetUserId() string {
+func (x *ListUserAddressesRequest) GetPage() int32 {
 	if x != nil {
-		return x.UserId
+		return x.Page
 	}
-	return ""
+	return 0
+}
+
+func (x *ListUserAddressesRequest) GetLimit() int32 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
 }
 
 type ListUserAddressesResponse struct {
@@ -1286,12 +1278,10 @@ const file_user_type_proto_rawDesc = "" +
 	"\x12refresh_expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x10refreshExpiresAt\"D\n" +
 	"\fLocationInfo\x12\x17\n" +
 	"\x02id\x18\x01 \x01(\x03B\a\xfaB\x04\"\x02 \x00R\x02id\x12\x1b\n" +
-	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\"\x81\x04\n" +
-	"\x15AddUserAddressRequest\x12 \n" +
-	"\auser_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06userId\x129\n" +
+	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\"\xa2\x03\n" +
+	"\x15AddUserAddressRequest\x129\n" +
 	"\acountry\x18\x02 \x01(\v2\x15.user.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\acountry\x12;\n" +
-	"\bprovince\x18\x03 \x01(\v2\x15.user.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\bprovince\x12;\n" +
-	"\bdistrict\x18\x04 \x01(\v2\x15.user.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\bdistrict\x123\n" +
+	"\bprovince\x18\x03 \x01(\v2\x15.user.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\bprovince\x123\n" +
 	"\x04ward\x18\x05 \x01(\v2\x15.user.v1.LocationInfoB\b\xfaB\x05\x8a\x01\x02\x10\x01R\x04ward\x12*\n" +
 	"\faddress_line\x18\x06 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\vaddressLine\x12,\n" +
 	"\rreceiver_name\x18\a \x01(\tB\a\xfaB\x04r\x02\x10\x01R\freceiverName\x128\n" +
@@ -1336,9 +1326,10 @@ const file_user_type_proto_rawDesc = "" +
 	"\x15GetUserProfileRequest\x12 \n" +
 	"\auser_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06userId\"J\n" +
 	"\x16GetUserProfileResponse\x120\n" +
-	"\aprofile\x18\x01 \x01(\v2\x16.user.v1.ProfileDetailR\aprofile\"<\n" +
-	"\x18ListUserAddressesRequest\x12 \n" +
-	"\auser_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06userId\"Q\n" +
+	"\aprofile\x18\x01 \x01(\v2\x16.user.v1.ProfileDetailR\aprofile\"D\n" +
+	"\x18ListUserAddressesRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x14\n" +
+	"\x05limit\x18\x02 \x01(\x05R\x05limit\"Q\n" +
 	"\x19ListUserAddressesResponse\x124\n" +
 	"\taddresses\x18\x01 \x03(\v2\x16.user.v1.AddressDetailR\taddresses\"\x82\x01\n" +
 	"\x12SearchUsersRequest\x12\x18\n" +
@@ -1401,20 +1392,19 @@ var file_user_type_proto_depIdxs = []int32{
 	21, // 3: user.v1.LoginUserResponse.refresh_expires_at:type_name -> google.protobuf.Timestamp
 	5,  // 4: user.v1.AddUserAddressRequest.country:type_name -> user.v1.LocationInfo
 	5,  // 5: user.v1.AddUserAddressRequest.province:type_name -> user.v1.LocationInfo
-	5,  // 6: user.v1.AddUserAddressRequest.district:type_name -> user.v1.LocationInfo
-	5,  // 7: user.v1.AddUserAddressRequest.ward:type_name -> user.v1.LocationInfo
-	8,  // 8: user.v1.UserDetail.profile:type_name -> user.v1.ProfileDetail
-	9,  // 9: user.v1.UserDetail.addresses:type_name -> user.v1.AddressDetail
-	10, // 10: user.v1.GetUserDetailResponse.user:type_name -> user.v1.UserDetail
-	8,  // 11: user.v1.GetUserProfileResponse.profile:type_name -> user.v1.ProfileDetail
-	9,  // 12: user.v1.ListUserAddressesResponse.addresses:type_name -> user.v1.AddressDetail
-	10, // 13: user.v1.SearchUsersResponse.users:type_name -> user.v1.UserDetail
-	9,  // 14: user.v1.GetUserAddressByIDResponse.address:type_name -> user.v1.AddressDetail
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	5,  // 6: user.v1.AddUserAddressRequest.ward:type_name -> user.v1.LocationInfo
+	8,  // 7: user.v1.UserDetail.profile:type_name -> user.v1.ProfileDetail
+	9,  // 8: user.v1.UserDetail.addresses:type_name -> user.v1.AddressDetail
+	10, // 9: user.v1.GetUserDetailResponse.user:type_name -> user.v1.UserDetail
+	8,  // 10: user.v1.GetUserProfileResponse.profile:type_name -> user.v1.ProfileDetail
+	9,  // 11: user.v1.ListUserAddressesResponse.addresses:type_name -> user.v1.AddressDetail
+	10, // 12: user.v1.SearchUsersResponse.users:type_name -> user.v1.UserDetail
+	9,  // 13: user.v1.GetUserAddressByIDResponse.address:type_name -> user.v1.AddressDetail
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_user_type_proto_init() }
