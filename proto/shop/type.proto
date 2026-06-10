@@ -91,9 +91,9 @@ message ShopProfileDetail {
 message ShopAddressDetail {
   string id            = 1;
   string shop_id       = 2;
-  int32  province_id   = 3;
+  string province_id   = 3;
   string province_name = 4;
-  int32  ward_id       = 5;
+  string ward_id       = 5;
   string ward_name     = 6;
   string address_line  = 8;
   string full_address  = 7;

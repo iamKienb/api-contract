@@ -561,9 +561,9 @@ type AddressDetail struct {
 	AddressId     string                 `protobuf:"bytes,1,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
 	ReceiverName  string                 `protobuf:"bytes,2,opt,name=receiver_name,json=receiverName,proto3" json:"receiver_name,omitempty"`
 	PhoneNumber   string                 `protobuf:"bytes,3,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
-	ProvinceId    int32                  `protobuf:"varint,4,opt,name=province_id,json=provinceId,proto3" json:"province_id,omitempty"`
+	ProvinceId    string                 `protobuf:"bytes,4,opt,name=province_id,json=provinceId,proto3" json:"province_id,omitempty"`
 	ProvinceName  string                 `protobuf:"bytes,5,opt,name=province_name,json=provinceName,proto3" json:"province_name,omitempty"`
-	WardId        int32                  `protobuf:"varint,6,opt,name=ward_id,json=wardId,proto3" json:"ward_id,omitempty"`
+	WardId        string                 `protobuf:"bytes,6,opt,name=ward_id,json=wardId,proto3" json:"ward_id,omitempty"`
 	WardName      string                 `protobuf:"bytes,7,opt,name=ward_name,json=wardName,proto3" json:"ward_name,omitempty"`
 	AddressLine   string                 `protobuf:"bytes,8,opt,name=address_line,json=addressLine,proto3" json:"address_line,omitempty"`
 	Label         string                 `protobuf:"bytes,9,opt,name=label,proto3" json:"label,omitempty"`
@@ -623,11 +623,11 @@ func (x *AddressDetail) GetPhoneNumber() string {
 	return ""
 }
 
-func (x *AddressDetail) GetProvinceId() int32 {
+func (x *AddressDetail) GetProvinceId() string {
 	if x != nil {
 		return x.ProvinceId
 	}
-	return 0
+	return ""
 }
 
 func (x *AddressDetail) GetProvinceName() string {
@@ -637,11 +637,11 @@ func (x *AddressDetail) GetProvinceName() string {
 	return ""
 }
 
-func (x *AddressDetail) GetWardId() int32 {
+func (x *AddressDetail) GetWardId() string {
 	if x != nil {
 		return x.WardId
 	}
-	return 0
+	return ""
 }
 
 func (x *AddressDetail) GetWardName() string {
@@ -1301,10 +1301,10 @@ const file_user_type_proto_rawDesc = "" +
 	"address_id\x18\x01 \x01(\tR\taddressId\x12#\n" +
 	"\rreceiver_name\x18\x02 \x01(\tR\freceiverName\x12!\n" +
 	"\fphone_number\x18\x03 \x01(\tR\vphoneNumber\x12\x1f\n" +
-	"\vprovince_id\x18\x04 \x01(\x05R\n" +
+	"\vprovince_id\x18\x04 \x01(\tR\n" +
 	"provinceId\x12#\n" +
 	"\rprovince_name\x18\x05 \x01(\tR\fprovinceName\x12\x17\n" +
-	"\award_id\x18\x06 \x01(\x05R\x06wardId\x12\x1b\n" +
+	"\award_id\x18\x06 \x01(\tR\x06wardId\x12\x1b\n" +
 	"\tward_name\x18\a \x01(\tR\bwardName\x12!\n" +
 	"\faddress_line\x18\b \x01(\tR\vaddressLine\x12\x14\n" +
 	"\x05label\x18\t \x01(\tR\x05label\x12\x1d\n" +

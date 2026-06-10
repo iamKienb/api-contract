@@ -775,9 +775,9 @@ type ShopAddressDetail struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	ShopId        string                 `protobuf:"bytes,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
-	ProvinceId    int32                  `protobuf:"varint,3,opt,name=province_id,json=provinceId,proto3" json:"province_id,omitempty"`
+	ProvinceId    string                 `protobuf:"bytes,3,opt,name=province_id,json=provinceId,proto3" json:"province_id,omitempty"`
 	ProvinceName  string                 `protobuf:"bytes,4,opt,name=province_name,json=provinceName,proto3" json:"province_name,omitempty"`
-	WardId        int32                  `protobuf:"varint,5,opt,name=ward_id,json=wardId,proto3" json:"ward_id,omitempty"`
+	WardId        string                 `protobuf:"bytes,5,opt,name=ward_id,json=wardId,proto3" json:"ward_id,omitempty"`
 	WardName      string                 `protobuf:"bytes,6,opt,name=ward_name,json=wardName,proto3" json:"ward_name,omitempty"`
 	AddressLine   string                 `protobuf:"bytes,8,opt,name=address_line,json=addressLine,proto3" json:"address_line,omitempty"`
 	FullAddress   string                 `protobuf:"bytes,7,opt,name=full_address,json=fullAddress,proto3" json:"full_address,omitempty"`
@@ -832,11 +832,11 @@ func (x *ShopAddressDetail) GetShopId() string {
 	return ""
 }
 
-func (x *ShopAddressDetail) GetProvinceId() int32 {
+func (x *ShopAddressDetail) GetProvinceId() string {
 	if x != nil {
 		return x.ProvinceId
 	}
-	return 0
+	return ""
 }
 
 func (x *ShopAddressDetail) GetProvinceName() string {
@@ -846,11 +846,11 @@ func (x *ShopAddressDetail) GetProvinceName() string {
 	return ""
 }
 
-func (x *ShopAddressDetail) GetWardId() int32 {
+func (x *ShopAddressDetail) GetWardId() string {
 	if x != nil {
 		return x.WardId
 	}
-	return 0
+	return ""
 }
 
 func (x *ShopAddressDetail) GetWardName() string {
@@ -1572,10 +1572,10 @@ const file_shop_type_proto_rawDesc = "" +
 	"\x11ShopAddressDetail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\ashop_id\x18\x02 \x01(\tR\x06shopId\x12\x1f\n" +
-	"\vprovince_id\x18\x03 \x01(\x05R\n" +
+	"\vprovince_id\x18\x03 \x01(\tR\n" +
 	"provinceId\x12#\n" +
 	"\rprovince_name\x18\x04 \x01(\tR\fprovinceName\x12\x17\n" +
-	"\award_id\x18\x05 \x01(\x05R\x06wardId\x12\x1b\n" +
+	"\award_id\x18\x05 \x01(\tR\x06wardId\x12\x1b\n" +
 	"\tward_name\x18\x06 \x01(\tR\bwardName\x12!\n" +
 	"\faddress_line\x18\b \x01(\tR\vaddressLine\x12!\n" +
 	"\ffull_address\x18\a \x01(\tR\vfullAddress\x12!\n" +
