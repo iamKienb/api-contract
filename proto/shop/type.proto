@@ -82,36 +82,48 @@ message CheckPermissionResponse {
   string message    = 2;
 }
 
-message ShopProfileView {
+message ShopProfileDetail {
   string description = 1;
   string logo_url    = 2;
   string banner_url  = 3;
 }
 
-message ShopAddressView {
-  string id           = 1;
-  string shop_id      = 2;
-  string full_address = 3;
-  string address_line = 4;
-  string contact_name = 5;
-  string phone_number = 6;
-  string type         = 7;
+message ShopAddressDetail {
+  string id            = 1;
+  string shop_id       = 2;
+  int32  province_id   = 3;
+  string province_name = 4;
+  int32  ward_id       = 5;
+  string ward_name     = 6;
+  string address_line  = 8;
+  string full_address  = 7;
+  string contact_name  = 9;
+  string phone_number  = 10;
+  string type          = 11;
 }
 
-message ShopMemberView {
+message Role {
+  string id   = 1;
+  string code = 2;
+  string name = 3;
+
+}
+
+message ShopMemberDetail {
   string         id       = 1;
   string         name     = 2;
   repeated int32 role_ids = 3;
+  repeated Role  roles    = 4;
 }
 
-message ShopView {
-  string                   shop_id   = 1;
-  string                   name      = 2;
-  string                   slug      = 3;
-  string                   status    = 4;
-  ShopProfileView          profile   = 5;
-  repeated ShopAddressView addresses = 6;
-  repeated ShopMemberView  members   = 7;
+message ShopDetail {
+  string                     shop_id   = 1;
+  string                     name      = 2;
+  string                     slug      = 3;
+  string                     status    = 4;
+  ShopProfileDetail          profile   = 5;
+  repeated ShopAddressDetail addresses = 6;
+  repeated ShopMemberDetail  members   = 7;
 }
 
 message GetShopDetailRequest {
@@ -119,7 +131,7 @@ message GetShopDetailRequest {
 }
 
 message GetShopDetailResponse {
-  ShopView shop = 1;
+  ShopDetail shop = 1;
 }
 
 message SearchShopsRequest {
@@ -130,9 +142,9 @@ message SearchShopsRequest {
 }
 
 message SearchShopsResponse {
-  repeated ShopView shops           = 1;
-  int64             total           = 2;
-  string            next_page_token = 3;
+  repeated ShopDetail shops           = 1;
+  int64               total           = 2;
+  string              next_page_token = 3;
 }
 
 message ListShopAddressesRequest {
@@ -140,7 +152,7 @@ message ListShopAddressesRequest {
 }
 
 message ListShopAddressesResponse {
-  repeated ShopAddressView addresses = 1;
+  repeated ShopAddressDetail addresses = 1;
 }
 
 message ListShopMembersRequest {
@@ -148,5 +160,5 @@ message ListShopMembersRequest {
 }
 
 message ListShopMembersResponse {
-  repeated ShopMemberView members = 1;
+  repeated ShopMemberDetail members = 1;
 }

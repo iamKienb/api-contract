@@ -711,7 +711,7 @@ func (x *CheckPermissionResponse) GetMessage() string {
 	return ""
 }
 
-type ShopProfileView struct {
+type ShopProfileDetail struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Description   string                 `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
 	LogoUrl       string                 `protobuf:"bytes,2,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url,omitempty"`
@@ -720,20 +720,20 @@ type ShopProfileView struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ShopProfileView) Reset() {
-	*x = ShopProfileView{}
+func (x *ShopProfileDetail) Reset() {
+	*x = ShopProfileDetail{}
 	mi := &file_shop_type_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ShopProfileView) String() string {
+func (x *ShopProfileDetail) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ShopProfileView) ProtoMessage() {}
+func (*ShopProfileDetail) ProtoMessage() {}
 
-func (x *ShopProfileView) ProtoReflect() protoreflect.Message {
+func (x *ShopProfileDetail) ProtoReflect() protoreflect.Message {
 	mi := &file_shop_type_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -745,59 +745,63 @@ func (x *ShopProfileView) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ShopProfileView.ProtoReflect.Descriptor instead.
-func (*ShopProfileView) Descriptor() ([]byte, []int) {
+// Deprecated: Use ShopProfileDetail.ProtoReflect.Descriptor instead.
+func (*ShopProfileDetail) Descriptor() ([]byte, []int) {
 	return file_shop_type_proto_rawDescGZIP(), []int{12}
 }
 
-func (x *ShopProfileView) GetDescription() string {
+func (x *ShopProfileDetail) GetDescription() string {
 	if x != nil {
 		return x.Description
 	}
 	return ""
 }
 
-func (x *ShopProfileView) GetLogoUrl() string {
+func (x *ShopProfileDetail) GetLogoUrl() string {
 	if x != nil {
 		return x.LogoUrl
 	}
 	return ""
 }
 
-func (x *ShopProfileView) GetBannerUrl() string {
+func (x *ShopProfileDetail) GetBannerUrl() string {
 	if x != nil {
 		return x.BannerUrl
 	}
 	return ""
 }
 
-type ShopAddressView struct {
+type ShopAddressDetail struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	ShopId        string                 `protobuf:"bytes,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
-	FullAddress   string                 `protobuf:"bytes,3,opt,name=full_address,json=fullAddress,proto3" json:"full_address,omitempty"`
-	AddressLine   string                 `protobuf:"bytes,4,opt,name=address_line,json=addressLine,proto3" json:"address_line,omitempty"`
-	ContactName   string                 `protobuf:"bytes,5,opt,name=contact_name,json=contactName,proto3" json:"contact_name,omitempty"`
-	PhoneNumber   string                 `protobuf:"bytes,6,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
-	Type          string                 `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
+	ProvinceId    int32                  `protobuf:"varint,3,opt,name=province_id,json=provinceId,proto3" json:"province_id,omitempty"`
+	ProvinceName  string                 `protobuf:"bytes,4,opt,name=province_name,json=provinceName,proto3" json:"province_name,omitempty"`
+	WardId        int32                  `protobuf:"varint,5,opt,name=ward_id,json=wardId,proto3" json:"ward_id,omitempty"`
+	WardName      string                 `protobuf:"bytes,6,opt,name=ward_name,json=wardName,proto3" json:"ward_name,omitempty"`
+	AddressLine   string                 `protobuf:"bytes,8,opt,name=address_line,json=addressLine,proto3" json:"address_line,omitempty"`
+	FullAddress   string                 `protobuf:"bytes,7,opt,name=full_address,json=fullAddress,proto3" json:"full_address,omitempty"`
+	ContactName   string                 `protobuf:"bytes,9,opt,name=contact_name,json=contactName,proto3" json:"contact_name,omitempty"`
+	PhoneNumber   string                 `protobuf:"bytes,10,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
+	Type          string                 `protobuf:"bytes,11,opt,name=type,proto3" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ShopAddressView) Reset() {
-	*x = ShopAddressView{}
+func (x *ShopAddressDetail) Reset() {
+	*x = ShopAddressDetail{}
 	mi := &file_shop_type_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ShopAddressView) String() string {
+func (x *ShopAddressDetail) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ShopAddressView) ProtoMessage() {}
+func (*ShopAddressDetail) ProtoMessage() {}
 
-func (x *ShopAddressView) ProtoReflect() protoreflect.Message {
+func (x *ShopAddressDetail) ProtoReflect() protoreflect.Message {
 	mi := &file_shop_type_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -809,83 +813,111 @@ func (x *ShopAddressView) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ShopAddressView.ProtoReflect.Descriptor instead.
-func (*ShopAddressView) Descriptor() ([]byte, []int) {
+// Deprecated: Use ShopAddressDetail.ProtoReflect.Descriptor instead.
+func (*ShopAddressDetail) Descriptor() ([]byte, []int) {
 	return file_shop_type_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *ShopAddressView) GetId() string {
+func (x *ShopAddressDetail) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *ShopAddressView) GetShopId() string {
+func (x *ShopAddressDetail) GetShopId() string {
 	if x != nil {
 		return x.ShopId
 	}
 	return ""
 }
 
-func (x *ShopAddressView) GetFullAddress() string {
+func (x *ShopAddressDetail) GetProvinceId() int32 {
 	if x != nil {
-		return x.FullAddress
+		return x.ProvinceId
+	}
+	return 0
+}
+
+func (x *ShopAddressDetail) GetProvinceName() string {
+	if x != nil {
+		return x.ProvinceName
 	}
 	return ""
 }
 
-func (x *ShopAddressView) GetAddressLine() string {
+func (x *ShopAddressDetail) GetWardId() int32 {
+	if x != nil {
+		return x.WardId
+	}
+	return 0
+}
+
+func (x *ShopAddressDetail) GetWardName() string {
+	if x != nil {
+		return x.WardName
+	}
+	return ""
+}
+
+func (x *ShopAddressDetail) GetAddressLine() string {
 	if x != nil {
 		return x.AddressLine
 	}
 	return ""
 }
 
-func (x *ShopAddressView) GetContactName() string {
+func (x *ShopAddressDetail) GetFullAddress() string {
+	if x != nil {
+		return x.FullAddress
+	}
+	return ""
+}
+
+func (x *ShopAddressDetail) GetContactName() string {
 	if x != nil {
 		return x.ContactName
 	}
 	return ""
 }
 
-func (x *ShopAddressView) GetPhoneNumber() string {
+func (x *ShopAddressDetail) GetPhoneNumber() string {
 	if x != nil {
 		return x.PhoneNumber
 	}
 	return ""
 }
 
-func (x *ShopAddressView) GetType() string {
+func (x *ShopAddressDetail) GetType() string {
 	if x != nil {
 		return x.Type
 	}
 	return ""
 }
 
-type ShopMemberView struct {
+type Role struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	RoleIds       []int32                `protobuf:"varint,3,rep,packed,name=role_ids,json=roleIds,proto3" json:"role_ids,omitempty"`
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ShopMemberView) Reset() {
-	*x = ShopMemberView{}
+func (x *Role) Reset() {
+	*x = Role{}
 	mi := &file_shop_type_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ShopMemberView) String() string {
+func (x *Role) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ShopMemberView) ProtoMessage() {}
+func (*Role) ProtoMessage() {}
 
-func (x *ShopMemberView) ProtoReflect() protoreflect.Message {
+func (x *Role) ProtoReflect() protoreflect.Message {
 	mi := &file_shop_type_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -897,59 +929,56 @@ func (x *ShopMemberView) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ShopMemberView.ProtoReflect.Descriptor instead.
-func (*ShopMemberView) Descriptor() ([]byte, []int) {
+// Deprecated: Use Role.ProtoReflect.Descriptor instead.
+func (*Role) Descriptor() ([]byte, []int) {
 	return file_shop_type_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *ShopMemberView) GetId() string {
+func (x *Role) GetId() string {
 	if x != nil {
 		return x.Id
 	}
 	return ""
 }
 
-func (x *ShopMemberView) GetName() string {
+func (x *Role) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *Role) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *ShopMemberView) GetRoleIds() []int32 {
-	if x != nil {
-		return x.RoleIds
-	}
-	return nil
-}
-
-type ShopView struct {
+type ShopMemberDetail struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ShopId        string                 `protobuf:"bytes,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Slug          string                 `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
-	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
-	Profile       *ShopProfileView       `protobuf:"bytes,5,opt,name=profile,proto3" json:"profile,omitempty"`
-	Addresses     []*ShopAddressView     `protobuf:"bytes,6,rep,name=addresses,proto3" json:"addresses,omitempty"`
-	Members       []*ShopMemberView      `protobuf:"bytes,7,rep,name=members,proto3" json:"members,omitempty"`
+	RoleIds       []int32                `protobuf:"varint,3,rep,packed,name=role_ids,json=roleIds,proto3" json:"role_ids,omitempty"`
+	Roles         []*Role                `protobuf:"bytes,4,rep,name=roles,proto3" json:"roles,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ShopView) Reset() {
-	*x = ShopView{}
+func (x *ShopMemberDetail) Reset() {
+	*x = ShopMemberDetail{}
 	mi := &file_shop_type_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ShopView) String() string {
+func (x *ShopMemberDetail) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ShopView) ProtoMessage() {}
+func (*ShopMemberDetail) ProtoMessage() {}
 
-func (x *ShopView) ProtoReflect() protoreflect.Message {
+func (x *ShopMemberDetail) ProtoReflect() protoreflect.Message {
 	mi := &file_shop_type_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -961,54 +990,125 @@ func (x *ShopView) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ShopView.ProtoReflect.Descriptor instead.
-func (*ShopView) Descriptor() ([]byte, []int) {
+// Deprecated: Use ShopMemberDetail.ProtoReflect.Descriptor instead.
+func (*ShopMemberDetail) Descriptor() ([]byte, []int) {
 	return file_shop_type_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *ShopView) GetShopId() string {
+func (x *ShopMemberDetail) GetId() string {
 	if x != nil {
-		return x.ShopId
+		return x.Id
 	}
 	return ""
 }
 
-func (x *ShopView) GetName() string {
+func (x *ShopMemberDetail) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *ShopView) GetSlug() string {
+func (x *ShopMemberDetail) GetRoleIds() []int32 {
+	if x != nil {
+		return x.RoleIds
+	}
+	return nil
+}
+
+func (x *ShopMemberDetail) GetRoles() []*Role {
+	if x != nil {
+		return x.Roles
+	}
+	return nil
+}
+
+type ShopDetail struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ShopId        string                 `protobuf:"bytes,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Slug          string                 `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
+	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	Profile       *ShopProfileDetail     `protobuf:"bytes,5,opt,name=profile,proto3" json:"profile,omitempty"`
+	Addresses     []*ShopAddressDetail   `protobuf:"bytes,6,rep,name=addresses,proto3" json:"addresses,omitempty"`
+	Members       []*ShopMemberDetail    `protobuf:"bytes,7,rep,name=members,proto3" json:"members,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ShopDetail) Reset() {
+	*x = ShopDetail{}
+	mi := &file_shop_type_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ShopDetail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShopDetail) ProtoMessage() {}
+
+func (x *ShopDetail) ProtoReflect() protoreflect.Message {
+	mi := &file_shop_type_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShopDetail.ProtoReflect.Descriptor instead.
+func (*ShopDetail) Descriptor() ([]byte, []int) {
+	return file_shop_type_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ShopDetail) GetShopId() string {
+	if x != nil {
+		return x.ShopId
+	}
+	return ""
+}
+
+func (x *ShopDetail) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ShopDetail) GetSlug() string {
 	if x != nil {
 		return x.Slug
 	}
 	return ""
 }
 
-func (x *ShopView) GetStatus() string {
+func (x *ShopDetail) GetStatus() string {
 	if x != nil {
 		return x.Status
 	}
 	return ""
 }
 
-func (x *ShopView) GetProfile() *ShopProfileView {
+func (x *ShopDetail) GetProfile() *ShopProfileDetail {
 	if x != nil {
 		return x.Profile
 	}
 	return nil
 }
 
-func (x *ShopView) GetAddresses() []*ShopAddressView {
+func (x *ShopDetail) GetAddresses() []*ShopAddressDetail {
 	if x != nil {
 		return x.Addresses
 	}
 	return nil
 }
 
-func (x *ShopView) GetMembers() []*ShopMemberView {
+func (x *ShopDetail) GetMembers() []*ShopMemberDetail {
 	if x != nil {
 		return x.Members
 	}
@@ -1024,7 +1124,7 @@ type GetShopDetailRequest struct {
 
 func (x *GetShopDetailRequest) Reset() {
 	*x = GetShopDetailRequest{}
-	mi := &file_shop_type_proto_msgTypes[16]
+	mi := &file_shop_type_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1036,7 +1136,7 @@ func (x *GetShopDetailRequest) String() string {
 func (*GetShopDetailRequest) ProtoMessage() {}
 
 func (x *GetShopDetailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_type_proto_msgTypes[16]
+	mi := &file_shop_type_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1049,7 +1149,7 @@ func (x *GetShopDetailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetShopDetailRequest.ProtoReflect.Descriptor instead.
 func (*GetShopDetailRequest) Descriptor() ([]byte, []int) {
-	return file_shop_type_proto_rawDescGZIP(), []int{16}
+	return file_shop_type_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetShopDetailRequest) GetShopId() string {
@@ -1061,14 +1161,14 @@ func (x *GetShopDetailRequest) GetShopId() string {
 
 type GetShopDetailResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Shop          *ShopView              `protobuf:"bytes,1,opt,name=shop,proto3" json:"shop,omitempty"`
+	Shop          *ShopDetail            `protobuf:"bytes,1,opt,name=shop,proto3" json:"shop,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetShopDetailResponse) Reset() {
 	*x = GetShopDetailResponse{}
-	mi := &file_shop_type_proto_msgTypes[17]
+	mi := &file_shop_type_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1080,7 +1180,7 @@ func (x *GetShopDetailResponse) String() string {
 func (*GetShopDetailResponse) ProtoMessage() {}
 
 func (x *GetShopDetailResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_type_proto_msgTypes[17]
+	mi := &file_shop_type_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1093,10 +1193,10 @@ func (x *GetShopDetailResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetShopDetailResponse.ProtoReflect.Descriptor instead.
 func (*GetShopDetailResponse) Descriptor() ([]byte, []int) {
-	return file_shop_type_proto_rawDescGZIP(), []int{17}
+	return file_shop_type_proto_rawDescGZIP(), []int{18}
 }
 
-func (x *GetShopDetailResponse) GetShop() *ShopView {
+func (x *GetShopDetailResponse) GetShop() *ShopDetail {
 	if x != nil {
 		return x.Shop
 	}
@@ -1115,7 +1215,7 @@ type SearchShopsRequest struct {
 
 func (x *SearchShopsRequest) Reset() {
 	*x = SearchShopsRequest{}
-	mi := &file_shop_type_proto_msgTypes[18]
+	mi := &file_shop_type_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1127,7 +1227,7 @@ func (x *SearchShopsRequest) String() string {
 func (*SearchShopsRequest) ProtoMessage() {}
 
 func (x *SearchShopsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_type_proto_msgTypes[18]
+	mi := &file_shop_type_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1140,7 +1240,7 @@ func (x *SearchShopsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchShopsRequest.ProtoReflect.Descriptor instead.
 func (*SearchShopsRequest) Descriptor() ([]byte, []int) {
-	return file_shop_type_proto_rawDescGZIP(), []int{18}
+	return file_shop_type_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *SearchShopsRequest) GetKeyword() string {
@@ -1173,7 +1273,7 @@ func (x *SearchShopsRequest) GetPageToken() string {
 
 type SearchShopsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Shops         []*ShopView            `protobuf:"bytes,1,rep,name=shops,proto3" json:"shops,omitempty"`
+	Shops         []*ShopDetail          `protobuf:"bytes,1,rep,name=shops,proto3" json:"shops,omitempty"`
 	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
 	NextPageToken string                 `protobuf:"bytes,3,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1182,7 +1282,7 @@ type SearchShopsResponse struct {
 
 func (x *SearchShopsResponse) Reset() {
 	*x = SearchShopsResponse{}
-	mi := &file_shop_type_proto_msgTypes[19]
+	mi := &file_shop_type_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1194,7 +1294,7 @@ func (x *SearchShopsResponse) String() string {
 func (*SearchShopsResponse) ProtoMessage() {}
 
 func (x *SearchShopsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_type_proto_msgTypes[19]
+	mi := &file_shop_type_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1207,10 +1307,10 @@ func (x *SearchShopsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchShopsResponse.ProtoReflect.Descriptor instead.
 func (*SearchShopsResponse) Descriptor() ([]byte, []int) {
-	return file_shop_type_proto_rawDescGZIP(), []int{19}
+	return file_shop_type_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *SearchShopsResponse) GetShops() []*ShopView {
+func (x *SearchShopsResponse) GetShops() []*ShopDetail {
 	if x != nil {
 		return x.Shops
 	}
@@ -1240,7 +1340,7 @@ type ListShopAddressesRequest struct {
 
 func (x *ListShopAddressesRequest) Reset() {
 	*x = ListShopAddressesRequest{}
-	mi := &file_shop_type_proto_msgTypes[20]
+	mi := &file_shop_type_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1252,7 +1352,7 @@ func (x *ListShopAddressesRequest) String() string {
 func (*ListShopAddressesRequest) ProtoMessage() {}
 
 func (x *ListShopAddressesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_type_proto_msgTypes[20]
+	mi := &file_shop_type_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1265,7 +1365,7 @@ func (x *ListShopAddressesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListShopAddressesRequest.ProtoReflect.Descriptor instead.
 func (*ListShopAddressesRequest) Descriptor() ([]byte, []int) {
-	return file_shop_type_proto_rawDescGZIP(), []int{20}
+	return file_shop_type_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ListShopAddressesRequest) GetShopId() string {
@@ -1277,14 +1377,14 @@ func (x *ListShopAddressesRequest) GetShopId() string {
 
 type ListShopAddressesResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Addresses     []*ShopAddressView     `protobuf:"bytes,1,rep,name=addresses,proto3" json:"addresses,omitempty"`
+	Addresses     []*ShopAddressDetail   `protobuf:"bytes,1,rep,name=addresses,proto3" json:"addresses,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListShopAddressesResponse) Reset() {
 	*x = ListShopAddressesResponse{}
-	mi := &file_shop_type_proto_msgTypes[21]
+	mi := &file_shop_type_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1296,7 +1396,7 @@ func (x *ListShopAddressesResponse) String() string {
 func (*ListShopAddressesResponse) ProtoMessage() {}
 
 func (x *ListShopAddressesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_type_proto_msgTypes[21]
+	mi := &file_shop_type_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1309,10 +1409,10 @@ func (x *ListShopAddressesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListShopAddressesResponse.ProtoReflect.Descriptor instead.
 func (*ListShopAddressesResponse) Descriptor() ([]byte, []int) {
-	return file_shop_type_proto_rawDescGZIP(), []int{21}
+	return file_shop_type_proto_rawDescGZIP(), []int{22}
 }
 
-func (x *ListShopAddressesResponse) GetAddresses() []*ShopAddressView {
+func (x *ListShopAddressesResponse) GetAddresses() []*ShopAddressDetail {
 	if x != nil {
 		return x.Addresses
 	}
@@ -1328,7 +1428,7 @@ type ListShopMembersRequest struct {
 
 func (x *ListShopMembersRequest) Reset() {
 	*x = ListShopMembersRequest{}
-	mi := &file_shop_type_proto_msgTypes[22]
+	mi := &file_shop_type_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1340,7 +1440,7 @@ func (x *ListShopMembersRequest) String() string {
 func (*ListShopMembersRequest) ProtoMessage() {}
 
 func (x *ListShopMembersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_type_proto_msgTypes[22]
+	mi := &file_shop_type_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1353,7 +1453,7 @@ func (x *ListShopMembersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListShopMembersRequest.ProtoReflect.Descriptor instead.
 func (*ListShopMembersRequest) Descriptor() ([]byte, []int) {
-	return file_shop_type_proto_rawDescGZIP(), []int{22}
+	return file_shop_type_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ListShopMembersRequest) GetShopId() string {
@@ -1365,14 +1465,14 @@ func (x *ListShopMembersRequest) GetShopId() string {
 
 type ListShopMembersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Members       []*ShopMemberView      `protobuf:"bytes,1,rep,name=members,proto3" json:"members,omitempty"`
+	Members       []*ShopMemberDetail    `protobuf:"bytes,1,rep,name=members,proto3" json:"members,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListShopMembersResponse) Reset() {
 	*x = ListShopMembersResponse{}
-	mi := &file_shop_type_proto_msgTypes[23]
+	mi := &file_shop_type_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1384,7 +1484,7 @@ func (x *ListShopMembersResponse) String() string {
 func (*ListShopMembersResponse) ProtoMessage() {}
 
 func (x *ListShopMembersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_shop_type_proto_msgTypes[23]
+	mi := &file_shop_type_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1397,10 +1497,10 @@ func (x *ListShopMembersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListShopMembersResponse.ProtoReflect.Descriptor instead.
 func (*ListShopMembersResponse) Descriptor() ([]byte, []int) {
-	return file_shop_type_proto_rawDescGZIP(), []int{23}
+	return file_shop_type_proto_rawDescGZIP(), []int{24}
 }
 
-func (x *ListShopMembersResponse) GetMembers() []*ShopMemberView {
+func (x *ListShopMembersResponse) GetMembers() []*ShopMemberDetail {
 	if x != nil {
 		return x.Members
 	}
@@ -1463,54 +1563,66 @@ const file_shop_type_proto_rawDesc = "" +
 	"\x17CheckPermissionResponse\x12\x1d\n" +
 	"\n" +
 	"is_allowed\x18\x01 \x01(\bR\tisAllowed\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"m\n" +
-	"\x0fShopProfileView\x12 \n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"o\n" +
+	"\x11ShopProfileDetail\x12 \n" +
 	"\vdescription\x18\x01 \x01(\tR\vdescription\x12\x19\n" +
 	"\blogo_url\x18\x02 \x01(\tR\alogoUrl\x12\x1d\n" +
 	"\n" +
-	"banner_url\x18\x03 \x01(\tR\tbannerUrl\"\xda\x01\n" +
-	"\x0fShopAddressView\x12\x0e\n" +
+	"banner_url\x18\x03 \x01(\tR\tbannerUrl\"\xd8\x02\n" +
+	"\x11ShopAddressDetail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
-	"\ashop_id\x18\x02 \x01(\tR\x06shopId\x12!\n" +
-	"\ffull_address\x18\x03 \x01(\tR\vfullAddress\x12!\n" +
-	"\faddress_line\x18\x04 \x01(\tR\vaddressLine\x12!\n" +
-	"\fcontact_name\x18\x05 \x01(\tR\vcontactName\x12!\n" +
-	"\fphone_number\x18\x06 \x01(\tR\vphoneNumber\x12\x12\n" +
-	"\x04type\x18\a \x01(\tR\x04type\"O\n" +
-	"\x0eShopMemberView\x12\x0e\n" +
+	"\ashop_id\x18\x02 \x01(\tR\x06shopId\x12\x1f\n" +
+	"\vprovince_id\x18\x03 \x01(\x05R\n" +
+	"provinceId\x12#\n" +
+	"\rprovince_name\x18\x04 \x01(\tR\fprovinceName\x12\x17\n" +
+	"\award_id\x18\x05 \x01(\x05R\x06wardId\x12\x1b\n" +
+	"\tward_name\x18\x06 \x01(\tR\bwardName\x12!\n" +
+	"\faddress_line\x18\b \x01(\tR\vaddressLine\x12!\n" +
+	"\ffull_address\x18\a \x01(\tR\vfullAddress\x12!\n" +
+	"\fcontact_name\x18\t \x01(\tR\vcontactName\x12!\n" +
+	"\fphone_number\x18\n" +
+	" \x01(\tR\vphoneNumber\x12\x12\n" +
+	"\x04type\x18\v \x01(\tR\x04type\">\n" +
+	"\x04Role\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\"v\n" +
+	"\x10ShopMemberDetail\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x19\n" +
-	"\brole_ids\x18\x03 \x03(\x05R\aroleIds\"\x82\x02\n" +
-	"\bShopView\x12\x17\n" +
+	"\brole_ids\x18\x03 \x03(\x05R\aroleIds\x12#\n" +
+	"\x05roles\x18\x04 \x03(\v2\r.shop.v1.RoleR\x05roles\"\x8a\x02\n" +
+	"\n" +
+	"ShopDetail\x12\x17\n" +
 	"\ashop_id\x18\x01 \x01(\tR\x06shopId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
 	"\x04slug\x18\x03 \x01(\tR\x04slug\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\x122\n" +
-	"\aprofile\x18\x05 \x01(\v2\x18.shop.v1.ShopProfileViewR\aprofile\x126\n" +
-	"\taddresses\x18\x06 \x03(\v2\x18.shop.v1.ShopAddressViewR\taddresses\x121\n" +
-	"\amembers\x18\a \x03(\v2\x17.shop.v1.ShopMemberViewR\amembers\"8\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x124\n" +
+	"\aprofile\x18\x05 \x01(\v2\x1a.shop.v1.ShopProfileDetailR\aprofile\x128\n" +
+	"\taddresses\x18\x06 \x03(\v2\x1a.shop.v1.ShopAddressDetailR\taddresses\x123\n" +
+	"\amembers\x18\a \x03(\v2\x19.shop.v1.ShopMemberDetailR\amembers\"8\n" +
 	"\x14GetShopDetailRequest\x12 \n" +
-	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\">\n" +
-	"\x15GetShopDetailResponse\x12%\n" +
-	"\x04shop\x18\x01 \x01(\v2\x11.shop.v1.ShopViewR\x04shop\"\x82\x01\n" +
+	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\"@\n" +
+	"\x15GetShopDetailResponse\x12'\n" +
+	"\x04shop\x18\x01 \x01(\v2\x13.shop.v1.ShopDetailR\x04shop\"\x82\x01\n" +
 	"\x12SearchShopsRequest\x12\x18\n" +
 	"\akeyword\x18\x01 \x01(\tR\akeyword\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x04 \x01(\tR\tpageToken\"|\n" +
-	"\x13SearchShopsResponse\x12'\n" +
-	"\x05shops\x18\x01 \x03(\v2\x11.shop.v1.ShopViewR\x05shops\x12\x14\n" +
+	"page_token\x18\x04 \x01(\tR\tpageToken\"~\n" +
+	"\x13SearchShopsResponse\x12)\n" +
+	"\x05shops\x18\x01 \x03(\v2\x13.shop.v1.ShopDetailR\x05shops\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x03R\x05total\x12&\n" +
 	"\x0fnext_page_token\x18\x03 \x01(\tR\rnextPageToken\"<\n" +
 	"\x18ListShopAddressesRequest\x12 \n" +
-	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\"S\n" +
-	"\x19ListShopAddressesResponse\x126\n" +
-	"\taddresses\x18\x01 \x03(\v2\x18.shop.v1.ShopAddressViewR\taddresses\":\n" +
+	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\"U\n" +
+	"\x19ListShopAddressesResponse\x128\n" +
+	"\taddresses\x18\x01 \x03(\v2\x1a.shop.v1.ShopAddressDetailR\taddresses\":\n" +
 	"\x16ListShopMembersRequest\x12 \n" +
-	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\"L\n" +
-	"\x17ListShopMembersResponse\x121\n" +
-	"\amembers\x18\x01 \x03(\v2\x17.shop.v1.ShopMemberViewR\amembersB+Z)github.com/iamKienb/api-contract/gen/shopb\x06proto3"
+	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\"N\n" +
+	"\x17ListShopMembersResponse\x123\n" +
+	"\amembers\x18\x01 \x03(\v2\x19.shop.v1.ShopMemberDetailR\amembersB+Z)github.com/iamKienb/api-contract/gen/shopb\x06proto3"
 
 var (
 	file_shop_type_proto_rawDescOnce sync.Once
@@ -1524,7 +1636,7 @@ func file_shop_type_proto_rawDescGZIP() []byte {
 	return file_shop_type_proto_rawDescData
 }
 
-var file_shop_type_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_shop_type_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_shop_type_proto_goTypes = []any{
 	(*ShopProfileInfo)(nil),           // 0: shop.v1.ShopProfileInfo
 	(*CreateShopRequest)(nil),         // 1: shop.v1.CreateShopRequest
@@ -1538,18 +1650,19 @@ var file_shop_type_proto_goTypes = []any{
 	(*AssignMemberRolesResponse)(nil), // 9: shop.v1.AssignMemberRolesResponse
 	(*CheckPermissionRequest)(nil),    // 10: shop.v1.CheckPermissionRequest
 	(*CheckPermissionResponse)(nil),   // 11: shop.v1.CheckPermissionResponse
-	(*ShopProfileView)(nil),           // 12: shop.v1.ShopProfileView
-	(*ShopAddressView)(nil),           // 13: shop.v1.ShopAddressView
-	(*ShopMemberView)(nil),            // 14: shop.v1.ShopMemberView
-	(*ShopView)(nil),                  // 15: shop.v1.ShopView
-	(*GetShopDetailRequest)(nil),      // 16: shop.v1.GetShopDetailRequest
-	(*GetShopDetailResponse)(nil),     // 17: shop.v1.GetShopDetailResponse
-	(*SearchShopsRequest)(nil),        // 18: shop.v1.SearchShopsRequest
-	(*SearchShopsResponse)(nil),       // 19: shop.v1.SearchShopsResponse
-	(*ListShopAddressesRequest)(nil),  // 20: shop.v1.ListShopAddressesRequest
-	(*ListShopAddressesResponse)(nil), // 21: shop.v1.ListShopAddressesResponse
-	(*ListShopMembersRequest)(nil),    // 22: shop.v1.ListShopMembersRequest
-	(*ListShopMembersResponse)(nil),   // 23: shop.v1.ListShopMembersResponse
+	(*ShopProfileDetail)(nil),         // 12: shop.v1.ShopProfileDetail
+	(*ShopAddressDetail)(nil),         // 13: shop.v1.ShopAddressDetail
+	(*Role)(nil),                      // 14: shop.v1.Role
+	(*ShopMemberDetail)(nil),          // 15: shop.v1.ShopMemberDetail
+	(*ShopDetail)(nil),                // 16: shop.v1.ShopDetail
+	(*GetShopDetailRequest)(nil),      // 17: shop.v1.GetShopDetailRequest
+	(*GetShopDetailResponse)(nil),     // 18: shop.v1.GetShopDetailResponse
+	(*SearchShopsRequest)(nil),        // 19: shop.v1.SearchShopsRequest
+	(*SearchShopsResponse)(nil),       // 20: shop.v1.SearchShopsResponse
+	(*ListShopAddressesRequest)(nil),  // 21: shop.v1.ListShopAddressesRequest
+	(*ListShopAddressesResponse)(nil), // 22: shop.v1.ListShopAddressesResponse
+	(*ListShopMembersRequest)(nil),    // 23: shop.v1.ListShopMembersRequest
+	(*ListShopMembersResponse)(nil),   // 24: shop.v1.ListShopMembersResponse
 }
 var file_shop_type_proto_depIdxs = []int32{
 	0,  // 0: shop.v1.CreateShopRequest.profile:type_name -> shop.v1.ShopProfileInfo
@@ -1558,18 +1671,19 @@ var file_shop_type_proto_depIdxs = []int32{
 	3,  // 3: shop.v1.AddShopAddressRequest.ward:type_name -> shop.v1.LocationInfo
 	6,  // 4: shop.v1.Member.roleIDs:type_name -> shop.v1.RoleID
 	7,  // 5: shop.v1.AssignMemberRolesRequest.member_roles:type_name -> shop.v1.Member
-	12, // 6: shop.v1.ShopView.profile:type_name -> shop.v1.ShopProfileView
-	13, // 7: shop.v1.ShopView.addresses:type_name -> shop.v1.ShopAddressView
-	14, // 8: shop.v1.ShopView.members:type_name -> shop.v1.ShopMemberView
-	15, // 9: shop.v1.GetShopDetailResponse.shop:type_name -> shop.v1.ShopView
-	15, // 10: shop.v1.SearchShopsResponse.shops:type_name -> shop.v1.ShopView
-	13, // 11: shop.v1.ListShopAddressesResponse.addresses:type_name -> shop.v1.ShopAddressView
-	14, // 12: shop.v1.ListShopMembersResponse.members:type_name -> shop.v1.ShopMemberView
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	14, // 6: shop.v1.ShopMemberDetail.roles:type_name -> shop.v1.Role
+	12, // 7: shop.v1.ShopDetail.profile:type_name -> shop.v1.ShopProfileDetail
+	13, // 8: shop.v1.ShopDetail.addresses:type_name -> shop.v1.ShopAddressDetail
+	15, // 9: shop.v1.ShopDetail.members:type_name -> shop.v1.ShopMemberDetail
+	16, // 10: shop.v1.GetShopDetailResponse.shop:type_name -> shop.v1.ShopDetail
+	16, // 11: shop.v1.SearchShopsResponse.shops:type_name -> shop.v1.ShopDetail
+	13, // 12: shop.v1.ListShopAddressesResponse.addresses:type_name -> shop.v1.ShopAddressDetail
+	15, // 13: shop.v1.ListShopMembersResponse.members:type_name -> shop.v1.ShopMemberDetail
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_shop_type_proto_init() }
@@ -1585,7 +1699,7 @@ func file_shop_type_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_shop_type_proto_rawDesc), len(file_shop_type_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   24,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
