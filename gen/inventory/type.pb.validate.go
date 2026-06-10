@@ -190,6 +190,8 @@ func (m *CreateInventoriesRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	// no validation rules for UserId
+
 	if len(m.GetItems()) < 1 {
 		err := CreateInventoriesRequestValidationError{
 			field:  "Items",
@@ -793,6 +795,8 @@ func (m *ReserveStockRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	// no validation rules for ActorId
+
 	if utf8.RuneCountInString(m.GetOrderId()) < 1 {
 		err := ReserveStockRequestValidationError{
 			field:  "OrderId",
@@ -1093,6 +1097,8 @@ func (m *ReleaseStockRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	// no validation rules for ActorId
+
 	if utf8.RuneCountInString(m.GetOrderId()) < 1 {
 		err := ReleaseStockRequestValidationError{
 			field:  "OrderId",
@@ -1320,6 +1326,8 @@ func (m *FulfillStockRequest) validate(all bool) error {
 		}
 		errors = append(errors, err)
 	}
+
+	// no validation rules for ActorId
 
 	if utf8.RuneCountInString(m.GetOrderId()) < 1 {
 		err := FulfillStockRequestValidationError{

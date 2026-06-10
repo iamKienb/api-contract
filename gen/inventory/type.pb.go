@@ -78,7 +78,8 @@ func (x *InventoryItem) GetQuantity() int32 {
 type CreateInventoriesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ShopId        string                 `protobuf:"bytes,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
-	Items         []*InventoryItem       `protobuf:"bytes,2,rep,name=items,proto3" json:"items,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Items         []*InventoryItem       `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -116,6 +117,13 @@ func (*CreateInventoriesRequest) Descriptor() ([]byte, []int) {
 func (x *CreateInventoriesRequest) GetShopId() string {
 	if x != nil {
 		return x.ShopId
+	}
+	return ""
+}
+
+func (x *CreateInventoriesRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
 	}
 	return ""
 }
@@ -322,8 +330,9 @@ func (x *StockReservationItem) GetQuantity() int32 {
 type ReserveStockRequest struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
 	ShopId        string                  `protobuf:"bytes,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
-	OrderId       string                  `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	Items         []*StockReservationItem `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	ActorId       string                  `protobuf:"bytes,2,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"`
+	OrderId       string                  `protobuf:"bytes,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	Items         []*StockReservationItem `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -361,6 +370,13 @@ func (*ReserveStockRequest) Descriptor() ([]byte, []int) {
 func (x *ReserveStockRequest) GetShopId() string {
 	if x != nil {
 		return x.ShopId
+	}
+	return ""
+}
+
+func (x *ReserveStockRequest) GetActorId() string {
+	if x != nil {
+		return x.ActorId
 	}
 	return ""
 }
@@ -426,7 +442,8 @@ func (x *ReserveStockResponse) GetExpiresAt() *timestamppb.Timestamp {
 type ReleaseStockRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ShopId        string                 `protobuf:"bytes,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
-	OrderId       string                 `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	ActorId       string                 `protobuf:"bytes,2,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"`
+	OrderId       string                 `protobuf:"bytes,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -464,6 +481,13 @@ func (*ReleaseStockRequest) Descriptor() ([]byte, []int) {
 func (x *ReleaseStockRequest) GetShopId() string {
 	if x != nil {
 		return x.ShopId
+	}
+	return ""
+}
+
+func (x *ReleaseStockRequest) GetActorId() string {
+	if x != nil {
+		return x.ActorId
 	}
 	return ""
 }
@@ -522,7 +546,8 @@ func (x *ReleaseStockResponse) GetSuccess() bool {
 type FulfillStockRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ShopId        string                 `protobuf:"bytes,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
-	OrderId       string                 `protobuf:"bytes,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	ActorId       string                 `protobuf:"bytes,2,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"`
+	OrderId       string                 `protobuf:"bytes,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -560,6 +585,13 @@ func (*FulfillStockRequest) Descriptor() ([]byte, []int) {
 func (x *FulfillStockRequest) GetShopId() string {
 	if x != nil {
 		return x.ShopId
+	}
+	return ""
+}
+
+func (x *FulfillStockRequest) GetActorId() string {
+	if x != nil {
+		return x.ActorId
 	}
 	return ""
 }
@@ -1458,10 +1490,11 @@ const file_inventory_type_proto_rawDesc = "" +
 	"\x14inventory/type.proto\x12\finventory.v1\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"T\n" +
 	"\rInventoryItem\x12\x1e\n" +
 	"\x06sku_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x05skuId\x12#\n" +
-	"\bquantity\x18\x03 \x01(\x05B\a\xfaB\x04\x1a\x02(\x00R\bquantity\"y\n" +
+	"\bquantity\x18\x03 \x01(\x05B\a\xfaB\x04\x1a\x02(\x00R\bquantity\"\x92\x01\n" +
 	"\x18CreateInventoriesRequest\x12 \n" +
-	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12;\n" +
-	"\x05items\x18\x02 \x03(\v2\x1b.inventory.v1.InventoryItemB\b\xfaB\x05\x92\x01\x02\b\x01R\x05items\"5\n" +
+	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12;\n" +
+	"\x05items\x18\x03 \x03(\v2\x1b.inventory.v1.InventoryItemB\b\xfaB\x05\x92\x01\x02\b\x01R\x05items\"5\n" +
 	"\x19CreateInventoriesResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"1\n" +
 	"\x16DeleteInventoryRequest\x12\x17\n" +
@@ -1471,22 +1504,25 @@ const file_inventory_type_proto_rawDesc = "" +
 	"\x14StockReservationItem\x12\x1e\n" +
 	"\x06sku_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x05skuId\x12*\n" +
 	"\finventory_id\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\vinventoryId\x12#\n" +
-	"\bquantity\x18\x03 \x01(\x05B\a\xfaB\x04\x1a\x02 \x00R\bquantity\"\x9f\x01\n" +
+	"\bquantity\x18\x03 \x01(\x05B\a\xfaB\x04\x1a\x02 \x00R\bquantity\"\xba\x01\n" +
 	"\x13ReserveStockRequest\x12 \n" +
-	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12\"\n" +
-	"\border_id\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\aorderId\x12B\n" +
-	"\x05items\x18\x03 \x03(\v2\".inventory.v1.StockReservationItemB\b\xfaB\x05\x92\x01\x02\b\x01R\x05items\"Q\n" +
+	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12\x19\n" +
+	"\bactor_id\x18\x02 \x01(\tR\aactorId\x12\"\n" +
+	"\border_id\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\aorderId\x12B\n" +
+	"\x05items\x18\x04 \x03(\v2\".inventory.v1.StockReservationItemB\b\xfaB\x05\x92\x01\x02\b\x01R\x05items\"Q\n" +
 	"\x14ReserveStockResponse\x129\n" +
 	"\n" +
-	"expires_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"[\n" +
+	"expires_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"v\n" +
 	"\x13ReleaseStockRequest\x12 \n" +
-	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12\"\n" +
-	"\border_id\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\aorderId\"0\n" +
+	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12\x19\n" +
+	"\bactor_id\x18\x02 \x01(\tR\aactorId\x12\"\n" +
+	"\border_id\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\aorderId\"0\n" +
 	"\x14ReleaseStockResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"[\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"v\n" +
 	"\x13FulfillStockRequest\x12 \n" +
-	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12\"\n" +
-	"\border_id\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\aorderId\"0\n" +
+	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12\x19\n" +
+	"\bactor_id\x18\x02 \x01(\tR\aactorId\x12\"\n" +
+	"\border_id\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\aorderId\"0\n" +
 	"\x14FulfillStockResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"\xf4\x01\n" +
 	"\x12InventoryStockView\x12!\n" +

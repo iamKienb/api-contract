@@ -14,7 +14,8 @@ message InventoryItem {
 
 message CreateInventoriesRequest {
   string                 shop_id = 1 [(validate.rules).string.min_len = 1];
-  repeated InventoryItem items   = 2 [(validate.rules).repeated.min_items = 1];
+  string                 user_id = 2;
+  repeated InventoryItem items   = 3 [(validate.rules).repeated.min_items = 1];
 }
 
 message CreateInventoriesResponse {
@@ -38,9 +39,11 @@ message StockReservationItem {
 
 message ReserveStockRequest {
   string shop_id  = 1 [(validate.rules).string.min_len = 1];
-  string order_id = 2 [(validate.rules).string.min_len = 1];
+  string actor_id = 2;
 
-  repeated StockReservationItem items = 3 [(validate.rules).repeated.min_items = 1];
+  string order_id = 3 [(validate.rules).string.min_len = 1];
+
+  repeated StockReservationItem items = 4 [(validate.rules).repeated.min_items = 1];
 }
 
 message ReserveStockResponse {
@@ -49,7 +52,9 @@ message ReserveStockResponse {
 
 message ReleaseStockRequest {
   string shop_id  = 1 [(validate.rules).string.min_len = 1];
-  string order_id = 2 [(validate.rules).string.min_len = 1];
+  string actor_id = 2;
+
+  string order_id = 3[(validate.rules).string.min_len = 1];
 }
 
 message ReleaseStockResponse {
@@ -58,7 +63,9 @@ message ReleaseStockResponse {
 
 message FulfillStockRequest {
   string shop_id  = 1 [(validate.rules).string.min_len = 1];
-  string order_id = 2 [(validate.rules).string.min_len = 1];
+  string actor_id = 2;
+
+  string order_id = 3[(validate.rules).string.min_len = 1];
 }
 
 message FulfillStockResponse {
