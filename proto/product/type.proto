@@ -35,7 +35,7 @@ message CreateProductsRequest {
   bool                            has_variant = 8;
   repeated ProductAttributeOption attributes  = 9;
   repeated ProductVariantOption   variants    = 10 [(validate.rules).repeated.min_items = 1];
-  string                          action      = 11;
+  string                          status      = 11;
 }
 
 message CreateProductsResponse {

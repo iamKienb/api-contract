@@ -172,7 +172,7 @@ type CreateProductsRequest struct {
 	HasVariant    bool                      `protobuf:"varint,8,opt,name=has_variant,json=hasVariant,proto3" json:"has_variant,omitempty"`
 	Attributes    []*ProductAttributeOption `protobuf:"bytes,9,rep,name=attributes,proto3" json:"attributes,omitempty"`
 	Variants      []*ProductVariantOption   `protobuf:"bytes,10,rep,name=variants,proto3" json:"variants,omitempty"`
-	Action        string                    `protobuf:"bytes,11,opt,name=action,proto3" json:"action,omitempty"`
+	Status        string                    `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -277,9 +277,9 @@ func (x *CreateProductsRequest) GetVariants() []*ProductVariantOption {
 	return nil
 }
 
-func (x *CreateProductsRequest) GetAction() string {
+func (x *CreateProductsRequest) GetStatus() string {
 	if x != nil {
-		return x.Action
+		return x.Status
 	}
 	return ""
 }
@@ -1403,7 +1403,7 @@ const file_product_type_proto_rawDesc = "" +
 	"attributes\x12F\n" +
 	"\bvariants\x18\n" +
 	" \x03(\v2 .product.v1.ProductVariantOptionB\b\xfaB\x05\x92\x01\x02\b\x01R\bvariants\x12\x16\n" +
-	"\x06action\x18\v \x01(\tR\x06action\"9\n" +
+	"\x06status\x18\v \x01(\tR\x06status\"9\n" +
 	"\x16CreateProductsResponse\x12\x1f\n" +
 	"\vworkflow_id\x18\x01 \x01(\tR\n" +
 	"workflowId\"\xd6\x01\n" +

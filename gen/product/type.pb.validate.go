@@ -434,7 +434,7 @@ func (m *CreateProductsRequest) validate(all bool) error {
 
 	}
 
-	// no validation rules for Action
+	// no validation rules for Status
 
 	if len(errors) > 0 {
 		return CreateProductsRequestMultiError(errors)
