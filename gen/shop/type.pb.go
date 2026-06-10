@@ -85,9 +85,9 @@ func (x *ShopProfileInfo) GetBannerUrl() string {
 
 type CreateShopRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Slug          string                 `protobuf:"bytes,3,opt,name=slug,proto3" json:"slug,omitempty"`
-	Profile       *ShopProfileInfo       `protobuf:"bytes,4,opt,name=profile,proto3,oneof" json:"profile,omitempty"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Slug          string                 `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug,omitempty"`
+	Profile       *ShopProfileInfo       `protobuf:"bytes,3,opt,name=profile,proto3,oneof" json:"profile,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1521,9 +1521,9 @@ const file_shop_type_proto_rawDesc = "" +
 	"\t_logo_urlB\r\n" +
 	"\v_banner_url\"\xb0\x01\n" +
 	"\x11CreateShopRequest\x12\x1b\n" +
-	"\x04name\x18\x02 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\x129\n" +
-	"\x04slug\x18\x03 \x01(\tB%\xfaB\"r \x10\x01\x18\x142\x1a^[a-z0-9]+(?:-[a-z0-9]+)*$R\x04slug\x127\n" +
-	"\aprofile\x18\x04 \x01(\v2\x18.shop.v1.ShopProfileInfoH\x00R\aprofile\x88\x01\x01B\n" +
+	"\x04name\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x04name\x129\n" +
+	"\x04slug\x18\x02 \x01(\tB%\xfaB\"r \x10\x01\x18\x142\x1a^[a-z0-9]+(?:-[a-z0-9]+)*$R\x04slug\x127\n" +
+	"\aprofile\x18\x03 \x01(\v2\x18.shop.v1.ShopProfileInfoH\x00R\aprofile\x88\x01\x01B\n" +
 	"\n" +
 	"\b_profile\"-\n" +
 	"\x12CreateShopResponse\x12\x17\n" +

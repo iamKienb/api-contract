@@ -14,13 +14,13 @@ message ShopProfileInfo {
 }
 
 message CreateShopRequest {
-  string name = 2 [(validate.rules).string.min_len = 1];
-  string slug = 3 [(validate.rules).string = {
+  string name = 1[(validate.rules).string.min_len = 1];
+  string slug = 2 [(validate.rules).string = {
     pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$",
     min_len: 1,
     max_len: 20
   }];
-  optional ShopProfileInfo profile = 4;
+  optional ShopProfileInfo profile = 3;
 }
 
 message CreateShopResponse {
