@@ -897,7 +897,7 @@ func (x *ShopAddressDetail) GetType() string {
 
 type Role struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
 	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -934,11 +934,11 @@ func (*Role) Descriptor() ([]byte, []int) {
 	return file_shop_type_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *Role) GetId() string {
+func (x *Role) GetId() int32 {
 	if x != nil {
 		return x.Id
 	}
-	return ""
+	return 0
 }
 
 func (x *Role) GetCode() string {
@@ -1584,7 +1584,7 @@ const file_shop_type_proto_rawDesc = "" +
 	" \x01(\tR\vphoneNumber\x12\x12\n" +
 	"\x04type\x18\v \x01(\tR\x04type\">\n" +
 	"\x04Role\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\"v\n" +
 	"\x10ShopMemberDetail\x12\x0e\n" +
