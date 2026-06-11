@@ -51,7 +51,6 @@ message ReserveStockResponse {
 }
 
 message ReleaseStockRequest {
-  string shop_id  = 1 [(validate.rules).string.min_len = 1];
   string actor_id = 2;
 
   string order_id = 3[(validate.rules).string.min_len = 1];
@@ -62,7 +61,6 @@ message ReleaseStockResponse {
 }
 
 message FulfillStockRequest {
-  string shop_id  = 1 [(validate.rules).string.min_len = 1];
   string actor_id = 2;
 
   string order_id = 3[(validate.rules).string.min_len = 1];

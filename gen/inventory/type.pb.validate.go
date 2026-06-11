@@ -1086,17 +1086,6 @@ func (m *ReleaseStockRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetShopId()) < 1 {
-		err := ReleaseStockRequestValidationError{
-			field:  "ShopId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
 	// no validation rules for ActorId
 
 	if utf8.RuneCountInString(m.GetOrderId()) < 1 {
@@ -1315,17 +1304,6 @@ func (m *FulfillStockRequest) validate(all bool) error {
 	}
 
 	var errors []error
-
-	if utf8.RuneCountInString(m.GetShopId()) < 1 {
-		err := FulfillStockRequestValidationError{
-			field:  "ShopId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
 
 	// no validation rules for ActorId
 

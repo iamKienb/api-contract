@@ -441,7 +441,6 @@ func (x *ReserveStockResponse) GetExpiresAt() *timestamppb.Timestamp {
 
 type ReleaseStockRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ShopId        string                 `protobuf:"bytes,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
 	ActorId       string                 `protobuf:"bytes,2,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"`
 	OrderId       string                 `protobuf:"bytes,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -476,13 +475,6 @@ func (x *ReleaseStockRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ReleaseStockRequest.ProtoReflect.Descriptor instead.
 func (*ReleaseStockRequest) Descriptor() ([]byte, []int) {
 	return file_inventory_type_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *ReleaseStockRequest) GetShopId() string {
-	if x != nil {
-		return x.ShopId
-	}
-	return ""
 }
 
 func (x *ReleaseStockRequest) GetActorId() string {
@@ -545,7 +537,6 @@ func (x *ReleaseStockResponse) GetSuccess() bool {
 
 type FulfillStockRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ShopId        string                 `protobuf:"bytes,1,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
 	ActorId       string                 `protobuf:"bytes,2,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"`
 	OrderId       string                 `protobuf:"bytes,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -580,13 +571,6 @@ func (x *FulfillStockRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use FulfillStockRequest.ProtoReflect.Descriptor instead.
 func (*FulfillStockRequest) Descriptor() ([]byte, []int) {
 	return file_inventory_type_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *FulfillStockRequest) GetShopId() string {
-	if x != nil {
-		return x.ShopId
-	}
-	return ""
 }
 
 func (x *FulfillStockRequest) GetActorId() string {
@@ -1512,15 +1496,13 @@ const file_inventory_type_proto_rawDesc = "" +
 	"\x05items\x18\x04 \x03(\v2\".inventory.v1.StockReservationItemB\b\xfaB\x05\x92\x01\x02\b\x01R\x05items\"Q\n" +
 	"\x14ReserveStockResponse\x129\n" +
 	"\n" +
-	"expires_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"v\n" +
-	"\x13ReleaseStockRequest\x12 \n" +
-	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12\x19\n" +
+	"expires_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"T\n" +
+	"\x13ReleaseStockRequest\x12\x19\n" +
 	"\bactor_id\x18\x02 \x01(\tR\aactorId\x12\"\n" +
 	"\border_id\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\aorderId\"0\n" +
 	"\x14ReleaseStockResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\"v\n" +
-	"\x13FulfillStockRequest\x12 \n" +
-	"\ashop_id\x18\x01 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\x06shopId\x12\x19\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"T\n" +
+	"\x13FulfillStockRequest\x12\x19\n" +
 	"\bactor_id\x18\x02 \x01(\tR\aactorId\x12\"\n" +
 	"\border_id\x18\x03 \x01(\tB\a\xfaB\x04r\x02\x10\x01R\aorderId\"0\n" +
 	"\x14FulfillStockResponse\x12\x18\n" +
