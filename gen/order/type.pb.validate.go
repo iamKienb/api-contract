@@ -57,8 +57,6 @@ func (m *PreviewCheckoutRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for BuyerId
-
 	// no validation rules for AddressUserId
 
 	// no validation rules for ShopId
@@ -666,8 +664,6 @@ func (m *PlaceOrderRequest) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for BuyerId
-
 	// no validation rules for AddressUserId
 
 	// no validation rules for ShopId
@@ -929,8 +925,6 @@ func (m *CancelOrderRequest) validate(all bool) error {
 
 	// no validation rules for OrderId
 
-	// no validation rules for ActorId
-
 	// no validation rules for Reason
 
 	if len(errors) > 0 {
@@ -1146,8 +1140,6 @@ func (m *ConfirmOrderRequest) validate(all bool) error {
 	// no validation rules for OrderId
 
 	// no validation rules for ShopId
-
-	// no validation rules for ActorId
 
 	if len(errors) > 0 {
 		return ConfirmOrderRequestMultiError(errors)

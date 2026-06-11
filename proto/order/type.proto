@@ -8,7 +8,6 @@ import "google/protobuf/timestamp.proto";
 option go_package = "github.com/iamKienb/api-contract/gen/order";
 
 message PreviewCheckoutRequest {
-  string                buyer_id        = 1;
   string                address_user_id = 2;
   string                shop_id         = 3;
   repeated CheckoutItem items           = 4;
@@ -44,7 +43,6 @@ message PlaceOrderItem {
 }
 
 message PlaceOrderRequest {
-  string                  buyer_id        = 1;
   string                  address_user_id = 2;
   string                  shop_id         = 3;
   repeated PlaceOrderItem items           = 4;
@@ -58,24 +56,19 @@ message PlaceOrderResponse {
 }
 
 message CancelOrderRequest {
-  string order_id = 1; // ID của đơn hàng muốn hủy
-  string actor_id = 2; // ID của người bấm nút hủy (Có thể là BuyerID hoặc AdminID)
-  string reason   = 3; // Lý do hủy đơn (để lưu log phục vụ CSKH/Data Analyst)
+  string order_id = 1;
+  string reason   = 3;
 }
 
 message CancelOrderResponse {
   string order_id = 1;
-  string status   = 2; // Trạng thái mới (ví dụ: "CANCELLED")
-  string message  = 3; // Câu thông báo thành công
+  string status   = 2;
+  string message  = 3;
 }
 
-// ----------------------------------------------------
-// 2. API XÁC NHẬN ĐƠN HÀNG (CONFIRM ORDER)
-// ----------------------------------------------------
 message ConfirmOrderRequest {
-  string order_id = 1; // ID của đơn hàng cần duyệt
-  string shop_id  = 2; // ID của Shop thực hiện duyệt (Để phân quyền, bảo mật dữ liệu)
-  string actor_id = 3; // ID của Nhân viên/Chủ shop bấm nút duyệt đơn
+  string order_id = 1;
+  string shop_id  = 2;
 }
 
 message OrderItemView {
@@ -155,5 +148,5 @@ message SearchOrdersResponse {
 
 message ConfirmOrderResponse {
   string order_id = 1;
-  string status   = 2; // Trạng thái mới (ví dụ: "PROCESSING" hoặc "CONFIRMED")
+  string status   = 2;
 }

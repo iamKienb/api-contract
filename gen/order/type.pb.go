@@ -25,7 +25,6 @@ const (
 
 type PreviewCheckoutRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	BuyerId       string                 `protobuf:"bytes,1,opt,name=buyer_id,json=buyerId,proto3" json:"buyer_id,omitempty"`
 	AddressUserId string                 `protobuf:"bytes,2,opt,name=address_user_id,json=addressUserId,proto3" json:"address_user_id,omitempty"`
 	ShopId        string                 `protobuf:"bytes,3,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
 	Items         []*CheckoutItem        `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
@@ -61,13 +60,6 @@ func (x *PreviewCheckoutRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use PreviewCheckoutRequest.ProtoReflect.Descriptor instead.
 func (*PreviewCheckoutRequest) Descriptor() ([]byte, []int) {
 	return file_order_type_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *PreviewCheckoutRequest) GetBuyerId() string {
-	if x != nil {
-		return x.BuyerId
-	}
-	return ""
 }
 
 func (x *PreviewCheckoutRequest) GetAddressUserId() string {
@@ -365,7 +357,6 @@ func (x *PlaceOrderItem) GetBasePrice() int64 {
 
 type PlaceOrderRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	BuyerId        string                 `protobuf:"bytes,1,opt,name=buyer_id,json=buyerId,proto3" json:"buyer_id,omitempty"`
 	AddressUserId  string                 `protobuf:"bytes,2,opt,name=address_user_id,json=addressUserId,proto3" json:"address_user_id,omitempty"`
 	ShopId         string                 `protobuf:"bytes,3,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
 	Items          []*PlaceOrderItem      `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
@@ -402,13 +393,6 @@ func (x *PlaceOrderRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use PlaceOrderRequest.ProtoReflect.Descriptor instead.
 func (*PlaceOrderRequest) Descriptor() ([]byte, []int) {
 	return file_order_type_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *PlaceOrderRequest) GetBuyerId() string {
-	if x != nil {
-		return x.BuyerId
-	}
-	return ""
 }
 
 func (x *PlaceOrderRequest) GetAddressUserId() string {
@@ -501,9 +485,8 @@ func (x *PlaceOrderResponse) GetStatus() string {
 
 type CancelOrderRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrderId       string                 `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"` // ID của đơn hàng muốn hủy
-	ActorId       string                 `protobuf:"bytes,2,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"` // ID của người bấm nút hủy (Có thể là BuyerID hoặc AdminID)
-	Reason        string                 `protobuf:"bytes,3,opt,name=reason,proto3" json:"reason,omitempty"`                  // Lý do hủy đơn (để lưu log phục vụ CSKH/Data Analyst)
+	OrderId       string                 `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	Reason        string                 `protobuf:"bytes,3,opt,name=reason,proto3" json:"reason,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -545,13 +528,6 @@ func (x *CancelOrderRequest) GetOrderId() string {
 	return ""
 }
 
-func (x *CancelOrderRequest) GetActorId() string {
-	if x != nil {
-		return x.ActorId
-	}
-	return ""
-}
-
 func (x *CancelOrderRequest) GetReason() string {
 	if x != nil {
 		return x.Reason
@@ -562,8 +538,8 @@ func (x *CancelOrderRequest) GetReason() string {
 type CancelOrderResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OrderId       string                 `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`   // Trạng thái mới (ví dụ: "CANCELLED")
-	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"` // Câu thông báo thành công
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -619,14 +595,10 @@ func (x *CancelOrderResponse) GetMessage() string {
 	return ""
 }
 
-// ----------------------------------------------------
-// 2. API XÁC NHẬN ĐƠN HÀNG (CONFIRM ORDER)
-// ----------------------------------------------------
 type ConfirmOrderRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrderId       string                 `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"` // ID của đơn hàng cần duyệt
-	ShopId        string                 `protobuf:"bytes,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`    // ID của Shop thực hiện duyệt (Để phân quyền, bảo mật dữ liệu)
-	ActorId       string                 `protobuf:"bytes,3,opt,name=actor_id,json=actorId,proto3" json:"actor_id,omitempty"` // ID của Nhân viên/Chủ shop bấm nút duyệt đơn
+	OrderId       string                 `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	ShopId        string                 `protobuf:"bytes,2,opt,name=shop_id,json=shopId,proto3" json:"shop_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -671,13 +643,6 @@ func (x *ConfirmOrderRequest) GetOrderId() string {
 func (x *ConfirmOrderRequest) GetShopId() string {
 	if x != nil {
 		return x.ShopId
-	}
-	return ""
-}
-
-func (x *ConfirmOrderRequest) GetActorId() string {
-	if x != nil {
-		return x.ActorId
 	}
 	return ""
 }
@@ -1397,7 +1362,7 @@ func (x *SearchOrdersResponse) GetNextPageToken() string {
 type ConfirmOrderResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OrderId       string                 `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"` // Trạng thái mới (ví dụ: "PROCESSING" hoặc "CONFIRMED")
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1450,9 +1415,8 @@ var File_order_type_proto protoreflect.FileDescriptor
 
 const file_order_type_proto_rawDesc = "" +
 	"\n" +
-	"\x10order/type.proto\x12\border.v1\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa2\x01\n" +
-	"\x16PreviewCheckoutRequest\x12\x19\n" +
-	"\bbuyer_id\x18\x01 \x01(\tR\abuyerId\x12&\n" +
+	"\x10order/type.proto\x12\border.v1\x1a\x17validate/validate.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x87\x01\n" +
+	"\x16PreviewCheckoutRequest\x12&\n" +
 	"\x0faddress_user_id\x18\x02 \x01(\tR\raddressUserId\x12\x17\n" +
 	"\ashop_id\x18\x03 \x01(\tR\x06shopId\x12,\n" +
 	"\x05items\x18\x04 \x03(\v2\x16.order.v1.CheckoutItemR\x05items\"A\n" +
@@ -1477,9 +1441,8 @@ const file_order_type_proto_rawDesc = "" +
 	"\x06sku_id\x18\x01 \x01(\tR\x05skuId\x12\x1a\n" +
 	"\bquantity\x18\x02 \x01(\x05R\bquantity\x12\x1d\n" +
 	"\n" +
-	"base_price\x18\x03 \x01(\x03R\tbasePrice\"\xd1\x01\n" +
-	"\x11PlaceOrderRequest\x12\x19\n" +
-	"\bbuyer_id\x18\x01 \x01(\tR\abuyerId\x12&\n" +
+	"base_price\x18\x03 \x01(\x03R\tbasePrice\"\xb6\x01\n" +
+	"\x11PlaceOrderRequest\x12&\n" +
 	"\x0faddress_user_id\x18\x02 \x01(\tR\raddressUserId\x12\x17\n" +
 	"\ashop_id\x18\x03 \x01(\tR\x06shopId\x12.\n" +
 	"\x05items\x18\x04 \x03(\v2\x18.order.v1.PlaceOrderItemR\x05items\x120\n" +
@@ -1487,19 +1450,17 @@ const file_order_type_proto_rawDesc = "" +
 	"\x12PlaceOrderResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x19\n" +
 	"\border_id\x18\x02 \x01(\tR\aorderId\x12\x16\n" +
-	"\x06status\x18\x03 \x01(\tR\x06status\"b\n" +
+	"\x06status\x18\x03 \x01(\tR\x06status\"G\n" +
 	"\x12CancelOrderRequest\x12\x19\n" +
-	"\border_id\x18\x01 \x01(\tR\aorderId\x12\x19\n" +
-	"\bactor_id\x18\x02 \x01(\tR\aactorId\x12\x16\n" +
+	"\border_id\x18\x01 \x01(\tR\aorderId\x12\x16\n" +
 	"\x06reason\x18\x03 \x01(\tR\x06reason\"b\n" +
 	"\x13CancelOrderResponse\x12\x19\n" +
 	"\border_id\x18\x01 \x01(\tR\aorderId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x18\n" +
-	"\amessage\x18\x03 \x01(\tR\amessage\"d\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\"I\n" +
 	"\x13ConfirmOrderRequest\x12\x19\n" +
 	"\border_id\x18\x01 \x01(\tR\aorderId\x12\x17\n" +
-	"\ashop_id\x18\x02 \x01(\tR\x06shopId\x12\x19\n" +
-	"\bactor_id\x18\x03 \x01(\tR\aactorId\"\x86\x02\n" +
+	"\ashop_id\x18\x02 \x01(\tR\x06shopId\"\x86\x02\n" +
 	"\rOrderItemView\x12!\n" +
 	"\finventory_id\x18\x01 \x01(\tR\vinventoryId\x12\x15\n" +
 	"\x06sku_id\x18\x02 \x01(\tR\x05skuId\x12\x19\n" +
