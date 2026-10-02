@@ -76,14 +76,6 @@ message ProductDetail {
   repeated ProductCategoryView  categories  = 14;
 }
 
-message GetProductDetailRequest {
-  string product_id = 1 [(validate.rules).string.min_len = 1];
-}
-
-message GetProductDetailResponse {
-  ProductDetail product = 1;
-}
-
 message SearchProductsRequest {
   string shop_id    = 1;
   string keyword    = 2;
@@ -147,4 +139,23 @@ message GetPriceSkusByIDsRequest {
 
 message GetPriceSkusByIDsResponse {
   repeated SkuPriceItem skus = 1;
+}
+
+message GetProductDetailRequest {
+  string shop_id    = 1 [(validate.rules).string.min_len = 1];
+  string product_id = 2 [(validate.rules).string.min_len = 1];
+  string sku_id     = 3;
+}
+
+message GetProductDetailResponse {
+  string shop_id      = 1;
+  string product_id   = 2;
+  string product_name = 3;
+  string status       = 4;
+
+  string sku_id    = 5;
+  string sku_code  = 6;
+  int64  price     = 7;
+  string currency  = 8;
+  string image_url = 9;
 }

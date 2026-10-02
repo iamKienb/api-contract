@@ -45,7 +45,7 @@ const (
 
 // OTPCommandServiceClient is a client for the otp.v1.OTPCommandService service.
 type OTPCommandServiceClient interface {
-	// Verify otp.
+	//  Verify otp.
 	Verify(context.Context, *connect.Request[otp.VerifyRequest]) (*connect.Response[otp.VerifyResponse], error)
 	// Resend otp.
 	Resend(context.Context, *connect.Request[otp.ResendRequest]) (*connect.Response[otp.ResendResponse], error)
@@ -95,7 +95,7 @@ func (c *oTPCommandServiceClient) Resend(ctx context.Context, req *connect.Reque
 
 // OTPCommandServiceHandler is an implementation of the otp.v1.OTPCommandService service.
 type OTPCommandServiceHandler interface {
-	// Verify otp.
+	//  Verify otp.
 	Verify(context.Context, *connect.Request[otp.VerifyRequest]) (*connect.Response[otp.VerifyResponse], error)
 	// Resend otp.
 	Resend(context.Context, *connect.Request[otp.ResendRequest]) (*connect.Response[otp.ResendResponse], error)

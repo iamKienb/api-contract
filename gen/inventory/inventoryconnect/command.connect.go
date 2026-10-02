@@ -55,13 +55,13 @@ const (
 
 // InventoryCommandServiceClient is a client for the inventory.v1.InventoryCommandService service.
 type InventoryCommandServiceClient interface {
-	// Public Commands
+	//  Public Commands
 	CreateInventories(context.Context, *connect.Request[inventory.CreateInventoriesRequest]) (*connect.Response[inventory.CreateInventoriesResponse], error)
 	DeleteInventory(context.Context, *connect.Request[inventory.DeleteInventoryRequest]) (*connect.Response[inventory.DeleteInventoryResponse], error)
 	ReserveStock(context.Context, *connect.Request[inventory.ReserveStockRequest]) (*connect.Response[inventory.ReserveStockResponse], error)
 	ReleaseStock(context.Context, *connect.Request[inventory.ReleaseStockRequest]) (*connect.Response[inventory.ReleaseStockResponse], error)
 	FulfillStock(context.Context, *connect.Request[inventory.FulfillStockRequest]) (*connect.Response[inventory.FulfillStockResponse], error)
-	// internal call
+	//internal call
 	GetStockBySkuIDs(context.Context, *connect.Request[inventory.GetStockBySkuIDsRequest]) (*connect.Response[inventory.GetStockBySkuIDsResponse], error)
 }
 
@@ -158,13 +158,13 @@ func (c *inventoryCommandServiceClient) GetStockBySkuIDs(ctx context.Context, re
 // InventoryCommandServiceHandler is an implementation of the inventory.v1.InventoryCommandService
 // service.
 type InventoryCommandServiceHandler interface {
-	// Public Commands
+	//  Public Commands
 	CreateInventories(context.Context, *connect.Request[inventory.CreateInventoriesRequest]) (*connect.Response[inventory.CreateInventoriesResponse], error)
 	DeleteInventory(context.Context, *connect.Request[inventory.DeleteInventoryRequest]) (*connect.Response[inventory.DeleteInventoryResponse], error)
 	ReserveStock(context.Context, *connect.Request[inventory.ReserveStockRequest]) (*connect.Response[inventory.ReserveStockResponse], error)
 	ReleaseStock(context.Context, *connect.Request[inventory.ReleaseStockRequest]) (*connect.Response[inventory.ReleaseStockResponse], error)
 	FulfillStock(context.Context, *connect.Request[inventory.FulfillStockRequest]) (*connect.Response[inventory.FulfillStockResponse], error)
-	// internal call
+	//internal call
 	GetStockBySkuIDs(context.Context, *connect.Request[inventory.GetStockBySkuIDsRequest]) (*connect.Response[inventory.GetStockBySkuIDsResponse], error)
 }
 

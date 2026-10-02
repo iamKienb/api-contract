@@ -49,7 +49,7 @@ const (
 
 // ShopCommandServiceClient is a client for the shop.v1.ShopCommandService service.
 type ShopCommandServiceClient interface {
-	// Public Commands
+	//  Public Commands
 	CreateShop(context.Context, *connect.Request[shop.CreateShopRequest]) (*connect.Response[shop.CreateShopResponse], error)
 	AddShopAddress(context.Context, *connect.Request[shop.AddShopAddressRequest]) (*connect.Response[shop.AddShopAddressResponse], error)
 	AssignMemberRoles(context.Context, *connect.Request[shop.AssignMemberRolesRequest]) (*connect.Response[shop.AssignMemberRolesResponse], error)
@@ -125,7 +125,7 @@ func (c *shopCommandServiceClient) CheckPermission(ctx context.Context, req *con
 
 // ShopCommandServiceHandler is an implementation of the shop.v1.ShopCommandService service.
 type ShopCommandServiceHandler interface {
-	// Public Commands
+	//  Public Commands
 	CreateShop(context.Context, *connect.Request[shop.CreateShopRequest]) (*connect.Response[shop.CreateShopResponse], error)
 	AddShopAddress(context.Context, *connect.Request[shop.AddShopAddressRequest]) (*connect.Response[shop.AddShopAddressResponse], error)
 	AssignMemberRoles(context.Context, *connect.Request[shop.AssignMemberRolesRequest]) (*connect.Response[shop.AssignMemberRolesResponse], error)

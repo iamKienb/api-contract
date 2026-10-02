@@ -49,11 +49,11 @@ const (
 
 // UserCommandServiceClient is a client for the user.v1.UserCommandService service.
 type UserCommandServiceClient interface {
-	// Public Commands
+	//  Public Commands
 	RegisterUser(context.Context, *connect.Request[user.RegisterUserRequest]) (*connect.Response[user.RegisterUserResponse], error)
 	LoginUser(context.Context, *connect.Request[user.LoginUserRequest]) (*connect.Response[user.LoginUserResponse], error)
 	AddUserAddress(context.Context, *connect.Request[user.AddUserAddressRequest]) (*connect.Response[user.AddUserAddressResponse], error)
-	// internal services
+	//  internal services
 	GetUserAddressByID(context.Context, *connect.Request[user.GetUserAddressByIDRequest]) (*connect.Response[user.GetUserAddressByIDResponse], error)
 }
 
@@ -125,11 +125,11 @@ func (c *userCommandServiceClient) GetUserAddressByID(ctx context.Context, req *
 
 // UserCommandServiceHandler is an implementation of the user.v1.UserCommandService service.
 type UserCommandServiceHandler interface {
-	// Public Commands
+	//  Public Commands
 	RegisterUser(context.Context, *connect.Request[user.RegisterUserRequest]) (*connect.Response[user.RegisterUserResponse], error)
 	LoginUser(context.Context, *connect.Request[user.LoginUserRequest]) (*connect.Response[user.LoginUserResponse], error)
 	AddUserAddress(context.Context, *connect.Request[user.AddUserAddressRequest]) (*connect.Response[user.AddUserAddressResponse], error)
-	// internal services
+	//  internal services
 	GetUserAddressByID(context.Context, *connect.Request[user.GetUserAddressByIDRequest]) (*connect.Response[user.GetUserAddressByIDResponse], error)
 }
 

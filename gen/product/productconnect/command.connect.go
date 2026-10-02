@@ -43,7 +43,7 @@ const (
 
 // ProductCommandServiceClient is a client for the product.v1.ProductCommandService service.
 type ProductCommandServiceClient interface {
-	// Public Commands
+	//  Public Commands
 	CreateProduct(context.Context, *connect.Request[product.CreateProductsRequest]) (*connect.Response[product.CreateProductsResponse], error)
 	// internal service call
 	GetPriceSkusByIDs(context.Context, *connect.Request[product.GetPriceSkusByIDsRequest]) (*connect.Response[product.GetPriceSkusByIDsResponse], error)
@@ -94,7 +94,7 @@ func (c *productCommandServiceClient) GetPriceSkusByIDs(ctx context.Context, req
 // ProductCommandServiceHandler is an implementation of the product.v1.ProductCommandService
 // service.
 type ProductCommandServiceHandler interface {
-	// Public Commands
+	//  Public Commands
 	CreateProduct(context.Context, *connect.Request[product.CreateProductsRequest]) (*connect.Response[product.CreateProductsResponse], error)
 	// internal service call
 	GetPriceSkusByIDs(context.Context, *connect.Request[product.GetPriceSkusByIDsRequest]) (*connect.Response[product.GetPriceSkusByIDsResponse], error)
