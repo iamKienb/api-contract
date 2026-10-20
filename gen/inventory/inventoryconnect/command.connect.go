@@ -5,286 +5,255 @@
 package inventoryconnect
 
 import (
-	connect "connectrpc.com/connect/v2"
+	connect "connectrpc.com/connect"
 	context "context"
+	errors "errors"
 	inventory "github.com/iamKienb/api-contract/gen/inventory"
-	sync "sync"
+	http "net/http"
+	strings "strings"
 )
+
+// This is a compile-time assertion to ensure that this generated file and the connect package are
+// compatible. If you get a compiler error that this constant is not defined, this code was
+// generated with a version of connect newer than the one compiled into your binary. You can fix the
+// problem by either regenerating this code with an older version of connect or updating the connect
+// version compiled into your binary.
+const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// InventoryCommandServiceName is the fully-qualified name of the InventoryCommandService service.
 	InventoryCommandServiceName = "inventory.v1.InventoryCommandService"
 )
 
-// These constants are the procedure names of the RPCs defined in this package. They're exposed at
-// runtime as Spec.Procedure and as the final two segments of the HTTP route.
+// These constants are the fully-qualified names of the RPCs defined in this package. They're
+// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
 //
 // Note that these are different from the fully-qualified method names used by
 // google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// InventoryCommandServiceCreateInventoriesProcedure is the procedure name of the
+	// InventoryCommandServiceCreateInventoriesProcedure is the fully-qualified name of the
 	// InventoryCommandService's CreateInventories RPC.
 	InventoryCommandServiceCreateInventoriesProcedure = "/inventory.v1.InventoryCommandService/CreateInventories"
-	// InventoryCommandServiceDeleteInventoryProcedure is the procedure name of the
+	// InventoryCommandServiceDeleteInventoryProcedure is the fully-qualified name of the
 	// InventoryCommandService's DeleteInventory RPC.
 	InventoryCommandServiceDeleteInventoryProcedure = "/inventory.v1.InventoryCommandService/DeleteInventory"
-	// InventoryCommandServiceReserveStockProcedure is the procedure name of the
+	// InventoryCommandServiceReserveStockProcedure is the fully-qualified name of the
 	// InventoryCommandService's ReserveStock RPC.
 	InventoryCommandServiceReserveStockProcedure = "/inventory.v1.InventoryCommandService/ReserveStock"
-	// InventoryCommandServiceReleaseStockProcedure is the procedure name of the
+	// InventoryCommandServiceReleaseStockProcedure is the fully-qualified name of the
 	// InventoryCommandService's ReleaseStock RPC.
 	InventoryCommandServiceReleaseStockProcedure = "/inventory.v1.InventoryCommandService/ReleaseStock"
-	// InventoryCommandServiceFulfillStockProcedure is the procedure name of the
+	// InventoryCommandServiceFulfillStockProcedure is the fully-qualified name of the
 	// InventoryCommandService's FulfillStock RPC.
 	InventoryCommandServiceFulfillStockProcedure = "/inventory.v1.InventoryCommandService/FulfillStock"
-	// InventoryCommandServiceGetStockBySkuIDsProcedure is the procedure name of the
+	// InventoryCommandServiceGetStockBySkuIDsProcedure is the fully-qualified name of the
 	// InventoryCommandService's GetStockBySkuIDs RPC.
 	InventoryCommandServiceGetStockBySkuIDsProcedure = "/inventory.v1.InventoryCommandService/GetStockBySkuIDs"
 )
 
-var (
-	inventoryCommandServiceCreateInventoriesSpec = sync.OnceValue(func() connect.Spec {
-		return connect.Spec{
-			StreamType: connect.StreamTypeUnary,
-			Schema:     inventory.File_inventory_command_proto.Services().ByName("InventoryCommandService").Methods().ByName("CreateInventories"),
-			Procedure:  InventoryCommandServiceCreateInventoriesProcedure,
-		}
-	})
-	inventoryCommandServiceDeleteInventorySpec = sync.OnceValue(func() connect.Spec {
-		return connect.Spec{
-			StreamType: connect.StreamTypeUnary,
-			Schema:     inventory.File_inventory_command_proto.Services().ByName("InventoryCommandService").Methods().ByName("DeleteInventory"),
-			Procedure:  InventoryCommandServiceDeleteInventoryProcedure,
-		}
-	})
-	inventoryCommandServiceReserveStockSpec = sync.OnceValue(func() connect.Spec {
-		return connect.Spec{
-			StreamType: connect.StreamTypeUnary,
-			Schema:     inventory.File_inventory_command_proto.Services().ByName("InventoryCommandService").Methods().ByName("ReserveStock"),
-			Procedure:  InventoryCommandServiceReserveStockProcedure,
-		}
-	})
-	inventoryCommandServiceReleaseStockSpec = sync.OnceValue(func() connect.Spec {
-		return connect.Spec{
-			StreamType: connect.StreamTypeUnary,
-			Schema:     inventory.File_inventory_command_proto.Services().ByName("InventoryCommandService").Methods().ByName("ReleaseStock"),
-			Procedure:  InventoryCommandServiceReleaseStockProcedure,
-		}
-	})
-	inventoryCommandServiceFulfillStockSpec = sync.OnceValue(func() connect.Spec {
-		return connect.Spec{
-			StreamType: connect.StreamTypeUnary,
-			Schema:     inventory.File_inventory_command_proto.Services().ByName("InventoryCommandService").Methods().ByName("FulfillStock"),
-			Procedure:  InventoryCommandServiceFulfillStockProcedure,
-		}
-	})
-	inventoryCommandServiceGetStockBySkuIDsSpec = sync.OnceValue(func() connect.Spec {
-		return connect.Spec{
-			StreamType: connect.StreamTypeUnary,
-			Schema:     inventory.File_inventory_command_proto.Services().ByName("InventoryCommandService").Methods().ByName("GetStockBySkuIDs"),
-			Procedure:  InventoryCommandServiceGetStockBySkuIDsProcedure,
-		}
-	})
-)
-
 // InventoryCommandServiceClient is a client for the inventory.v1.InventoryCommandService service.
 type InventoryCommandServiceClient interface {
-	//  Public Commands
-	CreateInventories(context.Context, *inventory.CreateInventoriesRequest) (*inventory.CreateInventoriesResponse, error)
-	DeleteInventory(context.Context, *inventory.DeleteInventoryRequest) (*inventory.DeleteInventoryResponse, error)
-	ReserveStock(context.Context, *inventory.ReserveStockRequest) (*inventory.ReserveStockResponse, error)
-	ReleaseStock(context.Context, *inventory.ReleaseStockRequest) (*inventory.ReleaseStockResponse, error)
-	FulfillStock(context.Context, *inventory.FulfillStockRequest) (*inventory.FulfillStockResponse, error)
-	//internal call
-	GetStockBySkuIDs(context.Context, *inventory.GetStockBySkuIDsRequest) (*inventory.GetStockBySkuIDsResponse, error)
+	// Public Commands
+	CreateInventories(context.Context, *connect.Request[inventory.CreateInventoriesRequest]) (*connect.Response[inventory.CreateInventoriesResponse], error)
+	DeleteInventory(context.Context, *connect.Request[inventory.DeleteInventoryRequest]) (*connect.Response[inventory.DeleteInventoryResponse], error)
+	ReserveStock(context.Context, *connect.Request[inventory.ReserveStockRequest]) (*connect.Response[inventory.ReserveStockResponse], error)
+	ReleaseStock(context.Context, *connect.Request[inventory.ReleaseStockRequest]) (*connect.Response[inventory.ReleaseStockResponse], error)
+	FulfillStock(context.Context, *connect.Request[inventory.FulfillStockRequest]) (*connect.Response[inventory.FulfillStockResponse], error)
+	// internal call
+	GetStockBySkuIDs(context.Context, *connect.Request[inventory.GetStockBySkuIDsRequest]) (*connect.Response[inventory.GetStockBySkuIDsResponse], error)
 }
 
 // NewInventoryCommandServiceClient constructs a client for the inventory.v1.InventoryCommandService
-// service. Multiple service clients may share a single connect.Client.
-func NewInventoryCommandServiceClient(client *connect.Client) InventoryCommandServiceClient {
-	return &inventoryCommandServiceClient{client: client}
+// service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
+// gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
+// the connect.WithGRPC() or connect.WithGRPCWeb() options.
+//
+// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
+// http://api.acme.com or https://acme.com/grpc).
+func NewInventoryCommandServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) InventoryCommandServiceClient {
+	baseURL = strings.TrimRight(baseURL, "/")
+	inventoryCommandServiceMethods := inventory.File_inventory_command_proto.Services().ByName("InventoryCommandService").Methods()
+	return &inventoryCommandServiceClient{
+		createInventories: connect.NewClient[inventory.CreateInventoriesRequest, inventory.CreateInventoriesResponse](
+			httpClient,
+			baseURL+InventoryCommandServiceCreateInventoriesProcedure,
+			connect.WithSchema(inventoryCommandServiceMethods.ByName("CreateInventories")),
+			connect.WithClientOptions(opts...),
+		),
+		deleteInventory: connect.NewClient[inventory.DeleteInventoryRequest, inventory.DeleteInventoryResponse](
+			httpClient,
+			baseURL+InventoryCommandServiceDeleteInventoryProcedure,
+			connect.WithSchema(inventoryCommandServiceMethods.ByName("DeleteInventory")),
+			connect.WithClientOptions(opts...),
+		),
+		reserveStock: connect.NewClient[inventory.ReserveStockRequest, inventory.ReserveStockResponse](
+			httpClient,
+			baseURL+InventoryCommandServiceReserveStockProcedure,
+			connect.WithSchema(inventoryCommandServiceMethods.ByName("ReserveStock")),
+			connect.WithClientOptions(opts...),
+		),
+		releaseStock: connect.NewClient[inventory.ReleaseStockRequest, inventory.ReleaseStockResponse](
+			httpClient,
+			baseURL+InventoryCommandServiceReleaseStockProcedure,
+			connect.WithSchema(inventoryCommandServiceMethods.ByName("ReleaseStock")),
+			connect.WithClientOptions(opts...),
+		),
+		fulfillStock: connect.NewClient[inventory.FulfillStockRequest, inventory.FulfillStockResponse](
+			httpClient,
+			baseURL+InventoryCommandServiceFulfillStockProcedure,
+			connect.WithSchema(inventoryCommandServiceMethods.ByName("FulfillStock")),
+			connect.WithClientOptions(opts...),
+		),
+		getStockBySkuIDs: connect.NewClient[inventory.GetStockBySkuIDsRequest, inventory.GetStockBySkuIDsResponse](
+			httpClient,
+			baseURL+InventoryCommandServiceGetStockBySkuIDsProcedure,
+			connect.WithSchema(inventoryCommandServiceMethods.ByName("GetStockBySkuIDs")),
+			connect.WithClientOptions(opts...),
+		),
+	}
+}
+
+// inventoryCommandServiceClient implements InventoryCommandServiceClient.
+type inventoryCommandServiceClient struct {
+	createInventories *connect.Client[inventory.CreateInventoriesRequest, inventory.CreateInventoriesResponse]
+	deleteInventory   *connect.Client[inventory.DeleteInventoryRequest, inventory.DeleteInventoryResponse]
+	reserveStock      *connect.Client[inventory.ReserveStockRequest, inventory.ReserveStockResponse]
+	releaseStock      *connect.Client[inventory.ReleaseStockRequest, inventory.ReleaseStockResponse]
+	fulfillStock      *connect.Client[inventory.FulfillStockRequest, inventory.FulfillStockResponse]
+	getStockBySkuIDs  *connect.Client[inventory.GetStockBySkuIDsRequest, inventory.GetStockBySkuIDsResponse]
+}
+
+// CreateInventories calls inventory.v1.InventoryCommandService.CreateInventories.
+func (c *inventoryCommandServiceClient) CreateInventories(ctx context.Context, req *connect.Request[inventory.CreateInventoriesRequest]) (*connect.Response[inventory.CreateInventoriesResponse], error) {
+	return c.createInventories.CallUnary(ctx, req)
+}
+
+// DeleteInventory calls inventory.v1.InventoryCommandService.DeleteInventory.
+func (c *inventoryCommandServiceClient) DeleteInventory(ctx context.Context, req *connect.Request[inventory.DeleteInventoryRequest]) (*connect.Response[inventory.DeleteInventoryResponse], error) {
+	return c.deleteInventory.CallUnary(ctx, req)
+}
+
+// ReserveStock calls inventory.v1.InventoryCommandService.ReserveStock.
+func (c *inventoryCommandServiceClient) ReserveStock(ctx context.Context, req *connect.Request[inventory.ReserveStockRequest]) (*connect.Response[inventory.ReserveStockResponse], error) {
+	return c.reserveStock.CallUnary(ctx, req)
+}
+
+// ReleaseStock calls inventory.v1.InventoryCommandService.ReleaseStock.
+func (c *inventoryCommandServiceClient) ReleaseStock(ctx context.Context, req *connect.Request[inventory.ReleaseStockRequest]) (*connect.Response[inventory.ReleaseStockResponse], error) {
+	return c.releaseStock.CallUnary(ctx, req)
+}
+
+// FulfillStock calls inventory.v1.InventoryCommandService.FulfillStock.
+func (c *inventoryCommandServiceClient) FulfillStock(ctx context.Context, req *connect.Request[inventory.FulfillStockRequest]) (*connect.Response[inventory.FulfillStockResponse], error) {
+	return c.fulfillStock.CallUnary(ctx, req)
+}
+
+// GetStockBySkuIDs calls inventory.v1.InventoryCommandService.GetStockBySkuIDs.
+func (c *inventoryCommandServiceClient) GetStockBySkuIDs(ctx context.Context, req *connect.Request[inventory.GetStockBySkuIDsRequest]) (*connect.Response[inventory.GetStockBySkuIDsResponse], error) {
+	return c.getStockBySkuIDs.CallUnary(ctx, req)
 }
 
 // InventoryCommandServiceHandler is an implementation of the inventory.v1.InventoryCommandService
 // service.
 type InventoryCommandServiceHandler interface {
-	//  Public Commands
-	CreateInventories(context.Context, *inventory.CreateInventoriesRequest) (*inventory.CreateInventoriesResponse, error)
-	DeleteInventory(context.Context, *inventory.DeleteInventoryRequest) (*inventory.DeleteInventoryResponse, error)
-	ReserveStock(context.Context, *inventory.ReserveStockRequest) (*inventory.ReserveStockResponse, error)
-	ReleaseStock(context.Context, *inventory.ReleaseStockRequest) (*inventory.ReleaseStockResponse, error)
-	FulfillStock(context.Context, *inventory.FulfillStockRequest) (*inventory.FulfillStockResponse, error)
-	//internal call
-	GetStockBySkuIDs(context.Context, *inventory.GetStockBySkuIDsRequest) (*inventory.GetStockBySkuIDsResponse, error)
+	// Public Commands
+	CreateInventories(context.Context, *connect.Request[inventory.CreateInventoriesRequest]) (*connect.Response[inventory.CreateInventoriesResponse], error)
+	DeleteInventory(context.Context, *connect.Request[inventory.DeleteInventoryRequest]) (*connect.Response[inventory.DeleteInventoryResponse], error)
+	ReserveStock(context.Context, *connect.Request[inventory.ReserveStockRequest]) (*connect.Response[inventory.ReserveStockResponse], error)
+	ReleaseStock(context.Context, *connect.Request[inventory.ReleaseStockRequest]) (*connect.Response[inventory.ReleaseStockResponse], error)
+	FulfillStock(context.Context, *connect.Request[inventory.FulfillStockRequest]) (*connect.Response[inventory.FulfillStockResponse], error)
+	// internal call
+	GetStockBySkuIDs(context.Context, *connect.Request[inventory.GetStockBySkuIDsRequest]) (*connect.Response[inventory.GetStockBySkuIDsResponse], error)
 }
 
-// RegisterInventoryCommandServiceHandler registers svc as the inventory.v1.InventoryCommandService
-// implementation on server.
-func RegisterInventoryCommandServiceHandler(server *connect.Server, svc InventoryCommandServiceHandler) {
-	adapter := inventoryCommandServiceHandler{svc: svc}
-	server.Register(
-		connect.Method{Spec: inventoryCommandServiceCreateInventoriesSpec(), Handler: adapter.createInventories},
-		connect.Method{Spec: inventoryCommandServiceDeleteInventorySpec(), Handler: adapter.deleteInventory},
-		connect.Method{Spec: inventoryCommandServiceReserveStockSpec(), Handler: adapter.reserveStock},
-		connect.Method{Spec: inventoryCommandServiceReleaseStockSpec(), Handler: adapter.releaseStock},
-		connect.Method{Spec: inventoryCommandServiceFulfillStockSpec(), Handler: adapter.fulfillStock},
-		connect.Method{Spec: inventoryCommandServiceGetStockBySkuIDsSpec(), Handler: adapter.getStockBySkuIDs},
+// NewInventoryCommandServiceHandler builds an HTTP handler from the service implementation. It
+// returns the path on which to mount the handler and the handler itself.
+//
+// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
+// and JSON codecs. They also support gzip compression.
+func NewInventoryCommandServiceHandler(svc InventoryCommandServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	inventoryCommandServiceMethods := inventory.File_inventory_command_proto.Services().ByName("InventoryCommandService").Methods()
+	inventoryCommandServiceCreateInventoriesHandler := connect.NewUnaryHandler(
+		InventoryCommandServiceCreateInventoriesProcedure,
+		svc.CreateInventories,
+		connect.WithSchema(inventoryCommandServiceMethods.ByName("CreateInventories")),
+		connect.WithHandlerOptions(opts...),
 	)
+	inventoryCommandServiceDeleteInventoryHandler := connect.NewUnaryHandler(
+		InventoryCommandServiceDeleteInventoryProcedure,
+		svc.DeleteInventory,
+		connect.WithSchema(inventoryCommandServiceMethods.ByName("DeleteInventory")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryCommandServiceReserveStockHandler := connect.NewUnaryHandler(
+		InventoryCommandServiceReserveStockProcedure,
+		svc.ReserveStock,
+		connect.WithSchema(inventoryCommandServiceMethods.ByName("ReserveStock")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryCommandServiceReleaseStockHandler := connect.NewUnaryHandler(
+		InventoryCommandServiceReleaseStockProcedure,
+		svc.ReleaseStock,
+		connect.WithSchema(inventoryCommandServiceMethods.ByName("ReleaseStock")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryCommandServiceFulfillStockHandler := connect.NewUnaryHandler(
+		InventoryCommandServiceFulfillStockProcedure,
+		svc.FulfillStock,
+		connect.WithSchema(inventoryCommandServiceMethods.ByName("FulfillStock")),
+		connect.WithHandlerOptions(opts...),
+	)
+	inventoryCommandServiceGetStockBySkuIDsHandler := connect.NewUnaryHandler(
+		InventoryCommandServiceGetStockBySkuIDsProcedure,
+		svc.GetStockBySkuIDs,
+		connect.WithSchema(inventoryCommandServiceMethods.ByName("GetStockBySkuIDs")),
+		connect.WithHandlerOptions(opts...),
+	)
+	return "/inventory.v1.InventoryCommandService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case InventoryCommandServiceCreateInventoriesProcedure:
+			inventoryCommandServiceCreateInventoriesHandler.ServeHTTP(w, r)
+		case InventoryCommandServiceDeleteInventoryProcedure:
+			inventoryCommandServiceDeleteInventoryHandler.ServeHTTP(w, r)
+		case InventoryCommandServiceReserveStockProcedure:
+			inventoryCommandServiceReserveStockHandler.ServeHTTP(w, r)
+		case InventoryCommandServiceReleaseStockProcedure:
+			inventoryCommandServiceReleaseStockHandler.ServeHTTP(w, r)
+		case InventoryCommandServiceFulfillStockProcedure:
+			inventoryCommandServiceFulfillStockHandler.ServeHTTP(w, r)
+		case InventoryCommandServiceGetStockBySkuIDsProcedure:
+			inventoryCommandServiceGetStockBySkuIDsHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
 }
 
 // UnimplementedInventoryCommandServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedInventoryCommandServiceHandler struct{}
 
-func (UnimplementedInventoryCommandServiceHandler) CreateInventories(context.Context, *inventory.CreateInventoriesRequest) (*inventory.CreateInventoriesResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, "inventory.v1.InventoryCommandService.CreateInventories is not implemented")
+func (UnimplementedInventoryCommandServiceHandler) CreateInventories(context.Context, *connect.Request[inventory.CreateInventoriesRequest]) (*connect.Response[inventory.CreateInventoriesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryCommandService.CreateInventories is not implemented"))
 }
 
-func (UnimplementedInventoryCommandServiceHandler) DeleteInventory(context.Context, *inventory.DeleteInventoryRequest) (*inventory.DeleteInventoryResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, "inventory.v1.InventoryCommandService.DeleteInventory is not implemented")
+func (UnimplementedInventoryCommandServiceHandler) DeleteInventory(context.Context, *connect.Request[inventory.DeleteInventoryRequest]) (*connect.Response[inventory.DeleteInventoryResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryCommandService.DeleteInventory is not implemented"))
 }
 
-func (UnimplementedInventoryCommandServiceHandler) ReserveStock(context.Context, *inventory.ReserveStockRequest) (*inventory.ReserveStockResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, "inventory.v1.InventoryCommandService.ReserveStock is not implemented")
+func (UnimplementedInventoryCommandServiceHandler) ReserveStock(context.Context, *connect.Request[inventory.ReserveStockRequest]) (*connect.Response[inventory.ReserveStockResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryCommandService.ReserveStock is not implemented"))
 }
 
-func (UnimplementedInventoryCommandServiceHandler) ReleaseStock(context.Context, *inventory.ReleaseStockRequest) (*inventory.ReleaseStockResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, "inventory.v1.InventoryCommandService.ReleaseStock is not implemented")
+func (UnimplementedInventoryCommandServiceHandler) ReleaseStock(context.Context, *connect.Request[inventory.ReleaseStockRequest]) (*connect.Response[inventory.ReleaseStockResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryCommandService.ReleaseStock is not implemented"))
 }
 
-func (UnimplementedInventoryCommandServiceHandler) FulfillStock(context.Context, *inventory.FulfillStockRequest) (*inventory.FulfillStockResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, "inventory.v1.InventoryCommandService.FulfillStock is not implemented")
+func (UnimplementedInventoryCommandServiceHandler) FulfillStock(context.Context, *connect.Request[inventory.FulfillStockRequest]) (*connect.Response[inventory.FulfillStockResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryCommandService.FulfillStock is not implemented"))
 }
 
-func (UnimplementedInventoryCommandServiceHandler) GetStockBySkuIDs(context.Context, *inventory.GetStockBySkuIDsRequest) (*inventory.GetStockBySkuIDsResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, "inventory.v1.InventoryCommandService.GetStockBySkuIDs is not implemented")
-}
-
-type inventoryCommandServiceClient struct {
-	client *connect.Client
-}
-
-func (c *inventoryCommandServiceClient) CreateInventories(ctx context.Context, req *inventory.CreateInventoriesRequest) (*inventory.CreateInventoriesResponse, error) {
-	var res inventory.CreateInventoriesResponse
-	if err := c.client.CallUnary(ctx, inventoryCommandServiceCreateInventoriesSpec(), req, &res); err != nil {
-		return nil, err
-	}
-	return &res, nil
-}
-
-func (c *inventoryCommandServiceClient) DeleteInventory(ctx context.Context, req *inventory.DeleteInventoryRequest) (*inventory.DeleteInventoryResponse, error) {
-	var res inventory.DeleteInventoryResponse
-	if err := c.client.CallUnary(ctx, inventoryCommandServiceDeleteInventorySpec(), req, &res); err != nil {
-		return nil, err
-	}
-	return &res, nil
-}
-
-func (c *inventoryCommandServiceClient) ReserveStock(ctx context.Context, req *inventory.ReserveStockRequest) (*inventory.ReserveStockResponse, error) {
-	var res inventory.ReserveStockResponse
-	if err := c.client.CallUnary(ctx, inventoryCommandServiceReserveStockSpec(), req, &res); err != nil {
-		return nil, err
-	}
-	return &res, nil
-}
-
-func (c *inventoryCommandServiceClient) ReleaseStock(ctx context.Context, req *inventory.ReleaseStockRequest) (*inventory.ReleaseStockResponse, error) {
-	var res inventory.ReleaseStockResponse
-	if err := c.client.CallUnary(ctx, inventoryCommandServiceReleaseStockSpec(), req, &res); err != nil {
-		return nil, err
-	}
-	return &res, nil
-}
-
-func (c *inventoryCommandServiceClient) FulfillStock(ctx context.Context, req *inventory.FulfillStockRequest) (*inventory.FulfillStockResponse, error) {
-	var res inventory.FulfillStockResponse
-	if err := c.client.CallUnary(ctx, inventoryCommandServiceFulfillStockSpec(), req, &res); err != nil {
-		return nil, err
-	}
-	return &res, nil
-}
-
-func (c *inventoryCommandServiceClient) GetStockBySkuIDs(ctx context.Context, req *inventory.GetStockBySkuIDsRequest) (*inventory.GetStockBySkuIDsResponse, error) {
-	var res inventory.GetStockBySkuIDsResponse
-	if err := c.client.CallUnary(ctx, inventoryCommandServiceGetStockBySkuIDsSpec(), req, &res); err != nil {
-		return nil, err
-	}
-	return &res, nil
-}
-
-type inventoryCommandServiceHandler struct {
-	svc InventoryCommandServiceHandler
-}
-
-func (h inventoryCommandServiceHandler) createInventories(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
-	var req inventory.CreateInventoriesRequest
-	if err := stream.Receive(&req); err != nil {
-		return err
-	}
-	res, err := h.svc.CreateInventories(ctx, &req)
-	if err != nil {
-		return err
-	}
-	return stream.Send(res)
-}
-
-func (h inventoryCommandServiceHandler) deleteInventory(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
-	var req inventory.DeleteInventoryRequest
-	if err := stream.Receive(&req); err != nil {
-		return err
-	}
-	res, err := h.svc.DeleteInventory(ctx, &req)
-	if err != nil {
-		return err
-	}
-	return stream.Send(res)
-}
-
-func (h inventoryCommandServiceHandler) reserveStock(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
-	var req inventory.ReserveStockRequest
-	if err := stream.Receive(&req); err != nil {
-		return err
-	}
-	res, err := h.svc.ReserveStock(ctx, &req)
-	if err != nil {
-		return err
-	}
-	return stream.Send(res)
-}
-
-func (h inventoryCommandServiceHandler) releaseStock(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
-	var req inventory.ReleaseStockRequest
-	if err := stream.Receive(&req); err != nil {
-		return err
-	}
-	res, err := h.svc.ReleaseStock(ctx, &req)
-	if err != nil {
-		return err
-	}
-	return stream.Send(res)
-}
-
-func (h inventoryCommandServiceHandler) fulfillStock(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
-	var req inventory.FulfillStockRequest
-	if err := stream.Receive(&req); err != nil {
-		return err
-	}
-	res, err := h.svc.FulfillStock(ctx, &req)
-	if err != nil {
-		return err
-	}
-	return stream.Send(res)
-}
-
-func (h inventoryCommandServiceHandler) getStockBySkuIDs(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
-	var req inventory.GetStockBySkuIDsRequest
-	if err := stream.Receive(&req); err != nil {
-		return err
-	}
-	res, err := h.svc.GetStockBySkuIDs(ctx, &req)
-	if err != nil {
-		return err
-	}
-	return stream.Send(res)
+func (UnimplementedInventoryCommandServiceHandler) GetStockBySkuIDs(context.Context, *connect.Request[inventory.GetStockBySkuIDsRequest]) (*connect.Response[inventory.GetStockBySkuIDsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryCommandService.GetStockBySkuIDs is not implemented"))
 }

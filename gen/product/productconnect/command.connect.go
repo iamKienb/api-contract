@@ -5,136 +5,139 @@
 package productconnect
 
 import (
-	connect "connectrpc.com/connect/v2"
+	connect "connectrpc.com/connect"
 	context "context"
+	errors "errors"
 	product "github.com/iamKienb/api-contract/gen/product"
-	sync "sync"
+	http "net/http"
+	strings "strings"
 )
+
+// This is a compile-time assertion to ensure that this generated file and the connect package are
+// compatible. If you get a compiler error that this constant is not defined, this code was
+// generated with a version of connect newer than the one compiled into your binary. You can fix the
+// problem by either regenerating this code with an older version of connect or updating the connect
+// version compiled into your binary.
+const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// ProductCommandServiceName is the fully-qualified name of the ProductCommandService service.
 	ProductCommandServiceName = "product.v1.ProductCommandService"
 )
 
-// These constants are the procedure names of the RPCs defined in this package. They're exposed at
-// runtime as Spec.Procedure and as the final two segments of the HTTP route.
+// These constants are the fully-qualified names of the RPCs defined in this package. They're
+// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
 //
 // Note that these are different from the fully-qualified method names used by
 // google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// ProductCommandServiceCreateProductProcedure is the procedure name of the ProductCommandService's
-	// CreateProduct RPC.
+	// ProductCommandServiceCreateProductProcedure is the fully-qualified name of the
+	// ProductCommandService's CreateProduct RPC.
 	ProductCommandServiceCreateProductProcedure = "/product.v1.ProductCommandService/CreateProduct"
-	// ProductCommandServiceGetPriceSkusByIDsProcedure is the procedure name of the
+	// ProductCommandServiceGetPriceSkusByIDsProcedure is the fully-qualified name of the
 	// ProductCommandService's GetPriceSkusByIDs RPC.
 	ProductCommandServiceGetPriceSkusByIDsProcedure = "/product.v1.ProductCommandService/GetPriceSkusByIDs"
 )
 
-var (
-	productCommandServiceCreateProductSpec = sync.OnceValue(func() connect.Spec {
-		return connect.Spec{
-			StreamType: connect.StreamTypeUnary,
-			Schema:     product.File_product_command_proto.Services().ByName("ProductCommandService").Methods().ByName("CreateProduct"),
-			Procedure:  ProductCommandServiceCreateProductProcedure,
-		}
-	})
-	productCommandServiceGetPriceSkusByIDsSpec = sync.OnceValue(func() connect.Spec {
-		return connect.Spec{
-			StreamType: connect.StreamTypeUnary,
-			Schema:     product.File_product_command_proto.Services().ByName("ProductCommandService").Methods().ByName("GetPriceSkusByIDs"),
-			Procedure:  ProductCommandServiceGetPriceSkusByIDsProcedure,
-		}
-	})
-)
-
 // ProductCommandServiceClient is a client for the product.v1.ProductCommandService service.
 type ProductCommandServiceClient interface {
-	//  Public Commands
-	CreateProduct(context.Context, *product.CreateProductsRequest) (*product.CreateProductsResponse, error)
+	// Public Commands
+	CreateProduct(context.Context, *connect.Request[product.CreateProductsRequest]) (*connect.Response[product.CreateProductsResponse], error)
 	// internal service call
-	GetPriceSkusByIDs(context.Context, *product.GetPriceSkusByIDsRequest) (*product.GetPriceSkusByIDsResponse, error)
+	GetPriceSkusByIDs(context.Context, *connect.Request[product.GetPriceSkusByIDsRequest]) (*connect.Response[product.GetPriceSkusByIDsResponse], error)
 }
 
 // NewProductCommandServiceClient constructs a client for the product.v1.ProductCommandService
-// service. Multiple service clients may share a single connect.Client.
-func NewProductCommandServiceClient(client *connect.Client) ProductCommandServiceClient {
-	return &productCommandServiceClient{client: client}
+// service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
+// gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
+// the connect.WithGRPC() or connect.WithGRPCWeb() options.
+//
+// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
+// http://api.acme.com or https://acme.com/grpc).
+func NewProductCommandServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ProductCommandServiceClient {
+	baseURL = strings.TrimRight(baseURL, "/")
+	productCommandServiceMethods := product.File_product_command_proto.Services().ByName("ProductCommandService").Methods()
+	return &productCommandServiceClient{
+		createProduct: connect.NewClient[product.CreateProductsRequest, product.CreateProductsResponse](
+			httpClient,
+			baseURL+ProductCommandServiceCreateProductProcedure,
+			connect.WithSchema(productCommandServiceMethods.ByName("CreateProduct")),
+			connect.WithClientOptions(opts...),
+		),
+		getPriceSkusByIDs: connect.NewClient[product.GetPriceSkusByIDsRequest, product.GetPriceSkusByIDsResponse](
+			httpClient,
+			baseURL+ProductCommandServiceGetPriceSkusByIDsProcedure,
+			connect.WithSchema(productCommandServiceMethods.ByName("GetPriceSkusByIDs")),
+			connect.WithClientOptions(opts...),
+		),
+	}
+}
+
+// productCommandServiceClient implements ProductCommandServiceClient.
+type productCommandServiceClient struct {
+	createProduct     *connect.Client[product.CreateProductsRequest, product.CreateProductsResponse]
+	getPriceSkusByIDs *connect.Client[product.GetPriceSkusByIDsRequest, product.GetPriceSkusByIDsResponse]
+}
+
+// CreateProduct calls product.v1.ProductCommandService.CreateProduct.
+func (c *productCommandServiceClient) CreateProduct(ctx context.Context, req *connect.Request[product.CreateProductsRequest]) (*connect.Response[product.CreateProductsResponse], error) {
+	return c.createProduct.CallUnary(ctx, req)
+}
+
+// GetPriceSkusByIDs calls product.v1.ProductCommandService.GetPriceSkusByIDs.
+func (c *productCommandServiceClient) GetPriceSkusByIDs(ctx context.Context, req *connect.Request[product.GetPriceSkusByIDsRequest]) (*connect.Response[product.GetPriceSkusByIDsResponse], error) {
+	return c.getPriceSkusByIDs.CallUnary(ctx, req)
 }
 
 // ProductCommandServiceHandler is an implementation of the product.v1.ProductCommandService
 // service.
 type ProductCommandServiceHandler interface {
-	//  Public Commands
-	CreateProduct(context.Context, *product.CreateProductsRequest) (*product.CreateProductsResponse, error)
+	// Public Commands
+	CreateProduct(context.Context, *connect.Request[product.CreateProductsRequest]) (*connect.Response[product.CreateProductsResponse], error)
 	// internal service call
-	GetPriceSkusByIDs(context.Context, *product.GetPriceSkusByIDsRequest) (*product.GetPriceSkusByIDsResponse, error)
+	GetPriceSkusByIDs(context.Context, *connect.Request[product.GetPriceSkusByIDsRequest]) (*connect.Response[product.GetPriceSkusByIDsResponse], error)
 }
 
-// RegisterProductCommandServiceHandler registers svc as the product.v1.ProductCommandService
-// implementation on server.
-func RegisterProductCommandServiceHandler(server *connect.Server, svc ProductCommandServiceHandler) {
-	adapter := productCommandServiceHandler{svc: svc}
-	server.Register(
-		connect.Method{Spec: productCommandServiceCreateProductSpec(), Handler: adapter.createProduct},
-		connect.Method{Spec: productCommandServiceGetPriceSkusByIDsSpec(), Handler: adapter.getPriceSkusByIDs},
+// NewProductCommandServiceHandler builds an HTTP handler from the service implementation. It
+// returns the path on which to mount the handler and the handler itself.
+//
+// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
+// and JSON codecs. They also support gzip compression.
+func NewProductCommandServiceHandler(svc ProductCommandServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	productCommandServiceMethods := product.File_product_command_proto.Services().ByName("ProductCommandService").Methods()
+	productCommandServiceCreateProductHandler := connect.NewUnaryHandler(
+		ProductCommandServiceCreateProductProcedure,
+		svc.CreateProduct,
+		connect.WithSchema(productCommandServiceMethods.ByName("CreateProduct")),
+		connect.WithHandlerOptions(opts...),
 	)
+	productCommandServiceGetPriceSkusByIDsHandler := connect.NewUnaryHandler(
+		ProductCommandServiceGetPriceSkusByIDsProcedure,
+		svc.GetPriceSkusByIDs,
+		connect.WithSchema(productCommandServiceMethods.ByName("GetPriceSkusByIDs")),
+		connect.WithHandlerOptions(opts...),
+	)
+	return "/product.v1.ProductCommandService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case ProductCommandServiceCreateProductProcedure:
+			productCommandServiceCreateProductHandler.ServeHTTP(w, r)
+		case ProductCommandServiceGetPriceSkusByIDsProcedure:
+			productCommandServiceGetPriceSkusByIDsHandler.ServeHTTP(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
 }
 
 // UnimplementedProductCommandServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedProductCommandServiceHandler struct{}
 
-func (UnimplementedProductCommandServiceHandler) CreateProduct(context.Context, *product.CreateProductsRequest) (*product.CreateProductsResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, "product.v1.ProductCommandService.CreateProduct is not implemented")
+func (UnimplementedProductCommandServiceHandler) CreateProduct(context.Context, *connect.Request[product.CreateProductsRequest]) (*connect.Response[product.CreateProductsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product.v1.ProductCommandService.CreateProduct is not implemented"))
 }
 
-func (UnimplementedProductCommandServiceHandler) GetPriceSkusByIDs(context.Context, *product.GetPriceSkusByIDsRequest) (*product.GetPriceSkusByIDsResponse, error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, "product.v1.ProductCommandService.GetPriceSkusByIDs is not implemented")
-}
-
-type productCommandServiceClient struct {
-	client *connect.Client
-}
-
-func (c *productCommandServiceClient) CreateProduct(ctx context.Context, req *product.CreateProductsRequest) (*product.CreateProductsResponse, error) {
-	var res product.CreateProductsResponse
-	if err := c.client.CallUnary(ctx, productCommandServiceCreateProductSpec(), req, &res); err != nil {
-		return nil, err
-	}
-	return &res, nil
-}
-
-func (c *productCommandServiceClient) GetPriceSkusByIDs(ctx context.Context, req *product.GetPriceSkusByIDsRequest) (*product.GetPriceSkusByIDsResponse, error) {
-	var res product.GetPriceSkusByIDsResponse
-	if err := c.client.CallUnary(ctx, productCommandServiceGetPriceSkusByIDsSpec(), req, &res); err != nil {
-		return nil, err
-	}
-	return &res, nil
-}
-
-type productCommandServiceHandler struct{ svc ProductCommandServiceHandler }
-
-func (h productCommandServiceHandler) createProduct(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
-	var req product.CreateProductsRequest
-	if err := stream.Receive(&req); err != nil {
-		return err
-	}
-	res, err := h.svc.CreateProduct(ctx, &req)
-	if err != nil {
-		return err
-	}
-	return stream.Send(res)
-}
-
-func (h productCommandServiceHandler) getPriceSkusByIDs(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
-	var req product.GetPriceSkusByIDsRequest
-	if err := stream.Receive(&req); err != nil {
-		return err
-	}
-	res, err := h.svc.GetPriceSkusByIDs(ctx, &req)
-	if err != nil {
-		return err
-	}
-	return stream.Send(res)
+func (UnimplementedProductCommandServiceHandler) GetPriceSkusByIDs(context.Context, *connect.Request[product.GetPriceSkusByIDsRequest]) (*connect.Response[product.GetPriceSkusByIDsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("product.v1.ProductCommandService.GetPriceSkusByIDs is not implemented"))
 }
