@@ -5,196 +5,209 @@
 package userconnect
 
 import (
-	connect "connectrpc.com/connect"
+	connect "connectrpc.com/connect/v2"
 	context "context"
-	errors "errors"
 	user "github.com/iamKienb/api-contract/gen/user"
-	http "net/http"
-	strings "strings"
+	sync "sync"
 )
-
-// This is a compile-time assertion to ensure that this generated file and the connect package are
-// compatible. If you get a compiler error that this constant is not defined, this code was
-// generated with a version of connect newer than the one compiled into your binary. You can fix the
-// problem by either regenerating this code with an older version of connect or updating the connect
-// version compiled into your binary.
-const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// UserCommandServiceName is the fully-qualified name of the UserCommandService service.
 	UserCommandServiceName = "user.v1.UserCommandService"
 )
 
-// These constants are the fully-qualified names of the RPCs defined in this package. They're
-// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+// These constants are the procedure names of the RPCs defined in this package. They're exposed at
+// runtime as Spec.Procedure and as the final two segments of the HTTP route.
 //
 // Note that these are different from the fully-qualified method names used by
 // google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// UserCommandServiceRegisterUserProcedure is the fully-qualified name of the UserCommandService's
+	// UserCommandServiceRegisterUserProcedure is the procedure name of the UserCommandService's
 	// RegisterUser RPC.
 	UserCommandServiceRegisterUserProcedure = "/user.v1.UserCommandService/RegisterUser"
-	// UserCommandServiceLoginUserProcedure is the fully-qualified name of the UserCommandService's
-	// LoginUser RPC.
+	// UserCommandServiceLoginUserProcedure is the procedure name of the UserCommandService's LoginUser
+	// RPC.
 	UserCommandServiceLoginUserProcedure = "/user.v1.UserCommandService/LoginUser"
-	// UserCommandServiceAddUserAddressProcedure is the fully-qualified name of the UserCommandService's
+	// UserCommandServiceAddUserAddressProcedure is the procedure name of the UserCommandService's
 	// AddUserAddress RPC.
 	UserCommandServiceAddUserAddressProcedure = "/user.v1.UserCommandService/AddUserAddress"
-	// UserCommandServiceGetUserAddressByIDProcedure is the fully-qualified name of the
-	// UserCommandService's GetUserAddressByID RPC.
+	// UserCommandServiceGetUserAddressByIDProcedure is the procedure name of the UserCommandService's
+	// GetUserAddressByID RPC.
 	UserCommandServiceGetUserAddressByIDProcedure = "/user.v1.UserCommandService/GetUserAddressByID"
+)
+
+var (
+	userCommandServiceRegisterUserSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     user.File_user_command_proto.Services().ByName("UserCommandService").Methods().ByName("RegisterUser"),
+			Procedure:  UserCommandServiceRegisterUserProcedure,
+		}
+	})
+	userCommandServiceLoginUserSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     user.File_user_command_proto.Services().ByName("UserCommandService").Methods().ByName("LoginUser"),
+			Procedure:  UserCommandServiceLoginUserProcedure,
+		}
+	})
+	userCommandServiceAddUserAddressSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     user.File_user_command_proto.Services().ByName("UserCommandService").Methods().ByName("AddUserAddress"),
+			Procedure:  UserCommandServiceAddUserAddressProcedure,
+		}
+	})
+	userCommandServiceGetUserAddressByIDSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     user.File_user_command_proto.Services().ByName("UserCommandService").Methods().ByName("GetUserAddressByID"),
+			Procedure:  UserCommandServiceGetUserAddressByIDProcedure,
+		}
+	})
 )
 
 // UserCommandServiceClient is a client for the user.v1.UserCommandService service.
 type UserCommandServiceClient interface {
 	//  Public Commands
-	RegisterUser(context.Context, *connect.Request[user.RegisterUserRequest]) (*connect.Response[user.RegisterUserResponse], error)
-	LoginUser(context.Context, *connect.Request[user.LoginUserRequest]) (*connect.Response[user.LoginUserResponse], error)
-	AddUserAddress(context.Context, *connect.Request[user.AddUserAddressRequest]) (*connect.Response[user.AddUserAddressResponse], error)
+	RegisterUser(context.Context, *user.RegisterUserRequest) (*user.RegisterUserResponse, error)
+	LoginUser(context.Context, *user.LoginUserRequest) (*user.LoginUserResponse, error)
+	AddUserAddress(context.Context, *user.AddUserAddressRequest) (*user.AddUserAddressResponse, error)
 	//  internal services
-	GetUserAddressByID(context.Context, *connect.Request[user.GetUserAddressByIDRequest]) (*connect.Response[user.GetUserAddressByIDResponse], error)
+	GetUserAddressByID(context.Context, *user.GetUserAddressByIDRequest) (*user.GetUserAddressByIDResponse, error)
 }
 
-// NewUserCommandServiceClient constructs a client for the user.v1.UserCommandService service. By
-// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
-// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
-// connect.WithGRPC() or connect.WithGRPCWeb() options.
-//
-// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
-// http://api.acme.com or https://acme.com/grpc).
-func NewUserCommandServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) UserCommandServiceClient {
-	baseURL = strings.TrimRight(baseURL, "/")
-	userCommandServiceMethods := user.File_user_command_proto.Services().ByName("UserCommandService").Methods()
-	return &userCommandServiceClient{
-		registerUser: connect.NewClient[user.RegisterUserRequest, user.RegisterUserResponse](
-			httpClient,
-			baseURL+UserCommandServiceRegisterUserProcedure,
-			connect.WithSchema(userCommandServiceMethods.ByName("RegisterUser")),
-			connect.WithClientOptions(opts...),
-		),
-		loginUser: connect.NewClient[user.LoginUserRequest, user.LoginUserResponse](
-			httpClient,
-			baseURL+UserCommandServiceLoginUserProcedure,
-			connect.WithSchema(userCommandServiceMethods.ByName("LoginUser")),
-			connect.WithClientOptions(opts...),
-		),
-		addUserAddress: connect.NewClient[user.AddUserAddressRequest, user.AddUserAddressResponse](
-			httpClient,
-			baseURL+UserCommandServiceAddUserAddressProcedure,
-			connect.WithSchema(userCommandServiceMethods.ByName("AddUserAddress")),
-			connect.WithClientOptions(opts...),
-		),
-		getUserAddressByID: connect.NewClient[user.GetUserAddressByIDRequest, user.GetUserAddressByIDResponse](
-			httpClient,
-			baseURL+UserCommandServiceGetUserAddressByIDProcedure,
-			connect.WithSchema(userCommandServiceMethods.ByName("GetUserAddressByID")),
-			connect.WithClientOptions(opts...),
-		),
-	}
-}
-
-// userCommandServiceClient implements UserCommandServiceClient.
-type userCommandServiceClient struct {
-	registerUser       *connect.Client[user.RegisterUserRequest, user.RegisterUserResponse]
-	loginUser          *connect.Client[user.LoginUserRequest, user.LoginUserResponse]
-	addUserAddress     *connect.Client[user.AddUserAddressRequest, user.AddUserAddressResponse]
-	getUserAddressByID *connect.Client[user.GetUserAddressByIDRequest, user.GetUserAddressByIDResponse]
-}
-
-// RegisterUser calls user.v1.UserCommandService.RegisterUser.
-func (c *userCommandServiceClient) RegisterUser(ctx context.Context, req *connect.Request[user.RegisterUserRequest]) (*connect.Response[user.RegisterUserResponse], error) {
-	return c.registerUser.CallUnary(ctx, req)
-}
-
-// LoginUser calls user.v1.UserCommandService.LoginUser.
-func (c *userCommandServiceClient) LoginUser(ctx context.Context, req *connect.Request[user.LoginUserRequest]) (*connect.Response[user.LoginUserResponse], error) {
-	return c.loginUser.CallUnary(ctx, req)
-}
-
-// AddUserAddress calls user.v1.UserCommandService.AddUserAddress.
-func (c *userCommandServiceClient) AddUserAddress(ctx context.Context, req *connect.Request[user.AddUserAddressRequest]) (*connect.Response[user.AddUserAddressResponse], error) {
-	return c.addUserAddress.CallUnary(ctx, req)
-}
-
-// GetUserAddressByID calls user.v1.UserCommandService.GetUserAddressByID.
-func (c *userCommandServiceClient) GetUserAddressByID(ctx context.Context, req *connect.Request[user.GetUserAddressByIDRequest]) (*connect.Response[user.GetUserAddressByIDResponse], error) {
-	return c.getUserAddressByID.CallUnary(ctx, req)
+// NewUserCommandServiceClient constructs a client for the user.v1.UserCommandService service.
+// Multiple service clients may share a single connect.Client.
+func NewUserCommandServiceClient(client *connect.Client) UserCommandServiceClient {
+	return &userCommandServiceClient{client: client}
 }
 
 // UserCommandServiceHandler is an implementation of the user.v1.UserCommandService service.
 type UserCommandServiceHandler interface {
 	//  Public Commands
-	RegisterUser(context.Context, *connect.Request[user.RegisterUserRequest]) (*connect.Response[user.RegisterUserResponse], error)
-	LoginUser(context.Context, *connect.Request[user.LoginUserRequest]) (*connect.Response[user.LoginUserResponse], error)
-	AddUserAddress(context.Context, *connect.Request[user.AddUserAddressRequest]) (*connect.Response[user.AddUserAddressResponse], error)
+	RegisterUser(context.Context, *user.RegisterUserRequest) (*user.RegisterUserResponse, error)
+	LoginUser(context.Context, *user.LoginUserRequest) (*user.LoginUserResponse, error)
+	AddUserAddress(context.Context, *user.AddUserAddressRequest) (*user.AddUserAddressResponse, error)
 	//  internal services
-	GetUserAddressByID(context.Context, *connect.Request[user.GetUserAddressByIDRequest]) (*connect.Response[user.GetUserAddressByIDResponse], error)
+	GetUserAddressByID(context.Context, *user.GetUserAddressByIDRequest) (*user.GetUserAddressByIDResponse, error)
 }
 
-// NewUserCommandServiceHandler builds an HTTP handler from the service implementation. It returns
-// the path on which to mount the handler and the handler itself.
-//
-// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
-// and JSON codecs. They also support gzip compression.
-func NewUserCommandServiceHandler(svc UserCommandServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	userCommandServiceMethods := user.File_user_command_proto.Services().ByName("UserCommandService").Methods()
-	userCommandServiceRegisterUserHandler := connect.NewUnaryHandler(
-		UserCommandServiceRegisterUserProcedure,
-		svc.RegisterUser,
-		connect.WithSchema(userCommandServiceMethods.ByName("RegisterUser")),
-		connect.WithHandlerOptions(opts...),
+// RegisterUserCommandServiceHandler registers svc as the user.v1.UserCommandService implementation
+// on server.
+func RegisterUserCommandServiceHandler(server *connect.Server, svc UserCommandServiceHandler) {
+	adapter := userCommandServiceHandler{svc: svc}
+	server.Register(
+		connect.Method{Spec: userCommandServiceRegisterUserSpec(), Handler: adapter.registerUser},
+		connect.Method{Spec: userCommandServiceLoginUserSpec(), Handler: adapter.loginUser},
+		connect.Method{Spec: userCommandServiceAddUserAddressSpec(), Handler: adapter.addUserAddress},
+		connect.Method{Spec: userCommandServiceGetUserAddressByIDSpec(), Handler: adapter.getUserAddressByID},
 	)
-	userCommandServiceLoginUserHandler := connect.NewUnaryHandler(
-		UserCommandServiceLoginUserProcedure,
-		svc.LoginUser,
-		connect.WithSchema(userCommandServiceMethods.ByName("LoginUser")),
-		connect.WithHandlerOptions(opts...),
-	)
-	userCommandServiceAddUserAddressHandler := connect.NewUnaryHandler(
-		UserCommandServiceAddUserAddressProcedure,
-		svc.AddUserAddress,
-		connect.WithSchema(userCommandServiceMethods.ByName("AddUserAddress")),
-		connect.WithHandlerOptions(opts...),
-	)
-	userCommandServiceGetUserAddressByIDHandler := connect.NewUnaryHandler(
-		UserCommandServiceGetUserAddressByIDProcedure,
-		svc.GetUserAddressByID,
-		connect.WithSchema(userCommandServiceMethods.ByName("GetUserAddressByID")),
-		connect.WithHandlerOptions(opts...),
-	)
-	return "/user.v1.UserCommandService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		switch r.URL.Path {
-		case UserCommandServiceRegisterUserProcedure:
-			userCommandServiceRegisterUserHandler.ServeHTTP(w, r)
-		case UserCommandServiceLoginUserProcedure:
-			userCommandServiceLoginUserHandler.ServeHTTP(w, r)
-		case UserCommandServiceAddUserAddressProcedure:
-			userCommandServiceAddUserAddressHandler.ServeHTTP(w, r)
-		case UserCommandServiceGetUserAddressByIDProcedure:
-			userCommandServiceGetUserAddressByIDHandler.ServeHTTP(w, r)
-		default:
-			http.NotFound(w, r)
-		}
-	})
 }
 
 // UnimplementedUserCommandServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedUserCommandServiceHandler struct{}
 
-func (UnimplementedUserCommandServiceHandler) RegisterUser(context.Context, *connect.Request[user.RegisterUserRequest]) (*connect.Response[user.RegisterUserResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserCommandService.RegisterUser is not implemented"))
+func (UnimplementedUserCommandServiceHandler) RegisterUser(context.Context, *user.RegisterUserRequest) (*user.RegisterUserResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, "user.v1.UserCommandService.RegisterUser is not implemented")
 }
 
-func (UnimplementedUserCommandServiceHandler) LoginUser(context.Context, *connect.Request[user.LoginUserRequest]) (*connect.Response[user.LoginUserResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserCommandService.LoginUser is not implemented"))
+func (UnimplementedUserCommandServiceHandler) LoginUser(context.Context, *user.LoginUserRequest) (*user.LoginUserResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, "user.v1.UserCommandService.LoginUser is not implemented")
 }
 
-func (UnimplementedUserCommandServiceHandler) AddUserAddress(context.Context, *connect.Request[user.AddUserAddressRequest]) (*connect.Response[user.AddUserAddressResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserCommandService.AddUserAddress is not implemented"))
+func (UnimplementedUserCommandServiceHandler) AddUserAddress(context.Context, *user.AddUserAddressRequest) (*user.AddUserAddressResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, "user.v1.UserCommandService.AddUserAddress is not implemented")
 }
 
-func (UnimplementedUserCommandServiceHandler) GetUserAddressByID(context.Context, *connect.Request[user.GetUserAddressByIDRequest]) (*connect.Response[user.GetUserAddressByIDResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.v1.UserCommandService.GetUserAddressByID is not implemented"))
+func (UnimplementedUserCommandServiceHandler) GetUserAddressByID(context.Context, *user.GetUserAddressByIDRequest) (*user.GetUserAddressByIDResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, "user.v1.UserCommandService.GetUserAddressByID is not implemented")
+}
+
+type userCommandServiceClient struct {
+	client *connect.Client
+}
+
+func (c *userCommandServiceClient) RegisterUser(ctx context.Context, req *user.RegisterUserRequest) (*user.RegisterUserResponse, error) {
+	var res user.RegisterUserResponse
+	if err := c.client.CallUnary(ctx, userCommandServiceRegisterUserSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *userCommandServiceClient) LoginUser(ctx context.Context, req *user.LoginUserRequest) (*user.LoginUserResponse, error) {
+	var res user.LoginUserResponse
+	if err := c.client.CallUnary(ctx, userCommandServiceLoginUserSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *userCommandServiceClient) AddUserAddress(ctx context.Context, req *user.AddUserAddressRequest) (*user.AddUserAddressResponse, error) {
+	var res user.AddUserAddressResponse
+	if err := c.client.CallUnary(ctx, userCommandServiceAddUserAddressSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *userCommandServiceClient) GetUserAddressByID(ctx context.Context, req *user.GetUserAddressByIDRequest) (*user.GetUserAddressByIDResponse, error) {
+	var res user.GetUserAddressByIDResponse
+	if err := c.client.CallUnary(ctx, userCommandServiceGetUserAddressByIDSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+type userCommandServiceHandler struct{ svc UserCommandServiceHandler }
+
+func (h userCommandServiceHandler) registerUser(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req user.RegisterUserRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.RegisterUser(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h userCommandServiceHandler) loginUser(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req user.LoginUserRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.LoginUser(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h userCommandServiceHandler) addUserAddress(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req user.AddUserAddressRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.AddUserAddress(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h userCommandServiceHandler) getUserAddressByID(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req user.GetUserAddressByIDRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.GetUserAddressByID(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
 }

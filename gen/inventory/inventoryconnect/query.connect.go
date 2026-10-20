@@ -5,193 +5,206 @@
 package inventoryconnect
 
 import (
-	connect "connectrpc.com/connect"
+	connect "connectrpc.com/connect/v2"
 	context "context"
-	errors "errors"
 	inventory "github.com/iamKienb/api-contract/gen/inventory"
-	http "net/http"
-	strings "strings"
+	sync "sync"
 )
-
-// This is a compile-time assertion to ensure that this generated file and the connect package are
-// compatible. If you get a compiler error that this constant is not defined, this code was
-// generated with a version of connect newer than the one compiled into your binary. You can fix the
-// problem by either regenerating this code with an older version of connect or updating the connect
-// version compiled into your binary.
-const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// InventoryQueryServiceName is the fully-qualified name of the InventoryQueryService service.
 	InventoryQueryServiceName = "inventory.v1.InventoryQueryService"
 )
 
-// These constants are the fully-qualified names of the RPCs defined in this package. They're
-// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+// These constants are the procedure names of the RPCs defined in this package. They're exposed at
+// runtime as Spec.Procedure and as the final two segments of the HTTP route.
 //
 // Note that these are different from the fully-qualified method names used by
 // google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// InventoryQueryServiceGetInventoryItemProcedure is the fully-qualified name of the
+	// InventoryQueryServiceGetInventoryItemProcedure is the procedure name of the
 	// InventoryQueryService's GetInventoryItem RPC.
 	InventoryQueryServiceGetInventoryItemProcedure = "/inventory.v1.InventoryQueryService/GetInventoryItem"
-	// InventoryQueryServiceListInventoryItemsProcedure is the fully-qualified name of the
+	// InventoryQueryServiceListInventoryItemsProcedure is the procedure name of the
 	// InventoryQueryService's ListInventoryItems RPC.
 	InventoryQueryServiceListInventoryItemsProcedure = "/inventory.v1.InventoryQueryService/ListInventoryItems"
-	// InventoryQueryServiceListLowStockItemsProcedure is the fully-qualified name of the
+	// InventoryQueryServiceListLowStockItemsProcedure is the procedure name of the
 	// InventoryQueryService's ListLowStockItems RPC.
 	InventoryQueryServiceListLowStockItemsProcedure = "/inventory.v1.InventoryQueryService/ListLowStockItems"
-	// InventoryQueryServiceListStockMovementsProcedure is the fully-qualified name of the
+	// InventoryQueryServiceListStockMovementsProcedure is the procedure name of the
 	// InventoryQueryService's ListStockMovements RPC.
 	InventoryQueryServiceListStockMovementsProcedure = "/inventory.v1.InventoryQueryService/ListStockMovements"
 )
 
+var (
+	inventoryQueryServiceGetInventoryItemSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     inventory.File_inventory_query_proto.Services().ByName("InventoryQueryService").Methods().ByName("GetInventoryItem"),
+			Procedure:  InventoryQueryServiceGetInventoryItemProcedure,
+		}
+	})
+	inventoryQueryServiceListInventoryItemsSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     inventory.File_inventory_query_proto.Services().ByName("InventoryQueryService").Methods().ByName("ListInventoryItems"),
+			Procedure:  InventoryQueryServiceListInventoryItemsProcedure,
+		}
+	})
+	inventoryQueryServiceListLowStockItemsSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     inventory.File_inventory_query_proto.Services().ByName("InventoryQueryService").Methods().ByName("ListLowStockItems"),
+			Procedure:  InventoryQueryServiceListLowStockItemsProcedure,
+		}
+	})
+	inventoryQueryServiceListStockMovementsSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     inventory.File_inventory_query_proto.Services().ByName("InventoryQueryService").Methods().ByName("ListStockMovements"),
+			Procedure:  InventoryQueryServiceListStockMovementsProcedure,
+		}
+	})
+)
+
 // InventoryQueryServiceClient is a client for the inventory.v1.InventoryQueryService service.
 type InventoryQueryServiceClient interface {
-	GetInventoryItem(context.Context, *connect.Request[inventory.GetInventoryItemRequest]) (*connect.Response[inventory.GetInventoryItemResponse], error)
-	ListInventoryItems(context.Context, *connect.Request[inventory.ListInventoryItemsRequest]) (*connect.Response[inventory.ListInventoryItemsResponse], error)
-	ListLowStockItems(context.Context, *connect.Request[inventory.ListLowStockItemsRequest]) (*connect.Response[inventory.ListLowStockItemsResponse], error)
-	ListStockMovements(context.Context, *connect.Request[inventory.ListStockMovementsRequest]) (*connect.Response[inventory.ListStockMovementsResponse], error)
+	GetInventoryItem(context.Context, *inventory.GetInventoryItemRequest) (*inventory.GetInventoryItemResponse, error)
+	ListInventoryItems(context.Context, *inventory.ListInventoryItemsRequest) (*inventory.ListInventoryItemsResponse, error)
+	ListLowStockItems(context.Context, *inventory.ListLowStockItemsRequest) (*inventory.ListLowStockItemsResponse, error)
+	ListStockMovements(context.Context, *inventory.ListStockMovementsRequest) (*inventory.ListStockMovementsResponse, error)
 }
 
 // NewInventoryQueryServiceClient constructs a client for the inventory.v1.InventoryQueryService
-// service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
-// gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
-// the connect.WithGRPC() or connect.WithGRPCWeb() options.
-//
-// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
-// http://api.acme.com or https://acme.com/grpc).
-func NewInventoryQueryServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) InventoryQueryServiceClient {
-	baseURL = strings.TrimRight(baseURL, "/")
-	inventoryQueryServiceMethods := inventory.File_inventory_query_proto.Services().ByName("InventoryQueryService").Methods()
-	return &inventoryQueryServiceClient{
-		getInventoryItem: connect.NewClient[inventory.GetInventoryItemRequest, inventory.GetInventoryItemResponse](
-			httpClient,
-			baseURL+InventoryQueryServiceGetInventoryItemProcedure,
-			connect.WithSchema(inventoryQueryServiceMethods.ByName("GetInventoryItem")),
-			connect.WithClientOptions(opts...),
-		),
-		listInventoryItems: connect.NewClient[inventory.ListInventoryItemsRequest, inventory.ListInventoryItemsResponse](
-			httpClient,
-			baseURL+InventoryQueryServiceListInventoryItemsProcedure,
-			connect.WithSchema(inventoryQueryServiceMethods.ByName("ListInventoryItems")),
-			connect.WithClientOptions(opts...),
-		),
-		listLowStockItems: connect.NewClient[inventory.ListLowStockItemsRequest, inventory.ListLowStockItemsResponse](
-			httpClient,
-			baseURL+InventoryQueryServiceListLowStockItemsProcedure,
-			connect.WithSchema(inventoryQueryServiceMethods.ByName("ListLowStockItems")),
-			connect.WithClientOptions(opts...),
-		),
-		listStockMovements: connect.NewClient[inventory.ListStockMovementsRequest, inventory.ListStockMovementsResponse](
-			httpClient,
-			baseURL+InventoryQueryServiceListStockMovementsProcedure,
-			connect.WithSchema(inventoryQueryServiceMethods.ByName("ListStockMovements")),
-			connect.WithClientOptions(opts...),
-		),
-	}
-}
-
-// inventoryQueryServiceClient implements InventoryQueryServiceClient.
-type inventoryQueryServiceClient struct {
-	getInventoryItem   *connect.Client[inventory.GetInventoryItemRequest, inventory.GetInventoryItemResponse]
-	listInventoryItems *connect.Client[inventory.ListInventoryItemsRequest, inventory.ListInventoryItemsResponse]
-	listLowStockItems  *connect.Client[inventory.ListLowStockItemsRequest, inventory.ListLowStockItemsResponse]
-	listStockMovements *connect.Client[inventory.ListStockMovementsRequest, inventory.ListStockMovementsResponse]
-}
-
-// GetInventoryItem calls inventory.v1.InventoryQueryService.GetInventoryItem.
-func (c *inventoryQueryServiceClient) GetInventoryItem(ctx context.Context, req *connect.Request[inventory.GetInventoryItemRequest]) (*connect.Response[inventory.GetInventoryItemResponse], error) {
-	return c.getInventoryItem.CallUnary(ctx, req)
-}
-
-// ListInventoryItems calls inventory.v1.InventoryQueryService.ListInventoryItems.
-func (c *inventoryQueryServiceClient) ListInventoryItems(ctx context.Context, req *connect.Request[inventory.ListInventoryItemsRequest]) (*connect.Response[inventory.ListInventoryItemsResponse], error) {
-	return c.listInventoryItems.CallUnary(ctx, req)
-}
-
-// ListLowStockItems calls inventory.v1.InventoryQueryService.ListLowStockItems.
-func (c *inventoryQueryServiceClient) ListLowStockItems(ctx context.Context, req *connect.Request[inventory.ListLowStockItemsRequest]) (*connect.Response[inventory.ListLowStockItemsResponse], error) {
-	return c.listLowStockItems.CallUnary(ctx, req)
-}
-
-// ListStockMovements calls inventory.v1.InventoryQueryService.ListStockMovements.
-func (c *inventoryQueryServiceClient) ListStockMovements(ctx context.Context, req *connect.Request[inventory.ListStockMovementsRequest]) (*connect.Response[inventory.ListStockMovementsResponse], error) {
-	return c.listStockMovements.CallUnary(ctx, req)
+// service. Multiple service clients may share a single connect.Client.
+func NewInventoryQueryServiceClient(client *connect.Client) InventoryQueryServiceClient {
+	return &inventoryQueryServiceClient{client: client}
 }
 
 // InventoryQueryServiceHandler is an implementation of the inventory.v1.InventoryQueryService
 // service.
 type InventoryQueryServiceHandler interface {
-	GetInventoryItem(context.Context, *connect.Request[inventory.GetInventoryItemRequest]) (*connect.Response[inventory.GetInventoryItemResponse], error)
-	ListInventoryItems(context.Context, *connect.Request[inventory.ListInventoryItemsRequest]) (*connect.Response[inventory.ListInventoryItemsResponse], error)
-	ListLowStockItems(context.Context, *connect.Request[inventory.ListLowStockItemsRequest]) (*connect.Response[inventory.ListLowStockItemsResponse], error)
-	ListStockMovements(context.Context, *connect.Request[inventory.ListStockMovementsRequest]) (*connect.Response[inventory.ListStockMovementsResponse], error)
+	GetInventoryItem(context.Context, *inventory.GetInventoryItemRequest) (*inventory.GetInventoryItemResponse, error)
+	ListInventoryItems(context.Context, *inventory.ListInventoryItemsRequest) (*inventory.ListInventoryItemsResponse, error)
+	ListLowStockItems(context.Context, *inventory.ListLowStockItemsRequest) (*inventory.ListLowStockItemsResponse, error)
+	ListStockMovements(context.Context, *inventory.ListStockMovementsRequest) (*inventory.ListStockMovementsResponse, error)
 }
 
-// NewInventoryQueryServiceHandler builds an HTTP handler from the service implementation. It
-// returns the path on which to mount the handler and the handler itself.
-//
-// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
-// and JSON codecs. They also support gzip compression.
-func NewInventoryQueryServiceHandler(svc InventoryQueryServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	inventoryQueryServiceMethods := inventory.File_inventory_query_proto.Services().ByName("InventoryQueryService").Methods()
-	inventoryQueryServiceGetInventoryItemHandler := connect.NewUnaryHandler(
-		InventoryQueryServiceGetInventoryItemProcedure,
-		svc.GetInventoryItem,
-		connect.WithSchema(inventoryQueryServiceMethods.ByName("GetInventoryItem")),
-		connect.WithHandlerOptions(opts...),
+// RegisterInventoryQueryServiceHandler registers svc as the inventory.v1.InventoryQueryService
+// implementation on server.
+func RegisterInventoryQueryServiceHandler(server *connect.Server, svc InventoryQueryServiceHandler) {
+	adapter := inventoryQueryServiceHandler{svc: svc}
+	server.Register(
+		connect.Method{Spec: inventoryQueryServiceGetInventoryItemSpec(), Handler: adapter.getInventoryItem},
+		connect.Method{Spec: inventoryQueryServiceListInventoryItemsSpec(), Handler: adapter.listInventoryItems},
+		connect.Method{Spec: inventoryQueryServiceListLowStockItemsSpec(), Handler: adapter.listLowStockItems},
+		connect.Method{Spec: inventoryQueryServiceListStockMovementsSpec(), Handler: adapter.listStockMovements},
 	)
-	inventoryQueryServiceListInventoryItemsHandler := connect.NewUnaryHandler(
-		InventoryQueryServiceListInventoryItemsProcedure,
-		svc.ListInventoryItems,
-		connect.WithSchema(inventoryQueryServiceMethods.ByName("ListInventoryItems")),
-		connect.WithHandlerOptions(opts...),
-	)
-	inventoryQueryServiceListLowStockItemsHandler := connect.NewUnaryHandler(
-		InventoryQueryServiceListLowStockItemsProcedure,
-		svc.ListLowStockItems,
-		connect.WithSchema(inventoryQueryServiceMethods.ByName("ListLowStockItems")),
-		connect.WithHandlerOptions(opts...),
-	)
-	inventoryQueryServiceListStockMovementsHandler := connect.NewUnaryHandler(
-		InventoryQueryServiceListStockMovementsProcedure,
-		svc.ListStockMovements,
-		connect.WithSchema(inventoryQueryServiceMethods.ByName("ListStockMovements")),
-		connect.WithHandlerOptions(opts...),
-	)
-	return "/inventory.v1.InventoryQueryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		switch r.URL.Path {
-		case InventoryQueryServiceGetInventoryItemProcedure:
-			inventoryQueryServiceGetInventoryItemHandler.ServeHTTP(w, r)
-		case InventoryQueryServiceListInventoryItemsProcedure:
-			inventoryQueryServiceListInventoryItemsHandler.ServeHTTP(w, r)
-		case InventoryQueryServiceListLowStockItemsProcedure:
-			inventoryQueryServiceListLowStockItemsHandler.ServeHTTP(w, r)
-		case InventoryQueryServiceListStockMovementsProcedure:
-			inventoryQueryServiceListStockMovementsHandler.ServeHTTP(w, r)
-		default:
-			http.NotFound(w, r)
-		}
-	})
 }
 
 // UnimplementedInventoryQueryServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedInventoryQueryServiceHandler struct{}
 
-func (UnimplementedInventoryQueryServiceHandler) GetInventoryItem(context.Context, *connect.Request[inventory.GetInventoryItemRequest]) (*connect.Response[inventory.GetInventoryItemResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryQueryService.GetInventoryItem is not implemented"))
+func (UnimplementedInventoryQueryServiceHandler) GetInventoryItem(context.Context, *inventory.GetInventoryItemRequest) (*inventory.GetInventoryItemResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, "inventory.v1.InventoryQueryService.GetInventoryItem is not implemented")
 }
 
-func (UnimplementedInventoryQueryServiceHandler) ListInventoryItems(context.Context, *connect.Request[inventory.ListInventoryItemsRequest]) (*connect.Response[inventory.ListInventoryItemsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryQueryService.ListInventoryItems is not implemented"))
+func (UnimplementedInventoryQueryServiceHandler) ListInventoryItems(context.Context, *inventory.ListInventoryItemsRequest) (*inventory.ListInventoryItemsResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, "inventory.v1.InventoryQueryService.ListInventoryItems is not implemented")
 }
 
-func (UnimplementedInventoryQueryServiceHandler) ListLowStockItems(context.Context, *connect.Request[inventory.ListLowStockItemsRequest]) (*connect.Response[inventory.ListLowStockItemsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryQueryService.ListLowStockItems is not implemented"))
+func (UnimplementedInventoryQueryServiceHandler) ListLowStockItems(context.Context, *inventory.ListLowStockItemsRequest) (*inventory.ListLowStockItemsResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, "inventory.v1.InventoryQueryService.ListLowStockItems is not implemented")
 }
 
-func (UnimplementedInventoryQueryServiceHandler) ListStockMovements(context.Context, *connect.Request[inventory.ListStockMovementsRequest]) (*connect.Response[inventory.ListStockMovementsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("inventory.v1.InventoryQueryService.ListStockMovements is not implemented"))
+func (UnimplementedInventoryQueryServiceHandler) ListStockMovements(context.Context, *inventory.ListStockMovementsRequest) (*inventory.ListStockMovementsResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, "inventory.v1.InventoryQueryService.ListStockMovements is not implemented")
+}
+
+type inventoryQueryServiceClient struct {
+	client *connect.Client
+}
+
+func (c *inventoryQueryServiceClient) GetInventoryItem(ctx context.Context, req *inventory.GetInventoryItemRequest) (*inventory.GetInventoryItemResponse, error) {
+	var res inventory.GetInventoryItemResponse
+	if err := c.client.CallUnary(ctx, inventoryQueryServiceGetInventoryItemSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *inventoryQueryServiceClient) ListInventoryItems(ctx context.Context, req *inventory.ListInventoryItemsRequest) (*inventory.ListInventoryItemsResponse, error) {
+	var res inventory.ListInventoryItemsResponse
+	if err := c.client.CallUnary(ctx, inventoryQueryServiceListInventoryItemsSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *inventoryQueryServiceClient) ListLowStockItems(ctx context.Context, req *inventory.ListLowStockItemsRequest) (*inventory.ListLowStockItemsResponse, error) {
+	var res inventory.ListLowStockItemsResponse
+	if err := c.client.CallUnary(ctx, inventoryQueryServiceListLowStockItemsSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *inventoryQueryServiceClient) ListStockMovements(ctx context.Context, req *inventory.ListStockMovementsRequest) (*inventory.ListStockMovementsResponse, error) {
+	var res inventory.ListStockMovementsResponse
+	if err := c.client.CallUnary(ctx, inventoryQueryServiceListStockMovementsSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+type inventoryQueryServiceHandler struct{ svc InventoryQueryServiceHandler }
+
+func (h inventoryQueryServiceHandler) getInventoryItem(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req inventory.GetInventoryItemRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.GetInventoryItem(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h inventoryQueryServiceHandler) listInventoryItems(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req inventory.ListInventoryItemsRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.ListInventoryItems(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h inventoryQueryServiceHandler) listLowStockItems(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req inventory.ListLowStockItemsRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.ListLowStockItems(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h inventoryQueryServiceHandler) listStockMovements(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req inventory.ListStockMovementsRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.ListStockMovements(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
 }

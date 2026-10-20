@@ -1,6 +1,6 @@
 module github.com/iamKienb/api-contract
 
-go 1.25.8
+go 1.27.2
 
 require (
 	connectrpc.com/connect v1.19.2

@@ -5,20 +5,11 @@
 package otpconnect
 
 import (
-	connect "connectrpc.com/connect"
+	connect "connectrpc.com/connect/v2"
 	context "context"
-	errors "errors"
 	otp "github.com/iamKienb/api-contract/gen/otp"
-	http "net/http"
-	strings "strings"
+	sync "sync"
 )
-
-// This is a compile-time assertion to ensure that this generated file and the connect package are
-// compatible. If you get a compiler error that this constant is not defined, this code was
-// generated with a version of connect newer than the one compiled into your binary. You can fix the
-// problem by either regenerating this code with an older version of connect or updating the connect
-// version compiled into your binary.
-const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// OTPCommandServiceName is the fully-qualified name of the OTPCommandService service.
@@ -27,158 +18,151 @@ const (
 	OTPQueryServiceName = "otp.v1.OTPQueryService"
 )
 
-// These constants are the fully-qualified names of the RPCs defined in this package. They're
-// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+// These constants are the procedure names of the RPCs defined in this package. They're exposed at
+// runtime as Spec.Procedure and as the final two segments of the HTTP route.
 //
 // Note that these are different from the fully-qualified method names used by
 // google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// OTPCommandServiceVerifyProcedure is the fully-qualified name of the OTPCommandService's Verify
-	// RPC.
+	// OTPCommandServiceVerifyProcedure is the procedure name of the OTPCommandService's Verify RPC.
 	OTPCommandServiceVerifyProcedure = "/otp.v1.OTPCommandService/Verify"
-	// OTPCommandServiceResendProcedure is the fully-qualified name of the OTPCommandService's Resend
-	// RPC.
+	// OTPCommandServiceResendProcedure is the procedure name of the OTPCommandService's Resend RPC.
 	OTPCommandServiceResendProcedure = "/otp.v1.OTPCommandService/Resend"
+)
+
+var (
+	oTPCommandServiceVerifySpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     otp.File_otp_command_proto.Services().ByName("OTPCommandService").Methods().ByName("Verify"),
+			Procedure:  OTPCommandServiceVerifyProcedure,
+		}
+	})
+	oTPCommandServiceResendSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     otp.File_otp_command_proto.Services().ByName("OTPCommandService").Methods().ByName("Resend"),
+			Procedure:  OTPCommandServiceResendProcedure,
+		}
+	})
 )
 
 // OTPCommandServiceClient is a client for the otp.v1.OTPCommandService service.
 type OTPCommandServiceClient interface {
 	//  Verify otp.
-	Verify(context.Context, *connect.Request[otp.VerifyRequest]) (*connect.Response[otp.VerifyResponse], error)
+	Verify(context.Context, *otp.VerifyRequest) (*otp.VerifyResponse, error)
 	// Resend otp.
-	Resend(context.Context, *connect.Request[otp.ResendRequest]) (*connect.Response[otp.ResendResponse], error)
+	Resend(context.Context, *otp.ResendRequest) (*otp.ResendResponse, error)
 }
 
-// NewOTPCommandServiceClient constructs a client for the otp.v1.OTPCommandService service. By
-// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
-// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
-// connect.WithGRPC() or connect.WithGRPCWeb() options.
-//
-// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
-// http://api.acme.com or https://acme.com/grpc).
-func NewOTPCommandServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) OTPCommandServiceClient {
-	baseURL = strings.TrimRight(baseURL, "/")
-	oTPCommandServiceMethods := otp.File_otp_command_proto.Services().ByName("OTPCommandService").Methods()
-	return &oTPCommandServiceClient{
-		verify: connect.NewClient[otp.VerifyRequest, otp.VerifyResponse](
-			httpClient,
-			baseURL+OTPCommandServiceVerifyProcedure,
-			connect.WithSchema(oTPCommandServiceMethods.ByName("Verify")),
-			connect.WithClientOptions(opts...),
-		),
-		resend: connect.NewClient[otp.ResendRequest, otp.ResendResponse](
-			httpClient,
-			baseURL+OTPCommandServiceResendProcedure,
-			connect.WithSchema(oTPCommandServiceMethods.ByName("Resend")),
-			connect.WithClientOptions(opts...),
-		),
-	}
-}
-
-// oTPCommandServiceClient implements OTPCommandServiceClient.
-type oTPCommandServiceClient struct {
-	verify *connect.Client[otp.VerifyRequest, otp.VerifyResponse]
-	resend *connect.Client[otp.ResendRequest, otp.ResendResponse]
-}
-
-// Verify calls otp.v1.OTPCommandService.Verify.
-func (c *oTPCommandServiceClient) Verify(ctx context.Context, req *connect.Request[otp.VerifyRequest]) (*connect.Response[otp.VerifyResponse], error) {
-	return c.verify.CallUnary(ctx, req)
-}
-
-// Resend calls otp.v1.OTPCommandService.Resend.
-func (c *oTPCommandServiceClient) Resend(ctx context.Context, req *connect.Request[otp.ResendRequest]) (*connect.Response[otp.ResendResponse], error) {
-	return c.resend.CallUnary(ctx, req)
+// NewOTPCommandServiceClient constructs a client for the otp.v1.OTPCommandService service. Multiple
+// service clients may share a single connect.Client.
+func NewOTPCommandServiceClient(client *connect.Client) OTPCommandServiceClient {
+	return &oTPCommandServiceClient{client: client}
 }
 
 // OTPCommandServiceHandler is an implementation of the otp.v1.OTPCommandService service.
 type OTPCommandServiceHandler interface {
 	//  Verify otp.
-	Verify(context.Context, *connect.Request[otp.VerifyRequest]) (*connect.Response[otp.VerifyResponse], error)
+	Verify(context.Context, *otp.VerifyRequest) (*otp.VerifyResponse, error)
 	// Resend otp.
-	Resend(context.Context, *connect.Request[otp.ResendRequest]) (*connect.Response[otp.ResendResponse], error)
+	Resend(context.Context, *otp.ResendRequest) (*otp.ResendResponse, error)
 }
 
-// NewOTPCommandServiceHandler builds an HTTP handler from the service implementation. It returns
-// the path on which to mount the handler and the handler itself.
-//
-// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
-// and JSON codecs. They also support gzip compression.
-func NewOTPCommandServiceHandler(svc OTPCommandServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	oTPCommandServiceMethods := otp.File_otp_command_proto.Services().ByName("OTPCommandService").Methods()
-	oTPCommandServiceVerifyHandler := connect.NewUnaryHandler(
-		OTPCommandServiceVerifyProcedure,
-		svc.Verify,
-		connect.WithSchema(oTPCommandServiceMethods.ByName("Verify")),
-		connect.WithHandlerOptions(opts...),
+// RegisterOTPCommandServiceHandler registers svc as the otp.v1.OTPCommandService implementation on
+// server.
+func RegisterOTPCommandServiceHandler(server *connect.Server, svc OTPCommandServiceHandler) {
+	adapter := oTPCommandServiceHandler{svc: svc}
+	server.Register(
+		connect.Method{Spec: oTPCommandServiceVerifySpec(), Handler: adapter.verify},
+		connect.Method{Spec: oTPCommandServiceResendSpec(), Handler: adapter.resend},
 	)
-	oTPCommandServiceResendHandler := connect.NewUnaryHandler(
-		OTPCommandServiceResendProcedure,
-		svc.Resend,
-		connect.WithSchema(oTPCommandServiceMethods.ByName("Resend")),
-		connect.WithHandlerOptions(opts...),
-	)
-	return "/otp.v1.OTPCommandService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		switch r.URL.Path {
-		case OTPCommandServiceVerifyProcedure:
-			oTPCommandServiceVerifyHandler.ServeHTTP(w, r)
-		case OTPCommandServiceResendProcedure:
-			oTPCommandServiceResendHandler.ServeHTTP(w, r)
-		default:
-			http.NotFound(w, r)
-		}
-	})
 }
 
 // UnimplementedOTPCommandServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedOTPCommandServiceHandler struct{}
 
-func (UnimplementedOTPCommandServiceHandler) Verify(context.Context, *connect.Request[otp.VerifyRequest]) (*connect.Response[otp.VerifyResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("otp.v1.OTPCommandService.Verify is not implemented"))
+func (UnimplementedOTPCommandServiceHandler) Verify(context.Context, *otp.VerifyRequest) (*otp.VerifyResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, "otp.v1.OTPCommandService.Verify is not implemented")
 }
 
-func (UnimplementedOTPCommandServiceHandler) Resend(context.Context, *connect.Request[otp.ResendRequest]) (*connect.Response[otp.ResendResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("otp.v1.OTPCommandService.Resend is not implemented"))
+func (UnimplementedOTPCommandServiceHandler) Resend(context.Context, *otp.ResendRequest) (*otp.ResendResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, "otp.v1.OTPCommandService.Resend is not implemented")
+}
+
+type oTPCommandServiceClient struct {
+	client *connect.Client
+}
+
+func (c *oTPCommandServiceClient) Verify(ctx context.Context, req *otp.VerifyRequest) (*otp.VerifyResponse, error) {
+	var res otp.VerifyResponse
+	if err := c.client.CallUnary(ctx, oTPCommandServiceVerifySpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *oTPCommandServiceClient) Resend(ctx context.Context, req *otp.ResendRequest) (*otp.ResendResponse, error) {
+	var res otp.ResendResponse
+	if err := c.client.CallUnary(ctx, oTPCommandServiceResendSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+type oTPCommandServiceHandler struct{ svc OTPCommandServiceHandler }
+
+func (h oTPCommandServiceHandler) verify(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req otp.VerifyRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Verify(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h oTPCommandServiceHandler) resend(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req otp.ResendRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Resend(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
 }
 
 // OTPQueryServiceClient is a client for the otp.v1.OTPQueryService service.
 type OTPQueryServiceClient interface {
 }
 
-// NewOTPQueryServiceClient constructs a client for the otp.v1.OTPQueryService service. By default,
-// it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and
-// sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC()
-// or connect.WithGRPCWeb() options.
-//
-// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
-// http://api.acme.com or https://acme.com/grpc).
-func NewOTPQueryServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) OTPQueryServiceClient {
-	return &oTPQueryServiceClient{}
-}
-
-// oTPQueryServiceClient implements OTPQueryServiceClient.
-type oTPQueryServiceClient struct {
+// NewOTPQueryServiceClient constructs a client for the otp.v1.OTPQueryService service. Multiple
+// service clients may share a single connect.Client.
+func NewOTPQueryServiceClient(client *connect.Client) OTPQueryServiceClient {
+	return &oTPQueryServiceClient{client: client}
 }
 
 // OTPQueryServiceHandler is an implementation of the otp.v1.OTPQueryService service.
 type OTPQueryServiceHandler interface {
 }
 
-// NewOTPQueryServiceHandler builds an HTTP handler from the service implementation. It returns the
-// path on which to mount the handler and the handler itself.
-//
-// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
-// and JSON codecs. They also support gzip compression.
-func NewOTPQueryServiceHandler(svc OTPQueryServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	return "/otp.v1.OTPQueryService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		switch r.URL.Path {
-		default:
-			http.NotFound(w, r)
-		}
-	})
+// RegisterOTPQueryServiceHandler registers svc as the otp.v1.OTPQueryService implementation on
+// server.
+func RegisterOTPQueryServiceHandler(server *connect.Server, svc OTPQueryServiceHandler) {
+	server.Register()
 }
 
 // UnimplementedOTPQueryServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedOTPQueryServiceHandler struct{}
+
+type oTPQueryServiceClient struct {
+	client *connect.Client
+}
+
+type oTPQueryServiceHandler struct{ svc OTPQueryServiceHandler }
